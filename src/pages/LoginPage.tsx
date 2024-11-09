@@ -29,12 +29,12 @@ const LoginPage = () => {
 
       <div className="flex bg-transparent p-8 rounded-lg w-full max-w-3xl mt-16">
         <div className="w-1/2 pr-8">
-          <h2 className="text-3xl text-textgreen font-semibold">Access</h2>
-          <h2 className="text-3xl mb-2 text-textgreen font-semibold">your account</h2>
-          <h1 className="text-sm mb-1 text-white">
+          <h2 className="text-3xl text-textgreen font-syke-regular">Access</h2>
+          <h2 className="text-3xl mb-2 text-textgreen font-syke-regular">your account</h2>
+          <h1 className="text-sm font-syke-regular mb-1 text-white">
             Don't have an account?{" "}
             <button
-              className="text-buttongreen font-bold"
+              className="text-buttongreen font-syke-medium"
               type="button"
               onClick={handleSignUpButton}
             >
@@ -49,7 +49,7 @@ const LoginPage = () => {
                 id="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="bg-inputfield w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:ring-2 focus:ring-textgreen text-white placeholder-white rounded-sm"
+                className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 focus:shadow-inner border-none focus:outline-none focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                 placeholder="email or phone number"
                 pattern="([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})|(\d{10})"
                 required
@@ -61,22 +61,22 @@ const LoginPage = () => {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="bg-inputfield w-full mt-1 px-4 py-2 border border-none rounded-md focus:outline-none focus:ring-2 focus:ring-textgreen rounded-sm text-white placeholder-white"
+                className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 focus:shadow-inner border-none focus:outline-none focus:ring-1 focus:ring-textgreen rounded-sm text-white placeholder-white"
                 placeholder="Enter your password"
                 required
               />
-              <h1 className="mt-2 text-buttongreen cursor-pointer font-bold">Forgot Password?</h1>
+              <h1 className="mt-2 text-buttongreen cursor-pointer font-syke-medium text-sm">Forgot Password?</h1>
             </div>
             <button
               type="submit"
-              className="w-1/2 bg-buttongreen text-white py-2 hover:bg-hoverbutton transition-colors rounded-sm"
+              className="w-1/2 bg-buttongreen text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
             >
               Log In
             </button>
           </form>
         </div>
 
-        <div className="w-1/2 pl-8 flex flex-col justify-center items-start text-textgreen text-4xl font-bold gap-2">
+        <div className="w-1/2 pl-8 flex flex-col font-syke-medium justify-center items-start text-textgreen text-4xl gap-2">
           <h1>Welcome</h1>
           <h1>Log in to monitor</h1>
           <h1>your vehicle's</h1>

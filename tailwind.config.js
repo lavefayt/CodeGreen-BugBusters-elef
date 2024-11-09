@@ -8,12 +8,21 @@ export default {
         buttongreen: "#61892F",
         inputfield: "#6B6E70",
         hoverbutton: "#222629",
+        secondgrey: "#474B4F"
     },
-    backgroundImage: {
-      'login-bg': "url('/assets/login.png')",
-      'signup-bg': "url('/assets/signup.png')",
-      'homepage-bg': "url('/assets/homepage.png')",
-      'about-bg': "url('/assets/about.png')",
-  },
+      backgroundImage: {
+        'login-bg': "url('/assets/login.png')",
+        'signup-bg': "url('/assets/signup.png')",
+        'homepage-bg': "url('/assets/homepage.png')",
+        'about-bg': "url('/assets/about.png')",
+    },
+      fontFamily: {
+        syke: ['Syke', 'sans-serif'],
+        'syke-light': ['Syke-Light', 'sans-serif'],
+        'syke-bold': ['Syke-Bold', 'sans-serif'],
+        'syke-medium': ['Syke-Medium', 'sans-serif'],
+        'syke-thin': ['Syke-Thin', 'sans-serif'],
+        'syke-black': ['Syke-Black', 'sans-serif'],
+    },
   plugins: [],
   }}};
