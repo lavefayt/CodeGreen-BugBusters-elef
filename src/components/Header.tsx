@@ -70,7 +70,7 @@ const Header = () => {
 
                     <button 
                     onClick={toggleDropdown} 
-                    className="text-white">
+                    className="text-white hover:text-textgreen transition-colors">
                         Account
                     </button>
 
@@ -80,7 +80,7 @@ const Header = () => {
                         <Link 
                         to="/profile" 
                         className="block px-4 py-2 hover:bg-buttongreen rounded-sm">
-                            Edit Profile
+                            View Profile
                         </Link>
 
                         <Link 
