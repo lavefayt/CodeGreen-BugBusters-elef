@@ -6,8 +6,13 @@ import LoginPage from './pages/LoginPage.tsx';
 import HomePage from './pages/HomePage.tsx';
 import SignUp from './pages/SignUpPage.tsx';
 import AboutPage from './pages/AboutPage.tsx';
-import LandingPage from './pages/LandingPage.tsx';
-
+import AdminLandingPage from './pages/AdminHomePage.tsx';
+import EncodePage from './pages/EncodePage.tsx';
+import ViolatorList from './pages/ViolatorList.tsx';
+import DriversList from './pages/DriverList.tsx';
+import Policies from './pages/Policies.tsx';
+import Contacts
+ from './pages/Contacts.tsx';
 const Main = () => {
   return (
     <BrowserRouter>
@@ -16,8 +21,13 @@ const Main = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/homepage" element={<HomePage />} />
         <Route path="/signup" element={<SignUp/>}/>
-        <Route path="/landingpage" element={<LandingPage />} />
+        <Route path="/admin" element={<AdminLandingPage />} />
         <Route path="/about" element={<AboutPage/>}/>
+        <Route path="/driverslist" element={<DriversList/>}/>
+        <Route path="/encode" element={<EncodePage/>}/>
+        <Route path="/violatorslist" element={<ViolatorList/>}/>
+        <Route path="/policies" element={<Policies/>}/>
+        <Route path="/contacts" element={<Contacts/>}/>
       </Routes>
     </BrowserRouter>
   );
