@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage.tsx';
 import HomePage from './pages/HomePage.tsx';
 import SignUp from './pages/SignUpPage.tsx';
 import AboutPage from './pages/AboutPage.tsx';
+
 import AdminLandingPage from './pages/AdminHomePage.tsx';
 import EncodePage from './pages/EncodePage.tsx';
 import ViolatorList from './pages/ViolatorList.tsx';
@@ -13,6 +14,10 @@ import DriversList from './pages/DriverList.tsx';
 import Policies from './pages/Policies.tsx';
 import Contacts
  from './pages/Contacts.tsx';
+
+import Forgot from './pages/Forgot.tsx';
+
+
 const Main = () => {
   return (
     <BrowserRouter>
@@ -28,6 +33,7 @@ const Main = () => {
         <Route path="/violatorslist" element={<ViolatorList/>}/>
         <Route path="/policies" element={<Policies/>}/>
         <Route path="/contacts" element={<Contacts/>}/>
+        <Route path="/forgot" element={<Forgot/>}/>
       </Routes>
     </BrowserRouter>
   );
