@@ -66,10 +66,9 @@ const SignUp = () => {
 
         <div>
           <input
-            type="text"
+            type="email"
             className="bg-inputfield w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:ring-2 focus:ring-textgreen text-white placeholder-white rounded-sm"
-            placeholder="email or phone number"
-            pattern="([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})|(\d{10})"
+            placeholder="email"
             required
           />
         </div>
