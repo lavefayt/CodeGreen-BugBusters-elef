@@ -35,7 +35,7 @@ const Header = () => {
                     className="relative group overflow-hidden rounded-2xl"
                     onClick={ handleHomePage }>   
                     <img
-                        src="../assets/image.png"
+                        src="../assets/3.png"
                         alt="Logo"
                         className="w-2/3 h-2/3 object-contain"
                     />
