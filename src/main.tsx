@@ -7,6 +7,8 @@ import HomePage from './pages/HomePage.tsx';
 import SignUp from './pages/SignUpPage.tsx';
 import AboutPage from './pages/AboutPage.tsx';
 import LandingPage from './pages/LandingPage.tsx';
+import Forgot from './pages/Forgot.tsx';
+
 
 const Main = () => {
   return (
@@ -18,6 +20,7 @@ const Main = () => {
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/landingpage" element={<LandingPage />} />
         <Route path="/about" element={<AboutPage/>}/>
+        <Route path="/forgot" element={<Forgot/>}/>
       </Routes>
     </BrowserRouter>
   );
