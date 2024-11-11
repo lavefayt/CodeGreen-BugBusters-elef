@@ -63,7 +63,7 @@ const LoginPage = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 focus:shadow-inner border-none focus:outline-none focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
-                placeholder="Email"
+                placeholder="Email or phone number"
                 pattern="([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})|(\d{10})"
                 required
               />
@@ -92,7 +92,7 @@ const LoginPage = () => {
         </div>
 
         <div className="w-1/2 pl-8 flex flex-col font-syke-medium justify-center items-start text-textgreen text-4xl gap-2">
-          <h1>Welcome</h1>
+          <h1>Welcome.</h1>
           <h1>Log in to monitor</h1>
           <h1>your vehicle's</h1>
           <h1>violation records.</h1>
