@@ -10,8 +10,14 @@ const LoginPage = () => {
     e.preventDefault();
 
     // Check the username and password
-    if (username === "admin" || username === "nonoygwapo@hotmail.com" && password === "cpus") {
-      navigate(`/homepage`);
+    if ((username === "admin" && password === "cpus") || 
+      (username === "nonoygwapo@hotmail.com" && password === "cpus")) {
+    navigate(`/admin`);
+    
+  } else if ((username === "user" && password === "cpus") || 
+             (username === "nonoycute@hotmail.com" && password === "cpus")) {
+    navigate('/homepage');
+
     } else {
       alert("Invalid username or password");
     }

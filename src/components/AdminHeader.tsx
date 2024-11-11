@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const Header = () => {
+const AdminHeader = () => {
     const navigate = useNavigate();
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null); 
 
     const handleHomePage = () => { 
-        navigate("/homepage");
+        navigate("/admin");
     };
 
     const toggleDropdown = () => {
@@ -45,21 +45,21 @@ const Header = () => {
             <nav className="flex space-x-20 text-white font-medium text-lg">
 
                 <Link 
-                    to="/about"
+                    to="/encode"
                     className="hover:text-textgreen transition-colors">
-                    About
+                    Encode
                 </Link>
 
                 <Link 
-                    to="/policies" 
+                    to="/driverlist" 
                     className="hover:text-textgreen transition-colors">
-                    Policies
+                    Drivers
                 </Link>
 
                 <Link 
-                    to="/contacts" 
+                    to="/violatorlist" 
                     className="hover:text-textgreen transition-colors">
-                    Contact
+                    Violators
                 </Link>
 
                 <div className="relative" 
@@ -93,4 +93,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default AdminHeader;
