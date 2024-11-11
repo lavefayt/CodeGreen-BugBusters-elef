@@ -35,7 +35,7 @@ const SignUp = () => {
         </button>
       </h1>
 
-      <form className="space-y-4">
+      <form className="space-y-2">
         <div>
           <input
             type="text"
@@ -45,7 +45,7 @@ const SignUp = () => {
           />
         </div>
 
-        <div className="flex space-x-4">
+        <div className="flex space-x-2.5">
           <div className="flex-1">
             <input
               type="text"
@@ -77,7 +77,7 @@ const SignUp = () => {
         <div>
           <input
             type="password"
-            className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+            className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 mb-3 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
             placeholder="Password"
             required
           />

@@ -49,7 +49,7 @@ const LoginPage = () => {
             </button>
           </h1>
 
-          <form onSubmit={handleLogin} className="space-y-4">
+          <form onSubmit={handleLogin} className="space-y-2">
             <div>
               <input
                 type="text" 
@@ -72,7 +72,7 @@ const LoginPage = () => {
                 placeholder="Enter your password"
                 required
               />
-              <h1 className="mt-2 text-buttongreen cursor-pointer font-syke-medium text-sm"
+              <h1 className="mt-2 mb-2 text-buttongreen cursor-pointer font-syke-medium text-sm"
                 onClick={handleForgot}
                 >Forgot Password?</h1>
             </div>
