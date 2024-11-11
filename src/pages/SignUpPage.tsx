@@ -8,7 +8,7 @@ const SignUp = () => {
         navigate("/login")
     } 
   return (
-    <div className="flex justify-center items-center bg-signup-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
+    <div className= "flex justify-center items-center bg-signup-bg bg-cover bg-no-repeat sm:bg-top md:bg-right h-screen">
     {/* <div className="w-full max-w-3xl mb-8 mt-5">
         <LogInSignUpHeader />
     </div> */}
@@ -35,22 +35,22 @@ const SignUp = () => {
         </button>
       </h1>
 
-      <form className="space-y-4">
+      <form className="space-y-2">
         <div>
           <input
             type="text"
             className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
-            placeholder="username"
+            placeholder="Username"
             required
           />
         </div>
 
-        <div className="flex space-x-4">
+        <div className="flex space-x-2.5">
           <div className="flex-1">
             <input
               type="text"
               className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
-              placeholder="last name"
+              placeholder="Last Name"
               required
             />
           </div>
@@ -58,7 +58,7 @@ const SignUp = () => {
             <input
               type="text"
               className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
-              placeholder="first name"
+              placeholder="First Name"
               required
             />
           </div>
@@ -68,7 +68,7 @@ const SignUp = () => {
           <input
             type="text"
             className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
-            placeholder="email or phone number"
+            placeholder="Email"
             pattern="([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})|(\d{10})"
             required
           />
@@ -77,8 +77,8 @@ const SignUp = () => {
         <div>
           <input
             type="password"
-            className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
-            placeholder="password"
+            className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 mb-3 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+            placeholder="Password"
             required
           />
         </div>

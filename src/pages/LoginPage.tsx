@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Forgot from "./Forgot";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -27,8 +28,14 @@ const LoginPage = () => {
     navigate("/signup");
   };
 
+  
+  const handleForgot = () => {
+    navigate("/forgot");
+  };
+
+
   return (
-    <div className="flex justify-center items-center bg-login-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
+    <div className="flex justify-center items-center bg-login-bg bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
       {/* <div className="w-full max-w-3xl mb-8 mt-5">
         <LogInSignUpHeader />
       </div> */}
@@ -48,7 +55,7 @@ const LoginPage = () => {
             </button>
           </h1>
 
-          <form onSubmit={handleLogin} className="space-y-4">
+          <form onSubmit={handleLogin} className="space-y-2">
             <div>
               <input
                 type="text" 
@@ -71,7 +78,9 @@ const LoginPage = () => {
                 placeholder="Enter your password"
                 required
               />
-              <h1 className="mt-2 text-buttongreen cursor-pointer font-syke-medium text-sm">Forgot Password?</h1>
+              <h1 className="mt-2 mb-2 text-buttongreen cursor-pointer font-syke-medium text-sm"
+                onClick={handleForgot}
+                >Forgot Password?</h1>
             </div>
             <button
               type="submit"
