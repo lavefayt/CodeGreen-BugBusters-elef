@@ -12,8 +12,9 @@ import EncodePage from './pages/EncodePage.tsx';
 import ViolatorList from './pages/ViolatorList.tsx';
 import DriversList from './pages/DriverList.tsx';
 import Policies from './pages/Policies.tsx';
-import Contacts
- from './pages/Contacts.tsx';
+import Contacts from './pages/Contacts.tsx';
+
+import AddDriver from './pages/AddDriver.tsx';
 
 import Forgot from './pages/Forgot.tsx';
 
@@ -30,6 +31,7 @@ const Main = () => {
         <Route path="/about" element={<AboutPage/>}/>
         <Route path="/driverslist" element={<DriversList/>}/>
         <Route path="/encode" element={<EncodePage/>}/>
+        <Route path="/add-driver" element={<AddDriver/>}/>
         <Route path="/violatorslist" element={<ViolatorList/>}/>
         <Route path="/policies" element={<Policies/>}/>
         <Route path="/contacts" element={<Contacts/>}/>
