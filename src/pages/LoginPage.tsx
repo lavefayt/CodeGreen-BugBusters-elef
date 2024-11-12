@@ -1,23 +1,28 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Forgot from "./Forgot";
+import { useDrivers } from "../hooks/useDrivers";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  useDrivers();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
 
     // Check the username and password
-    if ((username === "admin" && password === "cpus") || 
-      (username === "nonoygwapo@hotmail.com" && password === "cpus")) {
-    navigate(`/admin`);
-    
-  } else if ((username === "user" && password === "cpus") || 
-             (username === "nonoycute@hotmail.com" && password === "cpus")) {
-    navigate('/homepage');
-
+    if (
+      (username === "admin" && password === "cpus") ||
+      (username === "nonoygwapo@hotmail.com" && password === "cpus")
+    ) {
+      navigate(`/admin`);
+    } else if (
+      (username === "user" && password === "cpus") ||
+      (username === "nonoycute@hotmail.com" && password === "cpus")
+    ) {
+      navigate("/homepage");
     } else {
       alert("Invalid username or password");
     }
@@ -27,11 +32,9 @@ const LoginPage = () => {
     navigate("/signup");
   };
 
-  
   const handleForgot = () => {
     navigate("/forgot");
   };
-
 
   return (
     <div className="flex justify-center items-center bg-login-bg bg-no-repeat bg-center sm:bg-top md:bg-right lg:bg-left h-screen">
@@ -42,22 +45,25 @@ const LoginPage = () => {
       <div className="flex bg-transparent p-8 rounded-lg w-full max-w-3xl mx-auto">
         <div className="w-1/2 pr-8">
           <h2 className="text-3xl text-textgreen font-syke-regular">Access</h2>
-          <h2 className="text-3xl mb-2 text-textgreen font-syke-regular">your account</h2>
+          <h2 className="text-3xl mb-2 text-textgreen font-syke-regular">
+            your account
+          </h2>
           <h1 className="text-sm font-syke-regular mb-1 text-white">
             Don't have an account?{" "}
             <button
               className="text-buttongreen font-syke-medium"
               type="button"
-              onClick={handleSignUpButton}
-            >
+              onClick={handleSignUpButton}>
               Sign Up
             </button>
           </h1>
 
-          <form onSubmit={handleLogin} className="space-y-2">
+          <form
+            onSubmit={handleLogin}
+            className="space-y-2">
             <div>
               <input
-                type="text" 
+                type="text"
                 id="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -77,14 +83,15 @@ const LoginPage = () => {
                 placeholder="Enter your password"
                 required
               />
-              <h1 className="mt-2 mb-2 text-buttongreen cursor-pointer font-syke-medium text-sm"
-                onClick={handleForgot}
-                >Forgot Password?</h1>
+              <h1
+                className="mt-2 mb-2 text-buttongreen cursor-pointer font-syke-medium text-sm"
+                onClick={handleForgot}>
+                Forgot Password?
+              </h1>
             </div>
             <button
               type="submit"
-              className="w-1/2 bg-buttongreen text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-            >
+              className="w-1/2 bg-buttongreen text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm">
               Log In
             </button>
           </form>
