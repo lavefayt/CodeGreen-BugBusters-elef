@@ -13,7 +13,7 @@ const SignUp = () => {
         <LogInSignUpHeader />
     </div> */}
 
-  <div className="flex bg-transparent p-8 rounded-lg w-full max-w-3xl mt-16">
+  <div className="flex bg-transparent p-8 rounded-lg w-full max-w-3xl">
     <div className="w-1/2 pl-8 flex flex-col justify-center items-start font-syke-medium text-textgreen text-4xl gap-2">
       <h1>Stay compliant.</h1>
       <h1>Sign up to track</h1>
@@ -77,7 +77,7 @@ const SignUp = () => {
         <div>
           <input
             type="password"
-            className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 mb-3 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+            className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 mb-1 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
             placeholder="Password"
             required
           />

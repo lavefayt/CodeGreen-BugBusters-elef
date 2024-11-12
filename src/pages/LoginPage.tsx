@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Forgot from "./Forgot";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -35,12 +34,12 @@ const LoginPage = () => {
 
 
   return (
-    <div className="flex justify-center items-center bg-login-bg bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
+    <div className="flex justify-center items-center bg-login-bg bg-no-repeat bg-center sm:bg-top md:bg-right lg:bg-left h-screen">
       {/* <div className="w-full max-w-3xl mb-8 mt-5">
         <LogInSignUpHeader />
       </div> */}
 
-      <div className="flex bg-transparent p-8 rounded-lg w-full max-w-3xl mt-16">
+      <div className="flex bg-transparent p-8 rounded-lg w-full max-w-3xl mx-auto">
         <div className="w-1/2 pr-8">
           <h2 className="text-3xl text-textgreen font-syke-regular">Access</h2>
           <h2 className="text-3xl mb-2 text-textgreen font-syke-regular">your account</h2>

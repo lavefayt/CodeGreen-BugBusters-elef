@@ -3,13 +3,17 @@ import { useNavigate } from "react-router-dom";
 
 const Forgot = () => {
   const [email, setEmail] = useState("");
+  const [isEmailSent, setIsEmailSent] = useState(false); // New state for the success message
+  const navigate = useNavigate();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsEmailSent(true);
   };
+
   const handleReturn = () => {
     navigate("/login");
   };
-  const navigate = useNavigate();
 
   return (
     <div className="flex justify-center items-center bg-hoverbutton bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
@@ -32,20 +36,24 @@ const Forgot = () => {
               placeholder="Email"
               required
             />
+            <h1
+              className="mt-4 mb-2 text-buttongreen cursor-pointer font-syke-medium text-sm"
+              onClick={handleReturn}
+            >
+              Remembered your password?
+            </h1>
           </div>
+          <button
+            type="submit"
+            className={`w-1/2 py-2 font-syke-regular transition-colors rounded-sm ${
+              isEmailSent
+                ? "bg-gray-500 text-white"
+                : "bg-buttongreen text-white hover:bg-[#33471a]"
+            }`}
+          >
+            {isEmailSent ? "Email Sent" : "Send Reset Email"}
+          </button>
         </form>
-        <h1
-          className="mt-4 mb-2 text-buttongreen cursor-pointer font-syke-medium text-sm"
-          onClick={handleReturn}
-        >
-          Remembered your password?
-        </h1>
-        <button
-          type="submit"
-          className="w-1/2 bg-buttongreen text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-        >
-          Send Reset Email
-        </button>
       </div>
     </div>
   );
