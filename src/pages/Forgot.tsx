@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 
 
+const navigate = useNavigate();
+
 const Forgot = () => {
     const [email, setEmail] = useState("");
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+    };
+    const handleReturn = () => {
+        navigate("/login");
     };
 
     return (
@@ -30,8 +35,12 @@ const Forgot = () => {
                 required/>
               </div></form>
               <h1 className="mt-4 mb-2 text-buttongreen cursor-pointer font-syke-medium text-sm"
-                onClick={handleSubmit}
-                >Send Reset Email</h1>
+                onClick={handleReturn}
+                >Remembered your password?</h1>
+            <button className="text-buttongreen font-syke-medium" type="button"
+              onClick={handleSubmit}
+            > Send Reset Email
+            </button>
             </div>
               </div>
     );
