@@ -228,7 +228,6 @@ const AddDriver = () => {
               )}
 
               <div className="relative">
-                <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 p-4 mb-60">
                 
               { currentStep === 1 && (
                
@@ -308,7 +307,6 @@ const AddDriver = () => {
              )}
 
                 </div>
-              </div>
             </div>
           );
         };
