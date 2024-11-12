@@ -51,13 +51,13 @@ const AdminHeader = () => {
                 </Link>
 
                 <Link 
-                    to="/driverlist" 
+                    to="/driverslist" 
                     className="hover:text-textgreen transition-colors">
                     Drivers
                 </Link>
 
                 <Link 
-                    to="/violatorlist" 
+                    to="/violatorslist" 
                     className="hover:text-textgreen transition-colors">
                     Violators
                 </Link>
