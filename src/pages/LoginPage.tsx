@@ -2,29 +2,27 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Forgot from "./Forgot";
 import { useDrivers } from "../hooks/useDrivers";
+import supabase from "../utils/supabase";
 
 const LoginPage = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  useDrivers();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Check the username and password
-    if (
-      (username === "admin" && password === "cpus") ||
-      (username === "nonoygwapo@hotmail.com" && password === "cpus")
-    ) {
-      navigate(`/admin`);
-    } else if (
-      (username === "user" && password === "cpus") ||
-      (username === "nonoycute@hotmail.com" && password === "cpus")
-    ) {
-      navigate("/homepage");
-    } else {
-      alert("Invalid username or password");
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+      });
+      error
+        ? alert("Invalid email or password")
+        : email === "jrofer.casio11@gmail.com"
+        ? navigate("/admin")
+        : navigate("/homepage");      
+    } catch (error) {
+      alert(error);
     }
   };
 
@@ -64,9 +62,9 @@ const LoginPage = () => {
             <div>
               <input
                 type="text"
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 focus:shadow-inner border-none focus:outline-none focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                 placeholder="Email or phone number"
                 pattern="([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})|(\d{10})"
