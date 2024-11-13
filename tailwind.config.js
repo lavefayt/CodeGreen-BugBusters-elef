@@ -11,11 +11,12 @@ export default {
         secondgrey: "#474B4F",
       },
       backgroundImage: {
-        "login-bg": "url('/assets/login.jpg')",
-        "signup-bg": "url('/assets/signup.png')",
-        "homepage-bg": "url('/assets/homepage.png')",
-        "about-bg": "url('/assets/about.png')",
-      },
+        'login-bg': "url('/assets/login.jpg')",
+        'signup-bg': "url('/assets/signup.png')",
+        'homepage-bg': "url('/assets/homepage.png')",
+        'about-bg': "url('/assets/about.png')",
+        'admin-bg': "url('/assets/admin.jpg')",
+    },
       fontFamily: {
         syke: ["Syke", "sans-serif"],
         "syke-light": ["Syke-Light", "sans-serif"],
