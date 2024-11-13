@@ -62,46 +62,48 @@ const AdminHeader = () => {
           Encode
         </Link>
 
-        <Link
-          to="/driverslist"
-          className="hover:text-textgreen transition-colors">
-          Drivers
-        </Link>
-
-        <Link
-          to="/violatorslist"
-          className="hover:text-textgreen transition-colors">
-          Violators
-        </Link>
-
-        <div
-          className="relative"
-          ref={dropdownRef}>
-          <button
-            onClick={toggleDropdown}
-            className="text-white hover:text-textgreen transition-colors">
-            Account
-          </button>
-
-          {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-black text-white rounded-sm shadow-lg text-center">
-              <Link
-                to="/profile"
-                className="block px-4 py-2 hover:bg-buttongreen rounded-sm">
-                View Profile
-              </Link>
-
-              <span
-                onClick={handleSignOut}
-                className="block px-4 py-2 hover:bg-buttongreen rounded-sm">
-                Log Out
-              </span>
+    return (
+        <header className="flex items-center justify-between w-full max-w-5xl mx-auto px-8 py-4">
+            <div className="flex items-center space-x-2">
+                <button 
+                    className="relative group overflow-hidden rounded-2xl"
+                    onClick={ handleHomePage }>   
+                    <img
+                        src="../assets/5.png"
+                        alt="Logo"
+                        className="w-2/3 h-2/3 object-contain"
+                    />   
+                </button>
+                <span className="text-white font-syke-bold">CodeGreen Gateway</span>
             </div>
-          )}
-        </div>
-      </nav>
-    </header>
-  );
+
+            <nav className="flex space-x-20 text-white font-medium text-lg">
+
+                <Link 
+                    to="/home"
+                    className="hover:text-textgreen transition-colors">
+                    Home
+                </Link>
+
+                <Link 
+                    to="/about" 
+                    className="hover:text-textgreen transition-colors">
+                    About
+                </Link>
+
+                <Link 
+                    to="/account" 
+                    className="hover:text-textgreen transition-colors">
+                    Account
+                </Link>
+
+                <div className="relative" 
+                    ref={dropdownRef}> 
+
+                </div>
+            </nav>
+        </header>
+    );
 };
 
 export default AdminHeader;
