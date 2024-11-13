@@ -24,17 +24,16 @@ const SignUp = () => {
     event.preventDefault();
 
     try {
-      // const { data, error } = await supabase.auth.signUp({
-      //   email: signUpForm.email,
-      //   password: signUpForm.password,
-      //   options: {
-      //     data: {
-      //       first_name: signUpForm.first_name,
-      //       last_name: signUpForm.last_name,
-      //     },
-      //   },
-      // });
-      // error ? alert(error) : setEmailPopUpActive(true);
+      const { data, error } = await supabase.auth.signUp({
+        email: signUpForm.email,
+        password: signUpForm.password,
+        options: {
+          data: {
+            display_name: `${signUpForm.first_name} ${signUpForm.last_name}`,
+          },
+        },
+      });
+      error ? alert(error) : setEmailPopUpActive(true);
       setEmailPopUpActive(true);
     } catch (error) {
       alert(error);
