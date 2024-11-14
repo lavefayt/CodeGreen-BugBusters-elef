@@ -9,14 +9,14 @@ export default {
         inputfield: "#6B6E70",
         hoverbutton: "#222629",
         secondgrey: "#474B4F",
+        colorhover: "#33471a"
       },
       backgroundImage: {
-        'login-bg': "url('/assets/login.jpg')",
-        'signup-bg': "url('/assets/signup.png')",
-        'homepage-bg': "url('/assets/homepage.png')",
-        'about-bg': "url('/assets/about.png')",
-        'admin-bg': "url('/assets/admin.jpg')",
-    },
+        "login-bg": "url('/assets/login.jpg')",
+        "signup-bg": "url('/assets/signup.png')",
+        "homepage-bg": "url('/assets/homepage.jpg')",
+        "about-bg": "url('/assets/about.png')",
+      },
       fontFamily: {
         syke: ["Syke", "sans-serif"],
         "syke-light": ["Syke-Light", "sans-serif"],

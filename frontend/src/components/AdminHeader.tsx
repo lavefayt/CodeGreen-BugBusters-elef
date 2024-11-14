@@ -43,41 +43,62 @@ const AdminHeader = () => {
 
   return (
     <header className="flex items-center justify-between w-full max-w-5xl mx-auto px-8 py-4">
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center">
         <button
           className="relative group overflow-hidden rounded-2xl"
           onClick={handleHomePage}>
           <img
-            src="../assets/5.png"
+            src="../assets/3.png"
             alt="Logo"
             className="w-2/3 h-2/3 object-contain"
           />
         </button>
-        <span className="text-white font-syke-bold">CodeGreen Gateway</span>
       </div>
 
       <nav className="flex space-x-20 text-white font-medium text-lg">
         <Link
-          to="/home"
+          to="/encode"
           className="hover:text-textgreen transition-colors">
-          Home
+          Encode
         </Link>
 
         <Link
-          to="/about"
+          to="/driverslist"
           className="hover:text-textgreen transition-colors">
-          About
+          Drivers
         </Link>
 
         <Link
-          to="/account"
+          to="/violatorslist"
           className="hover:text-textgreen transition-colors">
-          Account
+          Violators
         </Link>
 
         <div
           className="relative"
-          ref={dropdownRef}></div>
+          ref={dropdownRef}>
+          <button
+            onClick={toggleDropdown}
+            className="text-white hover:text-textgreen transition-colors">
+            Account
+          </button>
+
+          {isDropdownOpen && (
+            <div className="absolute right-0 mt-2 w-48 bg-black text-white rounded-sm shadow-lg text-center">
+              <Link
+                to="/profile"
+                className="block px-4 py-2 hover:bg-buttongreen rounded-sm">
+                View Profile
+              </Link>
+
+              <span
+                onClick={handleSignOut}
+                className="block px-4 py-2 hover:bg-buttongreen rounded-sm">
+                Log Out
+              </span>
+            </div>
+          )}
+        </div>
       </nav>
     </header>
   );
