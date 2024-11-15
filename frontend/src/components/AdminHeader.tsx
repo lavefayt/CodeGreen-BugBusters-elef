@@ -42,58 +42,53 @@ const AdminHeader = () => {
   }, [dropdownRef]);
 
   return (
-    <header className="flex items-center justify-between w-full max-w-5xl mx-auto px-8 py-4">
+    <header className="flex items-center justify-between w-full max-w-5xl mx-auto px-6 py-4">
       <div className="flex items-center">
         <button
           className="relative group overflow-hidden rounded-2xl"
-          onClick={handleHomePage}>
+          onClick={handleHomePage}
+        >
           <img
-            src="../assets/3.png"
+            src="../assets/5.png"
             alt="Logo"
-            className="w-2/3 h-2/3 object-contain"
+            className="w-30 h-30 object-contain md:w-28 md:h-28 transition-transform duration-300 hover:scale-105"
           />
         </button>
       </div>
 
-      <nav className="flex space-x-20 text-white font-medium text-lg">
-        <Link
-          to="/encode"
-          className="hover:text-textgreen transition-colors">
+      <nav className="flex ml-12 space-x-28 text-white font-medium text-lg">
+        <Link to="/encode" className="hover:text-textgreen transition-colors">
           Encode
         </Link>
 
-        <Link
-          to="/driverslist"
-          className="hover:text-textgreen transition-colors">
+        <Link to="/driverslist" className="hover:text-textgreen transition-colors">
           Drivers
         </Link>
 
-        <Link
-          to="/violatorslist"
-          className="hover:text-textgreen transition-colors">
+        <Link to="/violatorslist" className="hover:text-textgreen transition-colors">
           Violators
         </Link>
 
-        <div
-          className="relative"
-          ref={dropdownRef}>
+        <div className="relative" ref={dropdownRef}>
           <button
             onClick={toggleDropdown}
-            className="text-white hover:text-textgreen transition-colors">
+            className="text-white hover:text-textgreen transition-colors"
+          >
             Account
           </button>
 
           {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-black text-white rounded-sm shadow-lg text-center">
-              <Link
-                to="/profile"
-                className="block px-4 py-2 hover:bg-buttongreen rounded-sm">
-                View Profile
-              </Link>
+            <div className="absolute right-0 mt-4 w-48 bg-hoverbutton text-white rounded-md shadow-lg">
+              <span
+                className="block font-syke-medium text-sm px-4 py-2 hover:bg-buttongreen rounded-md cursor-pointer"
+              >
+                Profile
+              </span>
 
               <span
                 onClick={handleSignOut}
-                className="block px-4 py-2 hover:bg-buttongreen rounded-sm">
+                className="block font-syke-medium text-sm px-4 py-2 hover:bg-buttongreen rounded-md cursor-pointer"
+              >
                 Log Out
               </span>
             </div>

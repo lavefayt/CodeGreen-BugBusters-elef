@@ -53,14 +53,13 @@ const Header = () => {
           onClick={handleHomePage}
         >
           <img
-            src="../assets/header.png"
+            src="../assets/5.png"
             alt="Logo"
             className="w-30 h-30 object-contain md:w-28 md:h-28 transition-transform duration-300 hover:scale-105"
           />
         </button>
       </div>
 
-      {/* Added margin-left to nav to increase space between logo and links */}
       <nav className="flex ml-12 space-x-28 text-white font-medium text-lg">
         <Link to="/about" className="hover:text-textgreen transition-colors">
           About
