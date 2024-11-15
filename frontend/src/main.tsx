@@ -13,7 +13,7 @@ import ViolatorList from "./pages/ViolatorList.tsx";
 import DriversList from "./pages/DriverList.tsx";
 import Policies from "./pages/Policies.tsx";
 import Contacts from "./pages/Contacts.tsx";
-
+import DriverProfile from "./pages/DriverProfile.tsx"
 import RegisterDriver from "./pages/RegisterDriver.tsx";
 import AddDriver from "./pages/AddDriver.tsx";
 import AddViolation from "./pages/AddViolation.tsx";
@@ -39,6 +39,7 @@ const Main = () => {
         <Route path="/policies" element={<Policies />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/forgot" element={<Forgot />} />
+        <Route path="/driverprofile" element={<DriverProfile />} />
       </Routes>
     </BrowserRouter>
   );
