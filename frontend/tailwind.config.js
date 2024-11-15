@@ -16,6 +16,7 @@ export default {
         "signup-bg": "url('/assets/signup.png')",
         "homepage-bg": "url('/assets/homepage.jpg')",
         "about-bg": "url('/assets/about.png')",
+        'adminlandingpage-bg': "url('/assets/Adminlandingpage.png')",
       },
       fontFamily: {
         syke: ["Syke", "sans-serif"],
