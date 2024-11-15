@@ -46,21 +46,22 @@ const Header = () => {
   }, [dropdownRef]);
 
   return (
-    <header className="flex items-center justify-between w-full max-w-5xl mx-auto px-8 py-4">
+    <header className="flex items-center justify-between w-full max-w-5xl mx-auto px-6 py-4">
       <div className="flex items-center">
         <button
           className="relative group overflow-hidden rounded-2xl"
           onClick={handleHomePage}
         >
           <img
-            src="../assets/3.png"
+            src="../assets/header.png"
             alt="Logo"
-            className="w-2/3 h-2/3 object-contain"
+            className="w-30 h-30 object-contain md:w-28 md:h-28 transition-transform duration-300 hover:scale-105"
           />
         </button>
       </div>
 
-      <nav className="flex space-x-20 text-white font-medium text-lg">
+      {/* Added margin-left to nav to increase space between logo and links */}
+      <nav className="flex ml-12 space-x-28 text-white font-medium text-lg">
         <Link to="/about" className="hover:text-textgreen transition-colors">
           About
         </Link>
@@ -82,17 +83,17 @@ const Header = () => {
           </button>
 
           {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-black text-white rounded-sm shadow-lg text-center">
+            <div className="absolute right-0 mt-4 w-48 bg-hoverbutton text-white rounded-md shadow-lg">
               <span
                 onClick={handleDriverProfile}
-                className="block px-4 py-2 hover:bg-buttongreen rounded-sm"
+                className="block font-syke-medium text-sm px-4 py-2 hover:bg-buttongreen rounded-md cursor-pointer"
               >
-                Account{" "}
+                Profile
               </span>
 
               <span
                 onClick={handleSignOut}
-                className="block px-4 py-2 hover:bg-buttongreen rounded-sm"
+                className="block font-syke-medium text-sm px-4 py-2 hover:bg-buttongreen rounded-md cursor-pointer"
               >
                 Log Out
               </span>
