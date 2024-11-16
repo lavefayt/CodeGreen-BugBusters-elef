@@ -1,5 +1,6 @@
 import Header from "../components/Header";
 import { Link } from "react-router-dom";
+import DriverProfile from "../components/DriverProfile";
 
 const DriverProfile = () => {
   return (

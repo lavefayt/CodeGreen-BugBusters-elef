@@ -13,7 +13,7 @@ import ViolatorList from "./pages/ViolatorList.tsx";
 import DriversList from "./pages/DriverList.tsx";
 import Policies from "./pages/Policies.tsx";
 import Contacts from "./pages/Contacts.tsx";
-import DriverProfile from "./pages/DriverProfile.tsx"
+import DriverProfile from "./pages/DriverProfileSection.tsx"
 import RegisterDriver from "./pages/RegisterDriver.tsx";
 import AddDriver from "./pages/AddDriver.tsx";
 import AddViolation from "./pages/AddViolation.tsx";

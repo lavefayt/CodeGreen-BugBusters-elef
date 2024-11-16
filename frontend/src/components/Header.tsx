@@ -8,7 +8,7 @@ const AdminHeader = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleHomePage = () => {
-    navigate("/admin");
+    navigate("/homepage");
   };
 
   const handleProfile = () => {
