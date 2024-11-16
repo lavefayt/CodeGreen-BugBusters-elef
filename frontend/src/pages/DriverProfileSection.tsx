@@ -1,8 +1,9 @@
 import Header from "../components/Header";
 import { Link } from "react-router-dom";
-import DriverProfile from "../components/DriverProfile";
+import DriverProfileComponents from "../components/DriverProfileComp";
 
 const DriverProfile = () => {
+
   return (
     <div className="flex flex-col items-center bg-homepage-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
       <div className="w-full max-w-3xl mb-2 mt-5">
