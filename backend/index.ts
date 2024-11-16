@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { Pool, neonConfig } from "@neondatabase/serverless";
 import ws from "ws";
 import authRoutes from "./routes/auth";
+import { User } from "./types/datatypes";
 
 dotenv.config({ path: ".env" });
 
@@ -21,7 +22,7 @@ server.use("/auth", authRoutes);
 // server.get("/testing", async (req: Request, res: Response) => {
 //   try {
 //     const { rows } = await pool.query("SELECT * FROM users");
-//     res.send(rows[0]);
+//     res.send(rows[0] as User);
 //   } catch (error) {
 //     res.send({ field: "Error", message: error });
 //   }
