@@ -11,6 +11,7 @@ const SignUp = () => {
     first_name: "",
     email: "",
     password: "",
+    confirm_password: "",
   });
   const [emailPopUpActive, setEmailPopUpActive] = useState(false);
 
@@ -117,12 +118,24 @@ const SignUp = () => {
                 onChange={handleFormChange}
               />
             </div>
+
+            <div>
+              <input
+                type="password"
+                className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+                placeholder="Password"
+                name="password"
+                required
+                onChange={handleFormChange}
+              />
+            </div>
+
             <div>
               <input
                 type="password"
                 className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 mb-3 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
-                placeholder="Password"
-                name="password"
+                placeholder="Confirm Password"
+                name="confirm_password"
                 required
                 onChange={handleFormChange}
               />
