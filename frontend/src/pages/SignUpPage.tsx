@@ -59,7 +59,7 @@ const SignUp = () => {
         />
       )}
 
-      <div className="flex bg-transparent p-8 rounded-lg w-full max-w-3xl mt-16">
+      <div className="flex bg-transparent p-8 rounded-lg w-full max-w-3xl mt-10">
         <div className="w-1/2 pl-8 flex flex-col justify-center items-start font-syke-medium text-textgreen text-4xl gap-2">
           <h1>Stay compliant.</h1>
           <h1>Sign up to track</h1>

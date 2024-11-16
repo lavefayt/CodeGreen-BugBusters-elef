@@ -6,6 +6,7 @@ const HomePage = () => {
 
   const handleRegisterButton = () => {
     navigate("/register-driver");
+
   };
   return (
     <div className="flex flex-col items-center bg-homepage-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
