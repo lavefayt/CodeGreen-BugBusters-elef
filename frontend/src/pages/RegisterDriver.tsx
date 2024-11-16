@@ -4,7 +4,6 @@ import { useState } from "react";
 
 const RegisterDriver = () => {
   const navigate = useNavigate();
-
   const [currentStep, setCurrentStep] = useState(1);
 
   const handleRegisterClick = () => {
@@ -16,17 +15,18 @@ const RegisterDriver = () => {
   const handleConfirmClick = () => {
     navigate("/homepage");
   };
+
   return (
-    <div className="flex flex-col items-center bg-homepage-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
-      <div className="w-full max-w-3xl mb-8 mt-5">
+    <div className="flex flex-col items-center bg-login-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
+      <div className="w-full max-w-3xl">
         <AdminHeader />
       </div>
 
       {currentStep === 1 && (
         <div className="items-center">
           <div className="text-textgreen">
-            <h1 className="text-2xl font-bold">Registration Form: </h1>
-            <p>
+            <h1 className="text-4xl font-bold">Registration Form: </h1>
+            <p className="text-white">
               <b> Logged-in as:</b> nonoygwapo@hotmail.com
             </p>
           </div>
@@ -34,36 +34,102 @@ const RegisterDriver = () => {
           <div className="flex gap-4 mt-12">
             <div className="flex-1 w-full flex items-center space-x-3">
               <label className="text-white font-syke-regular">
-                First Name :
+                First Name:
               </label>
               <input
                 type="text"
-                className="bg-secondgrey w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-md"
+                className="bg-gray-600 w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-md border border-black"
                 required
               />
             </div>
 
             <div className="flex-1 w-full flex items-center space-x-3">
               <label className="text-white font-syke-regular">
-                Middle Name (Optional) :
+                Middle Name (Optional):
               </label>
               <input
                 type="text"
-                className="bg-secondgrey w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-md"
+                className="bg-gray-600 w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-md border border-black"
               />
             </div>
 
             <div className="flex-1 w-full flex items-center space-x-3">
               <label className="text-white font-syke-regular">
-                Last Name :
+                Last Name:
               </label>
               <input
                 type="text"
-                className="bg-secondgrey w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-md"
+                className="bg-gray-600 w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-md border border-black"
                 required
               />
             </div>
           </div>
+
+          <div className="flex gap-4 mt-12">
+            <div className="flex-1 w-full flex items-center space-x-3">
+              <label className="text-white font-syke-regular">
+                Date of Birth:
+              </label>
+              <input
+                type="text"
+                className="bg-gray-600 w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-md border border-black"
+                required
+              />
+            </div>
+
+            <div className="flex-1 w-full flex items-center space-x-3">
+              <label className="text-white font-syke-regular">
+                Sex:
+              </label>
+              <select
+                className="bg-gray-600 w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-md border border-black"
+                required
+              >
+                <option value="">Select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+
+            <div className="flex-1 w-full flex items-center space-x-3">
+              <label className="text-white font-syke-regular">
+                Driver Type:
+              </label>
+              <select
+                className="bg-gray-600 w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-md border border-black"
+                required
+              >
+                <option value="">Select</option>
+                <option value="Student">Student</option>
+                <option value="Faculty">Faculty</option>
+                <option value="Staff">Staff</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="flex gap-4 mt-12">
+            <div className="flex-1 w-full flex items-center space-x-3">
+              <label className="text-white font-syke-regular">
+               License No:
+              </label>
+              <input
+                type="text"
+                className="bg-gray-600 w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-md border border-black"
+                required
+              />
+            </div>
+
+            <div className="flex-1 w-full flex items-center space-x-3">
+              <label className="text-white font-syke-regular">
+                License expiration date:
+              </label>
+              <input
+                type="text"
+                className="bg-gray-600 w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-md border border-black"
+              />
+            </div>
+          </div>
+
           <div className="flex justify-center mt-6">
             <button
               type="button"
