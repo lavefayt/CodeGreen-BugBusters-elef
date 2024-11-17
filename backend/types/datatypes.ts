@@ -57,3 +57,13 @@ export interface RegisterUser {
   password?: string;
   confirm_password?: string;
 }
+
+  export interface ViolatorsTable {
+  id: string;
+  last_name: string;
+  first_name: string;
+  violation_type: string;
+   violation_date: string;
+  paid_status: boolean;
+  
+}
