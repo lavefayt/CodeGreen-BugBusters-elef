@@ -231,7 +231,7 @@ const AddDriver = () => {
                 
               { currentStep === 1 && (
                
-               <div className="text-center flex justify-center gap-40 p-10">
+               <div className="text-center flex justify-center gap-5 p-10">
                 <div>
                     <button
                         type="button"
