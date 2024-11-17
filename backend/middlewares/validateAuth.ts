@@ -13,9 +13,14 @@ const validateAuth = (
 
   switch (request.path) {
     case "/register": {
-      const { first_name, last_name, email, password } = request.body;
+      const { first_name, last_name, email, password, confirm_password } =
+        request.body;
 
-      if (![first_name, last_name, email, password].every(Boolean)) {
+      if (
+        ![first_name, last_name, email, password, confirm_password].every(
+          Boolean
+        )
+      ) {
         response
           .status(401)
           .json({ field: "", message: "Missing Credentials" });
