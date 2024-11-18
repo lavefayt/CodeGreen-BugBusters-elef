@@ -85,14 +85,21 @@ const AdminHeader = () => {
 
             {isDropdownOpen && (
               <div className="absolute right-0 mt-4 w-48 bg-hoverbutton text-white rounded-md shadow-lg">
-                <span onClick={handleProfile} className="block font-syke-medium text-sm px-4 py-2 hover:bg-buttongreen rounded-md cursor-pointer">
+                <span onClick={handleProfile} className="block font-syke-medium rounded-t-lg text-sm px-4 py-2 hover:bg-buttongreen  cursor-pointer">
 
                   Profile
                 </span>
 
                 <span
                   onClick={handleSignOut}
-                  className="block font-syke-medium text-sm px-4 py-2 hover:bg-buttongreen rounded-md cursor-pointer"
+                  className="block font-syke-medium text-sm px-4 py-2 hover:bg-buttongreen  cursor-pointer"
+                >
+                  Reset Password
+                </span>
+
+                <span
+                  onClick={handleSignOut}
+                  className="block font-syke-medium text-sm rounded-b-lg px-4 py-2 hover:bg-buttongreen  cursor-pointer"
                 >
                   Log Out
                 </span>
