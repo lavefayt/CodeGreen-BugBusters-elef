@@ -49,3 +49,21 @@ export interface User {
   last_login: string;
   is_admin: boolean;
 }
+
+export interface RegisterUser {
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+  password?: string;
+  confirm_password?: string;
+}
+
+  export interface ViolatorsTable {
+  id: string;
+  last_name: string;
+  first_name: string;
+  violation_type: string;
+   violation_date: string;
+  paid_status: boolean;
+  
+}
