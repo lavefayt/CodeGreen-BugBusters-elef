@@ -42,7 +42,7 @@ const AdminHeader = () => {
   }, [dropdownRef]);
 
   return (
-    <header className="flex space-x-40items-center justify-center w-full px-20 py-4">
+    <header className="flex space-x-40items-center justify-center w-full space-x-20 px-20 py-4">
       <div className="flex items-center w-full max-w-5xl justify-between">
         <div className="flex items-center">
           <button
