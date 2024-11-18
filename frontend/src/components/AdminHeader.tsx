@@ -18,9 +18,13 @@ const AdminHeader = () => {
   const handleSignOut = async () => {
     try {
       const { error } = await supabase.auth.signOut();
-      error ? alert(error) : navigate("/login");
+      if (error) {
+        alert(error.message);
+      } else {
+        navigate("/login");
+      }
     } catch (error) {
-      alert(error);
+      alert("An error occurred while signing out.");
     }
   };
 
@@ -35,18 +39,18 @@ const AdminHeader = () => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [dropdownRef]);
+  }, []);
 
   return (
-    <header className="flex space-x-40items-center justify-center w-full space-x-20 px-20 py-4">
-      <div className="flex items-center w-full max-w-5xl justify-between">
+    <header className="flex items-center justify-center w-full px-6 py-4">
+      <div className="flex items-center space-x-20 w-full max-w-6xl justify-between">
+        {/* Logo Section */}
         <div className="flex items-center">
           <button
-            className="flex items-center gap-4 relative group overflow-hidden rounded-2x pr-20 py-2 text-white font-medium text-lg"
+            className="flex items-center gap-4"
             onClick={handleHomePage}
           >
             <img
@@ -54,49 +58,59 @@ const AdminHeader = () => {
               alt="Logo"
               className="w-10 h-5 object-contain md:w-12 md:h-12 transition-transform duration-300 hover:scale-105"
             />
-            <h1 className="text-lg text-left font-syke-medium md:text-xl">
+            <h1 className="text-white text-lg font-syke-medium text-left hover:text-buttongreen">
               CodeGreen Gateway
             </h1>
           </button>
         </div>
 
-        {/* Right Section: Navigation */}
-        <nav className="flex space-x-12 text-white font-syke-medium font-medium text-lg">
-          <Link to="/encode" className="hover:text-textgreen transition-colors">
+        {/* Navigation Links */}
+        <nav className="flex items-center space-x-20 text-white text-lg font-syke-medium">
+          <Link
+            to="/encode"
+            className="hover:text-buttongreen transition-colors"
+          >
             Encode
           </Link>
-
           <Link
             to="/driverslist"
-            className="hover:text-textgreen font-syke-medium transition-colors"
+            className="hover:text-buttongreen transition-colors"
           >
             Drivers
           </Link>
-
           <Link
             to="/violatorslist"
-            className="hover:text-textgreen font-syke-medium transition-colors"
+            className="hover:text-buttongreen transition-colors"
           >
             Violators
           </Link>
 
+          {/* Account Dropdown */}
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={toggleDropdown}
-              className="text-white hover:text-textgreen transition-colors"
+              className="hover:tb-buttongreen hover:text-buttongreen transition-colors"
             >
               Account
             </button>
 
             {isDropdownOpen && (
               <div className="absolute right-0 mt-4 w-48 bg-hoverbutton text-white rounded-md shadow-lg">
-                <span className="block font-syke-medium text-sm px-4 py-2 hover:bg-buttongreen rounded-md cursor-pointer">
+                <span
+                  className="block rounded-t-lg text-sm px-4 py-2 hover:bg-buttongreen cursor-pointer"
+                  onClick={() => navigate("/profile")}
+                >
                   Profile
                 </span>
-
                 <span
+                  className="block text-sm px-4 py-2 hover:bg-buttongreen cursor-pointer"
+                  onClick={() => alert("Reset Password functionality")}
+                >
+                  Reset Password
+                </span>
+                <span
+                  className="block rounded-b-lg text-sm px-4 py-2 hover:bg-buttongreen cursor-pointer"
                   onClick={handleSignOut}
-                  className="block font-syke-medium text-sm px-4 py-2 hover:bg-buttongreen rounded-md cursor-pointer"
                 >
                   Log Out
                 </span>

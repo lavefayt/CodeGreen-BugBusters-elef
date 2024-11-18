@@ -57,7 +57,7 @@ const AdminHeader = () => {
               alt="Logo"
               className="w-10 h-5 object-contain md:w-12 md:h-12 transition-transform duration-300 hover:scale-105"
             />
-            <h1 className="text-lg text-left font-syke-medium md:text-xl">
+            <h1 className="text-lg text-left wfont-syke-medium md:text-xl">
               CodeGreen Gateway
             </h1>
           </button>
@@ -72,7 +72,7 @@ const AdminHeader = () => {
             to="/policies"
             className="hover:text-textgreen font-syke-medium transition-colors"
           >
-            Contacts
+            Policies
           </Link>
 
           <div className="relative" ref={dropdownRef}>
