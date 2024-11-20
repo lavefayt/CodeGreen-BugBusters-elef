@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from "express";
 const validateAuth = (req: Request, res: Response, next: NextFunction) => {
   const validateEmail = (email: string) => {
     return email.match(
-      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
     );
   };
 
@@ -19,10 +19,14 @@ const validateAuth = (req: Request, res: Response, next: NextFunction) => {
       ) {
         res.status(401).json({ field: "", message: "Missing Credentials" });
         return;
-      } else if (!validateEmail(email)) {
+      }
+
+      if (!validateEmail(email)) {
         res.status(401).json({ field: "", message: "Invalid Email" });
         return;
-      } else if (password.length < 8 || password.length > 20) {
+      }
+
+      if (password.length < 8 || password.length > 20) {
         res.status(401).json({
           field: "",
           message: "Password must be at least 8 and less than 20 characters.",
@@ -30,12 +34,14 @@ const validateAuth = (req: Request, res: Response, next: NextFunction) => {
         return;
       }
     }
+
     case "/login": {
       const { email, password } = req.body;
       if (![email, password].every(Boolean)) {
         res.status(401).json({ field: "", message: "Missing Credentials" });
         return;
-      } else if (!validateEmail(email)) {
+      }
+      if (!validateEmail(email)) {
         res.status(401).json({ field: "", message: "Invalid Email" });
         return;
       }

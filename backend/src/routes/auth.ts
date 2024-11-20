@@ -1,22 +1,14 @@
-import express, { Request as Req, Response } from "express";
+import express, { Request, Response } from "express";
 import validateAuth from "../middlewares/validateAuth";
 import { pool } from "..";
 import bcrypt from "bcrypt";
 import { generateAccessToken, generateRefreshToken } from "../utils/tokenGen";
 import { RegisterUser, User } from "../types/datatypes";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 const router = express();
 
-// router.get("/testing", async (req: Request, res: Response) => {
-//   try {
-//     const { rows } = await pool.query("SELECT * FROM users");
-//     res.send(rows[0]);
-//   } catch (error) {
-//     res.send({ field: "Error", message: error });
-//   }
-// });
-
-router.post("/register", validateAuth, async (req: Req, res: Response) => {
+router.post("/register", validateAuth, async (req: Request, res: Response) => {
   try {
     const { first_name, last_name, email, password, confirm_password } =
       req.body as RegisterUser;
@@ -59,11 +51,11 @@ router.post("/register", validateAuth, async (req: Req, res: Response) => {
       message: `Welcome to CodeGreen ${first_name} ${last_name}`,
     });
   } catch (error) {
-    res.sendStatus(500).json({ message: `${error}` });
+    res.sendStatus(500).json({ title: "Unknown Error", message: error });
   }
 });
 
-router.post("/login", validateAuth, async (req: Req, res: Response) => {
+router.post("/login", validateAuth, async (req: Request, res: Response) => {
   try {
     const { email, password } = await req.body;
 
@@ -103,11 +95,56 @@ router.post("/login", validateAuth, async (req: Req, res: Response) => {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
-    res.status(200).json({ accessToken: accessToken });
-    console.log(accessToken);
-    console.log(refreshToken);
+    // console.log(req.cookies.jwt);
+    res.status(200).json({ accessToken, isAdmin: user.is_admin });
   } catch (error) {
-    res.sendStatus(500).json({ title: "Error Found", message: error });
+    res.sendStatus(500).json({ title: "Unknown Error", message: error });
+    console.log(error);
+  }
+});
+
+router.get("/refresh", async (req: Request, res: Response) => {
+  try {
+    const cookies = req.cookies;
+    if (!cookies?.jwt) {
+      res.status(401).json({
+        title: "You are not authorized.",
+        message: "Please login to access these features.",
+      });
+      return;
+    }
+
+    const refreshToken = cookies.jwt;
+    console.log(refreshToken);
+
+    const foundUser = (
+      await pool.query("SELECT * FROM users WHERE refresh_token = $1", [
+        refreshToken,
+      ])
+    ).rows[0];
+
+    console.log(foundUser);
+
+    if (!foundUser) {
+      res.status(403).json({
+        title: "No Access Rights",
+        message: "You do not have access to these features.",
+      });
+
+      return;
+    }
+
+    const payload = jwt.verify(
+      refreshToken,
+      process.env.REFRESH_TOKEN_SECRET!
+    ) as JwtPayload;
+    console.log(payload.user);
+
+    const accessToken = generateAccessToken(payload.user);
+
+    res.status(200).json({ accessToken });
+  } catch (error) {
+    res.status(500).json({ title: "Unknown Error", message: error });
     console.log(error);
   }
 });

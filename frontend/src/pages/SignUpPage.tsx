@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import supabase from "../utils/supabase";
 import { NotificationPopUp } from "../components/NotificationPopUp";
 
 const SignUp = () => {
@@ -22,23 +21,23 @@ const SignUp = () => {
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    // event.preventDefault();
 
-    try {
-      const { data, error } = await supabase.auth.signUp({
-        email: signUpForm.email,
-        password: signUpForm.password,
-        options: {
-          data: {
-            display_name: `${signUpForm.first_name} ${signUpForm.last_name}`,
-          },
-        },
-      });
-      error ? alert(error) : setEmailPopUpActive(true);
-      setEmailPopUpActive(true);
-    } catch (error) {
-      alert(error);
-    }
+    // try {
+    //   const { data, error } = await supabase.auth.signUp({
+    //     email: signUpForm.email,
+    //     password: signUpForm.password,
+    //     options: {
+    //       data: {
+    //         display_name: `${signUpForm.first_name} ${signUpForm.last_name}`,
+    //       },
+    //     },
+    //   });
+    //   error ? alert(error) : setEmailPopUpActive(true);
+    //   setEmailPopUpActive(true);
+    // } catch (error) {
+    //   alert(error);
+    // }
   };
 
   const handleLogInButton = () => {
