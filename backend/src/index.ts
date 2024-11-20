@@ -7,6 +7,9 @@ import ws from "ws";
 import authRoutes from "./routes/auth";
 import { User } from "./types/datatypes";
 import verifyToken from "./middlewares/verifyToken";
+import cookieParser from "cookie-parser";
+import allowedOrigins from "./config/allowedOrigins";
+import { credentials } from "./middlewares/credentials";
 
 dotenv.config({ path: ".env" });
 
@@ -14,7 +17,23 @@ const server = express();
 
 // Middlewares
 server.use(express.json());
-server.use(cors());
+
+server.use(credentials);
+
+server.use(
+  cors({
+    origin: (origin, callback) => {
+      if (allowedOrigins.indexOf(origin!) !== -1 || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not Allowed By CORS"));
+      }
+    },
+    optionsSuccessStatus: 200,
+  })
+);
+
+server.use(cookieParser());
 
 neonConfig.webSocketConstructor = ws;
 export const pool = new Pool({ connectionString: process.env.DATABASE_URL });

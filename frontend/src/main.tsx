@@ -13,7 +13,7 @@ import ViolatorList from "./pages/ViolatorList.tsx";
 import DriversList from "./pages/DriverList.tsx";
 import Policies from "./pages/Policies.tsx";
 import Contacts from "./pages/Contacts.tsx";
-import DriverProfile from "./pages/DriverProfileSection.tsx"
+import DriverProfile from "./pages/DriverProfileSection.tsx";
 import RegisterDriver from "./pages/RegisterDriver.tsx";
 import AddDriver from "./pages/AddDriver.tsx";
 import AddViolation from "./pages/AddViolation.tsx";
@@ -24,22 +24,75 @@ const Main = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/homepage" element={<HomePage />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/admin" element={<AdminLandingPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/driverslist" element={<DriversList />} />
-        <Route path="/encode" element={<EncodePage />} />
-        <Route path="/register-driver" element={<RegisterDriver />} />
-        <Route path="/add-driver" element={<AddDriver />} />
-        <Route path="/add-violation" element={<AddViolation />} />
-        <Route path="/violatorslist" element={<ViolatorList />} />
-        <Route path="/policies" element={<Policies />} />
-        <Route path="/contacts" element={<Contacts />} />
-        <Route path="/forgot" element={<Forgot />} />
-        <Route path="/driverprofile" element={<DriverProfile />} />
+        <Route
+          path="/"
+          element={
+            <Navigate
+              to="/login"
+              replace
+            />
+          }
+        />
+        <Route
+          path="/login"
+          element={<LoginPage />}
+        />
+        <Route
+          path="/homepage"
+          element={<HomePage />}
+        />
+        <Route
+          path="/signup"
+          element={<SignUp />}
+        />
+        <Route
+          path="/admin"
+          element={<AdminLandingPage />}
+        />
+        <Route
+          path="/about"
+          element={<AboutPage />}
+        />
+        <Route
+          path="/driverslist"
+          element={<DriversList />}
+        />
+        <Route
+          path="/encode"
+          element={<EncodePage />}
+        />
+        <Route
+          path="/register-driver"
+          element={<RegisterDriver />}
+        />
+        <Route
+          path="/add-driver"
+          element={<AddDriver />}
+        />
+        <Route
+          path="/add-violation"
+          element={<AddViolation />}
+        />
+        <Route
+          path="/violatorslist"
+          element={<ViolatorList />}
+        />
+        <Route
+          path="/policies"
+          element={<Policies />}
+        />
+        <Route
+          path="/contacts"
+          element={<Contacts />}
+        />
+        <Route
+          path="/forgot"
+          element={<Forgot />}
+        />
+        <Route
+          path="/driverprofile"
+          element={<DriverProfile />}
+        />
       </Routes>
     </BrowserRouter>
   );

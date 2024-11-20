@@ -61,8 +61,3 @@ export interface RegisterUser {
   confirm_password?: string;
 }
 
-
-
-export interface JwtPayload {
-  _id: string
-}
