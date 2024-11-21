@@ -123,6 +123,7 @@ const RegisterDriver = () => {
                 </div>
               </form>
               <button
+                onClick={handleRegisterClick}
                 type="submit"
                 className="w-[10rem] py-2 mt-[30px] bg-buttongreen text-white hover:bg-colorhover font-syke-regular transition-colors rounded-sm"
               >
