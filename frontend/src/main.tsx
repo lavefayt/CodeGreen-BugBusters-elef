@@ -17,8 +17,9 @@ import DriverProfile from "./pages/DriverProfileSection.tsx"
 import RegisterDriver from "./pages/RegisterDriver.tsx";
 import AddDriver from "./pages/AddDriver.tsx";
 import AddViolation from "./pages/AddViolation.tsx";
-
 import Forgot from "./pages/Forgot.tsx";
+import HomepageDriver from "./pages/HomepageDriver.tsx"
+
 
 const Main = () => {
   return (
@@ -40,6 +41,7 @@ const Main = () => {
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/driverprofile" element={<DriverProfile />} />
+        <Route path="/homepagedriver" element={<HomepageDriver/>}/>
       </Routes>
     </BrowserRouter>
   );

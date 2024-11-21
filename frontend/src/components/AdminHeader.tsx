@@ -45,12 +45,12 @@ const AdminHeader = () => {
   }, []);
 
   return (
-    <header className="flex items-center justify-center w-full px-6 py-4">
-      <div className="flex items-center space-x-20 w-full max-w-6xl justify-between">
-        {/* Logo Section */}
-        <div className="flex items-center">
+    <header className="flex justify-center items-center w-full px-4 py-4">
+      <div className="flex items-center justify-between w-[55rem]">
+        {/* Logo and Title Section */}
+        <div className="flex items-center gap-4">
           <button
-            className="flex items-center gap-4"
+            className="flex items-center gap-2"
             onClick={handleHomePage}
           >
             <img
@@ -58,8 +58,8 @@ const AdminHeader = () => {
               alt="Logo"
               className="w-10 h-5 object-contain md:w-12 md:h-12 transition-transform duration-300 hover:scale-105"
             />
-            <h1 className="text-white text-lg font-syke-medium text-left hover:text-buttongreen">
-              CodeGreen Gateway
+            <h1 className="text-white text-lg font-syke-medium hover:text-buttongreen">
+              Admin Gateway
             </h1>
           </button>
         </div>
