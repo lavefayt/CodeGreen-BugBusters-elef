@@ -1,28 +1,25 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Forgot from "./Forgot";
-import { useDrivers } from "../hooks/useDrivers";
-import supabase from "../utils/supabase";
+import useLogin from "../hooks/useLogin";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { submitLogin, error, loading, isAdmin } = useLogin();
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const { data, error } = await supabase.auth.signUp({
-        email: email,
-        password: password,
-      });
-      error
-        ? alert("Invalid email or password")
-        : email === "jrofer.casio11@gmail.com"
-        ? navigate("/admin")
-        : navigate("/homepage");      
-    } catch (error) {
-      alert(error);
+    await submitLogin({ email, password });
+    console.log(error)
+    if (error === null) {
+      // Put it on the ERROR NOTIF
+      if (isAdmin) {
+        navigate("/admin");
+      } else {
+        navigate("/homepage");
+      }
     }
   };
 

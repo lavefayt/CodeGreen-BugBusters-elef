@@ -6,11 +6,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "backend": "cd backend && npm run dev",
     "frontend": "cd frontend && npm run dev",
-    "allinstall": "npm install && cd frontend && npm install && cd ../backend && npm install && cd .."
+    "allinstall": "npm install && cd frontend && npm install && cd ../backend && npm install && cd ..",
+    "allupdate": "npm update && cd frontend && npm update && cd ../backend && npm update && cd .."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {},
-  "dependencies": {}
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
 }

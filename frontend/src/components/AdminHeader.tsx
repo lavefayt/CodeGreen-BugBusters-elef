@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import supabase from "../utils/supabase";
 
 const AdminHeader = () => {
   const navigate = useNavigate();
@@ -15,6 +14,7 @@ const AdminHeader = () => {
     setDropdownOpen((prevState) => !prevState);
   };
 
+
   const handleSignOut = async () => {
     try {
       const { error } = await supabase.auth.signOut();
@@ -26,6 +26,14 @@ const AdminHeader = () => {
     } catch (error) {
       alert("An error occurred while signing out.");
     }
+
+  const handleSignOut = async () => { // Replace with BACKEND APIs
+    // try {
+    //   const { error } = await supabase.auth.signOut();
+    //   error ? alert(error) : navigate("/login");
+    // } catch (error) {
+    //   alert(error);
+    // }
   };
 
   useEffect(() => {

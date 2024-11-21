@@ -6,16 +6,37 @@ import { Pool, neonConfig } from "@neondatabase/serverless";
 import ws from "ws";
 import authRoutes from "./routes/auth";
 import { User } from "./types/datatypes";
+import verifyToken from "./middlewares/verifyToken";
+import cookieParser from "cookie-parser";
+import allowedOrigins from "./config/allowedOrigins";
+import { credentials } from "./middlewares/credentials";
 
 dotenv.config({ path: ".env" });
 
 const server = express();
-neonConfig.webSocketConstructor = ws;
-export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 // Middlewares
 server.use(express.json());
-server.use(cors());
+
+server.use(credentials);
+
+server.use(
+  cors({
+    origin: (origin, callback) => {
+      if (allowedOrigins.indexOf(origin!) !== -1 || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not Allowed By CORS"));
+      }
+    },
+    optionsSuccessStatus: 200,
+  })
+);
+
+server.use(cookieParser());
+
+neonConfig.webSocketConstructor = ws;
+export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 // Routes
 server.use("/auth", authRoutes);
@@ -29,10 +50,15 @@ server.use("/auth", authRoutes);
 //   }
 // });
 
-// server.post("/testing", async (req: Request, res: Response) => {
-//   console.log(req.body);
-//   res.sendStatus(200);
+// server.post("/testing", verifyToken, async (req: Request, res: Response) => {
+//   try {
+//     res.sendStatus(200);
+//   } catch (error) {
+//     res.sendStatus(500).json(error);
+//   }
 // });
+
+server.use(verifyToken);
 
 const PORT = 4444;
 
