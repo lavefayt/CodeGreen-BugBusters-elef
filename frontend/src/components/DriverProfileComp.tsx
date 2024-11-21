@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import supabase from "../utils/supabase";
 
 const DriverProfileComponent = () => {
   const navigate = useNavigate();
@@ -33,4 +32,4 @@ const DriverProfileComponent = () => {
   );
 };
 
-export default DriverProfileComponent;[EOD]
+export default DriverProfileComponent;

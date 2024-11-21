@@ -50,13 +50,15 @@ server.use("/auth", authRoutes);
 //   }
 // });
 
-server.post("/testing", verifyToken, async (req: Request, res: Response) => {
-  try {
-    res.sendStatus(200);
-  } catch (error) {
-    res.sendStatus(500).json(error);
-  }
-});
+// server.post("/testing", verifyToken, async (req: Request, res: Response) => {
+//   try {
+//     res.sendStatus(200);
+//   } catch (error) {
+//     res.sendStatus(500).json(error);
+//   }
+// });
+
+server.use(verifyToken);
 
 const PORT = 4444;
 

@@ -11,11 +11,15 @@ const LoginPage = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    submitLogin({ email, password });
-    if (isAdmin) {
-      navigate("/admin");
-    } else {
-      navigate("/homepage");
+    await submitLogin({ email, password });
+    console.log(error)
+    if (error === null) {
+      // Put it on the ERROR NOTIF
+      if (isAdmin) {
+        navigate("/admin");
+      } else {
+        navigate("/homepage");
+      }
     }
   };
 

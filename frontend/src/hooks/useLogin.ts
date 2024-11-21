@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { UserLogin } from "../types/user.types";
 import { BackendError } from "../types/error.types";
 
@@ -6,8 +6,8 @@ const useLogin = () => {
   // this should have a component catcher on the interface
   const [error, setError] = useState<BackendError | null>(null);
   const [loading, setLoading] = useState(true);
-  const [token, setToken] = useState<string>("");
-  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [token, setToken] = useState<string>(""); // must be useContext
+  const [isAdmin, setIsAdmin] = useState<boolean>();
 
   const submitLogin = async (data: UserLogin) => {
     console.log(data);
@@ -26,14 +26,15 @@ const useLogin = () => {
       console.log(error);
       setError(error);
       setLoading(false);
-      return;
     } else {
+      setError(null);
       const userInfo = await response.json();
       const accessToken = userInfo.accessToken;
       const userIsAdmin = userInfo.is_admin;
       console.log(accessToken);
-      setToken(accessToken);
+      setToken(accessToken); // useContext
       setIsAdmin(userIsAdmin);
+      setLoading(false);
     }
   };
 
