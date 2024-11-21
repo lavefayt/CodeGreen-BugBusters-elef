@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import AdminHeader from "../components/AdminHeader";
+import Header from "../components/Header";
 import { useState } from "react";
 
 const RegisterDriver = () => {
@@ -17,127 +17,118 @@ const RegisterDriver = () => {
   };
 
   return (
-    <div className="flex flex-col items-center bg-login-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
-      <div className="w-full max-w-3xl">
-        <AdminHeader />
+    <div className="flex flex-col items-center bg-hoverbutton bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
+      <div className="w-full max-w-3xl mb-8 mt-5">
+        <Header />
       </div>
 
       {currentStep === 1 && (
-        <div className="items-center">
-          <div className="text-textgreen">
-            <h1 className="text-4xl font-bold">Registration Form: </h1>
-            <p className="text-white">
-              <b> Logged-in as:</b> nonoygwapo@hotmail.com
-            </p>
-          </div>
+        <div className="text-center font-syke-light text-white justify-center items-center">
+          <div className="text-textgreen text-2xl text-left font-syke-medium">
+            <h1>Registration Form</h1>
 
-          <div className="flex gap-4 mt-12">
-            <div className="flex-1 w-full flex items-center space-x-3">
-              <label className="text-white font-syke-regular">
-                First Name:
-              </label>
-              <input
-                type="text"
-                className="bg-gray-600 w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-md border border-black"
-                required
-              />
-            </div>
+            <div className="bg- w-[40rem] h-[25rem] mt-4">
+              <form className="space-y-2">
+                <div className="flex space-x-4">
+                  <div className="flex-1">
+                    <h1 className="text-white font-syke-light text-xl">
+                      Last Name
+                    </h1>
+                    <input
+                      type="text"
+                      className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+                      name="last_name"
+                      required
+                    />
+                  </div>
 
-            <div className="flex-1 w-full flex items-center space-x-3">
-              <label className="text-white font-syke-regular">
-                Middle Name (Optional):
-              </label>
-              <input
-                type="text"
-                className="bg-gray-600 w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-md border border-black"
-              />
-            </div>
+                  <div className="flex-1">
+                    <h1 className="text-white font-syke-light text-xl">
+                      First Name
+                    </h1>
+                    <input
+                      type="text"
+                      className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+                      name="first_name"
+                      required
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <h1 className="text-white font-syke-light text-xl">Sex</h1>
+                    <select
+                      className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+                      name="sex"
+                      required
+                    >
+                      <option value="">Select</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>{" "}
+                    </select>
+                  </div>
+                </div>
 
-            <div className="flex-1 w-full flex items-center space-x-3">
-              <label className="text-white font-syke-regular">
-                Last Name:
-              </label>
-              <input
-                type="text"
-                className="bg-gray-600 w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-md border border-black"
-                required
-              />
-            </div>
-          </div>
+                <div className="flex space-x-4">
+                  <div className="flex-1">
+                    <h1 className="text-white font-syke-light text-xl">
+                      Date of Birth
+                    </h1>
+                    <input
+                      type="date"
+                      className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+                      name="birthday"
+                      required
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <h1 className="text-white font-syke-light text-xl">
+                      Driver Type
+                    </h1>
+                    <select
+                      className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+                      name="drivertype"
+                      required
+                    >
+                      <option value="">Select</option>
+                      <option value="Student">Male</option>
+                      <option value="Faculty">Faculty</option>
+                      <option value="Guest">Guest</option>
+                      <option value="Alumni">Alumni</option>
+                    </select>
+                  </div>
+                </div>
 
-          <div className="flex gap-4 mt-12">
-            <div className="flex-1 w-full flex items-center space-x-3">
-              <label className="text-white font-syke-regular">
-                Date of Birth:
-              </label>
-              <input
-                type="text"
-                className="bg-gray-600 w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-md border border-black"
-                required
-              />
-            </div>
-
-            <div className="flex-1 w-full flex items-center space-x-3">
-              <label className="text-white font-syke-regular">
-                Sex:
-              </label>
-              <select
-                className="bg-gray-600 w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-md border border-black"
-                required
+                <div className="flex space-x-4">
+                  <div className="flex-1">
+                    <h1 className="text-white font-syke-light text-xl">
+                      License Number:
+                    </h1>
+                    <input
+                      type="text"
+                      className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+                      name="first_name"
+                      required
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <h1 className="text-white font-syke-light text-xl">
+                      License Expiration Date
+                    </h1>
+                    <input
+                      type="date"
+                      className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+                      name="birthday"
+                      required
+                    />
+                  </div>
+                </div>
+              </form>
+              <button
+                type="submit"
+                className="w-[10rem] py-2 mt-[30px] bg-buttongreen text-white hover:bg-colorhover font-syke-regular transition-colors rounded-sm"
               >
-                <option value="">Select</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
+                Next
+              </button>
             </div>
-
-            <div className="flex-1 w-full flex items-center space-x-3">
-              <label className="text-white font-syke-regular">
-                Driver Type:
-              </label>
-              <select
-                className="bg-gray-600 w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-md border border-black"
-                required
-              >
-                <option value="">Select</option>
-                <option value="Student">Student</option>
-                <option value="Faculty">Faculty</option>
-                <option value="Staff">Staff</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="flex gap-4 mt-12">
-            <div className="flex-1 w-full flex items-center space-x-3">
-              <label className="text-white font-syke-regular">
-               License No:
-              </label>
-              <input
-                type="text"
-                className="bg-gray-600 w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-md border border-black"
-                required
-              />
-            </div>
-
-            <div className="flex-1 w-full flex items-center space-x-3">
-              <label className="text-white font-syke-regular">
-                License expiration date:
-              </label>
-              <input
-                type="text"
-                className="bg-gray-600 w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-md border border-black"
-              />
-            </div>
-          </div>
-
-          <div className="flex justify-center mt-6">
-            <button
-              type="button"
-              className="w-32 bg-buttongreen text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-              onClick={handleRegisterClick}
-            >
-              Register
-            </button>
           </div>
         </div>
       )}
