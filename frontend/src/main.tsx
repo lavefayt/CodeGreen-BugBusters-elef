@@ -1,6 +1,12 @@
 import { StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 
 import LoginPage from "./pages/LoginPage.tsx";
 import HomePage from "./pages/HomePage.tsx";

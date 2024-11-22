@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const AdminHeader = () => {
@@ -14,7 +14,8 @@ const AdminHeader = () => {
     setDropdownOpen((prevState) => !prevState);
   };
 
-  const handleSignOut = async () => { // Replace with BACKEND APIs
+  const handleSignOut = async () => {
+    // Replace with BACKEND APIs
     // try {
     //   const { error } = await supabase.auth.signOut();
     //   error ? alert(error) : navigate("/login");
@@ -46,8 +47,7 @@ const AdminHeader = () => {
         <div className="flex items-center">
           <button
             className="flex items-center gap-4 relative group overflow-hidden rounded-2x pr-20 py-2 text-white font-medium text-lg"
-            onClick={handleHomePage}
-          >
+            onClick={handleHomePage}>
             <img
               src="../assets/5.png"
               alt="Logo"
@@ -61,29 +61,30 @@ const AdminHeader = () => {
 
         {/* Right Section: Navigation */}
         <nav className="flex space-x-12 text-white font-syke-medium font-medium text-lg">
-          <Link to="/encode" className="hover:text-textgreen transition-colors">
+          <Link
+            to="/encode"
+            className="hover:text-textgreen transition-colors">
             Encode
           </Link>
 
           <Link
             to="/driverslist"
-            className="hover:text-textgreen font-syke-medium transition-colors"
-          >
+            className="hover:text-textgreen font-syke-medium transition-colors">
             Drivers
           </Link>
 
           <Link
             to="/violatorslist"
-            className="hover:text-textgreen font-syke-medium transition-colors"
-          >
+            className="hover:text-textgreen font-syke-medium transition-colors">
             Violators
           </Link>
 
-          <div className="relative" ref={dropdownRef}>
+          <div
+            className="relative"
+            ref={dropdownRef}>
             <button
               onClick={toggleDropdown}
-              className="text-white hover:text-textgreen transition-colors"
-            >
+              className="text-white hover:text-textgreen transition-colors">
               Account
             </button>
 
@@ -95,8 +96,7 @@ const AdminHeader = () => {
 
                 <span
                   onClick={handleSignOut}
-                  className="block font-syke-medium text-sm px-4 py-2 hover:bg-buttongreen rounded-md cursor-pointer"
-                >
+                  className="block font-syke-medium text-sm px-4 py-2 hover:bg-buttongreen rounded-md cursor-pointer">
                   Log Out
                 </span>
               </div>
