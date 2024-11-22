@@ -4,11 +4,6 @@ import useLogin from "../hooks/useLogin";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const { token, error } = useLogin();
-
-  if (error) {
-    console.log(error);
-  } else console.log(token);
 
   const handleRegisterButton = () => {
     navigate("/register-driver");
