@@ -24,8 +24,10 @@ const RegisterDriver = () => {
 
       {currentStep === 1 && (
         <div className="text-center font-syke-light text-white justify-center items-center">
-          <div className="text-textgreen text-2xl text-left font-syke-medium">
-            <h1>Registration Form</h1>
+          <div className="text-textgreen text-3xl text-left font-syke-medium">
+            <h1>Registering as Driver</h1>
+            <h1 className="text-sm font-syke-light">Please enter your information</h1>
+
 
             <div className="bg- w-[40rem] h-[25rem] mt-4">
               <form className="space-y-2">
@@ -36,7 +38,7 @@ const RegisterDriver = () => {
                     </h1>
                     <input
                       type="text"
-                      className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+                      className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                       name="last_name"
                       required
                     />
@@ -105,7 +107,7 @@ const RegisterDriver = () => {
                     <input
                       type="text"
                       className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
-                      name="first_name"
+                      name="licenseNum"
                       required
                     />
                   </div>
@@ -116,42 +118,34 @@ const RegisterDriver = () => {
                     <input
                       type="date"
                       className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
-                      name="birthday"
+                      name="LicenseExp"
                       required
                     />
                   </div>
                 </div>
               </form>
-              <button
-                onClick={handleRegisterClick}
-                type="submit"
-                className="w-[10rem] py-2 mt-[30px] bg-buttongreen text-white hover:bg-colorhover font-syke-regular transition-colors rounded-sm"
-              >
-                Next
-              </button>
+
+              <div className="flex items-center mt-4">
+                <input
+                  type="checkbox"
+                  id="termsCheckbox"
+                  className="w-6 h-6 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  required
+                />
+                <label
+                  htmlFor="termsCheckbox"
+                  className="ms-4 text-xl font-medium text-gray-900 dark:text-gray-300"
+                >
+                  I verify that the information I have provided above is true.
+                </label>
+              </div>
+                <button
+                  onClick={handleConfirmClick}
+                  className="bg-buttongreen hover:bg-colorhover text-xl text-white py-2 px-4 w-[9rem]  mt-[1rem] rounded-sm">
+                Confirm
+                </button>
             </div>
           </div>
-        </div>
-      )}
-
-      {currentStep === 2 && (
-        <div className="absolute inset-0 flex flex-col justify-center items-center bg-[rgba(34,38,41,0.66)] opacity-95 w-[804px] h-[451px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/3">
-          <button
-            className="absolute top-0 right-0 w-[23px] h-[25px] p-2"
-            onClick={handleBackClick}
-          >
-            <img src="/assets/X.png" alt="Close" />
-          </button>
-          <div>
-            <p className="text-white">are you sure you want to continue?</p>
-          </div>
-          <button
-            type="button"
-            className="w-32 bg-buttongreen text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm mt-4"
-            onClick={handleConfirmClick}
-          >
-            confirm
-          </button>
         </div>
       )}
     </div>

@@ -17,10 +17,9 @@ const HomepageDriver = () => {
       </div>
 
       <div className="mt-8 px-6 py-3 w-[45rem] bg-[#222629] h-[23rem] rounded flex">
-        {/* Upcoming Events Section */}
         <div className="w-3/4 pr-2">
           <h1 className="text-xl font-syke-medium text-white">Notices</h1>
-          <div className="mt-2 h-[18.5rem] bg-[#474B4F] overflow-y-auto rounded scrollbar">
+          <div className="mt-2 h-[18.5rem] bg-[#474B4F] overflow-y-scroll rounded scrollbar">
             <p className="text-white p-2">
               Event 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>
