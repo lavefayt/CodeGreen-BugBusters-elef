@@ -1,14 +1,21 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const AdminHeader = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const handleHomePage = () => navigate("/admin");
-  const toggleDropdown = () => setDropdownOpen((prevState) => !prevState);
+
+  const handleHomePage = () => {
+    navigate("/admin");
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen((prevState) => !prevState);
+  };
+
   const handleSignOut = async () => {
-    // Replace with actual API integration
+    // Replace with BACKEND APIs
     // try {
     //   const { error } = await supabase.auth.signOut();
     //   if (error) alert(error);
