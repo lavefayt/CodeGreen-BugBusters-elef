@@ -80,16 +80,16 @@ const AdminHeader = () => {
               Account
             </button>
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-4 w-48 bg-gray-700 text-white rounded-md shadow-lg">
-                <span className="block px-4 py-2 hover:bg-green-500 rounded-t-md cursor-pointer">
+              <div className="absolute right-0 mt-4 w-48 bg-hoverbutton text-white rounded-md shadow-lg">
+                <span className="block px-4 py-2 hover:bg-buttongreen rounded-t-md cursor-pointer">
                   Profile
                 </span>
-                <span className="block px-4 py-2 hover:bg-green-500 cursor-pointer">
+                <span className="block px-4 py-2 hover:bg-buttongreen cursor-pointer">
                   Reset Password
                 </span>
                 <span
                   onClick={handleSignOut}
-                  className="block px-4 py-2 hover:bg-green-500 rounded-b-md cursor-pointer"
+                  className="block px-4 py-2 hover:bg-buttongreen rounded-b-md cursor-pointer"
                 >
                   Log Out
                 </span>
