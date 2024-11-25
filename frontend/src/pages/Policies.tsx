@@ -8,7 +8,7 @@ const Policies = () => {
     <div className="flex flex-col items-center min-h-screen bg-adminlanding-bg">
 
       <div>
-        <Header />
+        <Header/>
       </div>
       
       <div className="flex flex-grow w-full "
