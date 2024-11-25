@@ -40,7 +40,7 @@ const AdminHeader = () => {
   }, []);
 
   return (
-    <header className="flex items-center justify-start w-full px-4 py-4">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black py-4 px-8 shadow-md">
       <div className="flex mt-3 items-center font-syke-regular w-full max-w-[60rem] justify-between">
         {/* Logo Section */}
         <div className="flex items-center w-[12rem] ml-[-70px] mr-[150px]">
