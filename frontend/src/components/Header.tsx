@@ -62,7 +62,7 @@ const Header = () => {
             alt="Logo"
             className="w-10 h-5 object-contain md:w-[4rem] md:h-[4rem] transition-transform duration-300 hover:scale-105"
             />
-          <h1 className="text-lg md:text-xl font-semibold hover:text-buttongreen">CodeGreen Gateway</h1>
+          <h1 className="text-lg md:text-xl font-semibold transition-colors hover:text-buttongreen">CodeGreen Gateway</h1>
         </button>
       </div>
 

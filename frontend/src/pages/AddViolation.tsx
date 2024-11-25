@@ -167,7 +167,7 @@ const AddViolation = () => {
           <div>
             <button
               type="button"
-              className="w-32 bg-buttongreen text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
+              className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
               onClick={handleCancelButton}
             >
               Cancel
@@ -177,7 +177,7 @@ const AddViolation = () => {
           <div>
             <button
               type="button"
-              className="w-32 bg-buttongreen text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
+              className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
               onClick={handleNextClick}
             >
               Search
@@ -191,7 +191,7 @@ const AddViolation = () => {
           <div>
             <button
               type="button"
-              className="w-32 bg-buttongreen text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
+              className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
               onClick={handleBackClick}
             >
               Back
@@ -201,7 +201,7 @@ const AddViolation = () => {
           <div>
             <button
               type="button"
-              className="w-32 bg-buttongreen text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
+              className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
               onClick={handleNextClick}
             >
               Add Violation
