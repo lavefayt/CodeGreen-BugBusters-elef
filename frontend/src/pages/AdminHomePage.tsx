@@ -18,7 +18,7 @@ const AdminLandingPage = () => {
 
   return (
       <div className="flex flex-col items-center bg-adminlanding-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
-        <div className="w-full max-w-3xl mb-8 mt-5">
+        <div>
           <AdminHeader/>
         </div>
 
@@ -31,15 +31,15 @@ const AdminLandingPage = () => {
         CodeGreen Gateway is designed to monitor and manage parking violations within the university.
       </p>
 
-      <div className="grid grid-cols-3 gap-x-20 gap-y-4 mt-12">
-        <button className="text-white px-8 py-4 rounded-lg bg-lime-700 font-syke-medium" onClick={handleEncodeButton}>
+      <div className="grid grid-cols-3 font-syke-medium text-3xl gap-x-12 gap-y-4 mt-12">
+        <button className="transition-transform duration-300 hover:scale-105 text-white px-5 py-5 rounded-md bg-buttongreen hover:bg-colorhover font-syke-medium" onClick={handleEncodeButton}>
           Encode
         </button>
-        <button className="text-white px-8 py-4 rounded-lg bg-lime-700 font-syke-medium" onClick={handleAddViolationButton}>
-          Drivers
+        <button className="transition-transform duration-300 hover:scale-105 text-white px-5 py-4 rounded-md bg-buttongreen hover:bg-colorhover font-syke-medium" onClick={handleAddViolationButton}>
+          View Drivers
         </button>        
-        <button className="text-white px-8 py-4 rounded-lg bg-lime-700 font-syke-medium" onClick={handleAddDriverButton}>
-          Violators
+        <button className="transition-transform duration-300 hover:scale-105 text-white px-5 py-4 rounded-md bg-buttongreen hover:bg-colorhover font-syke-medium" onClick={handleAddDriverButton}>
+          View Violators
         </button>        
       </div>
     </div>

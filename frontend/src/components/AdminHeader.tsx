@@ -41,9 +41,9 @@ const AdminHeader = () => {
 
   return (
     <header className="flex items-center justify-start w-full px-4 py-4">
-      <div className="flex items-center font-syke-regular w-full max-w-[60rem] justify-between">
+      <div className="flex mt-3 items-center font-syke-regular w-full max-w-[60rem] justify-between">
         {/* Logo Section */}
-        <div className="flex items-center ml-[-70px] mr-[150px]">
+        <div className="flex items-center w-[12rem] ml-[-70px] mr-[150px]">
           <button
             onClick={handleHomePage}
             className="flex text-left items-center gap-4 group overflow-hidden rounded-md pr-20 py-2 text-white font-medium text-lg"
@@ -88,15 +88,20 @@ const AdminHeader = () => {
             </button>
             {isDropdownOpen && (
               <div className="absolute right-0 mt-4 w-48 bg-hoverbutton text-white rounded-md shadow-lg">
-                <span className="block px-4 py-2 hover:bg-buttongreen rounded-t-md cursor-pointer">
+                <span
+                  className="block font-syke-medium rounded-t-lg text-sm px-4 py-2 hover:bg-buttongreen cursor-pointer"
+                >
                   Profile
                 </span>
-                <span className="block px-4 py-2 hover:bg-buttongreen cursor-pointer">
+                <span
+                  onClick={handleSignOut}
+                  className="block font-syke-medium text-sm px-4 py-2 hover:bg-buttongreen cursor-pointer"
+                >
                   Reset Password
                 </span>
                 <span
                   onClick={handleSignOut}
-                  className="block px-4 py-2 hover:bg-buttongreen rounded-b-md cursor-pointer"
+                  className="block font-syke-medium text-sm rounded-b-lg px-4 py-2 hover:bg-buttongreen cursor-pointer"
                 >
                   Log Out
                 </span>

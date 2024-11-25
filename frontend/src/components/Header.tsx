@@ -10,6 +10,10 @@ const AdminHeader = () => {
     navigate("/homepage");
   };
 
+  const handleDriverHomepage = () => {
+    navigate("/homepagedriver")
+  }
+
   const handleProfile = () => {
     navigate("/driverprofile");
   };
@@ -45,27 +49,31 @@ const AdminHeader = () => {
   }, [dropdownRef]);
 
   return (
-    <header className="flex justify-center items-center w-full px-4 py-4">
-      <div className="flex items-center w-full max-w-6xl justify-between mx-auto">
-        {/* Logo Section */}
-        <div className="flex items-center w-[11rem]">
-          <button
-            className="flex items-center gap-4 relative group overflow-hidden rounded-2x text-white font-medium text-lg"
-            onClick={handleHomePage}
+    <header className="flex items-center justify-start w-full px-4 py-4">
+    <div className="flex mt-[1rem] items-center font-syke-regular w-full justify-between">
+      {/* Logo Section */}
+      <div className="flex items-center w-[12rem] mr-[150px]">
+        <button
+          onClick={handleHomePage}
+          className="flex text-left items-center gap-4 group overflow-hidden rounded-md pr-20 py-2 text-white font-medium text-lg"
           >
-            <img
-              src="../assets/5.png"
-              alt="Logo"
-              className="w-10 h-5 object-contain md:w-[4rem] md:h-[4rem] transition-transform duration-300 hover:scale-105"
+          <img
+            src="../assets/5.png"
+            alt="Logo"
+            className="w-10 h-5 object-contain md:w-[4rem] md:h-[4rem] transition-transform duration-300 hover:scale-105"
             />
-            <h1 className="text-lg text-left font-syke-medium md:text-xl">
-              CodeGreen Gateway
-            </h1>
-          </button>
-        </div>
+          <h1 className="text-lg md:text-xl font-semibold hover:text-buttongreen">CodeGreen Gateway</h1>
+        </button>
+      </div>
 
         {/* Navigation Links */}
-        <nav className="flex space-x-20 text-white font-syke-medium font-medium text-lg">
+        <nav className="flex space-x-20 text-white font-medium text-lg">
+        <Link
+            to="/homepagedriver"
+            className="hover:text-textgreen font-syke-medium transition-colors"
+          >
+            Inbox
+          </Link>
           <Link to="/about" className="hover:text-textgreen transition-colors">
             About
           </Link>

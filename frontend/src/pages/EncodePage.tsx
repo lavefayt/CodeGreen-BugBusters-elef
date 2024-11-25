@@ -17,10 +17,10 @@ const EncodePage = () => {
 
     return (
     <div className="flex flex-col items-center bg-adminlanding-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
-        <div className="w-full max-w-3xl mb-8 mt-5">
+        <div>
             <AdminHeader />
         </div>
-        <h1 className="text-white font-syke-light text-3xl">What would you like to do?</h1>
+        <h1 className="text-white font-syke-light text-3xl mt-5">What would you like to do?</h1>
         <div className="flex justify-center gap-10 p-3 mt-10">
 
             <div 

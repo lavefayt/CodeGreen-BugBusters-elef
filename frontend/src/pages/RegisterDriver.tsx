@@ -13,13 +13,13 @@ const RegisterDriver = () => {
     setCurrentStep(currentStep - 1);
   };
   const handleConfirmClick = () => {
-    navigate("/homepage");
+    navigate("/homepagedriver");
   };
 
   return (
     <div className="flex flex-col items-center bg-hoverbutton bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
-      <div className="w-full max-w-3xl mb-8 mt-5">
-        <Header />
+      <div>
+        <Header/>
       </div>
 
       {currentStep === 1 && (
@@ -55,7 +55,7 @@ const RegisterDriver = () => {
                       required
                     />
                   </div>
-                  <div className="flex-1">
+                  <div className="flex-2">
                     <h1 className="text-white font-syke-light text-xl">Sex</h1>
                     <select
                       className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
