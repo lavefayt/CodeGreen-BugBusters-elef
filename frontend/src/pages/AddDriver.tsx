@@ -260,7 +260,7 @@ const AddDriver = () => {
                 <div className="flex space-x-4">
                   <div className="flex-1">
                     <h1 className="text-white font-syke-light text-xl">
-                      License Number:
+                      License Number
                     </h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
                       NO3-12-123456

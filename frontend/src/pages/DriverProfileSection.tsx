@@ -8,19 +8,20 @@ const DriverProfile = () => {
   return (
     <div className="flex flex-col items-center bg-homepage-bg bg-cover sm:bg-top md:bg-right lg:bg-left bg-no-repeat h-screen">
     <div> <Header/> </div>
-      <div class="min-h-screen flex">
+    <h1 className="text-4xl text-textgreen font-syke-bold mr-[10rem] pb-3">My Gateway Account</h1>
 
-      <aside class="w-[10rem] bg-white shadow-lg">
-      <nav class="mt-4">
-        <ul>
+      <div className="mi flex">
+      <aside className="w-auto h-auto shadow-lg pr-2 mr-4 mb-5">
+      <nav className="mt-4 ">
+        <ul className="space-y-8">
           <li>
-            <a href="#" class="block py-2 px-4 text-gray-700 hover:bg-blue-100">Account Details</a>
+            <a className="block cursor-pointer transition-colors text-white text-2xl font-syke-medium hover:text-textgreen">Profile</a>
           </li>
           <li>
-            <a href="#" class="block py-2 px-4 text-gray-700 hover:bg-blue-100">Shipping Address</a>
+            <a className="block cursor-pointer transition-colors text-white text-2xl font-syke-medium hover:text-textgreen">Vehicles</a>
           </li>
           <li>
-            <a href="#" class="block py-2 px-4 text-gray-700 hover:bg-blue-100">Payment Methods</a>
+            <a className="block cursor-pointer transition-colors text-white text-2xl font-syke-medium hover:text-textgreen">Violations</a>
           </li>
         </ul>
       </nav>
