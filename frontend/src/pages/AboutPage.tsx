@@ -3,7 +3,7 @@ import Header from "../components/Header";
 const AboutPage = () => {
   return (
     <div className="flex flex-col items-center bg-about-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
-      <div className="w-full max-w-3xl mb-8 mt-5">
+      <div>
         <Header />
       </div>
       <h1 className="text-textgreen text-2xl font-bold">About Us</h1>
