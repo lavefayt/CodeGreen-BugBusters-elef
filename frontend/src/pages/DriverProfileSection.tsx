@@ -1,18 +1,36 @@
 import Header from "../components/Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DriverProfileComponents from "../components/DriverProfileComp";
 
 const DriverProfile = () => {
+  const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col items-center bg-homepage-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
-        <div>
-        <Header />
-      </div>
-      <h1 className="text-textgreen text-4xl mt-1 font-syke-bold">Shawn Patrick Alcorin</h1>
-      <p className="text-white text-lg font-syke-light mt-1 mb-5">Student</p>
-      
+    <div className="flex flex-col items-center bg-homepage-bg bg-cover sm:bg-top md:bg-right lg:bg-left bg-no-repeat h-screen">
+    <div> <Header/> </div>
+      <div class="min-h-screen flex">
+
+      <aside class="w-[10rem] bg-white shadow-lg">
+      <nav class="mt-4">
+        <ul>
+          <li>
+            <a href="#" class="block py-2 px-4 text-gray-700 hover:bg-blue-100">Account Details</a>
+          </li>
+          <li>
+            <a href="#" class="block py-2 px-4 text-gray-700 hover:bg-blue-100">Shipping Address</a>
+          </li>
+          <li>
+            <a href="#" class="block py-2 px-4 text-gray-700 hover:bg-blue-100">Payment Methods</a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    <div>
+      <DriverProfileComponents/>
     </div>
+    </div>
+    </div>
+
   );
 };
 

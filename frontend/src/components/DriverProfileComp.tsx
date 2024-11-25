@@ -5,29 +5,10 @@ const DriverProfileComponent = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="">
-      <nav className="flex space-x-28 text-white font-medium text-lg">
-        <Link to="" className="hover:text-textgreen transition-colors">
-          Profile
-        </Link>
-
-        <Link to="/driverslist" className="hover:text-textgreen transition-colors">
-          Vehicles
-        </Link>
-
-        <Link
-          to="/violatorslist"
-          className="hover:text-textgreen transition-colors"
-        >
-          Violations
-        </Link>
-        <Link
-          to="/driverprofile"
-          className="hover:text-textgreen transition-colors"
-        >
-          License
-        </Link>
-      </nav>
+    <div className="max-w-full max-h-full justify-center">
+      <div className="bg-secondgrey w-[30rem] h-[20rem]">
+      Mamamo
+      </div>
     </div>
   );
 };

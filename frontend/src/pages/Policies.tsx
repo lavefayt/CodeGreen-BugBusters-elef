@@ -2,9 +2,9 @@ import Header from "../components/Header";
 
 const Policies = () => { 
     return (
-        <div className="flex flex-col items-center bg-black bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
+        <div className="flex flex-col items-center bg-hoverbutton bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
       <div>
-        <Header />
+        <Header/>
       </div>
       <h1 className="text-textgreen text-2xl font-bold">Policies</h1>
 

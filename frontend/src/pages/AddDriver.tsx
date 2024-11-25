@@ -201,10 +201,10 @@ const AddDriver = () => {
               <div>Step 4: Confirm Details</div>
             </div>
 
-            <div className="bg- w-[40rem] h-[auto] mt-4">
+            <div className="w-[40rem] h-[auto] mt-4">
               <form className="space-y-[2rem]">
                 <div className="flex space-x-4">
-                  <div className="flex-[1]">
+                  <div className="flex-1">
                     <h1 className="text-white font-syke-light text-xl">
                       Last Name
                     </h1>
@@ -212,7 +212,6 @@ const AddDriver = () => {
                       Alcorin
                     </h1>
                   </div>
-
                   <div className="flex-1">
                     <h1 className="text-white font-syke-light text-xl">
                       First Name
@@ -221,16 +220,26 @@ const AddDriver = () => {
                       Shawn Patrick
                     </h1>
                   </div>
-                  <div className="flex-2">
+                  <div className="flex-1">
+                    <h1 className="text-white font-syke-light text-xl">
+                      Middle Name
+                    </h1>
+                    <h1 className="text-textgreen font-syke-medium text-3xl">
+                      Surilla
+                    </h1>
+                  </div>
+                  
+                </div>
+
+                <div className="flex space-x-4">
+                <div className="flex-1">
                     <h1 className="text-white font-syke-light text-xl">Sex</h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
                       Female
                     </h1>
                   </div>
-                </div>
-
-                <div className="flex space-x-4">
                   <div className="flex-1">
+                    
                     <h1 className="text-white font-syke-light text-xl">
                       Date of Birth
                     </h1>
@@ -326,7 +335,7 @@ const AddDriver = () => {
             <div>
               <button
                 type="button"
-                className="w-32 bg-buttongreen text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
+                className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
                 onClick={handleBackClick}
               >
                 Back
@@ -336,7 +345,7 @@ const AddDriver = () => {
             <div>
               <button
                 type="button"
-                className="w-32 bg-buttongreen text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
+                className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
                 onClick={handleAddButton}
               >
                 Add
