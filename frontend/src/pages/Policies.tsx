@@ -5,49 +5,52 @@ const Policies = () => {
   const [activeSection, setActiveSection] = useState("protocols");
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-black">
+    <div className="flex flex-col items-center min-h-screen bg-adminlanding-bg">
 
       <div>
         <Header />
       </div>
       
-      <div className="flex flex-grow w-full"
+      <div className="flex flex-grow w-full "
       >
-        <div className="flex flex-col items-start p-4 space-y-4 bg-black w-1/4">
+        <div className="flex flex-col items-start p-2 space-y-4 bg-none w-1/8 ml-4">
           <button
             type="button"
             className={`text-left text-lg ${
             activeSection === "protocols"
-                ? "text-textgreen opacity-100 underline decoration-white "
+                ? "text-textgreen font-semibold opacity-100 underline decoration-white "
                 : "text-white opacity-50"
             }`}
             onClick={() => setActiveSection("protocols")}
           >
-            CPU Traffic Protocol and Decorum
+            CPU Traffic Protocol <br />
+            and Decorum
           </button>
 
           <button
             type="button"
             className={`text-left text-lg ${
             activeSection === "rules"
-                ? "text-textgreen opacity-100 underline decoration-white"
+                ? "text-textgreen font-semibold opacity-100 underline decoration-white"
                 : "text-white opacity-50"
             }`}
             onClick={() => setActiveSection("rules")}
           >
-            Parking Rules and Regulations
+            Parking Rules <br />
+            and Regulations
           </button>
         </div>
 
-        <div className="flex-grow p-8">
-          <div className="flex justify-center">
-            <h1 className="text-textgreen text-2xl font-bold">Policies</h1>
-          </div>
-
+        <div className="flex flex-col p-8 ">
 
           {activeSection === "protocols" && (
-            <div className="text-white space-y-4 mt-8">
-              <h1>CPU Traffic Protocol and Decorum</h1>
+            <div className="text-white space-y-4 mt-2">
+
+              <h1 
+              className="font-bold text-textgreen text-2xl">
+                CPU Traffic Protocol and Decorum
+                </h1>
+
               <h1>
                 1. All vehicle owner/drivers are required to open their windows for
                 visual inspection and identification when going in and out of the CPU
@@ -56,7 +59,7 @@ const Policies = () => {
               <h1>2. The speed limit inside the campus is 15KPH. OVERTAKING is not allowed.</h1>
               <h1>
                 3. All vehicles/motorcycles must park properly at designated parking
-                areas. Illegal parking and Blocking of Driveway are not allowed.
+                areas. Illegal parking and Blocking of Driveway are not allowed. <br />
                 Observe No Loading/Unloading signs on designated areas.
               </h1>
               <h1>
@@ -118,15 +121,23 @@ const Policies = () => {
           )}
 
           {activeSection === "rules" && (
-            <div className="text-white space-y-4 mt-8">
-              <h1>Parking Rules and Regulations </h1>
+            <div className="text-white space-y-4 mt-2">
+
+              <h1 
+              className="font-bold text-textgreen text-2xl">
+                Parking Rules and Regulations 
+                </h1>
+
               <h1>1. All vehicles/motorcycles are required to park properly at designated parking areas.</h1>
+
               <h1>2. Avoid parking on roadsides and gutters on campus.</h1>
+
               <h1>
                 3. Any damage caused by a vehicle/motorcycle to any CPU property shall
                 be properly assessed and the owner will be charged the amount
                 equivalent to its current cost.
               </h1>
+
               <h1>
                 4. Vehicles/motorcycles with car passes are given priority in parking
                 areas while non-car pass vehicles are limited to only 3 hours on
@@ -135,25 +146,30 @@ const Policies = () => {
                 Administration. All vehicles/motorcycles owners must follow 10:00 PM to
                 5:00 AM curfew hours inside the campus.
               </h1>
+
               <h1>
                 5. A vehicle/motorcycle who wants to park overnight inside the campus
                 must ask permission from CPU Administration.
               </h1>
+
               <h1>
                 6. The CPU Administration is not liable for any loss or damage that may
                 happen to any vehicle/motorcycle while parked inside the campus.
               </h1>
+
               <h1>
                 7. The CPU Administration has the right to revoke parking privileges to
                 any vehicle/motorcycle as necessary to protect the University in
                 accordance <br />
                 with the University standing policies for security and safety reasons.
               </h1>
+
               <h1>
                 8. Parking inside the CPU Campus is only a privilege given by the
                 Administration and not a right given to any individual or group
                 regardless of his position or affiliation.
               </h1>
+
             </div>
           )}
         </div>
