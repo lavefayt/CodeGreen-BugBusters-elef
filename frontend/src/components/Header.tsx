@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const AdminHeader = () => {
+const Header = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -120,4 +120,4 @@ const AdminHeader = () => {
   );
 };
 
-export default AdminHeader;
+export default Header;
