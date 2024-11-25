@@ -63,7 +63,8 @@ const AdminHeader = () => {
         </div>
 
         <nav className="flex space-x-12 text-white font-syke-medium font-medium text-lg">
-          <Link to="/about" className="hover:text-textgreen transition-colors">
+          <Link to="/about" 
+          className="hover:text-textgreen transition-colors">
             About
           </Link>
 
@@ -71,7 +72,7 @@ const AdminHeader = () => {
             to="/policies"
             className="hover:text-textgreen font-syke-medium transition-colors"
           >
-            Contacts
+            Policies
           </Link>
 
           <div className="relative" ref={dropdownRef}>
