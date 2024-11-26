@@ -43,7 +43,7 @@ const useDrivers = () => {
   const fetchDrivers = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:4444/api/drivers`, {
+      const response = await fetch(`http://localhost:4444/drivers`, {
         method: "GET", // Use GET for fetching data
         headers: {
           "Content-Type": "application/json",

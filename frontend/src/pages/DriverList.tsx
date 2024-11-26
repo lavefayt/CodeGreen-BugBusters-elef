@@ -1,8 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import AdminHeader from "../components/AdminHeader";
+import DriverListCard from "../components/DriversListCard";
+import useDrivers from "../hooks/useDrivers";
 
 const DriversList = () => {
   const navigate = useNavigate();
+  const { data: Drivers } = useDrivers();
   return (
     // <p>Driver List Page!</p>
     <div className="flex flex-col items-center bg-login-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
@@ -23,10 +26,17 @@ const DriversList = () => {
           <h1 className="text-xl text-center text-textgreen font-syke-bold">
             Drivers List
           </h1>
-          <p className="text-white">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-            scelerisque felis sit amet odio ultricies, in tristique metus
-          </p>
+          {Drivers && Drivers.length > 0 && (
+            <DriverListCard
+              firstname={Drivers[0].first_name}
+              lastname={Drivers[0].last_name}
+              email={Drivers[0].email}
+              sex={Drivers[0].sex}
+              driver_type={Drivers[0].driver_type}
+              license_no={Drivers[0].license_number}
+              license_exp={Drivers[0].license_expiration_date}
+            />
+          )}
         </div>
       </div>
     </div>

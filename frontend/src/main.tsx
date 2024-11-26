@@ -31,8 +31,6 @@ import RequireAuth from "./components/RequireAuth.tsx";
 import UnauthorizedPage from "./pages/UnauthorizedPage.tsx";
 import useAuth from "./hooks/useAuth.ts";
 import { AuthContextType } from "./types/user.types.ts";
-import useRefresh from "./hooks/useRefresh.ts";
-import useInterceptor from "./hooks/useInterceptor.ts";
 
 const Main = () => {
   const { auth }: AuthContextType = useAuth();
@@ -51,30 +49,13 @@ const Main = () => {
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/homepage" element={<HomePage />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/admin" element={<AdminLandingPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/driver" element={<DriversList />} />
-        <Route path="/encode" element={<EncodePage />} />
-        <Route path="/register-driver" element={<RegisterDriver />} />
-        <Route path="/add-driver" element={<AddDriver />} />
-        <Route path="/add-violation" element={<AddViolation />} />
-        <Route path="/violatorslist" element={<ViolatorList />} />
-        <Route path="/policies" element={<Policies />} />
-        <Route path="/contacts" element={<Contacts />} />
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/driverprofile" element={<DriverProfile />} />
 
         {/* PUBLIC ROUTES */}
         <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route
-          path="/login"
-          element={
-            <LoginPage />
-            // auth?.accessToken ? <Navigate to={location} /> : <LoginPage />
-          }
-        />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/unauthorized" element={<UnauthorizedPage />} />

@@ -22,6 +22,7 @@ const AddDriver = () => {
   const handleAddButton = () => {
     navigate("/admin");
   };
+
   return (
     <div className="flex flex-col items-center bg-hoverbutton bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
       <div>
@@ -45,6 +46,7 @@ const AddDriver = () => {
                     </h1>
                     <input
                       type="text"
+                      className="bg-secondgrey border-b font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                       className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                       name="last_name"
                       placeholder="Enter last name"
@@ -60,6 +62,7 @@ const AddDriver = () => {
                     </h1>
                     <input
                       type="text"
+                      className="bg-secondgrey border-b font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                       className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                       name="first_name"
                       placeholder="Enter first name"
@@ -83,6 +86,7 @@ const AddDriver = () => {
                 </div>
               </form>
             </div>
+          </div>
           </div>
         </div>
       )}
@@ -136,7 +140,7 @@ const AddDriver = () => {
                       name="drivertype"
                       required>
                       <option value="">Select</option>
-                      <option value="Student">Male</option>
+                      <option value="Student">Student</option>
                       <option value="Faculty">Faculty</option>
                       <option value="Guest">Guest</option>
                       <option value="Alumni">Alumni</option>
@@ -166,6 +170,7 @@ const AddDriver = () => {
                     </h1>
                     <input
                       type="text"
+                      className="bg-secondgrey border-b font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                       className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                       name="license_number"
                       placeholder="Enter license number"
@@ -193,12 +198,46 @@ const AddDriver = () => {
 
       {currentStep === 4 && (
         <div>
+          <div className="h-full w-full p-10 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20">
+            <div className="text-left font-syke-light text-white justify-center items-center">
+              <div className="text-textgreen">
+                <h1 className="text-4xl font-syke-bold">Adding a Driver</h1>
+                <div>Step 4: Confirm Details</div>
+              </div>
           <div className="text-left font-syke-light text-white justify-center items-center">
             <div className="text-textgreen">
               <h1 className="text-4xl font-syke-bold">Adding a Driver</h1>
               <div>Step 4: Confirm Details</div>
             </div>
 
+              <div className="w-[40rem] h-[auto] mt-4">
+                <form className="space-y-[2rem]">
+                  <div className="flex space-x-4">
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-xl">
+                        Last Name
+                      </h1>
+                      <h1 className="text-textgreen font-syke-medium text-3xl">
+                        Alcorin
+                      </h1>
+                    </div>
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-xl">
+                        First Name
+                      </h1>
+                      <h1 className="text-textgreen font-syke-medium text-3xl">
+                        Shawn Patrick
+                      </h1>
+                    </div>
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-xl">
+                        Middle Name
+                      </h1>
+                      <h1 className="text-textgreen font-syke-medium text-3xl">
+                        Surilla
+                      </h1>
+                    </div>
+                  </div>
             <div className="w-[40rem] h-[auto] mt-4">
               <form className="space-y-[2rem]">
                 <div className="flex space-x-4">
@@ -228,6 +267,32 @@ const AddDriver = () => {
                   </div>
                 </div>
 
+                  <div className="flex space-x-4">
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-xl">
+                        Sex
+                      </h1>
+                      <h1 className="text-textgreen font-syke-medium text-3xl">
+                        Female
+                      </h1>
+                    </div>
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-xl">
+                        Date of Birth
+                      </h1>
+                      <h1 className="text-textgreen font-syke-medium text-3xl">
+                        02/29/2004
+                      </h1>
+                    </div>
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-xl">
+                        Driver Type
+                      </h1>
+                      <h1 className="text-textgreen font-syke-medium text-3xl">
+                        Student
+                      </h1>
+                    </div>
+                  </div>
                 <div className="flex space-x-4">
                   <div className="flex-1">
                     <h1 className="text-white font-syke-light text-xl">Sex</h1>
@@ -253,25 +318,26 @@ const AddDriver = () => {
                   </div>
                 </div>
 
-                <div className="flex space-x-4">
-                  <div className="flex-1">
-                    <h1 className="text-white font-syke-light text-xl">
-                      License Number
-                    </h1>
-                    <h1 className="text-textgreen font-syke-medium text-3xl">
-                      NO3-12-123456
-                    </h1>
+                  <div className="flex space-x-4">
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-xl">
+                        License Number
+                      </h1>
+                      <h1 className="text-textgreen font-syke-medium text-3xl">
+                        NO3-12-123456
+                      </h1>
+                    </div>
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-xl">
+                        License Expiration Date
+                      </h1>
+                      <h1 className="text-textgreen font-syke-medium text-3xl">
+                        03/10/2026
+                      </h1>
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <h1 className="text-white font-syke-light text-xl">
-                      License Expiration Date
-                    </h1>
-                    <h1 className="text-textgreen font-syke-medium text-3xl">
-                      03/10/2026
-                    </h1>
-                  </div>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
