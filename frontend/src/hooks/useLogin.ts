@@ -41,11 +41,8 @@ const useLogin = () => {
     console.log(userInfo);
 
     // To either navigate to the previous page where they go logged off or the landing page
-    const prevPage =
-      location.state?.from?.pathname || userInfo.isAdmin
-        ? "/admin"
-        : "/homepage";
-    navigate(prevPage);
+    const navigateTo = userInfo.isAdmin ? "/admin" : "/homepage";
+    navigate(navigateTo);
 
     setLoading(false);
   };
