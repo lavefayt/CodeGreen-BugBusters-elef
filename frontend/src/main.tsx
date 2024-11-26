@@ -17,20 +17,13 @@ import RegisterDriver from "./pages/RegisterDriver.tsx";
 import AddDriver from "./pages/AddDriver.tsx";
 import AddViolation from "./pages/AddViolation.tsx";
 import Forgot from "./pages/Forgot.tsx";
-
-import HomepageDriver from "./pages/HomepageDriver.tsx";
-import { BackendError } from "./types/error.types.ts";
-
-interface User {
-  accessToken: string;
-  isAdmin: boolean;
-}
-
 import { AuthProvider } from "./context/AuthContext.tsx";
 import RequireAuth from "./components/RequireAuth.tsx";
 import UnauthorizedPage from "./pages/UnauthorizedPage.tsx";
 import useAuth from "./hooks/useAuth.ts";
 import { AuthContextType } from "./types/user.types.ts";
+import useRefresh from "./hooks/useRefresh.ts";
+import useInterceptor from "./hooks/useInterceptor.ts";
 
 const Main = () => {
   const { auth }: AuthContextType = useAuth();
@@ -47,15 +40,15 @@ const Main = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/forgot" element={<Forgot />} />
-        <Route path="/driverprofile" element={<DriverProfile />} />
-
         {/* PUBLIC ROUTES */}
         <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/login"
+          element={
+            <LoginPage />
+            // auth?.accessToken ? <Navigate to={location} /> : <LoginPage />
+          }
+        />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/unauthorized" element={<UnauthorizedPage />} />

@@ -44,7 +44,7 @@ export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 // Routes
 server.use("/auth", authRoutes);
-server.use("/driver", addDriver);
+server.use("/api", driversRouter); // Ensure this is before the verifyToken middleware
 
 // For Verifying Auth
 server.use(verifyToken);
@@ -62,7 +62,6 @@ server.get("/testing", async (req: Request, res: Response) => {
 // For PORT
 const PORT = 4444;
 
-//
 server.listen(PORT, () => {
   console.log(
     `The Server for CodeGreen has Started at http://localhost:${PORT}`
