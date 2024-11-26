@@ -41,7 +41,7 @@ const AddViolation = () => {
                     </label>
                     <input
                         type="text"
-                        className="text-center bg-secondgrey w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-sm"
+                        className="text-left bg-secondgrey w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-sm"
                         required
                     />
                     </div>
@@ -53,7 +53,7 @@ const AddViolation = () => {
                     </label>
                     <input
                         type="text"
-                        className="text-center bg-secondgrey w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-sm"
+                        className="text-left bg-secondgrey w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-sm"
                         required
                     />
                     </div>
@@ -66,7 +66,7 @@ const AddViolation = () => {
                     </label>
                     <input
                         type="text"
-                        className="text-center bg-secondgrey w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-sm"
+                        className="text-left bg-secondgrey w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-textgreen text-white rounded-sm"
                         required
                     />
                     </div>
@@ -119,7 +119,7 @@ const AddViolation = () => {
           
           { currentStep === 1 && (
                
-               <div className="text-center flex justify-center gap-40 p-10">
+               <div className="text-center flex justify-center gap-10 p-10">
                 <div>
                     <button
                         type="button"
