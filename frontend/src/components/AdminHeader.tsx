@@ -14,7 +14,8 @@ const AdminHeader = () => {
     setDropdownOpen((prevState) => !prevState);
   };
 
-  const handleSignOut = async () => { // Replace with BACKEND APIs
+  const handleSignOut = async () => {
+    // Replace with BACKEND APIs
     // try {
     //   const { error } = await supabase.auth.signOut();
     //   error ? alert(error) : navigate("/login");
@@ -41,7 +42,7 @@ const AdminHeader = () => {
   }, [dropdownRef]);
 
   return (
-    <header className="flex space-x-40items-center justify-center w-full px-20 py-4">
+    <header className="flex space-x-40 items-center justify-center w-full px-20 py-4">
       <div className="flex items-center w-full max-w-5xl justify-between">
         <div className="flex items-center">
           <button
@@ -66,7 +67,7 @@ const AdminHeader = () => {
           </Link>
 
           <Link
-            to="/driverslist"
+            to="/driver"
             className="hover:text-textgreen font-syke-medium transition-colors"
           >
             Drivers

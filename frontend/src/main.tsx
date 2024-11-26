@@ -24,75 +24,22 @@ const Main = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Navigate
-              to="/login"
-              replace
-            />
-          }
-        />
-        <Route
-          path="/login"
-          element={<LoginPage />}
-        />
-        <Route
-          path="/homepage"
-          element={<HomePage />}
-        />
-        <Route
-          path="/signup"
-          element={<SignUp />}
-        />
-        <Route
-          path="/admin"
-          element={<AdminLandingPage />}
-        />
-        <Route
-          path="/about"
-          element={<AboutPage />}
-        />
-        <Route
-          path="/driverslist"
-          element={<DriversList />}
-        />
-        <Route
-          path="/encode"
-          element={<EncodePage />}
-        />
-        <Route
-          path="/register-driver"
-          element={<RegisterDriver />}
-        />
-        <Route
-          path="/add-driver"
-          element={<AddDriver />}
-        />
-        <Route
-          path="/add-violation"
-          element={<AddViolation />}
-        />
-        <Route
-          path="/violatorslist"
-          element={<ViolatorList />}
-        />
-        <Route
-          path="/policies"
-          element={<Policies />}
-        />
-        <Route
-          path="/contacts"
-          element={<Contacts />}
-        />
-        <Route
-          path="/forgot"
-          element={<Forgot />}
-        />
-        <Route
-          path="/driverprofile"
-          element={<DriverProfile />}
-        />
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/homepage" element={<HomePage />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/admin" element={<AdminLandingPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/driver" element={<DriversList />} />
+        <Route path="/encode" element={<EncodePage />} />
+        <Route path="/register-driver" element={<RegisterDriver />} />
+        <Route path="/add-driver" element={<AddDriver />} />
+        <Route path="/add-violation" element={<AddViolation />} />
+        <Route path="/violatorslist" element={<ViolatorList />} />
+        <Route path="/policies" element={<Policies />} />
+        <Route path="/contacts" element={<Contacts />} />
+        <Route path="/forgot" element={<Forgot />} />
+        <Route path="/driverprofile" element={<DriverProfile />} />
       </Routes>
     </BrowserRouter>
   );
