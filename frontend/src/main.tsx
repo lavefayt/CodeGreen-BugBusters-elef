@@ -1,11 +1,6 @@
 import { StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
 import LoginPage from "./pages/LoginPage.tsx";
 import HomePage from "./pages/HomePage.tsx";
@@ -27,11 +22,19 @@ import RequireAuth from "./components/RequireAuth.tsx";
 import UnauthorizedPage from "./pages/UnauthorizedPage.tsx";
 import useAuth from "./hooks/useAuth.ts";
 import { AuthContextType } from "./types/user.types.ts";
+import useRefresh from "./hooks/useRefresh.ts";
+import useInterceptor from "./hooks/useInterceptor.ts";
 
 const Main = () => {
   const { auth }: AuthContextType = useAuth();
+  const { loading, error } = useRefresh();
+
+  useInterceptor();
+
   useEffect(() => {
     console.log(auth);
+    console.log(location.pathname);
+    if (error) console.log(error);
   }, []);
 
   return (
@@ -49,7 +52,10 @@ const Main = () => {
         />
         <Route
           path="/login"
-          element={<LoginPage />}
+          element={
+            <LoginPage />
+            // auth?.accessToken ? <Navigate to={location} /> : <LoginPage />
+          }
         />
         <Route
           path="/signup"

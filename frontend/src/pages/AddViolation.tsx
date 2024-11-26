@@ -26,58 +26,60 @@ const AddViolation = () => {
 
       {currentStep === 1 && (
         <div>
-          <div className="text-left font-syke-light text-white justify-center items-center">
-            <div className="text-textgreen">
-              <h1 className="text-4xl font-syke-bold">Adding a Violation</h1>
-              <div>Find the driver by searching.</div>
-            </div>
+          <div className = "h-full w-full p-10 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+            <div className="text-left font-syke-light text-white justify-center items-center">
+              <div className="text-textgreen">
+                <h1 className="text-4xl font-syke-bold">Adding a Violation</h1>
+                <div>Find the driver by searching.</div>
+              </div>
 
-            <div className="w-[30rem] mt-[1rem]">
-              <form className="space-y-5">
-                <div className="flex space-x-4">
-                  <div className="flex-1">
-                    <h1 className="text-white font-syke-light text-xl">
-                      Last Name
-                    </h1>
-                    <input
-                      type="text"
-                      className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
-                      name="last_name"
-                      placeholder="Enter"
-                      required
-                    />
+              <div className="w-[30rem] mt-[1rem]">
+                <form className="space-y-5">
+                  <div className="flex space-x-4">
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-xl">
+                        Last Name
+                      </h1>
+                      <input
+                        type="text"
+                        className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
+                        name="last_name"
+                        placeholder="Enter last name"
+                        required
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div className="flex space-x-4">
-                  <div className="flex-1">
-                    <h1 className="text-white font-syke-light text-xl">
-                      First Name
-                    </h1>
-                    <input
-                      type="text"
-                      className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
-                      name="first_name"
-                      placeholder="Enter"
-                      required
-                    />
+                  <div className="flex space-x-4">
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-xl">
+                        First Name
+                      </h1>
+                      <input
+                        type="text"
+                        className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
+                        name="first_name"
+                        placeholder="Enter first name"
+                        required
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div className="flex space-x-4">
-                  <div className="flex-1">
-                    <h1 className="text-white font-syke-light text-xl">
-                      License Number
-                    </h1>
-                    <input
-                      type="text"
-                      className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
-                      name="license_number"
-                      placeholder="Enter"
-                    />
+                  <div className="flex space-x-4">
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-xl">
+                        License Number
+                      </h1>
+                      <input
+                        type="text"
+                        className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
+                        name="license_number"
+                        placeholder="Enter license number"
+                      />
+                    </div>
                   </div>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
