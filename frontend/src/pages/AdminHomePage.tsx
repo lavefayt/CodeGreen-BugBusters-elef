@@ -28,7 +28,8 @@ const AdminLandingPage = () => {
       </div>
 
       <p className="text-xl text-white font-syke-regular text-center mt-8">
-        CodeGreen Gateway is designed to monitor and manage parking violations within the university.
+        CodeGreen Gateway is designed to monitor and manage parking violations
+        within the university.
       </p>
 
       <div className="grid grid-cols-3 font-syke-medium text-3xl gap-x-12 gap-y-4 mt-12">
