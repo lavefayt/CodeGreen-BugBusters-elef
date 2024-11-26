@@ -21,6 +21,7 @@ import { AuthProvider } from "./context/AuthContext.tsx";
 import RequireAuth from "./components/RequireAuth.tsx";
 import UnauthorizedPage from "./pages/UnauthorizedPage.tsx";
 import useAuth from "./hooks/useAuth.ts";
+import HomepageDriver from "./pages/HomepageDriver.tsx";
 import { AuthContextType } from "./types/user.types.ts";
 import useRefresh from "./hooks/useRefresh.ts";
 import useInterceptor from "./hooks/useInterceptor.ts";
@@ -115,6 +116,12 @@ const Main = () => {
           <Route
             path="/add-violation"
             element={<AddViolation />}
+          
+          />
+          <Route
+            path="/homepagedriver"
+            element={<HomepageDriver/>}
+          
           />
           <Route
             path="/violatorslist"

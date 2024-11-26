@@ -103,7 +103,8 @@ const AddDriver = () => {
                     <select
                       className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                       name="sex"
-                      required>
+                      required
+                    >
                       <option value="">Select</option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
@@ -134,7 +135,8 @@ const AddDriver = () => {
                     <select
                       className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                       name="drivertype"
-                      required>
+                      required
+                    >
                       <option value="">Select</option>
                       <option value="Student">Male</option>
                       <option value="Faculty">Faculty</option>
@@ -226,16 +228,18 @@ const AddDriver = () => {
                       Surilla
                     </h1>
                   </div>
+                  
                 </div>
 
                 <div className="flex space-x-4">
-                  <div className="flex-1">
+                <div className="flex-1">
                     <h1 className="text-white font-syke-light text-xl">Sex</h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
                       Female
                     </h1>
                   </div>
                   <div className="flex-1">
+                    
                     <h1 className="text-white font-syke-light text-xl">
                       Date of Birth
                     </h1>
@@ -284,7 +288,8 @@ const AddDriver = () => {
               <button
                 type="button"
                 className="w-32 text-xl bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-                onClick={handleCancelButton}>
+                onClick={handleCancelButton}
+              >
                 Cancel
               </button>
             </div>
@@ -293,7 +298,8 @@ const AddDriver = () => {
               <button
                 type="button"
                 className="w-32 text-xl bg-buttongreen text-white py-2 font-syke-medium hover:bg-[#33471a] transition-colors rounded-sm"
-                onClick={handleNextClick}>
+                onClick={handleNextClick}
+              >
                 Next
               </button>
             </div>
@@ -306,7 +312,8 @@ const AddDriver = () => {
               <button
                 type="button"
                 className="w-32 text-xl bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-                onClick={handleBackClick}>
+                onClick={handleBackClick}
+              >
                 Back
               </button>
             </div>
@@ -315,7 +322,8 @@ const AddDriver = () => {
               <button
                 type="button"
                 className="w-32 text-xl bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-                onClick={handleNextClick}>
+                onClick={handleNextClick}
+              >
                 Next
               </button>
             </div>
@@ -328,7 +336,8 @@ const AddDriver = () => {
               <button
                 type="button"
                 className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-                onClick={handleBackClick}>
+                onClick={handleBackClick}
+              >
                 Back
               </button>
             </div>
@@ -337,7 +346,8 @@ const AddDriver = () => {
               <button
                 type="button"
                 className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-                onClick={handleAddButton}>
+                onClick={handleAddButton}
+              >
                 Add
               </button>
             </div>

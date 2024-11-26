@@ -6,7 +6,7 @@ const DriverVehicleComponent = () => {
 
   return (
     <div className="max-w-full max-h-full justify-center">
-      <div className="w-[35rem] h-[20rem] bg-hoverbutton overflow-y-auto rounded-md scrollbar">
+        <div className="w-[35rem] h-[20rem] bg-hoverbutton overflow-y-auto rounded-md scrollbar">
           <ul className="border-b-2 border-t-2 border-t-transparent  border-b-inputfield space-y-[10px]">
             <div className="ml-2 space-y-3 p-3">
             <div className="flex space-x-4 ">
