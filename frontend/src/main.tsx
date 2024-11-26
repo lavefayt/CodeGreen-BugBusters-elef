@@ -25,6 +25,7 @@ import HomepageDriver from "./pages/HomepageDriver.tsx";
 import { AuthContextType } from "./types/user.types.ts";
 import useRefresh from "./hooks/useRefresh.ts";
 import useInterceptor from "./hooks/useInterceptor.ts";
+import RegistrationList from "./pages/RegistrationList.tsx";
 
 const Main = () => {
   const { auth }: AuthContextType = useAuth();
@@ -93,10 +94,15 @@ const Main = () => {
           path="/driverprofile"
           element={<DriverProfile />}
         />
+
+        <Route
+          path="/registrationlist"
+          element={<RegistrationList/>}
+        />
         {/* </Route> */}
 
         {/* ADMIN ROUTES */}
-        <Route element={<RequireAuth forAdmin={true} />}>
+        {/* <Route element={<RequireAuth forAdmin={true} />}> */}
           <Route
             path="/admin"
             element={<AdminLandingPage />}
@@ -127,7 +133,7 @@ const Main = () => {
             path="/violatorslist"
             element={<ViolatorList />}
           />
-        </Route>
+        {/* </Route> */}
 
         {/* <Route
           path="/contacts"

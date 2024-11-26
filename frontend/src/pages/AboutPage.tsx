@@ -6,8 +6,7 @@ const AboutPage = () => {
       <div>
         <Header />
       </div>
-
-      <div className="w-[50rem] h-[30rem] bg-hoverbutton overflow-y-auto rounded-md scrollbar backdrop-filter backdrop-blur-sm bg-opacity-15 border border-hoverbutton">
+      <div className="w-[50rem] h-[30rem] bg-gray-400 overflow-y-auto rounded-md scrollbar bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border-hoverbutton">
       <div className="text-lef py-2 px-6 rounded-xl bg-clip-padding ">
         <div className=" overflow-y-auto scrollbar">
           <h1 className="text-textgreen font-syke-medium text-2xl mt-4">About Us</h1>

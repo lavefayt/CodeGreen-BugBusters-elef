@@ -42,7 +42,7 @@ const DriverProfile = () => {
                     : "text-white hover:text-textgreen" 
                 }`}
               >
-                Vehicle
+                Vehicles
               </button>
 
               <button

@@ -23,6 +23,9 @@ const AdminLandingPage = () => {
   const handleAddDriverButton = () => {
     navigate("/driverslist");
   };
+  const handleRegistrationList = () => {
+    navigate("/registrationlist")
+  }
 
   // const { fetch: originalFetch } = window;
   // const { refresh } = useRefresh();
@@ -109,6 +112,11 @@ const AdminLandingPage = () => {
           className="transition-transform duration-300 hover:scale-105 text-white px-5 py-4 rounded-md bg-buttongreen hover:bg-colorhover font-syke-medium"
           onClick={handleAddViolationButton}>
           View Violators
+        </button>
+        <button
+          className="transition-transform duration-300 hover:scale-105 text-white px-5 py-4 rounded-md bg-buttongreen hover:bg-colorhover font-syke-medium"
+          onClick={handleRegistrationList}>
+          View Registration List
         </button>
       </div>
     </div>

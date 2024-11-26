@@ -6,8 +6,8 @@ const DriverProfileComponent = () => {
 
   return (
     <div className="max-w-full max-h-full justify-center">
-      <div className="w-[35rem] h-[20rem] bg-hoverbutton p-6 rounded-md">
-        <form className="space-y-[2rem]">
+      <div className="w-[35rem] h-[20rem] bg-hoverbutton rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-50 p-6 ">
+      <form className="space-y-[2rem]">
           <div className="flex space-x-4">
             <div className="flex-1">
               <h1 className="text-white font-syke-light text-l">Last Name</h1>
