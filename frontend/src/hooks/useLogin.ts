@@ -18,17 +18,14 @@ const useLogin = () => {
     console.log(data);
     setLoading(true);
     console.log(import.meta.env.VITE_SERVER_URL);
-    const response = await fetch(
-      `${import.meta.env.VITE_SERVER_URL}/auth/login`,
-      {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(data),
-      }
-    );
+    const response = await fetch(`http://localhost:4444/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(data),
+    });
 
     if (!response.ok) {
       const backendError: BackendError = await response.json();

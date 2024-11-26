@@ -23,7 +23,7 @@ const AddDriver = () => {
     navigate("/admin");
   };
   return (
-    <div className="flex flex-col items-center bg-hoverbutton bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
+    <div className="flex flex-col items-center bg-adminlanding-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
       <div>
         <AdminHeader />
       </div>
@@ -197,40 +197,42 @@ const AddDriver = () => {
 
       {currentStep === 4 && (
         <div>
-          <div className="text-left font-syke-light text-white justify-center items-center">
-            <div className="text-textgreen">
-              <h1 className="text-4xl font-syke-bold">Adding a Driver</h1>
-              <div>Step 4: Confirm Details</div>
-            </div>
-            <div className="w-[40rem] h-[auto] mt-4">
-              <form className="space-y-[2rem]">
-                <div className="flex space-x-4">
-                  <div className="flex-1">
-                    <h1 className="text-white font-syke-light text-xl">
-                      Last Name
-                    </h1>
-                    <h1 className="text-textgreen font-syke-medium text-3xl">
-                      Alcorin
-                    </h1>
+          <div className = "h-full w-full p-10 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20">
+            <div className="text-left font-syke-light text-white justify-center items-center">
+              <div className="text-textgreen">
+                <h1 className="text-4xl font-syke-bold">Adding a Driver</h1>
+                <div>Step 4: Confirm Details</div>
+              </div>
+
+              <div className="w-[40rem] h-[auto] mt-4">
+                <form className="space-y-[2rem]">
+                  <div className="flex space-x-4">
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-xl">
+                        Last Name
+                      </h1>
+                      <h1 className="text-textgreen font-syke-medium text-3xl">
+                        Alcorin
+                      </h1>
+                    </div>
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-xl">
+                        First Name
+                      </h1>
+                      <h1 className="text-textgreen font-syke-medium text-3xl">
+                        Shawn Patrick
+                      </h1>
+                    </div>
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-xl">
+                        Middle Name
+                      </h1>
+                      <h1 className="text-textgreen font-syke-medium text-3xl">
+                        Surilla
+                      </h1>
+                    </div>
+
                   </div>
-                  <div className="flex-1">
-                    <h1 className="text-white font-syke-light text-xl">
-                      First Name
-                    </h1>
-                    <h1 className="text-textgreen font-syke-medium text-3xl">
-                      Shawn Patrick
-                    </h1>
-                  </div>
-                  <div className="flex-1">
-                    <h1 className="text-white font-syke-light text-xl">
-                      Middle Name
-                    </h1>
-                    <h1 className="text-textgreen font-syke-medium text-3xl">
-                      Surilla
-                    </h1>
-                  </div>
-                  
-                </div>
 
                 <div className="flex space-x-4">
                 <div className="flex-1">

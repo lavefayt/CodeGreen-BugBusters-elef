@@ -48,10 +48,20 @@ server.use("/api", driversRouter);
 // For Verifying Auth
 server.use(verifyToken);
 
+// APIs for Functionality (Must Be Placed Under Verification of Auth)
+server.get("/testing", async (req: Request, res: Response) => {
+  try {
+    res.status(200).json({ title: "Testing Complete", message: "WOWZIES" });
+    // console.log(req.headers["authorization"]);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+});
+
 // For PORT
 const PORT = 4444;
 
-// 
+//
 server.listen(PORT, () => {
   console.log(
     `The Server for CodeGreen has Started at http://localhost:${PORT}`
