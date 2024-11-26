@@ -18,8 +18,8 @@ const server = express();
 // Middlewares
 server.use(express.json());
 
+// This allows us to fetch from the FRONTEND
 server.use(credentials);
-
 server.use(
   cors({
     origin: (origin, callback) => {
@@ -33,35 +33,23 @@ server.use(
   })
 );
 
+// For Cookies
 server.use(cookieParser());
 
+// For Database
 neonConfig.webSocketConstructor = ws;
 export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 // Routes
 server.use("/auth", authRoutes);
 
-// server.get("/testing", async (req: Request, res: Response) => {
-//   try {
-//     const { rows } = await pool.query("SELECT * FROM users");
-//     res.send(rows[0]);
-//   } catch (error) {
-//     res.send({ field: "Error", message: error });
-//   }
-// });
-
-// server.post("/testing", verifyToken, async (req: Request, res: Response) => {
-//   try {
-//     res.sendStatus(200);
-//   } catch (error) {
-//     res.sendStatus(500).json(error);
-//   }
-// });
-
+// For Verifying Auth
 server.use(verifyToken);
 
+// For PORT
 const PORT = 4444;
 
+// 
 server.listen(PORT, () => {
   console.log(
     `The Server for CodeGreen has Started at http://localhost:${PORT}`
