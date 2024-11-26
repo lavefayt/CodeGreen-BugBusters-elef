@@ -72,28 +72,28 @@ const Main = () => {
         />
 
         {/* USER ROUTES */}
-        <Route element={<RequireAuth forAdmin={false} />}>
-          <Route
-            path="/homepage"
-            element={<HomePage />}
-          />
-          <Route
-            path="/about"
-            element={<AboutPage />}
-          />
-          <Route
-            path="/register-driver"
-            element={<RegisterDriver />}
-          />
-          <Route
-            path="/policies"
-            element={<Policies />}
-          />
-          <Route
-            path="/driverprofile"
-            element={<DriverProfile />}
-          />
-        </Route>
+        {/* <Route element={<RequireAuth forAdmin={false} />}> */}
+        <Route
+          path="/homepage"
+          element={<HomePage />}
+        />
+        <Route
+          path="/about"
+          element={<AboutPage />}
+        />
+        <Route
+          path="/register-driver"
+          element={<RegisterDriver />}
+        />
+        <Route
+          path="/policies"
+          element={<Policies />}
+        />
+        <Route
+          path="/driverprofile"
+          element={<DriverProfile />}
+        />
+        {/* </Route> */}
 
         {/* ADMIN ROUTES */}
         <Route element={<RequireAuth forAdmin={true} />}>
