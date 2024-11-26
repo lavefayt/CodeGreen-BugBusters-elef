@@ -100,6 +100,7 @@ router.post("/login", validateAuth, async (req: Request, res: Response) => {
     });
     // console.log(req.cookies.jwt);
     res.status(200).json({ accessToken, isAdmin: user.is_admin });
+    // req.headers["authorization"] = `Bearer ${accessToken}`;
   } catch (error) {
     res.sendStatus(500).json({ title: "Unknown Error", message: error });
     console.log(error);
@@ -143,14 +144,15 @@ router.get("/refresh", async (req: Request, res: Response) => {
         process.env.REFRESH_TOKEN_SECRET!
       ) as JwtPayload;
 
-      console.log(payload.user);
-      const accessToken = generateAccessToken(payload.user);
+      console.log(payload.userId);
+      const accessToken = generateAccessToken(payload.userId);
       res.status(200).json({ accessToken, isAdmin: foundUser.is_admin });
     } catch (error) {
       res.status(403).json({
         title: "No Access Rights",
         message: "You do not have access to these features.",
       });
+      return
     }
   } catch (error) {
     res.sendStatus(500).json({ title: "Unknown Error", message: error });
