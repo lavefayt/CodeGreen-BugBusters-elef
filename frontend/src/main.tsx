@@ -80,23 +80,23 @@ const Main = () => {
         <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
         {/* USER ROUTES */}
-        <Route element={<RequireAuth forAdmin={false} />}>
-          <Route path="/homepage" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/register-driver" element={<RegisterDriver />} />
-          <Route path="/policies" element={<Policies />} />
-          <Route path="/driverprofile" element={<DriverProfile />} />
-        </Route>
+        {/* <Route element={<RequireAuth forAdmin={false} />}> */}
+        <Route path="/homepage" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/register-driver" element={<RegisterDriver />} />
+        <Route path="/policies" element={<Policies />} />
+        <Route path="/driverprofile" element={<DriverProfile />} />
+        {/* </Route> */}
 
         {/* ADMIN ROUTES */}
-        <Route element={<RequireAuth forAdmin={true} />}>
-          <Route path="/admin" element={<AdminLandingPage />} />
-          <Route path="/driverslist" element={<DriversList />} />
-          <Route path="/encode" element={<EncodePage />} />
-          <Route path="/add-driver" element={<AddDriver />} />
-          <Route path="/add-violation" element={<AddViolation />} />
-          <Route path="/violatorslist" element={<ViolatorList />} />
-        </Route>
+        {/* <Route element={<RequireAuth forAdmin={true} />}> */}
+        <Route path="/admin" element={<AdminLandingPage />} />
+        <Route path="/driverslist" element={<DriversList />} />
+        <Route path="/encode" element={<EncodePage />} />
+        <Route path="/add-driver" element={<AddDriver />} />
+        <Route path="/add-violation" element={<AddViolation />} />
+        <Route path="/violatorslist" element={<ViolatorList />} />
+        {/* </Route> */}
 
         {/* <Route
           path="/contacts"

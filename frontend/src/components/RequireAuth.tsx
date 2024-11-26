@@ -6,6 +6,9 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 const RequireAuth = ({ forAdmin }: { forAdmin: boolean }) => {
   const { auth }: AuthContextType = useAuth();
   const location = useLocation();
+  console.log(forAdmin)
+  console.log(auth?.isAdmin)
+
 
   return auth?.isAdmin && forAdmin ? (
     <Outlet />

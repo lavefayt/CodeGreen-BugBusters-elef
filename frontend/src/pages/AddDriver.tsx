@@ -23,7 +23,7 @@ const AddDriver = () => {
     navigate("/admin");
   };
   return (
-    <div className="flex flex-col items-center bg-adminlanding-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
+    <div className="flex flex-col items-center bg-hoverbutton bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
       <div>
         <AdminHeader />
       </div>
@@ -45,9 +45,9 @@ const AddDriver = () => {
                     </h1>
                     <input
                       type="text"
-                      className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+                      className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                       name="last_name"
-                      placeholder="Enter"
+                      placeholder="Enter last name"
                       required
                     />
                   </div>
@@ -60,9 +60,9 @@ const AddDriver = () => {
                     </h1>
                     <input
                       type="text"
-                      className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+                      className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                       name="first_name"
-                      placeholder="Enter"
+                      placeholder="Enter first name"
                       required
                     />
                   </div>
@@ -75,7 +75,7 @@ const AddDriver = () => {
                     </h1>
                     <input
                       type="text"
-                      className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+                      className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                       name="middle_name"
                       placeholder="Optional"
                     />
@@ -83,7 +83,7 @@ const AddDriver = () => {
                 </div>
               </form>
             </div>
-          </div>  
+          </div>
         </div>
       )}
 
@@ -103,8 +103,7 @@ const AddDriver = () => {
                     <select
                       className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                       name="sex"
-                      required
-                    >
+                      required>
                       <option value="">Select</option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
@@ -135,8 +134,7 @@ const AddDriver = () => {
                     <select
                       className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                       name="drivertype"
-                      required
-                    >
+                      required>
                       <option value="">Select</option>
                       <option value="Student">Male</option>
                       <option value="Faculty">Faculty</option>
@@ -153,7 +151,6 @@ const AddDriver = () => {
 
       {currentStep === 3 && (
         <div>
-
           <div className="text-left font-syke-light text-white justify-center items-center">
             <div className="text-textgreen">
               <h1 className="text-4xl font-syke-bold">Adding a Driver</h1>
@@ -169,9 +166,9 @@ const AddDriver = () => {
                     </h1>
                     <input
                       type="text"
-                      className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+                      className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                       name="license_number"
-                      placeholder="Enter"
+                      placeholder="Enter license number"
                       required
                     />
                   </div>
@@ -189,7 +186,6 @@ const AddDriver = () => {
                   />
                 </div>
               </form>
-
             </div>
           </div>
         </div>
@@ -197,52 +193,49 @@ const AddDriver = () => {
 
       {currentStep === 4 && (
         <div>
-          <div className = "h-full w-full p-10 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20">
-            <div className="text-left font-syke-light text-white justify-center items-center">
-              <div className="text-textgreen">
-                <h1 className="text-4xl font-syke-bold">Adding a Driver</h1>
-                <div>Step 4: Confirm Details</div>
-              </div>
+          <div className="text-left font-syke-light text-white justify-center items-center">
+            <div className="text-textgreen">
+              <h1 className="text-4xl font-syke-bold">Adding a Driver</h1>
+              <div>Step 4: Confirm Details</div>
+            </div>
 
-              <div className="w-[40rem] h-[auto] mt-4">
-                <form className="space-y-[2rem]">
-                  <div className="flex space-x-4">
-                    <div className="flex-1">
-                      <h1 className="text-white font-syke-light text-xl">
-                        Last Name
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-3xl">
-                        Alcorin
-                      </h1>
-                    </div>
-                    <div className="flex-1">
-                      <h1 className="text-white font-syke-light text-xl">
-                        First Name
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-3xl">
-                        Shawn Patrick
-                      </h1>
-                    </div>
-                    <div className="flex-1">
-                      <h1 className="text-white font-syke-light text-xl">
-                        Middle Name
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-3xl">
-                        Surilla
-                      </h1>
-                    </div>
-
+            <div className="w-[40rem] h-[auto] mt-4">
+              <form className="space-y-[2rem]">
+                <div className="flex space-x-4">
+                  <div className="flex-1">
+                    <h1 className="text-white font-syke-light text-xl">
+                      Last Name
+                    </h1>
+                    <h1 className="text-textgreen font-syke-medium text-3xl">
+                      Alcorin
+                    </h1>
                   </div>
+                  <div className="flex-1">
+                    <h1 className="text-white font-syke-light text-xl">
+                      First Name
+                    </h1>
+                    <h1 className="text-textgreen font-syke-medium text-3xl">
+                      Shawn Patrick
+                    </h1>
+                  </div>
+                  <div className="flex-1">
+                    <h1 className="text-white font-syke-light text-xl">
+                      Middle Name
+                    </h1>
+                    <h1 className="text-textgreen font-syke-medium text-3xl">
+                      Surilla
+                    </h1>
+                  </div>
+                </div>
 
                 <div className="flex space-x-4">
-                <div className="flex-1">
+                  <div className="flex-1">
                     <h1 className="text-white font-syke-light text-xl">Sex</h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
                       Female
                     </h1>
                   </div>
                   <div className="flex-1">
-                    
                     <h1 className="text-white font-syke-light text-xl">
                       Date of Birth
                     </h1>
@@ -291,8 +284,7 @@ const AddDriver = () => {
               <button
                 type="button"
                 className="w-32 text-xl bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-                onClick={handleCancelButton}
-              >
+                onClick={handleCancelButton}>
                 Cancel
               </button>
             </div>
@@ -301,8 +293,7 @@ const AddDriver = () => {
               <button
                 type="button"
                 className="w-32 text-xl bg-buttongreen text-white py-2 font-syke-medium hover:bg-[#33471a] transition-colors rounded-sm"
-                onClick={handleNextClick}
-              >
+                onClick={handleNextClick}>
                 Next
               </button>
             </div>
@@ -315,8 +306,7 @@ const AddDriver = () => {
               <button
                 type="button"
                 className="w-32 text-xl bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-                onClick={handleBackClick}
-              >
+                onClick={handleBackClick}>
                 Back
               </button>
             </div>
@@ -325,8 +315,7 @@ const AddDriver = () => {
               <button
                 type="button"
                 className="w-32 text-xl bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-                onClick={handleNextClick}
-              >
+                onClick={handleNextClick}>
                 Next
               </button>
             </div>
@@ -339,8 +328,7 @@ const AddDriver = () => {
               <button
                 type="button"
                 className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-                onClick={handleBackClick}
-              >
+                onClick={handleBackClick}>
                 Back
               </button>
             </div>
@@ -349,8 +337,7 @@ const AddDriver = () => {
               <button
                 type="button"
                 className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-                onClick={handleAddButton}
-              >
+                onClick={handleAddButton}>
                 Add
               </button>
             </div>
