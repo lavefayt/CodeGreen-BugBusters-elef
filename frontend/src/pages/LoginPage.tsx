@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Forgot from "./Forgot";
 import useLogin from "../hooks/useLogin";
+import { Spinner } from "react-activity";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -28,7 +29,13 @@ const LoginPage = () => {
       {/* <div className="w-full max-w-3xl mb-8 mt-5">
         <LogInSignUpHeader />
       </div> */}
-      {/* {loading && <div>{error?.title}</div>} */}
+      {loading && (
+        <Spinner
+          size={10}
+          color="#fff"
+          animating={loading}
+        />
+      )}
 
       <div className="flex bg-transparent p-8 rounded-lg w-full max-w-3xl mx-auto">
         <div className="w-1/2 pr-8">
@@ -79,8 +86,15 @@ const LoginPage = () => {
             </div>
             <button
               type="submit"
-              className="w-1/2 bg-buttongreen text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm">
-              Log In
+              className="flex w-1/2 bg-buttongreen text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm justify-center items-center">
+              {loading
+                ? "Loading"
+                : /* <Spinner
+                    size={10}
+                    color="#000000"
+                    animating={loading}
+                  /> */
+                  "Login"}
             </button>
           </form>
         </div>
