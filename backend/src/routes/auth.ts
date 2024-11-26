@@ -8,7 +8,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 
 const router = express();
 
-router.post("/register", validateAuth, async (req: Request, res: Response) => {
+router.post("/signup", validateAuth, async (req: Request, res: Response) => {
   try {
     const { first_name, last_name, email, password, confirm_password } =
       req.body as RegisterUser;
@@ -64,12 +64,13 @@ router.post("/login", validateAuth, async (req: Request, res: Response) => {
       [email]
     );
 
-    const user = users[0] as User;
+    const user = (await users[0]) as User;
+    console.log(user);
 
     if (!user) {
       res.status(401).json({
         title: "Wrong Email or Password",
-        message: "The credentials entered are invalid.",
+        message: "The credentials entered are invalid.........",
       });
       return;
     }
@@ -84,6 +85,8 @@ router.post("/login", validateAuth, async (req: Request, res: Response) => {
       });
       return;
     }
+    console.log(user.password);
+    console.log(hashedPassword);
 
     const refreshToken = generateRefreshToken(user.id);
     const accessToken = generateAccessToken(user.id);
@@ -142,9 +145,9 @@ router.get("/refresh", async (req: Request, res: Response) => {
 
     const accessToken = generateAccessToken(payload.user);
 
-    res.status(200).json({ accessToken });
+    res.status(200).json({ accessToken, isAdmin: foundUser.is_admin });
   } catch (error) {
-    res.status(500).json({ title: "Unknown Error", message: error });
+    res.sendStatus(500).json({ title: "Unknown Error", message: error });
     console.log(error);
   }
 });

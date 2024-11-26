@@ -1,6 +1,12 @@
-import { StrictMode } from "react";
+import { StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 
 import LoginPage from "./pages/LoginPage.tsx";
 import HomePage from "./pages/HomePage.tsx";
@@ -17,10 +23,37 @@ import DriverProfile from "./pages/DriverProfileSection.tsx";
 import RegisterDriver from "./pages/RegisterDriver.tsx";
 import AddDriver from "./pages/AddDriver.tsx";
 import AddViolation from "./pages/AddViolation.tsx";
-
 import Forgot from "./pages/Forgot.tsx";
+import HomepageDriver from "./pages/HomepageDriver.tsx";
+import { BackendError } from "./types/error.types.ts";
+
+interface User {
+  accessToken: string;
+  isAdmin: boolean;
+}
 
 const Main = () => {
+  const [user, setUser] = useState<User>();
+  const [error, setError] = useState<BackendError>();
+
+  useEffect(() => {
+    const refresh = async () => {
+      const response = await fetch(`http://localhost:4444/auth/refresh`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+        credentials: "include",
+      });
+      if (response.ok) {
+        setUser(await response.json());
+      } else {
+        setError(await response.json());
+      }
+    };
+    refresh();
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>

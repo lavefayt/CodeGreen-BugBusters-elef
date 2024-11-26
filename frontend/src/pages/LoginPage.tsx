@@ -6,17 +6,13 @@ import useLogin from "../hooks/useLogin";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { submitLogin, error, loading, isAdmin } = useLogin();
+  const { loading, submitLogin, setLoading, error } = useLogin();
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    submitLogin({ email, password });
-    if (isAdmin) {
-      navigate("/admin");
-    } else {
-      navigate("/homepage");
-    }
+    await submitLogin({ email, password });
+    setLoading(false);
   };
 
   const handleSignUpButton = () => {
@@ -32,6 +28,7 @@ const LoginPage = () => {
       {/* <div className="w-full max-w-3xl mb-8 mt-5">
         <LogInSignUpHeader />
       </div> */}
+      {/* {loading && <div>{error?.title}</div>} */}
 
       <div className="flex bg-transparent p-8 rounded-lg w-full max-w-3xl mx-auto">
         <div className="w-1/2 pr-8">
