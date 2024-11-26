@@ -23,7 +23,7 @@ const AddDriver = () => {
     navigate("/admin");
   };
   return (
-    <div className="flex flex-col items-center bg-hoverbutton bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
+    <div className="flex flex-col items-center bg-adminlanding-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
       <div>
         <AdminHeader />
       </div>
