@@ -1,10 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { BackendError } from "../types/error.types";
+import useLogout from "../hooks/useLogout";
 
 const AdminHeader = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { loading, logout, setLoading } = useLogout();
 
   const handleHomePage = () => {
     navigate("/admin");
@@ -14,15 +17,9 @@ const AdminHeader = () => {
     setDropdownOpen((prevState) => !prevState);
   };
 
-  const handleSignOut = async () => {
-    // Replace with BACKEND APIs
-    // try {
-    //   const { error } = await supabase.auth.signOut();
-    //   if (error) alert(error);
-    //   else navigate("/login");
-    // } catch (error) {
-    //   alert(error);
-    // }
+  const handleLogOut = async () => {
+    logout();
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -40,9 +37,10 @@ const AdminHeader = () => {
   }, []);
 
   return (
-    <header className="flex space-x-40 items-center justify-center w-full px-20 py-4">
-      <div className="flex items-center w-full max-w-5xl justify-between">
-        <div className="flex items-center">
+    <header className="flex items-center justify-start w-full px-4 py-4">
+      <div className="flex mt-[1rem] items-center font-syke-regular w-full justify-between">
+        {/* Logo Section */}
+        <div className="flex items-center w-[12rem] ml-[-70px] mr-[150px]">
           <button
             onClick={handleHomePage}
             className="flex text-left items-center gap-4 group overflow-hidden rounded-md pr-20 py-2 text-white font-medium text-lg"
@@ -64,8 +62,8 @@ const AdminHeader = () => {
             Encode
           </Link>
           <Link
-            to="/driver"
-            className="hover:text-textgreen font-syke-medium transition-colors"
+            to="/driverslist"
+            className="hover:text-textgreen transition-colors"
           >
             Drivers
           </Link>
@@ -89,14 +87,14 @@ const AdminHeader = () => {
                 <span className="block font-syke-medium rounded-t-lg text-sm px-4 py-2 hover:bg-buttongreen cursor-pointer">
                   Profile
                 </span>
-                <span
+                {/* <span
                   onClick={handleSignOut}
                   className="block font-syke-medium text-sm px-4 py-2 hover:bg-buttongreen cursor-pointer"
                 >
                   Reset Password
-                </span>
+                </span> */}
                 <span
-                  onClick={handleSignOut}
+                  onClick={handleLogOut}
                   className="block font-syke-medium text-sm rounded-b-lg px-4 py-2 hover:bg-buttongreen cursor-pointer"
                 >
                   Log Out

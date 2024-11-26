@@ -22,13 +22,10 @@ const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
     req.user = payload.user;
     console.log(req.user);
   } catch (error) {
-    res.status(403);
+    res
+      .status(403)
+      .json({ title: "Token Invalid", message: "Access has expired." });
   }
-
-  // if (error) {
-  //   // need a reauth by checking refresh token if still valid, if so make a new access token.
-  // }
-
   next();
 };
 

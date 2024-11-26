@@ -83,7 +83,7 @@ const AddDriver = () => {
                 </div>
               </form>
             </div>
-          </div>
+          </div>  
         </div>
       )}
 
@@ -153,6 +153,7 @@ const AddDriver = () => {
 
       {currentStep === 3 && (
         <div>
+
           <div className="text-left font-syke-light text-white justify-center items-center">
             <div className="text-textgreen">
               <h1 className="text-4xl font-syke-bold">Adding a Driver</h1>
@@ -188,6 +189,7 @@ const AddDriver = () => {
                   />
                 </div>
               </form>
+
             </div>
           </div>
         </div>
@@ -200,7 +202,6 @@ const AddDriver = () => {
               <h1 className="text-4xl font-syke-bold">Adding a Driver</h1>
               <div>Step 4: Confirm Details</div>
             </div>
-
             <div className="w-[40rem] h-[auto] mt-4">
               <form className="space-y-[2rem]">
                 <div className="flex space-x-4">
