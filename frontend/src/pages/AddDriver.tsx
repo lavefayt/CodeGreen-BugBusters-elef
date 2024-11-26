@@ -201,7 +201,7 @@ const AddDriver = () => {
 
       {currentStep === 4 && (
         <div>
-          <div className = "h-full w-full p-10 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+          <div className = "h-full w-full p-10 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20">
             <div className="text-left font-syke-light text-white justify-center items-center">
               <div className="text-textgreen">
                 <h1 className="text-4xl font-syke-bold">Adding a Driver</h1>
