@@ -1,4 +1,4 @@
-import { Database } from "./database.types";
+// import { Database } from "./database.types";
 
 export interface Driver {
   date_of_birth: string;
@@ -65,5 +65,4 @@ export interface RegisterUser {
   violation_type: string;
   violation_date: string;
   paid_status: boolean;
-  
 }
