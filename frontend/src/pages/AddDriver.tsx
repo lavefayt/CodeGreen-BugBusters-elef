@@ -2,6 +2,9 @@ import { useNavigate } from "react-router-dom";
 import AdminHeader from "../components/AdminHeader";
 import React, { useState } from "react";
 
+import { DriverFormData } from "../hooks/useAddDriver";
+import { useAddDriver } from "../hooks/useAddDriver";
+
 const AddDriver = () => {
   const navigate = useNavigate();
 
@@ -22,6 +25,35 @@ const AddDriver = () => {
   const handleAddButton = () => {
     navigate("/admin");
   };
+
+  const { addDriver, loading, error, successMessage } = useAddDriver();
+
+  const [formData, setFormData] = useState<DriverFormData>({
+    email: "",
+    first_name: "",
+    last_name: "",
+    middle_name: "",
+    date_of_birth: "",
+    sex: "Male",
+    driver_type: "Student",
+    license_number: "",
+    license_expiration_date: "",
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    addDriver(formData);
+    navigate("/admin");
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
   return (
     <div className="flex flex-col items-center bg-adminlanding-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
       <div>
@@ -48,7 +80,7 @@ const AddDriver = () => {
                         type="text"
                         className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                         name="last_name"
-                        placeholder="Enter last name"
+                        placeholder="Enter Last Name"
                         required
                       />
                     </div>
@@ -63,7 +95,7 @@ const AddDriver = () => {
                         type="text"
                         className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                         name="first_name"
-                        placeholder="Enter first name"
+                        placeholder="Enter First Name"
                         required
                       />
                     </div>
@@ -97,27 +129,23 @@ const AddDriver = () => {
                 <h1 className="text-4xl font-syke-bold">Adding a Driver</h1>
                 <div>Step 2: Please enter driver's additional information.</div>
               </div>
-
               <div className="w-[30rem] mt-4">
                 <form className="space-y-5">
                   <div className="flex space-x-4">
                     <div className="flex-1">
-                      <h1 className="text-white font-syke-light text-xl">
-                        Sex
-                      </h1>
+                      <h1 className="text-white font-syke-light text-xl">Sex</h1>
                       <select
                         className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                         name="sex"
-                        required
-                      >
+                        required>
+
                         <option value="">Select</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
-                        <option value="Rather not say">Rather not say</option>
                       </select>
                     </div>
                   </div>
-
+                  
                   <div className="flex space-x-4">
                     <div className="flex-1">
                       <h1 className="text-white font-syke-light text-xl">
@@ -126,7 +154,7 @@ const AddDriver = () => {
                       <input
                         type="date"
                         className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
-                        name="birthday"
+                        name="date_of_birth"
                         required
                       />
                     </div>
@@ -139,14 +167,13 @@ const AddDriver = () => {
                       </h1>
                       <select
                         className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
-                        name="drivertype"
-                        required
-                      >
+
+                        name="driver_type"
+                        required>
                         <option value="">Select</option>
-                        <option value="Student">Male</option>
+                        <option value="Student">Student</option>
                         <option value="Faculty">Faculty</option>
-                        <option value="Guest">Guest</option>
-                        <option value="Alumni">Alumni</option>
+                        <option value="Guest">Staff</option>
                       </select>
                     </div>
                   </div>
@@ -190,7 +217,7 @@ const AddDriver = () => {
                     <input
                       type="date"
                       className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
-                      name="LicenseExp"
+                      name="license_expiration_date"
                       required
                     />
                   </div>
