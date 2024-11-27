@@ -38,7 +38,7 @@ const AdminHeader = () => {
 
   return (
     <header className="flex items-center justify-start w-full px-4 py-4">
-      <div className="flex mt-[1rem] items-center font-syke-regular w-full justify-between">
+      <div className="flex mt-[10px] items-center font-syke-regular w-full justify-between">
         {/* Logo Section */}
         <div className="flex items-center w-[11rem] mr-[150px]">
           <button

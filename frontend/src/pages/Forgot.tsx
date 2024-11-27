@@ -16,15 +16,15 @@ const Forgot = () => {
   };
 
   return (
-    <div className="flex justify-center bg-hoverbutton bg-no-repeat h-screen">
-      <div className="bg-hoverbutton mt-[10rem] p-5 rounded-sm">
+    <div className="flex items-center justify-center bg-hoverbutton h-screen">
+      <div className="p-5 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
         <div className="flex flex-col font-syke-medium text-textgreen text-4xl gap-2">
           <h1>Reset Password</h1>
         </div>
         <h5 className="font-skye-regular text-white mt-2">
           Please enter your email address to request a password reset.
         </h5>
-
+  
         <form className="space-y-2" onSubmit={handleSubmit}>
           <div>
             <input
