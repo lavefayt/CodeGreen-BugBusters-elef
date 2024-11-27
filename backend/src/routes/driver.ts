@@ -78,7 +78,7 @@ router.get("/get", async (req: Request, res: Response) => {
       console.log("Fetching drivers from the database...");
 
       const { rows: drivers } = await pool.query(
-       ` SELECT first_name, 
+       `SELECT first_name, 
         last_name,
         middle_name, 
         email, 
@@ -104,9 +104,18 @@ router.get("/get", async (req: Request, res: Response) => {
 
     try{ 
         console.log("Fetching. . .");
+
+        const driver = await pool.query(
+            `DELETE FROM 
+            drivers 
+            WHERE 
+            id = $1 RETURNING *`, 
+            [req.body.id]
+        );
+        console.log("Driver deleted successfully:", driver);
     }
     catch(error){ 
-        console.log("Deleted!")
+        console.log("Error!")
     }
   })
 
