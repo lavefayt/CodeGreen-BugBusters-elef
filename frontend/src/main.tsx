@@ -43,15 +43,7 @@ const Main = () => {
     <BrowserRouter>
       <Routes>
         {/* PUBLIC ROUTES */}
-        <Route
-          path="/"
-          element={
-            <Navigate
-              to="/login"
-              replace
-            />
-          }
-        />
+        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route
           path="/login"
           element={
@@ -59,80 +51,27 @@ const Main = () => {
             // auth?.accessToken ? <Navigate to={location} /> : <LoginPage />
           }
         />
-        <Route
-          path="/signup"
-          element={<SignUp />}
-        />
-        <Route
-          path="/forgot"
-          element={<Forgot />}
-        />
-        <Route
-          path="/unauthorized"
-          element={<UnauthorizedPage />}
-        />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/forgot" element={<Forgot />} />
+        <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
         {/* USER ROUTES */}
         {/* <Route element={<RequireAuth forAdmin={false} />}> */}
-        <Route
-          path="/homepage"
-          element={<HomePage />}
-        />
-        <Route
-          path="/about"
-          element={<AboutPage />}
-        />
-        <Route
-          path="/register-driver"
-          element={<RegisterDriver />}
-        />
-        <Route
-          path="/policies"
-          element={<Policies />}
-        />
-        <Route
-          path="/driverprofile"
-          element={<DriverProfile />}
-        />
-
-        <Route
-          path="/registrationlist"
-          element={<RegistrationList/>}
-        />
+        <Route path="/homepage" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/register-driver" element={<RegisterDriver />} />
+        <Route path="/policies" element={<Policies />} />
+        <Route path="/driverprofile" element={<DriverProfile />} />
         {/* </Route> */}
 
         {/* ADMIN ROUTES */}
         {/* <Route element={<RequireAuth forAdmin={true} />}> */}
-          <Route
-            path="/admin"
-            element={<AdminLandingPage />}
-          />
-          <Route
-            path="/driverslist"
-            element={<DriversList />}
-          />
-          <Route
-            path="/encode"
-            element={<EncodePage />}
-          />
-          <Route
-            path="/add-driver"
-            element={<AddDriver />}
-          />
-          <Route
-            path="/add-violation"
-            element={<AddViolation />}
-          
-          />
-          <Route
-            path="/homepagedriver"
-            element={<HomepageDriver/>}
-          
-          />
-          <Route
-            path="/violatorslist"
-            element={<ViolatorList />}
-          />
+        <Route path="/admin" element={<AdminLandingPage />} />
+        <Route path="/driverslist" element={<DriversList />} />
+        <Route path="/encode" element={<EncodePage />} />
+        <Route path="/add-driver" element={<AddDriver />} />
+        <Route path="/add-violation" element={<AddViolation />} />
+        <Route path="/violatorslist" element={<ViolatorList />} />
         {/* </Route> */}
 
         {/* <Route

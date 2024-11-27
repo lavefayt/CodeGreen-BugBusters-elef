@@ -43,7 +43,8 @@ const AdminHeader = () => {
         <div className="flex items-center w-[11rem] mr-[150px]">
           <button
             onClick={handleHomePage}
-            className="flex text-left items-center gap-4 group overflow-hidden rounded-md pr-20 py-2 text-white font-medium text-lg">
+            className="flex text-left items-center gap-4 group overflow-hidden rounded-md pr-20 py-2 text-white font-medium text-lg"
+          >
             <img
               src="../assets/5.png"
               alt="Logo"
@@ -56,30 +57,29 @@ const AdminHeader = () => {
         </div>
 
         {/* Navigation Section */}
-        <nav className="flex space-x-20 text-white font-syke-medium text-lg">
-          <Link
-            to="/encode"
-            className="hover:text-textgreen transition-colors">
+        <nav className="flex space-x-20 text-white font-medium text-lg">
+          <Link to="/encode" className="hover:text-textgreen transition-colors">
             Encode
           </Link>
           <Link
             to="/driverslist"
-            className="hover:text-textgreen transition-colors">
+            className="hover:text-textgreen transition-colors"
+          >
             Drivers
           </Link>
           <Link
             to="/violatorslist"
-            className="hover:text-textgreen transition-colors">
+            className="hover:text-textgreen transition-colors"
+          >
             Violators
           </Link>
 
           {/* Dropdown Menu */}
-          <div
-            className="relative"
-            ref={dropdownRef}>
+          <div className="relative" ref={dropdownRef}>
             <button
               onClick={toggleDropdown}
-              className="hover:text-buttongreen transition-colors">
+              className="hover:text-buttongreen transition-colors"
+            >
               Account
             </button>
             {isDropdownOpen && (
@@ -95,7 +95,8 @@ const AdminHeader = () => {
                 </span> */}
                 <span
                   onClick={handleLogOut}
-                  className="block font-syke-medium text-sm rounded-b-lg px-4 py-2 hover:bg-buttongreen cursor-pointer">
+                  className="block font-syke-medium text-sm rounded-b-lg px-4 py-2 hover:bg-buttongreen cursor-pointer"
+                >
                   Log Out
                 </span>
               </div>
