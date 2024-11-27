@@ -1,14 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import AdminHeader from "../components/AdminHeader";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-import { DriverFormData } from "../hooks/useAddDriver";
+import { Driver } from "../types/datatypes";
 import { useAddDriver } from "../hooks/useAddDriver";
 
 const AddDriver = () => {
   const navigate = useNavigate();
-
   const [currentStep, setCurrentStep] = useState(1);
+  const { postDriver, loading, error, setLoading} = useAddDriver();
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleNextClick = () => {
     setCurrentStep(currentStep + 1);
@@ -22,13 +23,8 @@ const AddDriver = () => {
     navigate("/encode");
   };
 
-  const handleAddButton = () => {
-    navigate("/admin");
-  };
 
-  const { addDriver, loading, error, successMessage } = useAddDriver();
-
-  const [formData, setFormData] = useState<DriverFormData>({
+  const [formData, setFormData] = useState<Driver>({
     email: "",
     first_name: "",
     last_name: "",
@@ -40,10 +36,22 @@ const AddDriver = () => {
     license_expiration_date: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    addDriver(formData);
-    navigate("/admin");
+    setLoading(true);
+    setSuccessMessage(""); 
+    try {
+      await postDriver(formData); 
+      setLoading(false);
+
+      setSuccessMessage("Success"); 
+      setTimeout(() => {
+        navigate("/admin"); 
+      }, 5000);
+    } catch (error) {
+      setLoading(false);
+      console.error("Error submitting driver:", error);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -58,6 +66,8 @@ const AddDriver = () => {
     <div className="flex flex-col items-center bg-adminlanding-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
       <div>
         <AdminHeader />
+        {loading && <p className="text-center text-textgreen text-2xl">Submitting</p>}
+        {successMessage && <p className="text-center text-textgreen text-2xl"> Driver has been submitted!</p>}
       </div>
 
       {currentStep === 1 && (
@@ -80,6 +90,8 @@ const AddDriver = () => {
                         type="text"
                         className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                         name="last_name"
+                        value={ formData.last_name }
+                        onChange={ handleChange }
                         placeholder="Enter Last Name"
                         required
                       />
@@ -95,6 +107,8 @@ const AddDriver = () => {
                         type="text"
                         className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                         name="first_name"
+                        value={ formData.first_name }
+                        onChange={ handleChange }
                         placeholder="Enter First Name"
                         required
                       />
@@ -110,10 +124,29 @@ const AddDriver = () => {
                         type="text"
                         className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                         name="middle_name"
+                        value={ formData.middle_name }
+                        onChange={ handleChange }
                         placeholder="Optional"
                       />
                     </div>
                   </div>
+
+                  <div className="flex space-x-4">
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-xl">
+                        Email
+                      </h1>
+                      <input
+                        type="text"
+                        className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
+                        name="email"
+                        value={ formData.email }
+                        onChange={ handleChange }
+                        placeholder="Enter Your Email"
+                      />
+                    </div>
+                  </div>
+
                 </form>
               </div>
             </div>
@@ -137,6 +170,8 @@ const AddDriver = () => {
                       <select
                         className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                         name="sex"
+                        value={ formData.sex }
+                        onChange={ handleChange }
                         required>
 
                         <option value="">Select</option>
@@ -155,6 +190,8 @@ const AddDriver = () => {
                         type="date"
                         className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                         name="date_of_birth"
+                        value={ formData.date_of_birth }
+                        onChange={ handleChange }
                         required
                       />
                     </div>
@@ -167,7 +204,8 @@ const AddDriver = () => {
                       </h1>
                       <select
                         className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
-
+                        value={ formData.driver_type }
+                        onChange={ handleChange }
                         name="driver_type"
                         required>
                         <option value="">Select</option>
@@ -204,6 +242,8 @@ const AddDriver = () => {
                         type="text"
                         className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                         name="license_number"
+                        value={ formData.license_number }
+                        onChange={ handleChange }
                         placeholder="Enter license number"
                         required
                       />
@@ -216,6 +256,8 @@ const AddDriver = () => {
                     </h1>
                     <input
                       type="date"
+                      value={ formData.license_expiration_date }
+                      onChange={ handleChange }
                       className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                       name="license_expiration_date"
                       required
@@ -244,7 +286,7 @@ const AddDriver = () => {
                       Last Name
                     </h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
-                      Alcorin
+                      {formData.last_name}
                     </h1>
                   </div>
                   <div className="flex-1">
@@ -252,7 +294,7 @@ const AddDriver = () => {
                       First Name
                     </h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
-                      Shawn Patrick
+                      { formData.first_name}
                     </h1>
                   </div>
                   <div className="flex-1">
@@ -260,16 +302,27 @@ const AddDriver = () => {
                       Middle Name
                     </h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
-                      Surilla
+                      { formData.middle_name }
                     </h1>
                   </div>
+
                 </div>
+                
+                <div className="flex-1">
+                    <h1 className="text-white font-syke-light text-xl">
+                      Email
+                    </h1>
+                    <h1 className="text-textgreen font-syke-medium text-3xl">
+                      { formData.email }
+                    </h1>
+                  </div>
 
                 <div className="flex space-x-4">
                   <div className="flex-1">
-                    <h1 className="text-white font-syke-light text-xl">Sex</h1>
+                    <h1 className="text-white font-syke-light text-xl">
+                      Sex</h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
-                      Female
+                      { formData.sex }
                     </h1>
                   </div>
                   <div className="flex-1">
@@ -277,7 +330,7 @@ const AddDriver = () => {
                       Date of Birth
                     </h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
-                      02/29/2004
+                      { formData.date_of_birth }
                     </h1>
                   </div>
                   <div className="flex-1">
@@ -285,7 +338,7 @@ const AddDriver = () => {
                       Driver Type
                     </h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
-                      Student
+                      { formData.driver_type }
                     </h1>
                   </div>
                 </div>
@@ -296,7 +349,7 @@ const AddDriver = () => {
                       License Number
                     </h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
-                      NO3-12-123456
+                      { formData.license_number }
                     </h1>
                   </div>
                   <div className="flex-1">
@@ -304,7 +357,7 @@ const AddDriver = () => {
                       License Expiration Date
                     </h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
-                      03/10/2026
+                      { formData.license_expiration_date }
                     </h1>
                   </div>
                 </div>
@@ -379,9 +432,9 @@ const AddDriver = () => {
               <button
                 type="button"
                 className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-                onClick={handleAddButton}
+                onClick={ handleSubmit }
               >
-                Add
+                Submit
               </button>
             </div>
           </div>

@@ -7,7 +7,7 @@ router.get("/DriversList", async (req: Req, res: Response) => {
   try {
     console.log("Fetching drivers from the database...");
     const { rows: drivers } = await pool.query(
-      "SELECT first_name, last_name, email, sex, driver_type, license_number, license_expiration_date FROM drivers"
+      "SELECT first_name, last_name, middle_name, email, sex, driver_type, license_number, license_expiration_date FROM drivers"
     );
     console.log("Drivers fetched successfully:", drivers);
 

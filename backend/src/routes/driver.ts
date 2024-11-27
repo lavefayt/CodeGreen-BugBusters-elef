@@ -42,7 +42,8 @@ router.post("/add-driver", validateDriver,  async (req : Request, res : Response
             last_name, 
             middle_name, 
             date_of_birth, 
-            sex, driver_type, 
+            sex, 
+            driver_type, 
             license_number, 
             license_expiration_date 
         ],

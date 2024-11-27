@@ -52,7 +52,7 @@ const useDrivers = () => {
       });
 
       if (!response.ok) {
-        const error: BackendError = await response.json();
+        const error : BackendError = await response.json();
         setError(error);
         console.error("Error fetching drivers:", error);
       } else {
