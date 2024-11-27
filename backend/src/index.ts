@@ -11,7 +11,7 @@ import verifyToken from "./middlewares/verifyToken";
 import cookieParser from "cookie-parser";
 import allowedOrigins from "./config/allowedOrigins";
 import { credentials } from "./middlewares/credentials";
-import addDriver from "./routes/driver";
+import driverRoutes from "./routes/driver";
 
 dotenv.config({ path: ".env" });
 
@@ -44,8 +44,7 @@ export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 // Routes
 server.use("/auth", authRoutes);
-server.use("/api", driversRouter); // Ensure this is before the verifyToken middleware
-server.use("/driver", addDriver);
+server.use("/driver", driverRoutes); // "/driver/get || /driver/add"
 
 
 // For Verifying Auth
