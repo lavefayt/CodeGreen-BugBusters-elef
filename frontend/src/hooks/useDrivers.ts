@@ -32,7 +32,7 @@
 // };
 
 import { useEffect, useState } from "react";
-import { Driver } from "../types/drivers.type";
+import { Driver } from "../types/datatypes.ts";
 import { BackendError } from "../types/error.types";
 
 const useDrivers = () => {
@@ -52,7 +52,7 @@ const useDrivers = () => {
       });
 
       if (!response.ok) {
-        const error : BackendError = await response.json();
+        const error: BackendError = await response.json();
         setError(error);
         console.error("Error fetching drivers:", error);
       } else {
