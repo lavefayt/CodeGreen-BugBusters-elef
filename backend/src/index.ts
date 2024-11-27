@@ -45,9 +45,12 @@ export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 // Routes
 server.use("/auth", authRoutes);
 server.use("/api", driversRouter); // Ensure this is before the verifyToken middleware
+server.use("/driver", addDriver);
+
 
 // For Verifying Auth
 server.use(verifyToken);
+
 
 // APIs for Functionality (Must Be Placed Under Verification of Auth)
 server.get("/testing", async (req: Request, res: Response) => {

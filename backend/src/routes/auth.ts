@@ -102,7 +102,7 @@ router.post("/login", validateAuth, async (req: Request, res: Response) => {
     res.status(200).json({ accessToken, isAdmin: user.is_admin });
     // req.headers["authorization"] = `Bearer ${accessToken}`;
   } catch (error) {
-    res.sendStatus(500).json({ title: "Unknown Error", message: error });
+    res.sendStatus(500);
     console.log(error);
   }
 });
