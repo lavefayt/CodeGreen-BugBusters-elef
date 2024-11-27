@@ -12,7 +12,7 @@ export const useAddDriver = () => {
     setLoading(true);
     
     try { 
-      const response = await fetch(`http://localhost:4444/driver/add-driver`, { 
+      const response = await fetch(`http://localhost:4444/driver/add`, { 
         method : "POST", 
         headers: {
           "Content-Type": "application/json",

@@ -48,6 +48,7 @@ const AddDriver = () => {
       setTimeout(() => {
         navigate("/admin"); 
       }, 5000);
+      
     } catch (error) {
       setLoading(false);
       console.error("Error submitting driver:", error);
@@ -211,7 +212,7 @@ const AddDriver = () => {
                         <option value="">Select</option>
                         <option value="Student">Student</option>
                         <option value="Faculty">Faculty</option>
-                        <option value="Guest">Staff</option>
+                        <option value="Staff">Staff</option>
                       </select>
                     </div>
                   </div>
