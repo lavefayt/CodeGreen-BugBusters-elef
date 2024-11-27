@@ -23,13 +23,12 @@ import UnauthorizedPage from "./pages/UnauthorizedPage.tsx";
 import useAuth from "./hooks/useAuth.ts";
 import { AuthContextType } from "./types/user.types.ts";
 import useRefresh from "./hooks/useRefresh.ts";
-import useInterceptor from "./hooks/useInterceptor.ts";
 
 const Main = () => {
   const { auth }: AuthContextType = useAuth();
   const { loading, error } = useRefresh();
 
-  useInterceptor();
+  // useInterceptor();
 
   useEffect(() => {
     console.log(auth);
