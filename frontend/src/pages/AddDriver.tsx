@@ -118,9 +118,8 @@ const AddDriver = () => {
       )}
 
       {currentStep === 2 && (
-        <div>
-          <div className="h-full w-full p-10 bg-zinc-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
-            <div className="text-left font-syke-light text-white justify-center items-center">
+          <div className = " px-6 py-5 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+          <div className="text-textgreen">
               <div className="text-textgreen">
                 <h1 className="text-4xl font-syke-bold">Adding a Driver</h1>
                 <div>Step 2: Please enter driver's additional information.</div>
@@ -174,16 +173,15 @@ const AddDriver = () => {
                     </div>
                   </div>
                 </form>
-              </div>
             </div>
           </div>
         </div>
       )}
 
       {currentStep === 3 && (
-        <div>
-          <div className="h-full w-full p-10 bg-zinc-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
-            <div className="text-left font-syke-light text-white justify-center items-center">
+      
+      <div className = " px-6 py-5 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+          <div className="text-textgreen">
               <div className="text-textgreen">
                 <h1 className="text-4xl font-syke-bold">Adding a Driver</h1>
                 <div>Step 3: Please enter driver's license information.</div>
@@ -219,7 +217,6 @@ const AddDriver = () => {
                   </div>
                 </form>
               </div>
-            </div>
           </div>
         </div>
       )}

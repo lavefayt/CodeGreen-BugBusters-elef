@@ -6,7 +6,7 @@ const RegistrationList = () => {
       <div>
         <AdminHeader />
       </div>
-      <div className="w-[50rem] h-[30rem] bg-gray-400 rounded-md  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border-hoverbutton">
+      <div className="w-[50rem] h-[30rem] bg-gray-400 rounded-md  backdrop-filter bg-clip-padding backdrop-blur-sm bg-opacity-10 border-hoverbutton">
         <div className="text-left py-2 px-6 rounded-xl bg-clip-padding">
           <div className="text-left font-syke-light text-white">
             <div className="text-textgreen py-3">

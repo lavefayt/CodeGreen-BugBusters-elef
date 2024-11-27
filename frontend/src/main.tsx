@@ -72,6 +72,10 @@ const Main = () => {
         <Route path="/add-driver" element={<AddDriver />} />
         <Route path="/add-violation" element={<AddViolation />} />
         <Route path="/violatorslist" element={<ViolatorList />} />
+        <Route path="/homepagedriver" element={<HomepageDriver />} />
+        <Route path="/registration-list" element={<RegistrationList />} />
+
+
         {/* </Route> */}
 
         {/* <Route

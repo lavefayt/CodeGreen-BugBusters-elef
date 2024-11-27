@@ -1,14 +1,15 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
 
 const DriverProfileComponent = () => {
-  const navigate = useNavigate();
-
   return (
-    <div className="max-w-full max-h-full justify-center">
-      <div className="w-[35rem] h-[20rem] bg-hoverbutton rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-50 p-6 ">
-      <form className="space-y-[2rem]">
-          <div className="flex space-x-4">
+    <div className="max-w-full max-h-full flex justify-center items-center">
+      <div
+        alt="container"
+        className="w-[35rem] h-[20rem] bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10"
+      >
+        <div className="items-center p-4">
+        <form className="space-y-[2rem]">
+          <div className="flex space-x-1">
             <div className="flex-1">
               <h1 className="text-white font-syke-light text-l">Last Name</h1>
               <h1 className="text-textgreen font-syke-medium text-xl">
@@ -52,7 +53,7 @@ const DriverProfileComponent = () => {
             </div>
           </div>
 
-          <div className="spacce-x-4">
+          <div className="space-y-2">
             <div className="flex space-x-4">
               <div className="flex-1">
                 <h1 className="text-white font-syke-light text-l">Email</h1>
@@ -82,6 +83,7 @@ const DriverProfileComponent = () => {
             </div>
           </div>
         </form>
+        </div>
       </div>
     </div>
   );

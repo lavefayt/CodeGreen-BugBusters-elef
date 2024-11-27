@@ -24,7 +24,7 @@ const AdminLandingPage = () => {
     navigate("/driverslist");
   };
   const handleRegistrationList = () => {
-    navigate("/registrationlist")
+    navigate("/registration-list")
   }
 
   // const { fetch: originalFetch } = window;
