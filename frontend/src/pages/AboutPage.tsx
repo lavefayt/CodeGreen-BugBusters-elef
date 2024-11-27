@@ -7,8 +7,8 @@ const AboutPage = () => {
         <Header />
       </div>
       
-      <div className="text-left bg-hoverbutton py-2 px-6 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-15 border border-textgreen">
-
+      <div className="text-left bg-hoverbutton py-2 px-6 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-15 border border-textgreen ">
+        
         <h1 
         className="text-textgreen font-bold text-2xl mt-4">
           About Us

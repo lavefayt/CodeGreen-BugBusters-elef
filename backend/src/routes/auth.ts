@@ -100,9 +100,10 @@ router.post("/login", validateAuth, async (req: Request, res: Response) => {
     });
     // console.log(req.cookies.jwt);
     res.status(200).json({ accessToken, isAdmin: user.is_admin });
+    // req.headers["authorization"] = `Bearer ${accessToken}`;
   } catch (error) {
-    res.sendStatus(500).json({ title: "Unknown Error", message: error });
-    console.log(error);
+    res.sendStatus(500);
+    console.log(error); 
   }
 });
 
@@ -137,19 +138,78 @@ router.get("/refresh", async (req: Request, res: Response) => {
       return;
     }
 
-    const payload = jwt.verify(
-      refreshToken,
-      process.env.REFRESH_TOKEN_SECRET!
-    ) as JwtPayload;
-    console.log(payload.user);
+    try {
+      const payload = jwt.verify(
+        refreshToken,
+        process.env.REFRESH_TOKEN_SECRET!
+      ) as JwtPayload;
 
-    const accessToken = generateAccessToken(payload.user);
-
-    res.status(200).json({ accessToken, isAdmin: foundUser.is_admin });
+      console.log(payload.userId);
+      const accessToken = generateAccessToken(payload.userId);
+      res.status(200).json({ accessToken, isAdmin: foundUser.is_admin });
+    } catch (error) {
+      res.status(403).json({
+        title: "No Access Rights",
+        message: "You do not have access to these features.",
+      });
+      return
+    }
   } catch (error) {
     res.sendStatus(500).json({ title: "Unknown Error", message: error });
     console.log(error);
   }
 });
 
+router.get("/logout", async (req: Request, res: Response) => {
+  try {
+    const cookies = req.cookies;
+
+    if (!cookies?.jwt) {
+      res.status(204).json({
+        title: "No Content",
+        message: "There is no content to be shown.",
+      });
+      return;
+    }
+
+    const refreshToken = await cookies.jwt;
+
+    const { rows: users } = await pool.query(
+      "SELECT * FROM users WHERE refresh_token = $1",
+      [refreshToken]
+    );
+
+    const foundUser = users[0];
+    console.log(foundUser.refresh_token);
+
+    if (!foundUser) {
+      res.clearCookie("jwt", {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000,
+      });
+      res.status(204).json({
+        title: "No Content",
+        message: "There is no content to be shown.",
+      });
+      return;
+    }
+
+    await pool.query("UPDATE users SET refresh_token = NULL WHERE id = $1", [
+      foundUser.id,
+    ]);
+
+    const newUser = await pool.query("SELECT * FROM users WHERE id = $1", [
+      foundUser.id,
+    ]);
+    console.log(newUser.rows[0]);
+
+    res.status(200).json({
+      title: "Log Out Successful",
+      message: "Thank you for visiting, feel free to use our services again.",
+    });
+  } catch (error) {
+    res.sendStatus(500).json({ title: "Unknown Error", message: error });
+    console.log(error);
+  }
+});
 export default router;

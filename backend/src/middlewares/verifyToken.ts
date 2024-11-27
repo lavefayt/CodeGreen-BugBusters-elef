@@ -6,6 +6,7 @@ dotenv.config();
 
 const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers["authorization"]?.split(" ")[1];
+  // console.log(token)
   if (!token) {
     res
       .status(401)
@@ -18,17 +19,16 @@ const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
       token,
       process.env.ACCESS_TOKEN_SECRET!
     ) as JwtPayload;
-
-    req.user = payload.user;
+    // console.log(payload.userId)
+    req.user = payload.userId;
     console.log(req.user);
   } catch (error) {
-    res.status(403);
+    // console.log(error)
+    res
+      .status(403)
+      .json({ title: "Token Invalid", message: "Access has expired." });
+    return;
   }
-
-  // if (error) {
-  //   // need a reauth by checking refresh token if still valid, if so make a new access token.
-  // }
-
   next();
 };
 
