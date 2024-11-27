@@ -2,10 +2,12 @@ import express, { Request , Response } from "express";
 import { pool } from "..";
 import { Driver } from "../types/datatypes";
 import { title } from "process";
+import validateDriver from "../middlewares/validateDriver";
+
 
 const router = express(); 
 
-router.post("/add-driver", async (req : Request, res : Response) => {
+router.post("/add-driver", validateDriver,  async (req : Request, res : Response) => {
     try{ 
         const { 
             email, 
@@ -20,6 +22,7 @@ router.post("/add-driver", async (req : Request, res : Response) => {
         }
         = req.body as Driver
         
+
     const driver = await pool.query( 
         `INSERT INTO drivers (
         email, 
@@ -42,28 +45,33 @@ router.post("/add-driver", async (req : Request, res : Response) => {
             sex, driver_type, 
             license_number, 
             license_expiration_date 
-        ]
-       
+        ],
+            
     )
+
     console.log(driver.rows)
     res.status(200).json({
         title : "Driver Added!", 
         message : `Driver ${last_name}, ${first_name} ${middle_name} has been added`,
+
+        
     })
 
     return
-}
-catch (error) {
-    if (error instanceof Error) {
-      console.error("Error occurred:", error.message);
-      res.status(500).json({ title: "Server Error", message: error.message });
 
-    } else {
-      console.error("Unexpected error occurred:", error);
-      res.status(500).json({ title: "Server Error", message: "An unexpected error occurred." });
+    } catch (error) {
+        if (error instanceof Error) {
+        console.error("Error occurred:", error.message);
+        res.status(500).json({ title: "Server Error", message: error.message });
+
+        } else {
+        console.error("Unexpected error occurred:", error);
+        res.status(500).json({ title: "Server Error", message: "An unexpected error occurred." });
+        }
+        
     }
-  }
-  
+
+    
   
 
 });
