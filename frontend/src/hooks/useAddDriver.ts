@@ -1,52 +1,41 @@
 import { useState } from "react";
-import axios, { AxiosError } from "axios";
+import { BackendError } from "../types/error.types";
+import { Driver } from "../types/datatypes";
 
-export interface DriverFormData {
-    date_of_birth: string;
-    driver_type: "Student" | "Faculty" | "Staff";
-    email: string;
-    first_name: string;
-    last_name: string;
-    license_expiration_date: string;
-    license_number: string;
-    middle_name: string;
-    sex: "Male" | "Female";
-  }
-
-interface ApiResponse {
-  title: string;
-  message: string;
-}
 
 export const useAddDriver = () => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  // const [data, setData] = useState<Driver[] | null>(null); // Store fetched drivers
+  const [error, setError] = useState<BackendError | null>(null); // Handle errors
+  const [loading, setLoading] = useState<boolean>(); // Track loading state
 
-  const addDriver = async (formData: DriverFormData) => {
+  const postDriver = async (formData: Driver) => {
     setLoading(true);
-    setError(null);
-    setSuccessMessage(null);
+    
+    try { 
+      const response = await fetch(`http://localhost:4444/driver/add`, { 
+        method : "POST", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(formData)
+      });
 
-    const PORT = process.env.REACT_APP_API_PORT || 4444; // Using environment variable for port
-
-    try {
-      const response = await axios.post<ApiResponse>(
-        `http://localhost:${PORT}/add-driver`, 
-        formData
-      );
-
-      setSuccessMessage(response.data.message);
-    } catch (err) {
-      if (err instanceof AxiosError && err.response) {
-        setError(err.response.data.message || "Validation error occurred.");
-      } else {
-        setError("An unexpected error occurred.");
+      if (!response.ok) { 
+        const error : BackendError = await response.json();
+        setError(error)
+        console.log("What are you doing?!")
       }
-    } finally {
-      setLoading(false);
-    }
-  };
 
-  return { addDriver, loading, error, successMessage };
+      } 
+      catch (error) {
+        console.error("Unexpected error:", error);
+        setError({ message: "An unexpected error occurred" } as BackendError);
+      } finally {
+        setTimeout(() => {
+          setLoading(false);
+        }, 5000)
+      }
+  }
+  return { postDriver, loading, setLoading, error }
 };

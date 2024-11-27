@@ -103,7 +103,7 @@ router.post("/login", validateAuth, async (req: Request, res: Response) => {
     // req.headers["authorization"] = `Bearer ${accessToken}`;
   } catch (error) {
     res.sendStatus(500);
-    console.log(error);
+    console.log(error); 
   }
 });
 
