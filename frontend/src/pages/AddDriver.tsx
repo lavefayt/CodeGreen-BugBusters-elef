@@ -72,11 +72,13 @@ const AddDriver = () => {
       </div>
 
       {currentStep === 1 && (
-          <div className = " px-6 py-5 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
-          <div className="text-textgreen">
-              <h1 className="text-4xl font-syke-bold">Adding a Driver</h1>
-              <div>Step 1: Please enter driver's Full Name.</div>
-            </div>
+        <div>
+          <div className="h-full w-full px-7 py-5 bg-zinc-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+            <div className="text-left font-syke-light text-white justify-center items-center">
+              <div className="text-textgreen">
+                <h1 className="text-4xl font-syke-bold">Adding a Driver</h1>
+                <div>Step 1: Please enter driver's Full Name.</div>
+              </div>
 
               <div className="w-[30rem] mt-[1rem]">
                 <form className="space-y-5">
@@ -149,11 +151,14 @@ const AddDriver = () => {
                 </form>
               </div>
             </div>
+          </div>
+        </div>
       )}
 
       {currentStep === 2 && (
-          <div className = " px-6 py-5 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
-          <div className="text-textgreen">
+        <div>
+          <div className="h-full w-full px-7 py-5 bg-zinc-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+            <div className="text-left font-syke-light text-white justify-center items-center">
               <div className="text-textgreen">
                 <h1 className="text-4xl font-syke-bold">Adding a Driver</h1>
                 <div>Step 2: Please enter driver's additional information.</div>
@@ -212,15 +217,16 @@ const AddDriver = () => {
                     </div>
                   </div>
                 </form>
+              </div>
             </div>
           </div>
         </div>
       )}
 
       {currentStep === 3 && (
-      
-      <div className = " px-6 py-5 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
-          <div className="text-textgreen">
+        <div>
+          <div className="h-full w-full px-7 py-5 bg-zinc-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+            <div className="text-left font-syke-light text-white justify-center items-center">
               <div className="text-textgreen">
                 <h1 className="text-4xl font-syke-bold">Adding a Driver</h1>
                 <div>Step 3: Please enter driver's license information.</div>
@@ -260,28 +266,17 @@ const AddDriver = () => {
                   </div>
                 </form>
               </div>
+            </div>
           </div>
         </div>
       )}
 
       {currentStep === 4 && (
-        <div className = "h-[auto] w-[auto] px-6 py-5 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
-        <div className="text-left font-syke-light text-white justify-center items-center">
-        <div className="text-textgreen">
-        <h1 className="text-4xl font-syke-bold">Adding a Driver</h1>
-        <div>Step 4: Confirm Details</div>
-        </div>
-
-        <div className="bg- w-[40rem] h-[auto] mt-4">
-        <form className="space-y-[2rem]">
-          <div className="flex space-x-4">
-            <div className="flex-[1]">
-              <h1 className="text-white font-syke-light text-xl">
-                Last Name
-              </h1>
-              <h1 className="text-textgreen font-syke-medium text-3xl">
-                Alcorin
-              </h1>
+        <div>
+          <div className="h-full w-full px-7 py-5 bg-zinc-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+          <div className="text-textgreen">
+              <h1 className="text-4xl font-syke-bold">Adding a Driver</h1>
+              <div>Step 4: Confirm Details</div>
             </div>
 
             <div className="w-[40rem] h-[auto] mt-4">
@@ -370,57 +365,16 @@ const AddDriver = () => {
               </form>
             </div>
           </div>
-
-          <div className="flex space-x-4">
-            <div className="flex-1">
-              <h1 className="text-white font-syke-light text-xl">
-                Date of Birth
-              </h1>
-              <h1 className="text-textgreen font-syke-medium text-3xl">
-                02/29/2004
-              </h1>
-            </div>
-            <div className="flex-1">
-              <h1 className="text-white font-syke-light text-xl">
-                Driver Type
-              </h1>
-              <h1 className="text-textgreen font-syke-medium text-3xl">
-                Student
-              </h1>
-            </div>
-          </div>
-
-          <div className="flex space-x-4">
-            <div className="flex-1">
-              <h1 className="text-white font-syke-light text-xl">
-                License Number:
-              </h1>
-              <h1 className="text-textgreen font-syke-medium text-3xl">
-                NO3-12-123456
-              </h1>
-            </div>
-            <div className="flex-1">
-              <h1 className="text-white font-syke-light text-xl">
-                License Expiration Date
-              </h1>
-              <h1 className="text-textgreen font-syke-medium text-3xl">
-                03/10/2026
-              </h1>
-            </div>
-          </div>
-        </form>
         </div>
-      </div>
-      </div>
       )}
 
       <div className="relative">
         {currentStep === 1 && (
-          <div className="flex justify-center gap-5 p-5">
+          <div className="flex justify-center gap-10 p-10">
             <div>
               <button
                 type="button"
-                className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
+                className="w-32 text-xl bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
                 onClick={handleCancelButton}
               >
                 Cancel
@@ -430,7 +384,7 @@ const AddDriver = () => {
             <div>
               <button
                 type="button"
-                className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
+                className="w-32 text-xl bg-buttongreen text-white py-2 font-syke-medium hover:bg-[#33471a] transition-colors rounded-sm"
                 onClick={handleNextClick}
               >
                 Next
@@ -440,11 +394,11 @@ const AddDriver = () => {
         )}
 
         {(currentStep === 2 || currentStep === 3) && (
-          <div className="flex justify-center gap-5 p-5">
+          <div className="flex justify-center gap-10 p-10">
             <div>
               <button
                 type="button"
-                className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
+                className="w-32 text-xl bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
                 onClick={handleBackClick}
               >
                 Back
@@ -454,7 +408,7 @@ const AddDriver = () => {
             <div>
               <button
                 type="button"
-                className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
+                className="w-32 text-xl bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
                 onClick={handleNextClick}
               >
                 Next
@@ -464,7 +418,7 @@ const AddDriver = () => {
         )}
 
         {currentStep === 4 && (
-          <div className="flex justify-center gap-5 p-5">
+          <div className="flex justify-center gap-20 p-10">
             <div>
               <button
                 type="button"
