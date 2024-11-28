@@ -37,10 +37,10 @@ const AdminHeader = () => {
   }, []);
 
   return (
-    <header className="flex items-center justify-start w-full px-4 py-4">
-      <div className="flex mt-[1rem] items-center font-syke-regular w-full justify-between">
+    <header className="flex items-center font-syke-medium justify-start w-full p-4">
+      <div className="flex items-center w-full justify-between">
         {/* Logo Section */}
-        <div className="flex items-center w-[12rem] ml-[-70px] mr-[150px]">
+        <div className="flex items-center w-[11rem] mr-[150px]">
           <button
             onClick={handleHomePage}
             className="flex text-left items-center gap-4 group overflow-hidden rounded-md pr-20 py-2 text-white font-medium text-lg"
@@ -50,14 +50,14 @@ const AdminHeader = () => {
               alt="Logo"
               className="w-10 h-5 object-contain md:w-[4rem] md:h-[4rem] transition-transform duration-300 hover:scale-105"
             />
-            <h1 className="text-lg md:text-xl font-semibold transition-colors hover:text-buttongreen">
+            <h1 className="text-lg md:text-xl  transition-colors font-syke-medium hover:text-buttongreen">
               CodeGreen Gateway
             </h1>
           </button>
         </div>
 
         {/* Navigation Section */}
-        <nav className="flex space-x-20 text-white font-medium text-lg">
+        <nav className="flex space-x-20 text-white font-syke-medium text-lg">
           <Link to="/encode" className="hover:text-textgreen transition-colors">
             Encode
           </Link>
@@ -83,8 +83,8 @@ const AdminHeader = () => {
               Account
             </button>
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-4 w-48 bg-hoverbutton text-white rounded-md shadow-lg">
-                <span className="block font-syke-medium rounded-t-lg text-sm px-4 py-2 hover:bg-buttongreen cursor-pointer">
+              <div className="absolute right-0 mt-4 w-48 bg-hoverbutton text-white rounded-md shadow-lg z-10">
+                <span className="block font-syke-medium rounded-t-lg text-sm px-4 py-2 hover:bg-buttongreen cursor-pointer ">
                   Profile
                 </span>
                 {/* <span
