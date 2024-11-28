@@ -1,18 +1,24 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { NotificationPopUp } from "../components/NotificationPopUp";
+import { UserSignUp } from "../types/user.types";
+import useSignUp from "../hooks/useSignUp";
+import { Spinner } from "react-activity";
+import "react-activity/dist/Spinner.css";
+
+const initialFormData = {
+  last_name: "",
+  first_name: "",
+  email: "",
+  password: "",
+  confirm_password: "",
+};
 
 const SignUp = () => {
   const navigate = useNavigate();
 
-  const [signUpForm, setSignUpForm] = useState({
-    last_name: "",
-    first_name: "",
-    email: "",
-    password: "",
-    confirm_password: "",
-  });
-  const [emailPopUpActive, setEmailPopUpActive] = useState(false);
+  const [signUpForm, setSignUpForm] = useState<UserSignUp>(initialFormData);
+  const { submitSignUp, loading } = useSignUp();
 
   const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSignUpForm((prevFormData) => {
@@ -21,23 +27,9 @@ const SignUp = () => {
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    // event.preventDefault();
-
-    // try {
-    //   const { data, error } = await supabase.auth.signUp({
-    //     email: signUpForm.email,
-    //     password: signUpForm.password,
-    //     options: {
-    //       data: {
-    //         display_name: `${signUpForm.first_name} ${signUpForm.last_name}`,
-    //       },
-    //     },
-    //   });
-    //   error ? alert(error) : setEmailPopUpActive(true);
-    //   setEmailPopUpActive(true);
-    // } catch (error) {
-    //   alert(error);
-    // }
+    event.preventDefault();
+    const notification = await submitSignUp(signUpForm);
+    console.log(notification);
   };
 
   const handleLogInButton = () => {
@@ -49,14 +41,6 @@ const SignUp = () => {
       {/* <div className="w-full max-w-3xl mb-8 mt-5">
         <LogInSignUpHeader />
     </div> */}
-      {emailPopUpActive && (
-        <NotificationPopUp
-          title="Verify Your Email"
-          message="Account is almost done. Please verify your email in your inbox."
-          setEmailPopUpActive={setEmailPopUpActive}
-          confirm={true}
-        />
-      )}
 
       <div className="flex bg-transparent p-8 rounded-lg w-full max-w-3xl mt-10">
         <div className="w-1/2 pl-8 flex flex-col justify-center items-start font-syke-medium text-textgreen text-4xl gap-2">
@@ -91,6 +75,7 @@ const SignUp = () => {
                   className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                   placeholder="Last Name"
                   name="last_name"
+                  onChange={handleFormChange}
                   required
                 />
               </div>
@@ -142,8 +127,16 @@ const SignUp = () => {
 
             <button
               type="submit"
-              className="w-1/2 bg-buttongreen font-syke-regular text-white py-2 hover:bg-[#33471a] transition-colors rounded-sm">
-              Create account
+              className="flex justify-center items-center w-1/2 bg-buttongreen font-syke-regular text-white py-2 hover:bg-[#33471a] transition-colors rounded-sm">
+              {loading ? (
+                <Spinner
+                  size={10}
+                  color="#fff"
+                  animating={loading}
+                />
+              ) : (
+                "Create account"
+              )}
             </button>
           </form>
         </div>

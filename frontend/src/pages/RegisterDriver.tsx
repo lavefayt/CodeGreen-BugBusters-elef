@@ -91,10 +91,9 @@ const RegisterDriver = () => {
                       required
                     >
                       <option value="">Select</option>
-                      <option value="Student">Male</option>
+                      <option value="Student">Student</option>
                       <option value="Faculty">Faculty</option>
-                      <option value="Guest">Guest</option>
-                      <option value="Alumni">Alumni</option>
+                      <option value="Staff">Staff</option>
                     </select>
                   </div>
                 </div>
