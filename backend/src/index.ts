@@ -53,6 +53,8 @@ server.use("/registration", registrations);
 
 // For Verifying Auth
 server.use(verifyToken);
+// server.use("/driver", driverRoutes); // "/driver/get || /driver/add"
+
 
 // APIs for Functionality (Must Be Placed Under Verification of Auth)
 server.get("/testing", async (req: Request, res: Response) => {

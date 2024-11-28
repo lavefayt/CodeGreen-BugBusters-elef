@@ -1,27 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import AdminHeader from "../components/AdminHeader";
-import React, { useState } from "react";
+// import React, { useState } from "react";
 // import { AuthContextType } from "../types/user.types";
 // import useAuth from "../hooks/useAuth";
 // import useRefresh from "../hooks/useRefresh";
 // import useFetch from "../hooks/useFetch";
 
 const AdminLandingPage = () => {
-  // const { auth }: AuthContextType = useAuth();
-
-  // const {
-  //   fetchWithAuth,
-  // }: {
-  //   fetchWithAuth: (
-  //     accessToken: string,
-  //     route: string,
-  //     method: string,
-  //     body?: string
-  //   ) => Promise<any>;
-  // } = useFetch();
-
-  // fetchWithAuth(auth?.accessToken!, "/testing", "get");
-
   const navigate = useNavigate();
 
   const handleEncodeButton = () => {
@@ -34,8 +19,8 @@ const AdminLandingPage = () => {
     navigate("/driverslist");
   };
   const handleRegistrationList = () => {
-    navigate("/registration-list")
-  }
+    navigate("/registration-list");
+  };
 
   return (
     <div className="flex flex-col items-center bg-adminlanding-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">

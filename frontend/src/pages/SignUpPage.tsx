@@ -4,7 +4,6 @@ import { NotificationPopUp } from "../components/NotificationPopUp";
 import { UserSignUp } from "../types/user.types";
 import useSignUp from "../hooks/useSignUp";
 import { Spinner } from "react-activity";
-import "react-activity/dist/Spinner.css";
 
 const initialFormData = {
   last_name: "",
