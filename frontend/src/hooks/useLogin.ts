@@ -12,7 +12,6 @@ const useLogin = () => {
   const { setAuth }: AuthContextType = useAuth();
 
   const navigate = useNavigate();
-  const location = useLocation();
 
   const submitLogin = async (data: UserLogin) => {
     console.log(data);
