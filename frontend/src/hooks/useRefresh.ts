@@ -8,7 +8,6 @@ const useRefresh = () => {
   const { setAuth }: AuthContextType = useAuth();
   const [error, setError] = useState<BackendError>();
   const [loading, setLoading] = useState<boolean>(true);
-  // const { pathname } = useLocation();
 
   const refresh = async () => {
     const response = await fetch(`http://localhost:4444/auth/refresh`, {
@@ -27,10 +26,7 @@ const useRefresh = () => {
     }
 
     const foundUser = await response.json();
-    console.log(foundUser);
     setAuth!((prev) => {
-      console.log(prev);
-      console.log(foundUser);
       return { ...prev, accessToken: foundUser.accessToken };
     });
 

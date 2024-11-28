@@ -25,17 +25,10 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center bg-login-bg bg-no-repeat bg-center sm:bg-top md:bg-right lg:bg-left h-screen">
+    <div className="flex justify-center items-center bg-login-bg bg-no-repeat bg-cover sm:bg-top md:bg-right lg:bg-left h-screen">
       {/* <div className="w-full max-w-3xl mb-8 mt-5">
         <LogInSignUpHeader />
       </div> */}
-      {loading && (
-        <Spinner
-          size={10}
-          color="#fff"
-          animating={loading}
-        />
-      )}
 
       <div className="flex bg-transparent p-8 rounded-lg w-full max-w-3xl mx-auto">
         <div className="w-1/2 pr-8">
@@ -87,14 +80,15 @@ const LoginPage = () => {
             <button
               type="submit"
               className="flex w-1/2 bg-buttongreen text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm justify-center items-center">
-              {loading
-                ? "Loading"
-                : /* <Spinner
-                    size={10}
-                    color="#000000"
-                    animating={loading}
-                  /> */
-                  "Login"}
+              {loading ? (
+                <Spinner
+                  size={15}
+                  color="#fff"
+                  animating={loading}
+                />
+              ) : (
+                "Login"
+              )}
             </button>
           </form>
         </div>

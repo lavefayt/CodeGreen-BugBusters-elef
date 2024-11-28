@@ -9,14 +9,14 @@ const useLogin = () => {
   const [error, setError] = useState<BackendError>();
   const [loading, setLoading] = useState(false);
 
-  const { setAuth }: AuthContextType = useAuth();
+  const { setAuth, auth }: AuthContextType = useAuth();
 
   const navigate = useNavigate();
 
   const submitLogin = async (data: UserLogin) => {
     console.log(data);
     setLoading(true);
-    console.log(import.meta.env.VITE_SERVER_URL);
+    console.log(import.meta.env.VITE_BASE_SERVER_URL);
     const response = await fetch(`http://localhost:4444/auth/login`, {
       method: "POST",
       headers: {
@@ -38,6 +38,9 @@ const useLogin = () => {
     const userInfo = await response.json();
     setAuth!(userInfo);
     console.log(userInfo);
+    console.log(auth);
+
+
 
     // To either navigate to the previous page where they go logged off or the landing page
     const navigateTo = userInfo.isAdmin ? "/admin" : "/homepage";

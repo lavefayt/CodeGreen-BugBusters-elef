@@ -1,21 +1,13 @@
-import { AuthContextType } from "../types/user.types";
-import useAuth from "./useAuth";
 import useRefresh from "./useRefresh";
-
-interface InterceptorType {
-  origFetch: (
-    input: string | URL | globalThis.Request,
-    init?: RequestInit
-  ) => Promise<Response>;
-  accessToken: string;
-  route: string;
-  method: string;
-  body: string;
-}
+import { BackendError } from "../types/error.types";
+import useAuth from "./useAuth";
+import { AuthContextType } from "../types/user.types";
+import { useNavigate } from "react-router-dom";
 
 const useFetch = () => {
   const { refresh } = useRefresh();
-  const { setAuth, auth }: AuthContextType = useAuth();
+  const { auth }: AuthContextType = useAuth();
+  const navigate = useNavigate();
 
   const normalFetch = async (route: string, method: string, body?: object) => {
     const response = await fetch(`http://localhost:4444${route}`, {
@@ -31,52 +23,48 @@ const useFetch = () => {
   };
 
   const fetchWithAuth = async (
-    accessToken: string,
     route: string,
     method: string,
     body?: object
   ) => {
-    try {
-      const response = await fetch(`http://localhost:4444${route}`, {
+    const response = await fetch(`http://localhost:4444${route}`, {
+      method: method.toUpperCase(),
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${auth?.accessToken}`,
+      },
+      credentials: "include",
+      body: body ? JSON.stringify(body) : null,
+    });
+
+    console.log(response.status);
+
+    if (response.status === 403) {
+      console.log(await response.json());
+      console.log(auth?.accessToken);
+      const newAccessToken = await refresh();
+      const newResponse = await fetch(`http://localhost:4444${route}`, {
         method: method.toUpperCase(),
         headers: {
           "Content-type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${newAccessToken}`,
         },
         credentials: "include",
         body: body ? JSON.stringify(body) : null,
       });
 
-      if (response.status === 403) {
-        const backendError = await response.json();
-        console.log(backendError);
-        const newAccessToken = await refresh();
-        const newResponse = await fetch(`http://localhost:4444${route}`, {
-          method: method.toUpperCase(),
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${newAccessToken}`,
-          },
-          credentials: "include",
-          body: body ? JSON.stringify(body) : null,
-        });
-        setAuth!((prev) => {
-          return { ...prev, accessToken: newAccessToken };
-        });
-        return await newResponse.json();
+      if (!newResponse.ok) {
+        const backendError: BackendError = await newResponse.json();
+        navigate("/unauthorized");
+        throw new Error(backendError.title + ": " + backendError.message);
       }
 
-      if (!response.ok) {
-        alert(await response.json());
-        return;
-      }
-
-      const origResponse = await response.json();
-      return origResponse;
-    } catch (error) {
-      console.log(error);
-      return;
+      console.log("NEW RESPONSE"); // SHOULD BE REMOVED
+      return newResponse;
     }
+
+    console.log("OLD RESPONSE"); // SHOULD BE REMOVED
+    return response;
   };
 
   return { normalFetch, fetchWithAuth };

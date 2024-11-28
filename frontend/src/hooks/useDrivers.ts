@@ -34,31 +34,32 @@
 import { useEffect, useState } from "react";
 import { Driver } from "../types/datatypes.ts";
 import { BackendError } from "../types/error.types";
+import useFetch from "./useFetch.ts";
+import useAuth from "./useAuth.ts";
+import { AuthContextType } from "../types/user.types.ts";
 
 const useDrivers = () => {
   const [data, setData] = useState<Driver[] | null>(null); // Store fetched drivers
   const [error, setError] = useState<BackendError | null>(null); // Handle errors
   const [loading, setLoading] = useState(false); // Track loading state
 
+  const { fetchWithAuth } = useFetch();
+
   const fetchDrivers = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:4444/driver/get`, {
-        method: "GET", // Use GET for fetching data
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
+      // for fetching with auth
+      const response = await fetchWithAuth(
+        "/driver/get",
+        "get"
+      );
 
       if (!response.ok) {
         const error: BackendError = await response.json();
         setError(error);
-        console.error("Error fetching drivers:", error);
       } else {
         const drivers: Driver[] = await response.json();
         setData(drivers);
-        console.log("Fetched drivers:", drivers);
       }
     } catch (err) {
       console.error("Unexpected error:", err);
