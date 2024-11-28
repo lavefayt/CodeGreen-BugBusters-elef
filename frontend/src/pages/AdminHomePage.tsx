@@ -55,22 +55,22 @@ const AdminLandingPage = () => {
 
       <div className="grid grid-cols-3 font-syke-medium text-3xl gap-x-12 gap-y-4 mt-12">
         <button
-          className="transition-transform duration-300 hover:scale-105 text-white px-5 py-5 rounded-md bg-buttongreen hover:bg-colorhover font-syke-medium"
+          className="transition-transform duration-300 hover:scale-105 text-white px-5 py-5 rounded-md bg-buttongreen active:bg-colorhover font-syke-medium"
           onClick={handleEncodeButton}>
           Encode
         </button>
         <button
-          className="transition-transform duration-300 hover:scale-105 text-white px-5 py-4 rounded-md bg-buttongreen hover:bg-colorhover font-syke-medium"
+          className="transition-transform duration-300 hover:scale-105 text-white px-5 py-4 rounded-md bg-buttongreen active:bg-colorhover font-syke-medium"
           onClick={handleAddDriverButton}>
           View Drivers
         </button>
         <button
-          className="transition-transform duration-300 hover:scale-105 text-white px-5 py-4 rounded-md bg-buttongreen hover:bg-colorhover font-syke-medium"
+          className="transition-transform duration-300 hover:scale-105 text-white px-5 py-4 rounded-md bg-buttongreen active:bg-colorhover font-syke-medium"
           onClick={handleAddViolationButton}>
           View Violators
         </button>
         <button
-          className="transition-transform duration-300 hover:scale-105 text-white px-5 py-4 rounded-md bg-buttongreen hover:bg-colorhover font-syke-medium"
+          className="transition-transform duration-300 hover:scale-105 text-white px-5 py-4 rounded-md bg-buttongreen active:bg-colorhover font-syke-medium"
           onClick={handleRegistrationList}>
           View Registration List
         </button>
