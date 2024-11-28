@@ -12,3 +12,11 @@ export interface AuthContextType {
   auth?: User | undefined;
   setAuth?: React.Dispatch<React.SetStateAction<{}>> | undefined;
 }
+
+export interface UserSignUp {
+  last_name: string;
+  first_name: string;
+  email: string;
+  password: string;
+  confirm_password: string;
+}
