@@ -59,13 +59,13 @@ const DriversList = () => {
                 Drivers.map((driver) => (
                   <DriverListCard
                     key={driver.license_number}
-                    firstname={driver.first_name}
-                    lastname={driver.last_name}
-                    email={driver.email}
-                    sex={driver.sex}
-                    driver_type={driver.driver_type}
-                    license_no={driver.license_number}
-                    license_exp={driver.license_expiration_date}
+                    firstname={driver.first_name!}
+                    lastname={driver.last_name!}
+                    email={driver.email!}
+                    sex={driver.sex!}
+                    driver_type={driver.driver_type!}
+                    license_no={driver.license_number!}
+                    license_exp={driver.license_expiration_date!}
                   />
                 ))
               ) : (

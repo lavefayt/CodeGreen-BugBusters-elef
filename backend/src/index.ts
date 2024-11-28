@@ -11,7 +11,10 @@ import cookieParser from "cookie-parser";
 import allowedOrigins from "./config/allowedOrigins";
 import { credentials } from "./middlewares/credentials";
 import driverRoutes from "./routes/driver";
+
 import notifRoutes from "./routes/notif";
+import registrations from "./routes/registration";
+
 
 dotenv.config({ path: ".env" });
 
@@ -46,10 +49,10 @@ export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 server.use("/auth", authRoutes);
 server.use("/driver", driverRoutes); // "/driver/get || /driver/add"
 server.use("/notif", notifRoutes); 
+server.use("/registration", registrations);
 
 // For Verifying Auth
 server.use(verifyToken);
-
 
 // APIs for Functionality (Must Be Placed Under Verification of Auth)
 server.get("/testing", async (req: Request, res: Response) => {
