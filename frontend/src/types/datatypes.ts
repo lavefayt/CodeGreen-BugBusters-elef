@@ -2,7 +2,7 @@ import { Database } from "./database.types";
 
 export interface Driver {
   date_of_birth?: string;
-  driver_type?: "Student" | "Faculty" | "Staff";
+  driver_type?: "Select" | "Student" | "Faculty" | "Staff";
   email?: string;
   first_name?: string;
   id?: string;
@@ -11,7 +11,7 @@ export interface Driver {
   license_expiration_date?: string;
   license_number?: string;
   middle_name?: string;
-  sex?: "Male" | "Female";
+  sex?: "Select" | "Male" | "Female";
   user_id?: string | null;
 }
 
