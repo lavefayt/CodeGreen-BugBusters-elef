@@ -4,7 +4,7 @@ import React, { useState } from "react";
 // import { AuthContextType } from "../types/user.types";
 // import useAuth from "../hooks/useAuth";
 // import useRefresh from "../hooks/useRefresh";
-// import useInterceptor from "../hooks/useInterceptor";
+// import useFetch from "../hooks/useFetch";
 
 const AdminLandingPage = () => {
   // const { auth }: AuthContextType = useAuth();
@@ -18,7 +18,7 @@ const AdminLandingPage = () => {
   //     method: string,
   //     body?: string
   //   ) => Promise<any>;
-  // } = useInterceptor();
+  // } = useFetch();
 
   // fetchWithAuth(auth?.accessToken!, "/testing", "get");
 
