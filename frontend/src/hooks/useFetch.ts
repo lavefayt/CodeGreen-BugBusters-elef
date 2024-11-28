@@ -13,15 +13,28 @@ interface InterceptorType {
   body: string;
 }
 
-const useInterceptor = () => {
+const useFetch = () => {
   const { refresh } = useRefresh();
   const { setAuth, auth }: AuthContextType = useAuth();
+
+  const normalFetch = async (route: string, method: string, body?: object) => {
+    const response = await fetch(`http://localhost:4444${route}`, {
+      method: method.toUpperCase(),
+      headers: {
+        "Content-type": "application/json",
+      },
+      credentials: "include",
+      body: body ? JSON.stringify(body) : null,
+    });
+
+    return response;
+  };
 
   const fetchWithAuth = async (
     accessToken: string,
     route: string,
     method: string,
-    body?: string
+    body?: object
   ) => {
     try {
       const response = await fetch(`http://localhost:4444${route}`, {
@@ -58,14 +71,15 @@ const useInterceptor = () => {
         return;
       }
 
-      return await response.json();
+      const origResponse = await response.json();
+      return origResponse;
     } catch (error) {
       console.log(error);
       return;
     }
   };
 
-  return { fetchWithAuth };
+  return { normalFetch, fetchWithAuth };
 };
 
-export default useInterceptor;
+export default useFetch;
