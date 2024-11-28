@@ -5,6 +5,7 @@ import Adding from "../components/Adding";
 import Success from "../components/Success";
 import { Driver } from "../types/datatypes";
 import { useAddDriver } from "../hooks/useAddDriver";
+import App from "../components/NotificationComponent";
 
 const AddDriver = () => {
   const navigate = useNavigate();
@@ -71,11 +72,20 @@ const AddDriver = () => {
   };
 
   return (
-    <div className="flex flex-col items-center bg-adminlanding-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
+    <div className="flex flex-col items-center bg-adminlanding-bg bg-cover sm:bg-top md:bg-right lg:bg-left h-screen">
       <div>
         <AdminHeader />
+<<<<<<< Updated upstream
         {loading && <Adding/>}
         {successMessage && <Success/>}
+=======
+        <App/>
+
+         <p className="text-center text-textgreen text-2xl">Submitting</p>
+         <p className="text-center text-textgreen text-2xl"> Driver has been submitted!</p>
+        {/* {loading && <p className="text-center text-textgreen text-2xl">Submitting</p>}
+        {successMessage && <p className="text-center text-textgreen text-2xl"> Driver has been submitted!</p>} */}
+>>>>>>> Stashed changes
       </div>
 
       {currentStep === 1 && (
@@ -88,7 +98,7 @@ const AddDriver = () => {
               </div>
 
               <div className="w-[30rem] mt-[1rem]">
-                <form className="space-y-5">
+                <form className="space-y-3">
                   <div className="flex space-x-4">
                     <div className="flex-1">
                       <h1 className="text-white font-syke-light text-xl">
@@ -105,6 +115,7 @@ const AddDriver = () => {
                       />
                     </div>
                     <div className="flex space-x-4">
+<<<<<<< Updated upstream
                       <div className="flex-1">
                         <h1 className="text-white font-syke-light text-xl">
                           Middle Name
@@ -119,6 +130,22 @@ const AddDriver = () => {
                         />
                       </div>
                     </div>
+=======
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-xl">
+                        Middle Name
+                      </h1>
+                      <input
+                        type="text"
+                        className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
+                        name="middle_name"
+                        value={ formData.middle_name }
+                        onChange={ handleChange }
+                        placeholder="Optional"
+                      />
+                    </div>
+                  </div>
+>>>>>>> Stashed changes
                   </div>
 
                   <div className="flex space-x-4">
@@ -138,6 +165,11 @@ const AddDriver = () => {
                     </div>
                   </div>
 
+<<<<<<< Updated upstream
+=======
+                  
+
+>>>>>>> Stashed changes
                   <div className="flex space-x-4">
                     <div className="flex-1">
                       <h1 className="text-white font-syke-light text-xl">
@@ -169,7 +201,7 @@ const AddDriver = () => {
                 <div>Step 2: Please enter driver's additional information.</div>
               </div>
               <div className="w-[30rem] mt-4">
-                <form className="space-y-5">
+                <form className="space-y-3">
                   <div className="flex space-x-4">
                     <div className="flex-1">
                       <h1 className="text-white font-syke-light text-xl">
@@ -241,7 +273,7 @@ const AddDriver = () => {
               </div>
 
               <div className="w-[30rem] mt-[1rem]">
-                <form className="space-y-5">
+                <form className="space-y-3">
                   <div className="flex space-x-4">
                     <div className="flex-1">
                       <h1 className="text-white font-syke-light text-xl">
@@ -374,7 +406,11 @@ const AddDriver = () => {
 
       <div className="relative">
         {currentStep === 1 && (
+<<<<<<< Updated upstream
           <div className="flex justify-center gap-10 p-5">
+=======
+          <div className="flex justify-center gap-5 p-5">
+>>>>>>> Stashed changes
             <div>
               <button
                 type="button"
@@ -399,7 +435,11 @@ const AddDriver = () => {
         )}
 
         {(currentStep === 2 || currentStep === 3) && (
+<<<<<<< Updated upstream
           <div className="flex justify-center gap-10 p-5">
+=======
+          <div className="flex justify-center gap-5 p-5">
+>>>>>>> Stashed changes
             <div>
               <button
                 type="button"
