@@ -5,15 +5,30 @@ import Adding from "../components/Adding";
 import Success from "../components/Success";
 import { Driver } from "../types/datatypes";
 import { useAddDriver } from "../hooks/useAddDriver";
-import App from "../components/NotificationComponent";
+import ErrorInput from "../components/ErrorAlert";
 
 const AddDriver = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const { postDriver, loading, error, setLoading } = useAddDriver();
   const [successMessage, setSuccessMessage] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
 
   const handleNextClick = () => {
+    if (
+      currentStep === 1 &&
+      (formData.first_name === "" || formData.last_name === "") ||
+      currentStep === 2 &&
+      (formData.date_of_birth === "" ||
+        formData.sex === "Select" ||
+        formData.driver_type === "Select") ||
+      currentStep === 3 &&
+      (formData.license_number === "" ||
+        formData.license_expiration_date === "")) {
+      setAlertMessage("Please fill in all the required fields.");
+      return;
+    }
+    setAlertMessage("");
     setCurrentStep(currentStep + 1);
   };
 
@@ -24,26 +39,19 @@ const AddDriver = () => {
   const handleCancelButton = () => {
     navigate("/encode");
   };
-  
+
   const [formData, setFormData] = useState<Driver>({
     first_name: "",
     last_name: "",
     middle_name: "",
     date_of_birth: "",
-    sex: "Male",
-    driver_type: "Student",
+    sex: "Select",
+    driver_type: "Select",
     license_number: "",
     license_expiration_date: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
-    if (formData.first_name === "" || formData.last_name === "" || formData.email === "") {
-      alert("Please fill in all required fields (First Name, Last Name, Email).");
-      setLoading(false);
-      return;
-    }
-
-
     e.preventDefault();
     setLoading(true);
     setSuccessMessage("");
@@ -72,20 +80,12 @@ const AddDriver = () => {
   };
 
   return (
-    <div className="flex flex-col items-center bg-adminlanding-bg bg-cover sm:bg-top md:bg-right lg:bg-left h-screen">
+    <div className="flex flex-col items-center bg-adminlanding-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
       <div>
         <AdminHeader />
-<<<<<<< Updated upstream
-        {loading && <Adding/>}
-        {successMessage && <Success/>}
-=======
-        <App/>
-
-         <p className="text-center text-textgreen text-2xl">Submitting</p>
-         <p className="text-center text-textgreen text-2xl"> Driver has been submitted!</p>
-        {/* {loading && <p className="text-center text-textgreen text-2xl">Submitting</p>}
-        {successMessage && <p className="text-center text-textgreen text-2xl"> Driver has been submitted!</p>} */}
->>>>>>> Stashed changes
+        {loading && <Adding />}
+        {successMessage && <Success />}
+        {alertMessage && <ErrorInput/>}
       </div>
 
       {currentStep === 1 && (
@@ -98,7 +98,7 @@ const AddDriver = () => {
               </div>
 
               <div className="w-[30rem] mt-[1rem]">
-                <form className="space-y-3">
+                <form className="space-y-5">
                   <div className="flex space-x-4">
                     <div className="flex-1">
                       <h1 className="text-white font-syke-light text-xl">
@@ -114,38 +114,6 @@ const AddDriver = () => {
                         required
                       />
                     </div>
-                    <div className="flex space-x-4">
-<<<<<<< Updated upstream
-                      <div className="flex-1">
-                        <h1 className="text-white font-syke-light text-xl">
-                          Middle Name
-                        </h1>
-                        <input
-                          type="text"
-                          className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
-                          name="middle_name"
-                          value={formData.middle_name}
-                          onChange={handleChange}
-                          placeholder="Optional"
-                        />
-                      </div>
-                    </div>
-=======
-                    <div className="flex-1">
-                      <h1 className="text-white font-syke-light text-xl">
-                        Middle Name
-                      </h1>
-                      <input
-                        type="text"
-                        className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
-                        name="middle_name"
-                        value={ formData.middle_name }
-                        onChange={ handleChange }
-                        placeholder="Optional"
-                      />
-                    </div>
-                  </div>
->>>>>>> Stashed changes
                   </div>
 
                   <div className="flex space-x-4">
@@ -164,24 +132,18 @@ const AddDriver = () => {
                       />
                     </div>
                   </div>
-
-<<<<<<< Updated upstream
-=======
-                  
-
->>>>>>> Stashed changes
                   <div className="flex space-x-4">
                     <div className="flex-1">
                       <h1 className="text-white font-syke-light text-xl">
-                        Email
+                        Middle Name
                       </h1>
                       <input
                         type="text"
                         className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
-                        name="email"
-                        value={formData.email}
+                        name="middle_name"
+                        value={formData.middle_name}
                         onChange={handleChange}
-                        placeholder="Enter Your Email"
+                        placeholder="Optional"
                       />
                     </div>
                   </div>
@@ -201,7 +163,7 @@ const AddDriver = () => {
                 <div>Step 2: Please enter driver's additional information.</div>
               </div>
               <div className="w-[30rem] mt-4">
-                <form className="space-y-3">
+                <form className="space-y-5">
                   <div className="flex space-x-4">
                     <div className="flex-1">
                       <h1 className="text-white font-syke-light text-xl">
@@ -273,7 +235,7 @@ const AddDriver = () => {
               </div>
 
               <div className="w-[30rem] mt-[1rem]">
-                <form className="space-y-3">
+                <form className="space-y-5">
                   <div className="flex space-x-4">
                     <div className="flex-1">
                       <h1 className="text-white font-syke-light text-xl">
@@ -330,14 +292,7 @@ const AddDriver = () => {
                       {formData.last_name}
                     </h1>
                   </div>
-                  <div className="flex-1">
-                    <h1 className="text-white font-syke-light text-xl">
-                      First Name
-                    </h1>
-                    <h1 className="text-textgreen font-syke-medium text-3xl">
-                      {formData.first_name}
-                    </h1>
-                  </div>
+                  
                   <div className="flex-1">
                     <h1 className="text-white font-syke-light text-xl">
                       Middle Name
@@ -349,11 +304,13 @@ const AddDriver = () => {
                 </div>
 
                 <div className="flex-1">
-                  <h1 className="text-white font-syke-light text-xl">Email</h1>
-                  <h1 className="text-textgreen font-syke-medium text-3xl">
-                    {formData.email}
-                  </h1>
-                </div>
+                    <h1 className="text-white font-syke-light text-xl">
+                      First Name
+                    </h1>
+                    <h1 className="text-textgreen font-syke-medium text-3xl">
+                      {formData.first_name}
+                    </h1>
+                  </div>
 
                 <div className="flex space-x-4">
                   <div className="flex-1">
@@ -406,11 +363,7 @@ const AddDriver = () => {
 
       <div className="relative">
         {currentStep === 1 && (
-<<<<<<< Updated upstream
           <div className="flex justify-center gap-10 p-5">
-=======
-          <div className="flex justify-center gap-5 p-5">
->>>>>>> Stashed changes
             <div>
               <button
                 type="button"
@@ -423,8 +376,7 @@ const AddDriver = () => {
 
             <div>
               <button
-                
-                type="button"
+                type="submit"
                 className="w-32 text-xl bg-buttongreen text-white py-2 font-syke-medium hover:bg-[#33471a] transition-colors rounded-sm"
                 onClick={handleNextClick}
               >
@@ -435,11 +387,7 @@ const AddDriver = () => {
         )}
 
         {(currentStep === 2 || currentStep === 3) && (
-<<<<<<< Updated upstream
           <div className="flex justify-center gap-10 p-5">
-=======
-          <div className="flex justify-center gap-5 p-5">
->>>>>>> Stashed changes
             <div>
               <button
                 type="button"
