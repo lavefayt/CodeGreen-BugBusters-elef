@@ -65,7 +65,7 @@ router.post("/login", validateAuth, async (req: Request, res: Response) => {
     );
 
     const user = (await users[0]) as User;
-    console.log(user);
+    // console.log(user);
 
     if (!user) {
       res.status(401).json({
@@ -85,8 +85,8 @@ router.post("/login", validateAuth, async (req: Request, res: Response) => {
       });
       return;
     }
-    console.log(user.password);
-    console.log(hashedPassword);
+    // console.log(user.password);
+    // console.log(hashedPassword);
 
     const refreshToken = generateRefreshToken(user.id);
     const accessToken = generateAccessToken(user.id);
@@ -119,7 +119,7 @@ router.get("/refresh", async (req: Request, res: Response) => {
     }
 
     const refreshToken = cookies.jwt;
-    console.log(refreshToken);
+    // console.log(refreshToken);
 
     const foundUser = (
       await pool.query("SELECT * FROM users WHERE refresh_token = $1", [
@@ -127,7 +127,7 @@ router.get("/refresh", async (req: Request, res: Response) => {
       ])
     ).rows[0];
 
-    console.log(foundUser);
+    // console.log(foundUser);
 
     if (!foundUser) {
       res.status(403).json({

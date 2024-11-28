@@ -1,16 +1,26 @@
 import { useNavigate } from "react-router-dom";
 import AdminHeader from "../components/AdminHeader";
 import React, { useState } from "react";
-import { AuthContextType } from "../types/user.types";
-import useAuth from "../hooks/useAuth";
-import useInterceptor from "../hooks/useInterceptor";
-import useRefresh from "../hooks/useRefresh";
+// import { AuthContextType } from "../types/user.types";
+// import useAuth from "../hooks/useAuth";
+// import useRefresh from "../hooks/useRefresh";
+// import useInterceptor from "../hooks/useInterceptor";
 
 const AdminLandingPage = () => {
-  const [test, setTest] = useState();
-  const { auth }: AuthContextType = useAuth();
+  // const { auth }: AuthContextType = useAuth();
 
-  // useInterceptor();
+  // const {
+  //   fetchWithAuth,
+  // }: {
+  //   fetchWithAuth: (
+  //     accessToken: string,
+  //     route: string,
+  //     method: string,
+  //     body?: string
+  //   ) => Promise<any>;
+  // } = useInterceptor();
+
+  // fetchWithAuth(auth?.accessToken!, "/testing", "get");
 
   const navigate = useNavigate();
 
@@ -26,60 +36,6 @@ const AdminLandingPage = () => {
   const handleRegistrationList = () => {
     navigate("/registration-list")
   }
-
-  // const { fetch: originalFetch } = window;
-  // const { refresh } = useRefresh();
-  // // const { auth }: AuthContextType = useAuth();
-
-  // window.fetch = async (...args) => {
-  //   let [resource, config] = args;
-  //   try {
-  //     const headers = config?.headers
-  //       ? new Headers(config.headers)
-  //       : new Headers();
-
-  //     if (!headers.has("authorization")) {
-  //       headers.set("authorization", `Bearer ${auth?.accessToken}`);
-  //     }
-  //   } catch (error) {
-  //     Promise.reject(error);
-  //   }
-
-  //   // request interceptor here
-  //   const response = await originalFetch(resource, config);
-  //   // response interceptor here
-
-  //   await response
-  //     .clone()
-  //     .json()
-  //     .then((response) => response)
-  //     .catch(async (error) => {
-  //       const prevRequest = error?.config;
-  //       if (error?.response?.status === 403 && !prevRequest.sent) {
-  //         prevRequest.sent = true;
-  //         const newAccessToken = refresh();
-  //         prevRequest.headers["authorization"] = `Bearer ${newAccessToken}`;
-  //       }
-  //       return Promise.reject(error);
-  //     });
-
-  //   return response;
-  // };
-
-  // const testing = async () => {
-  //   const response = await fetch(`http://localhost:4444/testing`, {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-type": "application/json",
-  //       // authorization: `Bearer ${auth!.accessToken}`,
-  //     },
-  //     credentials: "include",
-  //   });
-  //   setTest(await response.json());
-  // };
-  // testing();
-
-  // console.log(test);
 
   return (
     <div className="flex flex-col items-center bg-adminlanding-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">

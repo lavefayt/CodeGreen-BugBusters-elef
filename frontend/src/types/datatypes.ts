@@ -1,17 +1,17 @@
 import { Database } from "./database.types";
 
 export interface Driver {
-  date_of_birth?: string; 
-  driver_type?: "Student" | "Faculty" | "Staff"; 
-  email?: string; 
-  first_name?: string; 
-  id?: string; 
-  is_driver_registered?: boolean; 
-  last_name?: string; 
-  license_expiration_date?: string; 
-  license_number?: string; 
-  middle_name?: string ; 
-  sex?: "Male" | "Female"; 
+  date_of_birth?: string;
+  driver_type?: "Student" | "Faculty" | "Staff";
+  email?: string;
+  first_name?: string;
+  id?: string;
+  is_driver_registered?: boolean;
+  last_name?: string;
+  license_expiration_date?: string;
+  license_number?: string;
+  middle_name?: string;
+  sex?: "Male" | "Female";
   user_id?: string | null;
 }
 
@@ -24,18 +24,23 @@ export interface Violation {
 }
 
 export interface DriverWithViolations {
-  date_of_birth: string; 
-  driver_type: "Student" | "Faculty" | "Staff" | null; 
-  email: string; 
-  first_name: string; 
-  id: string; 
-  is_driver_registered: boolean; 
-  last_name: string; 
-  license_expiration_date: string; 
-  license_number: string; 
-  middle_name: string | null; 
-  sex: "Male" | "Female"; 
+  date_of_birth: string;
+  driver_type: "Student" | "Faculty" | "Staff" | null;
+  email: string;
+  first_name: string;
+  id: string;
+  is_driver_registered: boolean;
+  last_name: string;
+  license_expiration_date: string;
+  license_number: string;
+  middle_name: string | null;
+  sex: "Male" | "Female";
   user_id: string | null;
   Violations: Violation[];
 }
 
+export interface Registration {
+  user_id: string;
+  license_number: string;
+  school_email: string;
+}

@@ -31,7 +31,7 @@ const Main = () => {
   const { auth }: AuthContextType = useAuth();
   const { loading, error } = useRefresh();
 
-  useInterceptor();
+  // useInterceptor();
 
   useEffect(() => {
     console.log(auth);
