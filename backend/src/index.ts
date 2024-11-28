@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 import { Pool, neonConfig } from "@neondatabase/serverless";
 import ws from "ws";
 import authRoutes from "./routes/auth";
-import driversRouter from "./routes/getDriver";
 import { User } from "./types/datatypes";
 import verifyToken from "./middlewares/verifyToken";
 import cookieParser from "cookie-parser";

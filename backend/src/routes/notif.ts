@@ -4,7 +4,7 @@ import { pool } from "..";
 const router = express();
 
 // Get all notifications
-router.get("/notifications", async (req: Req, res: Response) => {
+router.get("/get", async (req: Req, res: Response) => {
     try {
         const notification = await pool.query('SELECT * FROM notifications');
         res.status(200).json({
@@ -18,7 +18,7 @@ router.get("/notifications", async (req: Req, res: Response) => {
 });
 
 // Get a specific notification by ID
-router.get("/notifications/:id", async (req: Req, res: Response) => {
+router.get("/get/:id", async (req: Req, res: Response) => {
     const { id } = req.params;
     try {
         const notification = await pool.query('SELECT * FROM notifications WHERE id = $1', [id]);
