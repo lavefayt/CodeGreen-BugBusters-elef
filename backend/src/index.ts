@@ -11,7 +11,10 @@ import cookieParser from "cookie-parser";
 import allowedOrigins from "./config/allowedOrigins";
 import { credentials } from "./middlewares/credentials";
 import driverRoutes from "./routes/driver";
+
+import notifRoutes from "./routes/notif";
 import registrations from "./routes/registration";
+
 
 dotenv.config({ path: ".env" });
 
@@ -45,6 +48,7 @@ export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 // Routes
 server.use("/auth", authRoutes);
 server.use("/driver", driverRoutes); // "/driver/get || /driver/add"
+server.use("/notif", notifRoutes); 
 server.use("/registration", registrations);
 
 // For Verifying Auth
