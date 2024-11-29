@@ -20,8 +20,16 @@ import AddViolation from "./pages/AddViolation.tsx";
 import Forgot from "./pages/Forgot.tsx";
 import { AuthProvider } from "./context/AuthContext.tsx";
 import UnauthorizedPage from "./pages/UnauthorizedPage.tsx";
+<<<<<<< Updated upstream
 import HomepageDriver from "./pages/HomepageDriver.tsx";
 import RegistrationList from "./pages/RegistrationList.tsx";
+=======
+import useAuth from "./hooks/useAuth.ts";
+import { AuthContextType } from "./types/user.types.ts";
+import useRefresh from "./hooks/useRefresh.ts";
+import useInterceptor from "./hooks/useInterceptor.ts";
+import NotificationList from "./pages/NotificationList.tsx";
+>>>>>>> Stashed changes
 
 const Main = () => {
   return (
@@ -59,6 +67,7 @@ const Main = () => {
 
         {/* USER ROUTES */}
         {/* <Route element={<RequireAuth forAdmin={false} />}> */}
+<<<<<<< Updated upstream
         <Route
           path="/homepage"
           element={<HomePage />}
@@ -79,6 +88,14 @@ const Main = () => {
           path="/driverprofile"
           element={<DriverProfile />}
         />
+=======
+        <Route path="/homepage" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/register-driver" element={<RegisterDriver />} />
+        <Route path="/policies" element={<Policies />} />
+        <Route path="/driverprofile" element={<DriverProfile />} />
+        <Route path="/notificationlist" element={<NotificationList />} />
+>>>>>>> Stashed changes
         {/* </Route> */}
 
         {/* ADMIN ROUTES */}
