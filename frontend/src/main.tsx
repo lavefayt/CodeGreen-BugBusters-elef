@@ -22,7 +22,8 @@ import { AuthProvider } from "./context/AuthContext.tsx";
 import UnauthorizedPage from "./pages/UnauthorizedPage.tsx";
 import HomepageDriver from "./pages/HomepageDriver.tsx";
 import RegistrationList from "./pages/RegistrationList.tsx";
-import AddCar from "./pages/AddCar.tsx";
+import NotificationList from "./pages/NotificationList.tsx";
+import RequireAuth from "./components/RequireAuth.tsx";
 
 const Main = () => {
   return (
@@ -59,28 +60,33 @@ const Main = () => {
         />
 
         {/* USER ROUTES */}
-        {/* <Route element={<RequireAuth forAdmin={false} />}> */}
-        <Route
-          path="/homepage"
-          element={<HomePage />}
-        />
-        <Route
-          path="/about"
-          element={<AboutPage />}
-        />
-        <Route
-          path="/register-driver"
-          element={<RegisterDriver />}
-        />
-        <Route
-          path="/policies"
-          element={<Policies />}
-        />
-        <Route
-          path="/driverprofile"
-          element={<DriverProfile />}
-        />
-        {/* </Route> */}
+        <Route element={<RequireAuth forAdmin={false} />}>
+          <Route
+            path="/homepage"
+            element={<HomePage />}
+          />
+          <Route
+            path="/about"
+            element={<AboutPage />}
+          />
+          <Route
+            path="/register-driver"
+            element={<RegisterDriver />}
+          />
+          <Route
+            path="/policies"
+            element={<Policies />}
+          />
+          <Route
+            path="/driverprofile"
+            element={<DriverProfile />}
+          />
+
+          <Route
+            path="/notificationlist"
+            element={<NotificationList />}
+          />
+        </Route>
 
         {/* ADMIN ROUTES */}
         {/* <Route element={<RequireAuth forAdmin={true} />}> */}
@@ -95,12 +101,6 @@ const Main = () => {
         <Route path="/registration-list" element={<RegistrationList />} />
 
 
-        {/* </Route> */}
-
-        {/* <Route
-          path="/contacts"
-          element={<Contacts />}
-        /> */}
       </Routes>
     </BrowserRouter>
   );

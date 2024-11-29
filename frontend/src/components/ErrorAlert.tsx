@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ErrorInput = () => {
+const ErrorAlert = () => {
   const [isVisible, setIsVisible] = useState(true); 
 
   const handleClose = () => {
@@ -48,4 +48,4 @@ const ErrorInput = () => {
   );
 };
 
-export default ErrorInput;
+export default ErrorAlert;
