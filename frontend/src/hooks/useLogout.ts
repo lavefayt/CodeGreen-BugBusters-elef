@@ -5,12 +5,12 @@ import { AuthContextType } from "../types/user.types";
 import useAuth from "./useAuth";
 
 const useLogout = () => {
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+  // const navigate = useNavigate();
   // const [error, setError] = useState<BackendError>();
-  const { setAuth }: AuthContextType = useAuth();
+  const { setAuth, setAppLoading }: AuthContextType = useAuth();
 
   const logout = async () => {
+    setAppLoading!(true);
     try {
       const response = await fetch(`http://localhost:4444/auth/logout`, {
         method: "GET",
@@ -32,18 +32,15 @@ const useLogout = () => {
         accessToken: undefined,
         isAdmin: undefined,
       });
-      // navigate("/login");
 
-      setLoading(false);
-
-      // put something when successfully logged out
     } catch (err) {
-      setLoading(false);
       alert(err);
+    } finally {
+      setAppLoading!(false);
     }
   };
 
-  return { logout, loading, setLoading };
+  return { logout };
 };
 
 export default useLogout;

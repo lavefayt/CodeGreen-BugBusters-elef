@@ -7,7 +7,7 @@ const AdminHeader = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const { loading, logout, setLoading } = useLogout();
+  const { logout } = useLogout();
 
   const handleHomePage = () => {
     navigate("/admin");
@@ -19,7 +19,6 @@ const AdminHeader = () => {
 
   const handleLogOut = async () => {
     logout();
-    setLoading(false);
   };
 
   useEffect(() => {

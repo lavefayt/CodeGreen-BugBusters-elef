@@ -26,9 +26,19 @@ import NotificationList from "./pages/NotificationList.tsx";
 import RequireAuth from "./components/RequireAuth.tsx";
 import PersistLogin from "./components/PersistLogin.tsx";
 import AddCar from "./pages/AddCar.tsx";
+import useAuth from "./hooks/useAuth.ts";
+import { AuthContextType } from "./types/user.types.ts";
+import { Spinner } from "react-activity";
+import Loading from "./components/Loading.tsx";
 
 const Main = () => {
-  return (
+  const { appLoading }: AuthContextType = useAuth();
+
+  return appLoading ? (
+    <div className="flex justify-center items-center h-screen bg-slate-900">
+      <Loading loading={appLoading} />
+    </div>
+  ) : (
     <BrowserRouter>
       <Routes>
         {/* PUBLIC ROUTES */}
@@ -43,10 +53,7 @@ const Main = () => {
         />
         <Route
           path="/login"
-          element={
-            <LoginPage />
-            // auth?.accessToken ? <Navigate to={location} /> : <LoginPage />
-          }
+          element={<LoginPage />}
         />
         <Route
           path="/signup"
@@ -84,7 +91,10 @@ const Main = () => {
               path="/driverprofile"
               element={<DriverProfile />}
             />
-
+            <Route
+              path="/homepagedriver"
+              element={<HomepageDriver />}
+            />
             <Route
               path="/notificationlist"
               element={<NotificationList />}
@@ -116,10 +126,6 @@ const Main = () => {
             <Route
               path="/violatorslist"
               element={<ViolatorList />}
-            />
-            <Route
-              path="/homepagedriver"
-              element={<HomepageDriver />}
             />
             <Route
               path="/registration-list"

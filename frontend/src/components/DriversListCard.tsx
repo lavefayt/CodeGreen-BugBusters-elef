@@ -6,22 +6,16 @@ interface DriverProps {
   id: string; // Add ID to uniquely identify each driver
   firstname: string;
   lastname: string;
-  email: string;
-  sex: string;
   driver_type: string;
   license_no: string;
-  license_exp: string;
 }
 
 const DriverListCard = ({
   id,
   firstname,
   lastname,
-  email,
-  sex,
   driver_type,
   license_no,
-  license_exp,
 }: DriverProps) => {
   // Track whether the driver is in edit mode
   const [isEditing, setIsEditing] = useState(false);
@@ -94,34 +88,6 @@ const DriverListCard = ({
       <div className="flex-1 text-center p-2">
         {isEditing ? (
           <input
-            type="email"
-            name="email"
-            value={updatedDriver.email}
-            onChange={handleInputChange}
-            className="bg-black p-1 rounded"
-          />
-        ) : (
-          <span className="font-medium">{email}</span>
-        )}
-      </div>
-
-      <div className="flex-1 text-center p-2">
-        {isEditing ? (
-          <input
-            type="text"
-            name="sex"
-            value={updatedDriver.sex}
-            onChange={handleInputChange}
-            className="bg-black p-1 rounded"
-          />
-        ) : (
-          <span className="font-medium">{sex}</span>
-        )}
-      </div>
-
-      <div className="flex-1 text-center p-2">
-        {isEditing ? (
-          <input
             type="text"
             name="driver_type"
             value={updatedDriver.driver_type}
@@ -144,20 +110,6 @@ const DriverListCard = ({
           />
         ) : (
           <span className="font-medium">{license_no}</span>
-        )}
-      </div>
-
-      <div className="flex-1 text-center p-2">
-        {isEditing ? (
-          <input
-            type="text"
-            name="license_exp"
-            value={updatedDriver.license_exp}
-            onChange={handleInputChange}
-            className="bg-gray-100 p-1 rounded"
-          />
-        ) : (
-          <span className="font-medium">{license_exp}</span>
         )}
       </div>
 

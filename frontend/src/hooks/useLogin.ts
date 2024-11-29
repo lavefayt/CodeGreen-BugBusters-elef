@@ -7,15 +7,14 @@ import useAuth from "./useAuth";
 const useLogin = () => {
   // this should have a component catcher on the interface
   const [error, setError] = useState<BackendError>();
-  const [loading, setLoading] = useState(false);
 
-  const { setAuth, auth }: AuthContextType = useAuth();
+  const { setAuth, setAppLoading }: AuthContextType = useAuth();
 
   const navigate = useNavigate();
 
   const submitLogin = async (data: UserLogin) => {
+    setAppLoading!(true);
     console.log(data);
-    setLoading(true);
     console.log(import.meta.env.VITE_BASE_SERVER_URL);
     const response = await fetch(`http://localhost:4444/auth/login`, {
       method: "POST",
@@ -29,27 +28,22 @@ const useLogin = () => {
     if (!response.ok) {
       const backendError: BackendError = await response.json();
       setError(backendError);
-      setLoading(false);
       alert(`${backendError.title}: ${backendError.message}`);
       return;
       // throw new Error(backendError.title || "Unknown Error");
     }
 
     const userInfo = await response.json();
+
     setAuth!(userInfo);
-    console.log(userInfo);
-    console.log(auth);
-
-
 
     // To either navigate to the previous page where they go logged off or the landing page
     const navigateTo = userInfo.isAdmin ? "/admin" : "/homepage";
     navigate(navigateTo);
-
-    setLoading(false);
+    setAppLoading!(false);
   };
 
-  return { loading, setLoading, submitLogin, error };
+  return { submitLogin, error };
 };
 
 export default useLogin;

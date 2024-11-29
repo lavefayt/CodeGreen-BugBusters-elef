@@ -4,6 +4,7 @@ import { AuthContextType } from "../types/user.types";
 import useRefresh from "../hooks/useRefresh";
 import { Spinner } from "react-activity";
 import { Outlet } from "react-router-dom";
+import Loading from "./Loading";
 
 const PersistLogin = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -24,21 +25,7 @@ const PersistLogin = () => {
     !auth?.accessToken ? verifyRefreshToken() : setLoading(false);
   }, []);
 
-  return (
-    <>
-      {loading ? (
-        <div className="flex justify-center items-center h-screen">
-          <Spinner
-            size={50}
-            color="#008000"
-            animating={loading}
-          />
-        </div>
-      ) : (
-        <Outlet />
-      )}
-    </>
-  );
+  return <>{!loading && <Outlet />}</>;
 };
 
 export default PersistLogin;
