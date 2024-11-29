@@ -8,6 +8,10 @@ interface Registration {
   user_id: string;
   license_number: string;
   school_email: string;
+  first_name: string;
+  last_name: string;
+  date_of_birth: string;
+  driver_type: string;
 }
 
 // The asyncHandler function for catching errors in async routes
@@ -22,7 +26,7 @@ router.get("/get", async (_req: Request, res: Response) => {
   try {
     console.log("Fetching registration from the database...");
     const { rows: registrations } = await pool.query(
-      "SELECT user_id, license_number, school_email FROM registrations"
+      "SELECT user_id, license_number, school_email, first_name,last_name, date_of_birth, driver_type FROM registrations"
     );
     console.log("Registrations fetched successfully:", registrations);
 
@@ -38,16 +42,30 @@ router.get("/get", async (_req: Request, res: Response) => {
 router.post("/add", async (req: Request, res: Response) => {
   try {
     // Extract data from the request body
-    const { license_number, school_email } = req.body as Registration;
+    const {
+      license_number,
+      school_email,
+      first_name,
+      last_name,
+      date_of_birth,
+      driver_type,
+    } = req.body as Registration;
 
-    const userId = req.user;
-
+    console.log(req.user);
     await pool.query(
       `
-      INSERT INTO registrations (user_id, license_number, school_email) 
-      VALUES ($1, $2, $3)
+      INSERT INTO registrations (user_id, license_number, school_email, first_name,last_name, date_of_birth, driver_type ) 
+      VALUES ($1, $2, $3,$4,$5,$6,$7)
       `,
-      [userId, license_number, school_email]
+      [
+        req.user,
+        license_number,
+        school_email,
+        first_name,
+        last_name,
+        date_of_birth,
+        driver_type,
+      ]
     );
 
     res.status(201).json({

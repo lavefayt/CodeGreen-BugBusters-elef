@@ -19,15 +19,16 @@ const RegisterDriver = () => {
   return (
     <div className="flex flex-col items-center bg-hoverbutton bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
       <div>
-        <Header/>
+        <Header />
       </div>
 
       {currentStep === 1 && (
         <div className="text-center font-syke-light text-white justify-center items-center">
           <div className="text-textgreen text-3xl text-left font-syke-medium">
             <h1>Registering as Driver</h1>
-            <h1 className="text-sm font-syke-light">Please enter your information</h1>
-
+            <h1 className="text-sm font-syke-light">
+              Please enter your information
+            </h1>
 
             <div className="bg- w-[40rem] h-[25rem] mt-4">
               <form className="space-y-2">
@@ -138,11 +139,12 @@ const RegisterDriver = () => {
                   I verify that the information I have provided above is true.
                 </label>
               </div>
-                <button
-                  onClick={handleConfirmClick}
-                  className="bg-buttongreen hover:bg-colorhover text-xl text-white py-2 px-4 w-[9rem]  mt-[1rem] rounded-sm">
+              <button
+                onClick={handleConfirmClick}
+                className="bg-buttongreen hover:bg-colorhover text-xl text-white py-2 px-4 w-[9rem]  mt-[1rem] rounded-sm"
+              >
                 Confirm
-                </button>
+              </button>
             </div>
           </div>
         </div>

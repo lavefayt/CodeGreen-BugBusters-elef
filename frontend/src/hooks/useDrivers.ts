@@ -49,10 +49,7 @@ const useDrivers = () => {
     setLoading(true);
     try {
       // for fetching with auth
-      const response = await fetchWithAuth(
-        "/driver/get",
-        "get"
-      );
+      const response = await fetchWithAuth("/driver/get", "get");
 
       if (!response.ok) {
         const error: BackendError = await response.json();
