@@ -47,13 +47,13 @@ export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 // Routes
 server.use("/auth", authRoutes);
-server.use("/driver", driverRoutes); // "/driver/get || /driver/add"
+// server.use("/driver", driverRoutes); // "/driver/get || /driver/add"
 server.use("/notif", notifRoutes); 
 server.use("/registration", registrations);
 
 // For Verifying Auth
 server.use(verifyToken);
-// server.use("/driver", driverRoutes); // "/driver/get || /driver/add"
+server.use("/driver", driverRoutes); // "/driver/get || /driver/add"
 
 
 // APIs for Functionality (Must Be Placed Under Verification of Auth)

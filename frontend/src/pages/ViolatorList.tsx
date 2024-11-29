@@ -1,5 +1,4 @@
-
-// const ViolatorList = () => { 
+// const ViolatorList = () => {
 //     return (
 //         <p>Violator List Page!</p>
 //     )
@@ -7,16 +6,16 @@
 
 // export default ViolatorList;
 
-
 import { useNavigate } from "react-router-dom";
 import AdminHeader from "../components/AdminHeader";
-import { ViolatorsTable } from "../types/datatypes";
+// import { ViolatorsTable } from "../types/datatypes";
 import { useEffect, useState } from "react";
 
 const ViolatorList = () => {
   const navigate = useNavigate();
 
-  const [violators, setViolators] = useState<ViolatorsTable[]>([
+  // const [violators, setViolators] = useState<ViolatorsTable[]>([
+  const [violators, setViolators] = useState([
     {
       id: "1",
       first_name: "Love",
@@ -33,17 +32,17 @@ const ViolatorList = () => {
       violation_date: "Ror",
       violation_type: "d",
     },
-  ])
+  ]);
+  
   useEffect(() => {
-
     const getData = async () => {
-      return await fetch("").then(res => res.json())
-    }
+      return await fetch("").then((res) => res.json());
+    };
 
-    getData().then(res => {
-      setViolators(res)
-    })
-  }, [])
+    getData().then((res) => {
+      setViolators(res);
+    });
+  }, []);
 
   // Sample data for violators
 
@@ -66,15 +65,26 @@ const ViolatorList = () => {
             </tr>
           </thead>
           <tbody>
-            {violators.map(({ id, first_name, last_name, paid_status, violation_date, violation_type }) => (
-              <tr key={id} className="border-b hover:bg-zinc-500">
-                <td className="py-3 px-4">{last_name}</td>
-                <td className="py-3 px-4">{first_name}</td>
-                <td className="py-3 px-4">{paid_status}</td>
-                <td className="py-3 px-4">{violation_date}</td>
-                <td className="py-3 px-4">{violation_type}</td>
-              </tr>
-            ))}
+            {violators.map(
+              ({
+                id,
+                first_name,
+                last_name,
+                paid_status,
+                violation_date,
+                violation_type,
+              }) => (
+                <tr
+                  key={id}
+                  className="border-b hover:bg-zinc-500">
+                  <td className="py-3 px-4">{last_name}</td>
+                  <td className="py-3 px-4">{first_name}</td>
+                  <td className="py-3 px-4">{paid_status}</td>
+                  <td className="py-3 px-4">{violation_date}</td>
+                  <td className="py-3 px-4">{violation_type}</td>
+                </tr>
+              )
+            )}
           </tbody>
         </table>
       </div>

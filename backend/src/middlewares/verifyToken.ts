@@ -21,7 +21,7 @@ const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
     ) as JwtPayload;
     // console.log(payload.userId)
     req.user = payload.userId;
-    console.log(req.user);
+    console.log(`UserId: ${req.user}`);
   } catch (error) {
     // console.log(error)
     res
