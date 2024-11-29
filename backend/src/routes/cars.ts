@@ -4,6 +4,57 @@ import { Cars } from "../types/datatypes";
 
 const router = express();
 
+router.post("/add", async (req : Request, res : Response) => {
+    try{
+        const{
+            car_model,
+            license_plate,
+            brand,
+            color,
+            license_number,
+        } : Cars = req.body 
+
+        const {rows: drivers} = await pool.query(
+            `SELECT id
+            FROM drivers
+            WHERE license_number = $1`,
+            [license_number])
+        
+        const driverFound = drivers[0]
+        const driverId = driverFound.id
+
+        const car = await pool.query(
+            `INSERT INTO cars (
+            driver_id,
+            car_model,
+            license_plate,
+            brand,
+            color,
+            license_number)
+            VALUES($1, $2, $3, $4, $5, $6)`,
+
+            [
+                driverId,
+                car_model,
+                license_plate,
+                brand,
+                color,
+                license_number
+            ],
+        );
+        console.log(car.rows)
+        res.status(200).json({
+            title: "Car Added!",
+            message: `Car ${brand} ${car_model} ${color} with a license plate of ${license_plate} has been added!`,
+        });
+
+    } catch (error) {
+        const errorMessage = (error as Error).message;
+        console.error("Error:", errorMessage);
+        res.status(500).json({ title: "Error", message: errorMessage });
+    }
+});
+
 router.get("/get", async (req: Request, res: Response) => { 
     try { 
         console.log("Fetching cars from the database...");
