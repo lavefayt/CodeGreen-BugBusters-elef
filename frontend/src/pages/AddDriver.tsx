@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import AdminHeader from "../components/AdminHeader";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Adding from "../components/Adding";
 import Success from "../components/Success";
 import { Driver } from "../types/datatypes";
 import { useAddDriver } from "../hooks/useAddDriver";
-import ErrorInput from "../components/ErrorAlert";
+import ErrorAlert from "../components/ErrorAlert";
 
 const AddDriver = () => {
   const navigate = useNavigate();
@@ -85,7 +85,7 @@ const AddDriver = () => {
         <AdminHeader />
         {loading && <Adding />}
         {successMessage && <Success />}
-        {alertMessage && <ErrorInput/>}
+        {alertMessage && <ErrorAlert/>}
       </div>
 
       {currentStep === 1 && (
