@@ -7,7 +7,7 @@ import useAuth from "./useAuth";
 const useLogout = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<BackendError>();
+  // const [error, setError] = useState<BackendError>();
   const { setAuth }: AuthContextType = useAuth();
 
   const logout = async () => {
@@ -32,7 +32,7 @@ const useLogout = () => {
         accessToken: undefined,
         isAdmin: undefined,
       });
-      navigate("/login");
+      // navigate("/login");
 
       setLoading(false);
 
@@ -43,7 +43,7 @@ const useLogout = () => {
     }
   };
 
-  return { logout, loading, error, setLoading };
+  return { logout, loading, setLoading };
 };
 
 export default useLogout;

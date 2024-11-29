@@ -1,4 +1,4 @@
-import { StrictMode, useEffect, useState } from "react";
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import "react-activity/dist/Spinner.css";
@@ -24,6 +24,7 @@ import HomepageDriver from "./pages/HomepageDriver.tsx";
 import RegistrationList from "./pages/RegistrationList.tsx";
 import NotificationList from "./pages/NotificationList.tsx";
 import RequireAuth from "./components/RequireAuth.tsx";
+import PersistLogin from "./components/PersistLogin.tsx";
 
 const Main = () => {
   return (
@@ -59,71 +60,72 @@ const Main = () => {
           element={<UnauthorizedPage />}
         />
 
-        {/* USER ROUTES */}
-        <Route element={<RequireAuth forAdmin={false} />}>
-          <Route
-            path="/homepage"
-            element={<HomePage />}
-          />
-          <Route
-            path="/about"
-            element={<AboutPage />}
-          />
-          <Route
-            path="/register-driver"
-            element={<RegisterDriver />}
-          />
-          <Route
-            path="/policies"
-            element={<Policies />}
-          />
-          <Route
-            path="/driverprofile"
-            element={<DriverProfile />}
-          />
+        <Route element={<PersistLogin />}>
+          {/* USER ROUTES */}
+          <Route element={<RequireAuth forAdmin={false} />}>
+            <Route
+              path="/homepage"
+              element={<HomePage />}
+            />
+            <Route
+              path="/about"
+              element={<AboutPage />}
+            />
+            <Route
+              path="/register-driver"
+              element={<RegisterDriver />}
+            />
+            <Route
+              path="/policies"
+              element={<Policies />}
+            />
+            <Route
+              path="/driverprofile"
+              element={<DriverProfile />}
+            />
 
-          <Route
-            path="/notificationlist"
-            element={<NotificationList />}
-          />
+            <Route
+              path="/notificationlist"
+              element={<NotificationList />}
+            />
+          </Route>
+
+          {/* ADMIN ROUTES */}
+          <Route element={<RequireAuth forAdmin={true} />}>
+            <Route
+              path="/admin"
+              element={<AdminLandingPage />}
+            />
+            <Route
+              path="/driverslist"
+              element={<DriversList />}
+            />
+            <Route
+              path="/encode"
+              element={<EncodePage />}
+            />
+            <Route
+              path="/add-driver"
+              element={<AddDriver />}
+            />
+            <Route
+              path="/add-violation"
+              element={<AddViolation />}
+            />
+            <Route
+              path="/violatorslist"
+              element={<ViolatorList />}
+            />
+            <Route
+              path="/homepagedriver"
+              element={<HomepageDriver />}
+            />
+            <Route
+              path="/registration-list"
+              element={<RegistrationList />}
+            />
+          </Route>
         </Route>
-
-        {/* ADMIN ROUTES */}
-        <Route element={<RequireAuth forAdmin={true} />}>
-          <Route
-            path="/admin"
-            element={<AdminLandingPage />}
-          />
-          <Route
-            path="/driverslist"
-            element={<DriversList />}
-          />
-          <Route
-            path="/encode"
-            element={<EncodePage />}
-          />
-          <Route
-            path="/add-driver"
-            element={<AddDriver />}
-          />
-          <Route
-            path="/add-violation"
-            element={<AddViolation />}
-          />
-          <Route
-            path="/violatorslist"
-            element={<ViolatorList />}
-          />
-          <Route
-            path="/homepagedriver"
-            element={<HomepageDriver />}
-          />
-          <Route
-            path="/registration-list"
-            element={<RegistrationList />}
-          />
-        </Route>
-
       </Routes>
     </BrowserRouter>
   );

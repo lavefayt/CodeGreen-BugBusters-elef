@@ -4,7 +4,6 @@ import { useState } from "react";
 import AdminHeader from "../components/AdminHeader";
 import DriverListCard from "../components/DriversListCard";
 import useDrivers from "../hooks/useDrivers";
-import Unauthorized from "./UnauthorizedPage";
 import { Spinner } from "react-activity";
 
 const DriversList = () => {
@@ -15,7 +14,6 @@ const DriversList = () => {
   const handleDriverClick = (driver: any) => {
     setSelectedDriver(driver);
   };
-
 
   if (loading)
     return (
@@ -37,7 +35,7 @@ const DriversList = () => {
       {/* Main Content */}
       {/* drivers info left side */}
       <div className="flex flex-col lg:flex-row items-center justify-center lg:space-x-10 w-full px-5">
-        <div className="bg-zinc-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 w-full lg:w-2/5 p-6 rounded-lg shadow-md mb-5 lg:mb-0">
+        <div className="bg-zinc-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 w-full lg:w-2/5 p-6 rounded-lg shadow-md mb-5 lg:mb-0">
           <h1 className="text-xl text-center text-textgreen font-syke-bold mb-4">
             Drivers info
           </h1>
@@ -77,7 +75,7 @@ const DriversList = () => {
           <h1 className="text-xl text-center text-textgreen font-syke-bold">
             Drivers List
           </h1>
-          
+
           {/* drivers list header */}
           <div className="flex justify-between items-center border-b-2 pb-2 mb-2 border-gray-400 text-white text-sm">
             <div className="flex-1 text-center font-bold">First Name</div>
@@ -101,6 +99,9 @@ const DriversList = () => {
                     lastname={driver.last_name!}
                     driver_type={driver.driver_type!}
                     license_no={driver.license_number!}
+                    email={driver.email!}
+                    sex={driver.sex!}
+                    license_exp={driver.license_expiration_date!}
                   />
                   
                 </div>
@@ -116,9 +117,6 @@ const DriversList = () => {
 };
 
 export default DriversList;
-
-
-
 
 // import { useState } from "react";
 // import { Spinner } from "react-activity";
@@ -214,7 +212,3 @@ export default DriversList;
 // };
 
 // export default DriversList;
-
-
-
-
