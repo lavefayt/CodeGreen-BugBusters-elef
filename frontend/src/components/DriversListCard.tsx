@@ -19,7 +19,6 @@ const DriverListCard = ({
   license_no,
   license_exp,
 }: DriverProps) => {
-  const navigate = useNavigate();
 
   const handleCardClick = () => {
     // navigate(`/detail/${id}`);
