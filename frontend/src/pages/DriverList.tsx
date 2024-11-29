@@ -46,14 +46,22 @@ const DriversList = () => {
           {selectedDriver ? (
             <div>
               <p className="text-white">
+                <strong>Name:</strong> {selectedDriver.first_name} {selectedDriver.last_name}
+              </p>
+              <p className="text-white">
                 <strong>Email:</strong> {selectedDriver.email}
               </p>
               <p className="text-white">
                 <strong>Sex:</strong> {selectedDriver.sex}
               </p>
               <p className="text-white">
-                <strong>License Expiration:</strong>{" "}
-                {selectedDriver.license_expiration_date}
+                <strong>Driver Type:</strong> {selectedDriver.driver_type}
+              </p>
+              <p className="text-white">
+                <strong>License Number:</strong> {selectedDriver.license_number}
+              </p>
+              <p className="text-white">
+                <strong>License Expiration:</strong> {selectedDriver.license_expiration_date}
               </p>
             </div>
           ) : (
@@ -95,6 +103,7 @@ const DriversList = () => {
                     sex={driver.sex!}
                     license_exp={driver.license_expiration_date!}
                   />
+                  
                 </div>
               ))
             ) : (
