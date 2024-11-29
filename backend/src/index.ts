@@ -14,7 +14,7 @@ import driverRoutes from "./routes/driver";
 
 import notifRoutes from "./routes/notif";
 import registrations from "./routes/registration";
-
+import carRoutes from "./routes/cars";
 
 dotenv.config({ path: ".env" });
 
@@ -50,6 +50,7 @@ server.use("/auth", authRoutes);
 // server.use("/driver", driverRoutes); // "/driver/get || /driver/add"
 server.use("/notif", notifRoutes); 
 server.use("/registration", registrations);
+server.use("/car", carRoutes)
 
 // For Verifying Auth
 server.use(verifyToken);
