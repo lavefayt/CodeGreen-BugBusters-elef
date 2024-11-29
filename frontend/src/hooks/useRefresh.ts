@@ -27,7 +27,11 @@ const useRefresh = () => {
 
     const foundUser = await response.json();
     setAuth!((prev) => {
-      return { ...prev, accessToken: foundUser.accessToken };
+      return {
+        ...prev,
+        accessToken: foundUser.accessToken,
+        isAdmin: foundUser.isAdmin,
+      };
     });
 
     return foundUser.accessToken;
