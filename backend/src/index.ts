@@ -68,7 +68,7 @@ server.get("/testing", async (req: Request, res: Response) => {
 });
 
 // For PORT
-const PORT = 4445;
+const PORT = 4444;
 
 server.listen(PORT, () => {
   console.log(
