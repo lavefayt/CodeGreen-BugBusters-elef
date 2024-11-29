@@ -13,6 +13,7 @@ const DriversList = () => {
   // Handle driver click to show more details
   const handleDriverClick = (driver: any) => {
     setSelectedDriver(driver);
+    console.log(driver.id)
   };
 
   if (loading)
@@ -94,7 +95,8 @@ const DriversList = () => {
                   onClick={() => handleDriverClick(driver)} // Show more details on click
                 >
                   <DriverListCard
-                    key={driver.license_number}
+                    key={driver.id}
+                    id = {driver.id!}
                     firstname={driver.first_name!}
                     lastname={driver.last_name!}
                     driver_type={driver.driver_type!}
