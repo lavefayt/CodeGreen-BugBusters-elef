@@ -1,14 +1,23 @@
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import AdminHeader from "../components/AdminHeader";
 import DriverListCard from "../components/DriversListCard";
 import useDrivers from "../hooks/useDrivers";
+import Unauthorized from "./UnauthorizedPage";
+import { Spinner } from "react-activity";
 
 const DriversList = () => {
-  const navigate = useNavigate();
-  const { data: Drivers, loading, error } = useDrivers();
+  const { data: Drivers, loading } = useDrivers();
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Spinner
+          size={50}
+          color="#008000"
+          animating={loading}
+        />
+      </div>
+    );
 
   return (
     <div className="flex flex-col items-center bg-login-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">

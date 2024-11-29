@@ -1,6 +1,7 @@
 import { StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import "react-activity/dist/Spinner.css";
 
 import LoginPage from "./pages/LoginPage.tsx";
 import HomePage from "./pages/HomePage.tsx";
@@ -18,33 +19,25 @@ import AddDriver from "./pages/AddDriver.tsx";
 import AddViolation from "./pages/AddViolation.tsx";
 import Forgot from "./pages/Forgot.tsx";
 import { AuthProvider } from "./context/AuthContext.tsx";
-import RequireAuth from "./components/RequireAuth.tsx";
 import UnauthorizedPage from "./pages/UnauthorizedPage.tsx";
-import useAuth from "./hooks/useAuth.ts";
 import HomepageDriver from "./pages/HomepageDriver.tsx";
-import { AuthContextType } from "./types/user.types.ts";
-import useRefresh from "./hooks/useRefresh.ts";
-import useInterceptor from "./hooks/useInterceptor.ts";
 import RegistrationList from "./pages/RegistrationList.tsx";
 import AddCar from "./pages/AddCar.tsx";
 
 const Main = () => {
-  const { auth }: AuthContextType = useAuth();
-  const { loading, error } = useRefresh();
-
-  // useInterceptor();
-
-  useEffect(() => {
-    console.log(auth);
-    console.log(location.pathname);
-    if (error) console.log(error);
-  }, []);
-
   return (
     <BrowserRouter>
       <Routes>
         {/* PUBLIC ROUTES */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route
+          path="/"
+          element={
+            <Navigate
+              to="/login"
+              replace
+            />
+          }
+        />
         <Route
           path="/login"
           element={
@@ -52,17 +45,41 @@ const Main = () => {
             // auth?.accessToken ? <Navigate to={location} /> : <LoginPage />
           }
         />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/forgot" element={<Forgot />} />
-        <Route path="/unauthorized" element={<UnauthorizedPage />} />
+        <Route
+          path="/signup"
+          element={<SignUp />}
+        />
+        <Route
+          path="/forgot"
+          element={<Forgot />}
+        />
+        <Route
+          path="/unauthorized"
+          element={<UnauthorizedPage />}
+        />
 
         {/* USER ROUTES */}
         {/* <Route element={<RequireAuth forAdmin={false} />}> */}
-        <Route path="/homepage" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/register-driver" element={<RegisterDriver />} />
-        <Route path="/policies" element={<Policies />} />
-        <Route path="/driverprofile" element={<DriverProfile />} />
+        <Route
+          path="/homepage"
+          element={<HomePage />}
+        />
+        <Route
+          path="/about"
+          element={<AboutPage />}
+        />
+        <Route
+          path="/register-driver"
+          element={<RegisterDriver />}
+        />
+        <Route
+          path="/policies"
+          element={<Policies />}
+        />
+        <Route
+          path="/driverprofile"
+          element={<DriverProfile />}
+        />
         {/* </Route> */}
 
         {/* ADMIN ROUTES */}
