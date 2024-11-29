@@ -1,21 +1,15 @@
 interface DriverProps {
   firstname: string;
   lastname: string;
-  email: string;
-  sex: string;
   driver_type: string;
   license_no: string;
-  license_exp: string;
 }
 
 const DriverListCard = ({
   firstname,
   lastname,
-  email,
-  sex,
   driver_type,
   license_no,
-  license_exp,
 }: DriverProps) => {
   const handleCardClick = () => {
     // navigate(`/detail/${id}`);
@@ -32,20 +26,12 @@ const DriverListCard = ({
       <div className="flex-1 text-center p-2">
         <span className="font-medium">{lastname}</span>
       </div>
-      <div className="flex-1 text-center p-2">
-        <span className="font-medium">{email}</span>
-      </div>
-      <div className="flex-1 text-center p-2">
-        <span className="font-medium">{sex}</span>
-      </div>
+      
       <div className="flex-1 text-center p-2">
         <span className="font-medium">{driver_type}</span>
       </div>
       <div className="flex-1 text-center p-2">
         <span className="font-medium">{license_no}</span>
-      </div>
-      <div className="flex-1 text-center p-2">
-        <span className="font-medium">{license_exp}</span>
       </div>
       {/* Buttons */}
       <div className="flex space-x-2 ml-4">
