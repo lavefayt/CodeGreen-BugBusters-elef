@@ -1,4 +1,7 @@
 import AdminHeader from "../components/AdminHeader";
+import RegistrationDetailsComp from "../components/RegistrationListCard";
+import useGetRegistration from "../hooks/useGetRegistration";
+
 
 const RegistrationList = () => {
   return (
@@ -6,19 +9,28 @@ const RegistrationList = () => {
       <div>
         <AdminHeader />
       </div>
-      <div className="w-[50rem] h-[30rem] bg-gray-400 rounded-md  backdrop-filter bg-clip-padding backdrop-blur-sm bg-opacity-10 border-hoverbutton">
-        <div className="text-left py-2 px-6 rounded-xl bg-clip-padding">
-          <div className="text-left font-syke-light text-white">
-            <div className="text-textgreen py-3">
-              <h1 className="text-4xl font-syke-bold">Registration List</h1>
-              <div>Approve or Reject User's Registration.</div>
+      <div className="flex flex-row justify-between w-[70rem] h-[30rem] bg-gray-400 rounded-md backdrop-filter bg-clip-padding backdrop-blur-sm bg-opacity-10 border-hoverbutton">
+        <div className="w-[50%]">
+          <RegistrationDetailsComp />
+        </div>
+
+        <div className="w-[50%] h-full p-6 rounded-r-md">
+          <div className="text-left rounded-xl bg-clip-padding">
+            <div className="text-left font-syke-light text-white">
+              <div className="text-textgreen py-3">
+                <h1 className="text-4xl font-syke-bold">Registration List</h1>
+                <div>Approve or Reject User's Registration.</div>
+              </div>
             </div>
-            <div className="w-full h-[23rem] overflow-y-auto rounded-md scrollbar" alt="listcontainer">
+            <div
+              className="w-full h-[23rem] overflow-y-auto rounded-md scrollbar"
+              alt="listcontainer"
+            >
               <ul className="border-b-2 border-t-2 border-t-transparent border-b-inputfield space-y-[10px]">
-                <div className="ml-2 space-y-3 p-3">
+                <div className="space-y-3">
                   <div className="flex justify-between items-center">
                     <div className="flex-1 min-w-[50%]">
-                      <h1 className="text-white font-syke-light text-l">
+                      <h1 className="text-white font-syke-light text-md">
                         Name
                       </h1>
                       <h1 className="text-textgreen font-syke-medium text-xl">
@@ -30,142 +42,7 @@ const RegistrationList = () => {
                         Date Registered
                       </h1>
                       <h1 className="text-textgreen font-syke-medium text-xl">
-                        November 24, 2024
-                      </h1>
-                    </div>
-                    <div className="flex-none">
-                      <button className="flex items-center justify-center bg-buttongreen w-[5rem] font-syke-medium px-2 py-1 rounded-md text-[1rem]">
-                        View Details
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </ul>
-              <ul className="border-b-2 border-t-2 border-t-transparent border-b-inputfield space-y-[10px]">
-                <div className="ml-2 space-y-3 p-3">
-                  <div className="flex justify-between items-center">
-                    <div className="flex-1 min-w-[50%]">
-                      <h1 className="text-white font-syke-light text-l">
-                        Name
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-xl">
-                        ALCORIN, JOHN ROFER MAMAMO
-                      </h1>
-                    </div>
-                    <div className="flex-1 text-left">
-                      <h1 className="text-white font-syke-light text-l">
-                        Date Registered
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-xl">
-                        July 19, 2024
-                      </h1>
-                    </div>
-                    <div className="flex-none">
-                      <button className="flex items-center justify-center bg-buttongreen w-[5rem] font-syke-medium px-2 py-1 rounded-md text-[1rem]">
-                        View Details
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </ul>
-              <ul className="border-b-2 border-t-2 border-t-transparent border-b-inputfield space-y-[10px]">
-                <div className="ml-2 space-y-3 p-3">
-                  <div className="flex justify-between items-center">
-                    <div className="flex-1 min-w-[50%]">
-                      <h1 className="text-white font-syke-light text-l">
-                        Name
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-xl">
-                        SIAOTONG, PATRICK JANE PAPAMO
-                      </h1>
-                    </div>
-                    <div className="flex-1 text-left">
-                      <h1 className="text-white font-syke-light text-l">
-                        Date Registered
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-xl">
-                        February 20, 2023
-                      </h1>
-                    </div>
-                    <div className="flex-none">
-                      <button className="flex items-center justify-center bg-buttongreen w-[5rem] font-syke-medium px-2 py-1 rounded-md text-[1rem]">
-                        View Details
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </ul>
-              <ul className="border-b-2 border-t-2 border-t-transparent border-b-inputfield space-y-[10px]">
-                <div className="ml-2 space-y-3 p-3">
-                  <div className="flex justify-between items-center">
-                    <div className="flex-1 min-w-[50%]">
-                      <h1 className="text-white font-syke-light text-l">
-                        Name
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-xl">
-                        ALCORIN, JOHN ROFER MAMAMO
-                      </h1>
-                    </div>
-                    <div className="flex-1 text-left">
-                      <h1 className="text-white font-syke-light text-l">
-                        Date Registered
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-xl">
-                        July 19, 2024
-                      </h1>
-                    </div>
-                    <div className="flex-none">
-                      <button className="flex items-center justify-center bg-buttongreen w-[5rem] font-syke-medium px-2 py-1 rounded-md text-[1rem]">
-                        View Details
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </ul>
-              <ul className="border-b-2 border-t-2 border-t-transparent border-b-inputfield space-y-[10px]">
-                <div className="ml-2 space-y-3 p-3">
-                  <div className="flex justify-between items-center">
-                    <div className="flex-1 min-w-[50%]">
-                      <h1 className="text-white font-syke-light text-l">
-                        Name
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-xl">
-                        ALCORIN, JOHN ROFER MAMAMO
-                      </h1>
-                    </div>
-                    <div className="flex-1 text-left">
-                      <h1 className="text-white font-syke-light text-l">
-                        Date Registered
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-xl">
-                        July 19, 2024
-                      </h1>
-                    </div>
-                    <div className="flex-none">
-                      <button className="flex items-center justify-center bg-buttongreen w-[5rem] font-syke-medium px-2 py-1 rounded-md text-[1rem]">
-                        View Details
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </ul>
-              <ul className="border-b-2 border-t-2 border-t-transparent border-b-inputfield space-y-[10px]">
-                <div className="ml-2 space-y-3 p-3">
-                  <div className="flex justify-between items-center">
-                    <div className="flex-1 min-w-[50%]">
-                      <h1 className="text-white font-syke-light text-l">
-                        Name
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-xl">
-                        ALCORIN, JOHN ROFER MAMAMO
-                      </h1>
-                    </div>
-                    <div className="flex-1 text-left">
-                      <h1 className="text-white font-syke-light text-l">
-                        Date Registered
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-xl">
-                        July 19, 2024
+                        11/24/2024
                       </h1>
                     </div>
                     <div className="flex-none">

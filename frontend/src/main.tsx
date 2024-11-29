@@ -26,6 +26,7 @@ import { AuthContextType } from "./types/user.types.ts";
 import useRefresh from "./hooks/useRefresh.ts";
 import useInterceptor from "./hooks/useInterceptor.ts";
 import RegistrationList from "./pages/RegistrationList.tsx";
+import AddCar from "./pages/AddCar.tsx";
 
 const Main = () => {
   const { auth }: AuthContextType = useAuth();
@@ -70,6 +71,7 @@ const Main = () => {
         <Route path="/driverslist" element={<DriversList />} />
         <Route path="/encode" element={<EncodePage />} />
         <Route path="/add-driver" element={<AddDriver />} />
+        <Route path="/add-car" element={<AddCar />} />
         <Route path="/add-violation" element={<AddViolation />} />
         <Route path="/violatorslist" element={<ViolatorList />} />
         <Route path="/homepagedriver" element={<HomepageDriver />} />

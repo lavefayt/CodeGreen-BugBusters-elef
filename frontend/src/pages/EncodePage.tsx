@@ -13,6 +13,10 @@ const EncodePage = () => {
     const handleAddViolationButton = () => { 
         navigate('/add-violation')
     }
+    
+    const handleAddCar = () => {
+        navigate('/add-car')
+    }
 
 
     return (
@@ -40,6 +44,15 @@ const EncodePage = () => {
                 Add Violation
                 </span>
             </div>
+            <div 
+                className="flex items-center justify-center w-72 h-40 rounded-lg border-2cursor-pointer border-white hover:border-textgreen hover:border-4 transition-all bg-secondgrey text-buttongreen hover:text-textgreen"
+                onClick={ handleAddCar }>
+                <span className="font-syke-medium text-white text-3xl">
+                Add Car
+                </span>
+            </div>
+
+            {/* license number, name of the owner */}
             
         </div>
 
