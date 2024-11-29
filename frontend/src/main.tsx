@@ -25,6 +25,7 @@ import RegistrationList from "./pages/RegistrationList.tsx";
 import NotificationList from "./pages/NotificationList.tsx";
 import RequireAuth from "./components/RequireAuth.tsx";
 import PersistLogin from "./components/PersistLogin.tsx";
+import AddCar from "./pages/AddCar.tsx";
 
 const Main = () => {
   return (
@@ -123,6 +124,10 @@ const Main = () => {
             <Route
               path="/registration-list"
               element={<RegistrationList />}
+            />
+            <Route
+              path="/add-car"
+              element={<AddCar />}
             />
           </Route>
         </Route>
