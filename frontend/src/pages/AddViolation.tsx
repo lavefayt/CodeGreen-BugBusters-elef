@@ -19,21 +19,21 @@ const AddViolation = () => {
     setCurrentStep(currentStep - 1);
   };
   return (
-    <div className="flex flex-col items-center bg-adminlanding-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
+    <div className="flex flex-col items-center overflow-y-hidden bg-adminlanding-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
       <div>
         <AdminHeader />
       </div>
 
       {currentStep === 1 && (
         <div>
-          <div className = "h-full w-full p-10 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+          <div className = "h-[auto w-[auto] px-6 py-5 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
             <div className="text-left font-syke-light text-white justify-center items-center">
               <div className="text-textgreen">
                 <h1 className="text-4xl font-syke-bold">Adding a Violation</h1>
                 <div>Find the driver by searching.</div>
               </div>
 
-              <div className="w-[30rem] mt-[1rem]">
+              <div className="w-[32rem] mt-[1rem]">
                 <form className="space-y-5">
                   <div className="flex space-x-4">
                     <div className="flex-1">
@@ -57,7 +57,7 @@ const AddViolation = () => {
                       </h1>
                       <input
                         type="text"
-                        className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
+                        className="bg-secondgrey border-b	font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                         name="first_name"
                         placeholder="Enter first name"
                         required
@@ -86,14 +86,14 @@ const AddViolation = () => {
       )}
 
       {currentStep === 2 && (
-        <div>
-        <div className="text-left font-syke-light text-white justify-center items-center">
-          <div className="text-textgreen">
+          <div className = "h-[auto] w-[auto] px-6 py-5 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+            <div className="text-left font-syke-light text-white justify-center items-center">
+            <div className="text-textgreen">
             <h1 className="text-4xl font-syke-bold">Adding a Violation</h1>
             <div>Driver found.</div>
-          </div>
+            </div>
 
-          <div className="bg- w-[40rem] h-[auto] mt-4">
+            <div className="bg- w-[40rem] h-[auto] mt-4">
             <form className="space-y-[2rem]">
               <div className="flex space-x-4">
                 <div className="flex-[1]">
@@ -159,13 +159,13 @@ const AddViolation = () => {
                 </div>
               </div>
             </form>
+            </div>
           </div>
-        </div>
       </div>
       )}
 
       {currentStep === 1 && (
-        <div className="text-center flex justify-center gap-40 p-10">
+        <div className="text-center flex justify-center gap-5 p-5">
           <div>
             <button
               type="button"
@@ -189,7 +189,7 @@ const AddViolation = () => {
       )}
 
       {currentStep === 2 && (
-        <div className="flex justify-center gap-40 p-10">
+        <div className="flex justify-center gap-5 p-5">
           <div>
             <button
               type="button"

@@ -6,8 +6,8 @@ const DriverViolationComponent = () => {
 
   return (
     <div className="max-w-full max-h-full justify-center">
-      <div className="w-[35rem] h-[20rem] bg-hoverbutton overflow-y-auto rounded-md scrollbar">
-        <ul className="border-b-2 border-t-2 border-t-transparent  border-b-inputfield space-y-[10px]">
+      <div className="w-[35rem] h-[20rem] bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 overflow-y-auto rounded-md scrollbar">
+        <ul className="border-b-2 border-t-2 border-t-transparent border-b-inputfield space-y-[10px]">
           <div className="ml-2 space-y-3 p-3">
             <div className="flex space-x-4 ">
               <div className="flex-1">
@@ -27,7 +27,7 @@ const DriverViolationComponent = () => {
             </div>
             <div className="flex space-x-4 ">
               <div className="flex-1">
-                <h1 className="text-white font-syke-thin text-m">Description</h1>
+                <h1 className="text-white font-syke">Description</h1>
                 <h1 className="text-textgreen font-syke text-l w-[15rem]">
                 Operating with expired vehicle registration inside the campus.
                 </h1>
@@ -63,8 +63,8 @@ const DriverViolationComponent = () => {
             </div>
             <div className="flex space-x-4 ">
               <div className="flex-1">
-                <h1 className="text-white font-syke-thin text-m">Description</h1>
-                <h1 className="text-textgreen font-syke text-l w-[15rem]">
+              <h1 className="text-white font-syke">Description</h1>
+              <h1 className="text-textgreen font-syke text-l w-[15rem]">
                 Operating with expired vehicle registration inside the campus.
                 </h1>
               </div>
@@ -99,8 +99,8 @@ const DriverViolationComponent = () => {
             </div>
             <div className="flex space-x-4 ">
               <div className="flex-1">
-                <h1 className="text-white font-syke-thin text-m">Description</h1>
-                <h1 className="text-textgreen font-syke text-l w-[15rem]">
+              <h1 className="text-white font-syke">Description</h1>
+              <h1 className="text-textgreen font-syke text-l w-[15rem]">
                 Operating with expired vehicle registration inside the campus.
                 </h1>
               </div>
