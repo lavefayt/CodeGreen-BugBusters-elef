@@ -74,7 +74,7 @@ const DriversList = () => {
             {Drivers && Drivers.length > 0 ? (
               Drivers.map((driver) => (
                 <div
-                  key={driver.license_number}
+                  key={driver.id}
                   className="cursor-pointer hover:bg-gray-700"
                   onClick={() => handleDriverClick(driver)} // Show more details on click
                 >

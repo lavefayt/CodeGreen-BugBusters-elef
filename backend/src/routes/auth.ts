@@ -34,18 +34,12 @@ router.post("/signup", validateAuth, async (req: Request, res: Response) => {
       });
       return;
     }
-    console.log(first_name);
-    console.log(last_name);
-    console.log(email);
-    console.log(password);
-    console.log(confirm_password);
     const salt = (await bcrypt.genSalt(11)) as string;
     const hashedPassword = await bcrypt.hash(password!, salt);
     const user = await pool.query(
       "INSERT INTO users (first_name, last_name, email, password, salt) VALUES ($1, $2, $3, $4, $5)",
       [first_name, last_name, email, hashedPassword, salt]
     );
-    console.log(user.rows);
     res.status(200).json({
       title: "Account Created Successfully",
       message: `Welcome to CodeGreen ${first_name} ${last_name}`,

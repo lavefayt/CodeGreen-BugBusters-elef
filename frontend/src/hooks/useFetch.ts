@@ -1,6 +1,6 @@
 import useRefresh from "./useRefresh";
 import { BackendError } from "../types/error.types";
-import useAuth from "./useAuth";
+import useAuth from "./context-hooks/useAuth";
 import { AuthContextType } from "../types/user.types";
 import { useNavigate } from "react-router-dom";
 

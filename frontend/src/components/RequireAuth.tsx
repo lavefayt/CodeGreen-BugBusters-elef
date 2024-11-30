@@ -1,14 +1,13 @@
 import React from "react";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../hooks/context-hooks/useAuth";
 import { AuthContextType } from "../types/user.types";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 const RequireAuth = ({ forAdmin }: { forAdmin: boolean }) => {
   const { auth }: AuthContextType = useAuth();
   const location = useLocation();
-  console.log(forAdmin)
-  console.log(auth?.isAdmin)
-
+  console.log(forAdmin);
+  console.log(auth?.isAdmin);
 
   return auth?.isAdmin && forAdmin ? (
     <Outlet />

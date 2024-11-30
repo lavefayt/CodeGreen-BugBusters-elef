@@ -11,8 +11,6 @@ export interface User {
 export interface AuthContextType {
   auth?: User | undefined;
   setAuth?: React.Dispatch<React.SetStateAction<{}>> | undefined;
-  appLoading?: boolean;
-  setAppLoading?: React.Dispatch<React.SetStateAction<boolean | undefined>>;
 }
 
 export interface UserSignUp {
