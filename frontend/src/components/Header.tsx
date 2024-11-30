@@ -1,18 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BackendError } from "../types/error.types";
+import useLogout from "../hooks/useLogout";
 
 const Header = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { logout } = useLogout();
 
   const handleHomePage = () => {
     navigate("/homepage");
-  };
-
-  const handleDriverHomepage = () => {
-    navigate("/homepagedriver");
   };
 
   const handleProfile = () => {
@@ -23,28 +21,7 @@ const Header = () => {
   };
 
   const handleLogOut = async () => {
-    try {
-      const response = await fetch(`http://localhost:4444/auth/logout`, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-        },
-        credentials: "include",
-      });
-
-      if (!response.ok) {
-        const backendError: BackendError = await response.json();
-        throw new Error(`${backendError.title}: ${backendError.message}`);
-      }
-      navigate("/login");
-
-      const notification = await response.json();
-
-      console.log(notification.title + ": " + notification.message);
-      // put something when successfully logged out
-    } catch (error) {
-      alert(error);
-    }
+    logout();
   };
 
   useEffect(() => {

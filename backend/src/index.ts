@@ -11,6 +11,7 @@ import cookieParser from "cookie-parser";
 import allowedOrigins from "./config/allowedOrigins";
 import { credentials } from "./middlewares/credentials";
 import driverRoutes from "./routes/driver";
+import user from "./routes/user";
 
 import notifRoutes from "./routes/notif";
 import registrations from "./routes/registration";
@@ -58,14 +59,10 @@ server.use(verifyToken);
 server.use("/driver", driverRoutes); // "/driver/get || /driver/add"
 
 // APIs for Functionality (Must Be Placed Under Verification of Auth)
-server.get("/testing", async (req: Request, res: Response) => {
-  try {
-    res.status(200).json({ title: "Testing Complete", message: "WOWZIES" });
-    // console.log(req.headers["authorization"]);
-  } catch (error) {
-    res.sendStatus(500);
-  }
-});
+server.use(verifyToken);
+server.use("/driver", driverRoutes); // "/driver/get || /driver/add"
+server.use("/registration", registrations);
+server.use("/user", user);
 
 // For PORT
 const PORT = 4444;

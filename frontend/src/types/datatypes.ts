@@ -44,3 +44,9 @@ export interface Registration {
   license_number: string;
   school_email: string;
 }
+
+export interface User {
+  id: string;
+  first_name: string;
+  last_name: string;
+}

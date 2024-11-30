@@ -5,6 +5,7 @@ import AdminHeader from "../components/AdminHeader";
 import DriverListCard from "../components/DriversListCard";
 import useDrivers from "../hooks/useDrivers";
 import { Spinner } from "react-activity";
+import Loading from "../components/Loading";
 
 const DriversList = () => {
   const { data: Drivers, loading } = useDrivers();
@@ -13,18 +14,10 @@ const DriversList = () => {
   // Handle driver click to show more details
   const handleDriverClick = (driver: any) => {
     setSelectedDriver(driver);
+    console.log(driver.id)
   };
 
-  if (loading)
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <Spinner
-          size={50}
-          color="#008000"
-          animating={loading}
-        />
-      </div>
-    );
+  if (loading) return <Loading loading={loading} />;
 
   return (
     <div className="flex flex-col items-center bg-login-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
@@ -46,22 +39,14 @@ const DriversList = () => {
           {selectedDriver ? (
             <div>
               <p className="text-white">
-                <strong>Name:</strong> {selectedDriver.first_name} {selectedDriver.last_name}
-              </p>
-              <p className="text-white">
                 <strong>Email:</strong> {selectedDriver.email}
               </p>
               <p className="text-white">
                 <strong>Sex:</strong> {selectedDriver.sex}
               </p>
               <p className="text-white">
-                <strong>Driver Type:</strong> {selectedDriver.driver_type}
-              </p>
-              <p className="text-white">
-                <strong>License Number:</strong> {selectedDriver.license_number}
-              </p>
-              <p className="text-white">
-                <strong>License Expiration:</strong> {selectedDriver.license_expiration_date}
+                <strong>License Expiration:</strong>{" "}
+                {selectedDriver.license_expiration_date}
               </p>
             </div>
           ) : (
@@ -94,16 +79,13 @@ const DriversList = () => {
                   onClick={() => handleDriverClick(driver)} // Show more details on click
                 >
                   <DriverListCard
-                    key={driver.license_number}
+                    key={driver.id}
+                    id = {driver.id!}
                     firstname={driver.first_name!}
                     lastname={driver.last_name!}
                     driver_type={driver.driver_type!}
                     license_no={driver.license_number!}
-                    email={driver.email!}
-                    sex={driver.sex!}
-                    license_exp={driver.license_expiration_date!}
                   />
-                  
                 </div>
               ))
             ) : (

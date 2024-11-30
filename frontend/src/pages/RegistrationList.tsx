@@ -26,10 +26,10 @@ const RegistrationList = () => {
               className="w-full h-[23rem] overflow-y-auto rounded-md scrollbar"
               alt="listcontainer"
             >
-              <ul className="border-b-2 border-t-2 border-t-transparent border-b-inputfield space-y-[10px]">
-                <div className="space-y-3">
+              <ul className="border-b-2 border-t-2 border-t-transparent border-b-inputfield space-y-[20px]" oncli>
+                <div className="space-y-[2]">
                   <div className="flex justify-between items-center">
-                    <div className="flex-1 min-w-[50%]">
+                    <div className="flex-1 min-w-[60%]">
                       <h1 className="text-white font-syke-light text-md">
                         Name
                       </h1>
@@ -45,11 +45,7 @@ const RegistrationList = () => {
                         11/24/2024
                       </h1>
                     </div>
-                    <div className="flex-none">
-                      <button className="flex items-center justify-center bg-buttongreen w-[5rem] font-syke-medium px-2 py-1 rounded-md text-[1rem]">
-                        View Details
-                      </button>
-                    </div>
+                    
                   </div>
                 </div>
               </ul>
