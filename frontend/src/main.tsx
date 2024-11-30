@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import "react-activity/dist/Spinner.css";
+import "react-toastify/dist/ReactToastify.css";
 
 import LoginPage from "./pages/LoginPage.tsx";
 import HomePage from "./pages/HomePage.tsx";
@@ -26,13 +27,14 @@ import NotificationList from "./pages/NotificationList.tsx";
 import RequireAuth from "./components/RequireAuth.tsx";
 import PersistLogin from "./components/PersistLogin.tsx";
 import AddCar from "./pages/AddCar.tsx";
-import useAuth from "./hooks/useAuth.ts";
-import { AuthContextType } from "./types/user.types.ts";
-import { Spinner } from "react-activity";
 import Loading from "./components/Loading.tsx";
+import { LoadingContextType } from "./types/loading.types.ts";
+import useLoading from "./hooks/context-hooks/useLoading.ts";
+import { LoadingProvider } from "./context/LoadingContext.tsx";
+import { Slide, ToastContainer } from "react-toastify";
 
 const Main = () => {
-  const { appLoading }: AuthContextType = useAuth();
+  const { appLoading }: LoadingContextType = useLoading();
 
   return appLoading ? (
     <div className="flex justify-center items-center h-screen bg-slate-900">
@@ -147,8 +149,24 @@ if (rootElement) {
   const root = createRoot(rootElement);
   root.render(
     <StrictMode>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Slide}
+        toastClassName={`text-xs`}
+      />
       <AuthProvider>
-        <Main />
+        <LoadingProvider>
+          <Main />
+        </LoadingProvider>
       </AuthProvider>
     </StrictMode>
   );

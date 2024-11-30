@@ -27,8 +27,7 @@ const SignUp = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const notification = await submitSignUp(signUpForm);
-    console.log(notification);
+    await submitSignUp(signUpForm);
   };
 
   const handleLogInButton = () => {
@@ -129,7 +128,7 @@ const SignUp = () => {
               className="flex justify-center items-center w-1/2 bg-buttongreen font-syke-regular text-white py-2 hover:bg-[#33471a] transition-colors rounded-sm">
               {loading ? (
                 <Spinner
-                  size={10}
+                  size={15}
                   color="#fff"
                   animating={loading}
                 />

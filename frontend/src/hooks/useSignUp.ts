@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { UserSignUp } from "../types/user.types";
 import useFetch from "./useFetch";
 import { BackendError } from "../types/error.types";
+import { toast } from "react-toastify";
 
 const useSignUp = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -15,11 +16,12 @@ const useSignUp = () => {
       if (!response.ok) {
         const backendError: BackendError = await response.json();
         console.log(backendError);
-        return `ERROR:\n${backendError.title} ${backendError.message}`;
+        toast.error(`${backendError.message}`);
+        return;
       }
 
-      const successNotification = await response.json();
-      return `SUCCESSFUL:\n${successNotification.title} ${successNotification.message}`;
+      const notification = await response.json();
+      toast.success(`${notification.message}!`);
     } catch (error) {
       alert(error);
     } finally {

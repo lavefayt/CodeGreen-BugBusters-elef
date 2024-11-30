@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
-import useAuth from "../hooks/useAuth";
+import { useEffect, useState } from "react";
+import useAuth from "../hooks/context-hooks/useAuth";
 import { AuthContextType } from "../types/user.types";
 import useRefresh from "../hooks/useRefresh";
-import { Spinner } from "react-activity";
 import { Outlet } from "react-router-dom";
-import Loading from "./Loading";
 
 const PersistLogin = () => {
   const [loading, setLoading] = useState<boolean>(true);
