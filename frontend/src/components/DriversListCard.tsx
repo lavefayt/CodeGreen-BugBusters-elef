@@ -24,11 +24,8 @@ const DriverListCard = ({
   const [updatedDriver, setUpdatedDriver] = useState({
     firstname,
     lastname,
-    email,
-    sex,
     driver_type,
     license_no,
-    license_exp,
   });
 
   // Hooks for update and delete
