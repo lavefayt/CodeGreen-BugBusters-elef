@@ -15,6 +15,7 @@ import driverRoutes from "./routes/driver";
 import notifRoutes from "./routes/notif";
 import registrations from "./routes/registration";
 import carRoutes from "./routes/cars";
+import violations from "./routes/violation";
 
 dotenv.config({ path: ".env" });
 
@@ -48,14 +49,13 @@ export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 // Routes
 server.use("/auth", authRoutes);
 // server.use("/driver", driverRoutes); // "/driver/get || /driver/add"
-server.use("/notif", notifRoutes); 
+server.use("/notif", notifRoutes);
 server.use("/registration", registrations);
-server.use("/car", carRoutes)
-
+server.use("/car", carRoutes);
+server.use("/violation", violations);
 // For Verifying Auth
 server.use(verifyToken);
 server.use("/driver", driverRoutes); // "/driver/get || /driver/add"
-
 
 // APIs for Functionality (Must Be Placed Under Verification of Auth)
 server.get("/testing", async (req: Request, res: Response) => {
