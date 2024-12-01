@@ -29,8 +29,8 @@ const DriversList = () => {
       {/* drivers info left side */}
       <div className="flex flex-col lg:flex-row items-center justify-center lg:space-x-10 w-full px-5">
         <div className="bg-zinc-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 w-full lg:w-2/5 p-6 rounded-lg shadow-md mb-5 lg:mb-0">
-          <h1 className="text-xl text-center text-textgreen font-syke-bold mb-4">
-            Drivers info
+          <h1 className="text-2xl text-center text-textgreen font-syke-bold mb-4">
+            - - - Drivers info - - -
           </h1>
           {/* <p className="text-white">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
@@ -38,16 +38,52 @@ const DriversList = () => {
           </p> */}
           {selectedDriver ? (
             <div>
+              
+              <h1 className="text-xl text-center text-textgreen font-syke-bold mb-2">
+                  Personal Details : 
+              </h1>
+
               <p className="text-white">
-                <strong>Email:</strong> {selectedDriver.email}
+                  <strong className="text-textgreen">Last Name : </strong> {selectedDriver.last_name}
               </p>
+               
               <p className="text-white">
-                <strong>Sex:</strong> {selectedDriver.sex}
+                  <strong className="text-textgreen">First Name : </strong> {selectedDriver.first_name}
               </p>
+
               <p className="text-white">
-                <strong>License Expiration:</strong>{" "}
+                  <strong className="text-textgreen">Middle Name : </strong> {selectedDriver.middle_name}
+              </p>
+
+              <p className="text-white">
+                <strong className="text-textgreen">Email : </strong> {selectedDriver.email}
+              </p>
+
+              <h1 className="text-xl text-center text-textgreen font-syke-bold mb-2">
+                  More Details : 
+              </h1>
+
+              <p className="text-white">
+                <strong className="text-textgreen">Sex : </strong> {selectedDriver.sex}
+              </p>
+
+              <p className="text-white">
+                <strong className="text-textgreen">Date of Birth : </strong> {selectedDriver.date_of_birth}
+              </p>
+
+              <h1 className="text-xl text-center text-textgreen font-syke-bold mb-2">
+                  License Details : 
+              </h1>
+
+              <p className="text-white">
+                <strong className="text-textgreen">License Number : </strong> {selectedDriver.license_number}
+              </p>
+
+              <p className="text-white">
+                <strong className="text-textgreen">License Expiration : </strong>{" "}
                 {selectedDriver.license_expiration_date}
               </p>
+
             </div>
           ) : (
             <p className="text-white">Click a driver to see more details.</p>
