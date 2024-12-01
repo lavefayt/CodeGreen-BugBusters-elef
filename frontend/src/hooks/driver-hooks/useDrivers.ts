@@ -32,9 +32,9 @@
 // };
 
 import { useEffect, useState } from "react";
-import { Driver } from "../types/datatypes.ts";
-import { BackendError } from "../types/error.types";
-import useFetch from "./useFetch.ts";
+import { Driver } from "../../types/datatypes.ts";
+import { BackendError } from "../../types/error.types.ts";
+import useFetch from "../useFetch.ts";
 
 const useDrivers = () => {
   const [data, setData] = useState<Driver[] | null>(null); // Store fetched drivers

@@ -199,7 +199,34 @@ router.delete("/delete", asyncHandler(async (req: Request, res: Response) => {
   }));
   
 
-
+  router.get("/exists", asyncHandler(async (req: Request, res: Response) => {
+    try {
+      const { license_number } = req.query;
+  
+      if (!license_number) {
+        return res.status(400).json({ message: "License number is required" });
+      }
+  
+      const { rows: drivers } = await pool.query(
+        `SELECT 1 FROM drivers WHERE license_number = $1`,
+        [license_number]
+      );
+  
+      if (drivers.length === 0) {
+        return res.status(404).json({ exists: false, message: "License number not found" });
+      }
+  
+      res.status(200).json({ exists: true });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error("Database error:", err.message);
+        res.status(500).json({ message: err.message });
+      } else {
+        console.error("Unexpected error:", err);
+        res.status(500).json({ message: "An unexpected error occurred" });
+      }
+    }
+  }));
   
 
 export default router;

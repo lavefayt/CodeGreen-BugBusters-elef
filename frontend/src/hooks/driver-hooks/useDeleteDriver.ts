@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { BackendError } from "../types/error.types";
-import useFetch from "./useFetch";
-import useDrivers from "./useDrivers";
+import { BackendError } from "../../types/error.types";
+import useFetch from "../useFetch";
 
 export const useDeleteDriver = () => {
     const [error, setError] = useState<BackendError | null>(null);
