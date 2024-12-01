@@ -50,13 +50,13 @@ export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 server.use("/auth", authRoutes);
 server.use("/notif", notifRoutes);
 server.use("/registration", registrations);
-server.use("/car", carRoutes);
 
 // APIs for Functionality (Must Be Placed Under Verification of Auth)
 server.use(verifyToken);
 server.use("/driver", driverRoutes); // "/driver/get || /driver/add"
 server.use("/registration", registrations);
 server.use("/user", user);
+server.use("/car", carRoutes);
 
 // For PORT
 const PORT = 4444;

@@ -3,7 +3,7 @@ import AdminHeader from "../components/AdminHeader";
 import React, { useState } from "react";
 import { Cars } from "../types/datatypes";
 import useAddCar from "../hooks/car-hooks/useAddCar";
-import useCheckLicenseNumber from "../hooks/car-hooks/checkLicenseNumber"; // Ensure this is correctly imported
+import useCheckLicenseNumber from "../hooks/car-hooks/useCheckLicenseNumber"; // Ensure this is correctly imported
 
 const AddCar = () => {
   const navigate = useNavigate();
@@ -46,27 +46,21 @@ const AddCar = () => {
       setLicenseError("License number is required.");
       return;
     }
-  
-    // Trim the license number and make it lowercase (for consistent matching)
-    const cleanedLicenseNumber = formData.license_number.trim().toLowerCase();
-  
-    console.log("Checking license number:", cleanedLicenseNumber);  // Log the license number
-  
+
     // Now it's safe to call checkLicenseNumber
-    const driverExists = await checkLicenseNumber(cleanedLicenseNumber);
-  
-    console.log("Driver exists:", driverExists); // Log the result of the check
-  
-    if (!driverExists) {
-      setLicenseError("This license number does not exist in our records.");
-      return;
+    if (currentStep === 1) {
+      const driverExists = await checkLicenseNumber(formData.license_number);
+
+      if (!driverExists) {
+        setLicenseError("This license number does not exist in our records.");
+        return;
+      }
     }
-  
+
     // Clear the license error and proceed to the next step if the license number is valid
     setLicenseError("");
     setCurrentStep(currentStep + 1);
   };
-  
 
   const handleBackClick = () => {
     setCurrentStep(currentStep - 1);
@@ -104,7 +98,9 @@ const AddCar = () => {
                         onChange={handleChange}
                       />
                       {licenseError && (
-                        <div className="text-red-500 text-sm mt-2">{licenseError}</div>
+                        <div className="text-red-500 text-sm mt-2">
+                          {licenseError}
+                        </div>
                       )}
                     </div>
                   </div>
@@ -145,7 +141,9 @@ const AddCar = () => {
 
                   <div className="flex space-x-4">
                     <div className="flex-1">
-                      <h1 className="text-white font-syke-light text-xl">Brand</h1>
+                      <h1 className="text-white font-syke-light text-xl">
+                        Brand
+                      </h1>
                       <input
                         type="text"
                         className="bg-secondgrey border-b font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
@@ -160,7 +158,9 @@ const AddCar = () => {
 
                   <div className="flex space-x-4">
                     <div className="flex-1">
-                      <h1 className="text-white font-syke-light text-xl">Model</h1>
+                      <h1 className="text-white font-syke-light text-xl">
+                        Model
+                      </h1>
                       <input
                         type="text"
                         className="bg-secondgrey border-b font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
@@ -175,7 +175,9 @@ const AddCar = () => {
 
                   <div className="flex space-x-4">
                     <div className="flex-1">
-                      <h1 className="text-white font-syke-light text-xl">Color</h1>
+                      <h1 className="text-white font-syke-light text-xl">
+                        Color
+                      </h1>
                       <input
                         type="text"
                         className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
@@ -205,14 +207,18 @@ const AddCar = () => {
               <form className="space-y-[2rem]">
                 <div className="flex space-x-4">
                   <div className="flex-1">
-                    <h1 className="text-white font-syke-light text-xl">Brand</h1>
+                    <h1 className="text-white font-syke-light text-xl">
+                      Brand
+                    </h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
                       {formData.brand}
                     </h1>
                   </div>
 
                   <div className="flex-1">
-                    <h1 className="text-white font-syke-light text-xl">Color</h1>
+                    <h1 className="text-white font-syke-light text-xl">
+                      Color
+                    </h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
                       {formData.color}
                     </h1>
@@ -228,13 +234,17 @@ const AddCar = () => {
 
                 <div className="flex space-x-4">
                   <div className="flex-1">
-                    <h1 className="text-white font-syke-light text-xl">License Plate</h1>
+                    <h1 className="text-white font-syke-light text-xl">
+                      License Plate
+                    </h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
                       {formData.license_plate}
                     </h1>
                   </div>
                   <div className="flex-1">
-                    <h1 className="text-white font-syke-light text-xl">License Number</h1>
+                    <h1 className="text-white font-syke-light text-xl">
+                      License Number
+                    </h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
                       {formData.license_number}
                     </h1>
@@ -252,16 +262,14 @@ const AddCar = () => {
             <button
               type="button"
               className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-              onClick={handleCancelButton}
-            >
+              onClick={handleCancelButton}>
               Cancel
             </button>
 
             <button
               type="button"
               className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-              onClick={handleNextClick}
-            >
+              onClick={handleNextClick}>
               Next
             </button>
           </>
@@ -272,16 +280,14 @@ const AddCar = () => {
             <button
               type="button"
               className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-              onClick={handleBackClick}
-            >
+              onClick={handleBackClick}>
               Back
             </button>
 
             <button
               type="button"
               className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-              onClick={handleNextClick}
-            >
+              onClick={handleNextClick}>
               Add Car
             </button>
           </>
@@ -292,16 +298,14 @@ const AddCar = () => {
             <button
               type="button"
               className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-              onClick={handleBackClick}
-            >
+              onClick={handleBackClick}>
               Back
             </button>
 
             <button
               type="button"
               className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-              onClick={handleSubmit}
-            >
+              onClick={handleSubmit}>
               Add Car
             </button>
           </>

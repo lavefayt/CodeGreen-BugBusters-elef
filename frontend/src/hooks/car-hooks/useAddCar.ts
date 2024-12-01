@@ -13,7 +13,6 @@ const useAddCar = () => {
     setLoading(true);
 
     try {
-      
     const response = await fetchWithAuth("/car/add", "post", formData)
 
       if (!response.ok) {
