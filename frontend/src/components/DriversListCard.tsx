@@ -20,6 +20,9 @@ const DriverListCard = ({
   // Track whether the driver is in edit mode
   const [isEditing, setIsEditing] = useState(false);
 
+  // Track menu visibility
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   // Store the updated driver details in state
   const [updatedDriver, setUpdatedDriver] = useState({
     firstname,
@@ -61,7 +64,7 @@ const DriverListCard = ({
             name="firstname"
             value={updatedDriver.firstname}
             onChange={handleInputChange}
-            className="bg-gray-100 p-1 rounded"
+            className="bg-neutral-500 p-1 rounded border border-gray-700"
           />
         ) : (
           <span className="font-medium">{firstname}</span>
@@ -75,7 +78,7 @@ const DriverListCard = ({
             name="lastname"
             value={updatedDriver.lastname}
             onChange={handleInputChange}
-            className="bg-black p-1 rounded"
+            className="bg-neutral-500 p-1 rounded border border-gray-700"
           />
         ) : (
           <span className="font-medium">{lastname}</span>
@@ -89,7 +92,7 @@ const DriverListCard = ({
             name="driver_type"
             value={updatedDriver.driver_type}
             onChange={handleInputChange}
-            className="bg-black p-1 rounded"
+            className="bg-neutral-500 p-1 rounded border border-gray-700"
           />
         ) : (
           <span className="font-medium">{driver_type}</span>
@@ -103,38 +106,47 @@ const DriverListCard = ({
             name="license_no"
             value={updatedDriver.license_no}
             onChange={handleInputChange}
-            className="bg-black p-1 rounded"
+            className="bg-neutral-500 p-1 rounded border border-gray-700"
           />
         ) : (
           <span className="font-medium">{license_no}</span>
         )}
       </div>
 
-      {/* Buttons */}
-      <div className="flex space-x-2 ml-4">
-        {/* Toggle between Edit/Update */}
-        {isEditing ? (
-          <button
-            className="text-white px-3 py-1 rounded-md hover:text-green-500"
-          >
-            Update
-          </button>
-        ) : (
-          <button
-            className="text-white px-3 py-1 rounded-md hover:text-green-500"
-            onClick={() => setIsEditing(true)} // Enter edit mode
-          >
-            Edit
-          </button>
-        )}
-
-        {/* Delete Button */}
+      {/* Meatball Menu */}
+      <div className="relative ml-4">
         <button
-          className="text-white px-3 py-1 rounded-md hover:text-red-600"
-          onClick={handleDeleteClick}
+          className="text-white px-2 py-1 rounded-full hover:bg-lime-600"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          Delete
+          <span className="text-xl">⋮</span>
         </button>
+
+        {isMenuOpen && (
+          <div className="absolute right-0 mt-2 w-40 bg-gray-800 text-white rounded-md shadow-lg">
+            {/* Edit Option */}
+            <button
+              className="block w-full text-left px-4 py-2 hover:bg-gray-700"
+              onClick={() => {
+                setIsEditing(true); // Enter edit mode
+                setIsMenuOpen(false); // Close menu
+              }}
+            >
+              Edit
+            </button>
+
+            {/* Delete Option */}
+            <button
+              className="block w-full text-left px-4 py-2 hover:bg-gray-700 text-red-500"
+              onClick={() => {
+                handleDeleteClick(); // Handle delete
+                setIsMenuOpen(false); // Close menu
+              }}
+            >
+              Delete
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
