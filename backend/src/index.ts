@@ -58,11 +58,13 @@ server.use("/violation", violations);
 server.use(verifyToken);
 server.use("/driver", driverRoutes); // "/driver/get || /driver/add"
 
+
 // APIs for Functionality (Must Be Placed Under Verification of Auth)
 server.use(verifyToken);
 server.use("/driver", driverRoutes); // "/driver/get || /driver/add"
 server.use("/registration", registrations);
 server.use("/user", user);
+server.use("/car", carRoutes);
 
 // For PORT
 const PORT = 4444;

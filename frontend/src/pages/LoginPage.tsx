@@ -7,13 +7,12 @@ import { Spinner } from "react-activity";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { loading, submitLogin, setLoading, error } = useLogin();
+  const { loading, submitLogin } = useLogin();
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     await submitLogin({ email, password });
-    setLoading(false);
   };
 
   const handleSignUpButton = () => {
@@ -26,9 +25,6 @@ const LoginPage = () => {
 
   return (
     <div className="flex justify-center items-center bg-login-bg bg-no-repeat bg-cover sm:bg-top md:bg-right lg:bg-left h-screen">
-      {/* <div className="w-full max-w-3xl mb-8 mt-5">
-        <LogInSignUpHeader />
-      </div> */}
 
       <div className="flex bg-transparent p-8 rounded-lg w-full max-w-3xl mx-auto">
         <div className="w-1/2 pr-8">

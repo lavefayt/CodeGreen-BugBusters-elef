@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDeleteDriver } from "../hooks/useDeleteDriver";
+import { useDeleteDriver } from "../hooks/driver-hooks/useDeleteDriver";
 import { useNavigate } from "react-router-dom";
 
 interface DriverProps {

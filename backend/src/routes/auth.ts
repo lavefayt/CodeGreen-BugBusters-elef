@@ -34,18 +34,12 @@ router.post("/signup", validateAuth, async (req: Request, res: Response) => {
       });
       return;
     }
-    console.log(first_name);
-    console.log(last_name);
-    console.log(email);
-    console.log(password);
-    console.log(confirm_password);
     const salt = (await bcrypt.genSalt(11)) as string;
     const hashedPassword = await bcrypt.hash(password!, salt);
     const user = await pool.query(
       "INSERT INTO users (first_name, last_name, email, password, salt) VALUES ($1, $2, $3, $4, $5)",
       [first_name, last_name, email, hashedPassword, salt]
     );
-    console.log(user.rows);
     res.status(200).json({
       title: "Account Created Successfully",
       message: `Welcome to CodeGreen ${first_name} ${last_name}`,
@@ -103,7 +97,7 @@ router.post("/login", validateAuth, async (req: Request, res: Response) => {
     // req.headers["authorization"] = `Bearer ${accessToken}`;
   } catch (error) {
     res.sendStatus(500);
-    console.log(error); 
+    console.log(error);
   }
 });
 
@@ -152,7 +146,7 @@ router.get("/refresh", async (req: Request, res: Response) => {
         title: "No Access Rights",
         message: "You do not have access to these features.",
       });
-      return
+      return;
     }
   } catch (error) {
     res.sendStatus(500).json({ title: "Unknown Error", message: error });
@@ -180,7 +174,6 @@ router.get("/logout", async (req: Request, res: Response) => {
     );
 
     const foundUser = users[0];
-    console.log(foundUser.refresh_token);
 
     if (!foundUser) {
       res.clearCookie("jwt", {
@@ -208,7 +201,7 @@ router.get("/logout", async (req: Request, res: Response) => {
       message: "Thank you for visiting, feel free to use our services again.",
     });
   } catch (error) {
-    res.sendStatus(500).json({ title: "Unknown Error", message: error });
+    res.sendStatus(500);
     console.log(error);
   }
 });

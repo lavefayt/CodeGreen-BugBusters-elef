@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AuthContextType, User } from "../types/user.types";
 import { BackendError } from "../types/error.types";
 import { useLocation } from "react-router-dom";
-import useAuth from "./useAuth";
+import useAuth from "./context-hooks/useAuth";
 
 const useRefresh = () => {
   const { setAuth }: AuthContextType = useAuth();
