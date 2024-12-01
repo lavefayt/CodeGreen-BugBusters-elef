@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { BackendError } from "../types/error.types";
-import { Driver } from "../types/datatypes";
-
+import { BackendError } from "../../types/error.types";
+import { Driver } from "../../types/datatypes";
+import useFetch from "../useFetch";
 
 export const useAddDriver = () => {
   // const [data, setData] = useState<Driver[] | null>(null); // Store fetched drivers
@@ -11,15 +11,10 @@ export const useAddDriver = () => {
   const postDriver = async (formData: Driver) => {
     setLoading(true);
     
+    const { fetchWithAuth } = useFetch()
+
     try { 
-      const response = await fetch(`http://localhost:4444/driver/add`, { 
-        method : "POST", 
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(formData)
-      });
+      const response = await fetchWithAuth("/driver/add", "POST", formData )
 
       if (!response.ok) { 
         const error : BackendError = await response.json();
@@ -39,3 +34,5 @@ export const useAddDriver = () => {
   }
   return { postDriver, loading, setLoading, error }
 };
+
+export default useAddDriver;
