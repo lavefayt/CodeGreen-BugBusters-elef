@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import AdminHeader from "../components/AdminHeader";
 import DriverListCard from "../components/DriversListCard";
-import useDrivers from "../hooks/useDrivers";
+import useDrivers from "../hooks/driver-hooks/useDrivers";
 import { Spinner } from "react-activity";
 import Loading from "../components/Loading";
 

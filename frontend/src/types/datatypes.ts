@@ -50,3 +50,13 @@ export interface User {
   first_name: string;
   last_name: string;
 }
+
+export interface Cars { 
+  id? : string; 
+  driver_id? : string; 
+  car_model? : string;
+  color? : string; 
+  license_plate? : string;
+  license_number? : string; 
+  brand? : string;
+}

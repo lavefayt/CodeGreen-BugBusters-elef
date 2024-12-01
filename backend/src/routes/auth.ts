@@ -97,7 +97,7 @@ router.post("/login", validateAuth, async (req: Request, res: Response) => {
     // req.headers["authorization"] = `Bearer ${accessToken}`;
   } catch (error) {
     res.sendStatus(500);
-    console.log(error); 
+    console.log(error);
   }
 });
 
@@ -146,7 +146,7 @@ router.get("/refresh", async (req: Request, res: Response) => {
         title: "No Access Rights",
         message: "You do not have access to these features.",
       });
-      return
+      return;
     }
   } catch (error) {
     res.sendStatus(500).json({ title: "Unknown Error", message: error });
@@ -174,7 +174,6 @@ router.get("/logout", async (req: Request, res: Response) => {
     );
 
     const foundUser = users[0];
-    console.log(foundUser.refresh_token);
 
     if (!foundUser) {
       res.clearCookie("jwt", {
@@ -202,7 +201,7 @@ router.get("/logout", async (req: Request, res: Response) => {
       message: "Thank you for visiting, feel free to use our services again.",
     });
   } catch (error) {
-    res.sendStatus(500).json({ title: "Unknown Error", message: error });
+    res.sendStatus(500);
     console.log(error);
   }
 });
