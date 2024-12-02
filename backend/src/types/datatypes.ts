@@ -15,6 +15,16 @@ export interface Driver {
   sex: "Male" | "Female";
   user_id: string | null;
 }
+export interface Registration {
+  user_id?: string;
+  license_number?: string;
+  school_email?: string;
+  first_name?: string;
+  last_name?: string;
+  date_of_birth?: string;
+  driver_type?: string;
+  sex?: "Select" | "Male" | "Female";
+}
 
 export interface Violation {
   id: string;
@@ -61,13 +71,12 @@ export interface RegisterUser {
   confirm_password?: string;
 }
 
-
-export interface Cars { 
-  id? : string; 
-  driver_id? : string; 
-  car_model? : string;
-  color? : string; 
-  license_plate? : string;
-  license_number? : string; 
-  brand? : string;
+export interface Cars {
+  id?: string;
+  driver_id?: string;
+  car_model?: string;
+  color?: string;
+  license_plate?: string;
+  license_number?: string;
+  brand?: string;
 }

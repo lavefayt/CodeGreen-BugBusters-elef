@@ -6,18 +6,19 @@ import DriverListCard from "../components/DriversListCard";
 import useDrivers from "../hooks/driver-hooks/useDrivers";
 import { Spinner } from "react-activity";
 import Loading from "../components/Loading";
+import { Driver } from "../types/datatypes.ts";
 
 
 
 const DriversList = () => {
   const { data: Drivers, loading } = useDrivers();
-  const [selectedDriver, setSelectedDriver] = useState<any>(null);
+  const [selectedDriver, setSelectedDriver] = useState<Driver>();
 
   const navigate = useNavigate()
   // Handle driver click to show more details
-  const handleDriverClick = (driver: any) => {
+  const handleDriverClick = (driver: Driver) => {
     setSelectedDriver(driver);
-    console.log(driver.id)
+    console.log(driver.id);
   };
 
   const handleViewProfile = (driver : any) => { 
@@ -138,7 +139,7 @@ const DriversList = () => {
                 >
                   <DriverListCard
                     key={driver.id}
-                    id = {driver.id!}
+                    id={driver.id!}
                     firstname={driver.first_name!}
                     lastname={driver.last_name!}
                     driver_type={driver.driver_type!}

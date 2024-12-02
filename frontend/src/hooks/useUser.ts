@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { User } from "../types/datatypes.ts";
+import { UserData } from "../types/datatypes.ts";
 import { BackendError } from "../types/error.types";
 import useFetch from "./useFetch.ts";
 
 const useUser = () => {
-  const [data, setData] = useState<User[] | null>(null); // Store fetched drivers
+  const [data, setData] = useState<UserData | null>(null); // Store fetched drivers
   const [error, setError] = useState<BackendError | null>(null); // Handle errors
   const [loading, setLoading] = useState(false); // Track loading state
 
@@ -17,10 +17,11 @@ const useUser = () => {
       if (!response.ok) {
         const error: BackendError = await response.json();
         setError(error);
-      } else {
-        const user: User[] = await response.json();
-        setData(user);
+        return;
       }
+      const user: UserData = await response.json();
+      console.log(user);
+      setData(user);
     } catch (err) {
       console.error("Error fetching user:", err);
       setError({ message: "An unexpected error occurred" } as BackendError);
