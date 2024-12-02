@@ -66,7 +66,7 @@ const ViewProfile = () => {
           </nav>
         </aside>
         {activeSection === "profile" && <Profile driver={driver} />}
-        {activeSection === "vehicle" && <Vehicle />}
+        {activeSection === "vehicle" && <Vehicle driverId={driverId} />}
         {activeSection === "violation" && (
           <Violation violations={driver.violations!} />
         )}

@@ -4,6 +4,18 @@ import { Cars } from "../types/datatypes";
 
 const router = express();
 
+const asyncHandler =
+  (
+    fn: (
+      req: Request,
+      res: Response,
+      next: express.NextFunction
+    ) => Promise<any>
+  ) =>
+  (req: Request, res: Response, next: express.NextFunction) => {
+    Promise.resolve(fn(req, res, next)).catch(next);
+  };
+
 router.post("/check-license", async (req: Request, res: Response) => {
   try {
     const { license_number } = req.body;
@@ -74,40 +86,48 @@ router.post("/add", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/get", async (req: Request, res: Response) => {
+router.get("/get", asyncHandler(async (req: Request, res: Response) => {
   try {
-    console.log("Fetching cars from the database...");
+    const { driverId } = req.query;
+
+    console.log("Received driverId:", driverId);
+
+    if (!driverId) {
+      return res.status(400).json({
+        title: "Driver ID is required",
+        message: "Please provide a driver ID.",
+      });
+    }
+
+    const driverIdStr = String(driverId);
 
     const { rows: cars } = await pool.query(
-      `SELECT 
-            car_model, 
-            license_plate, 
-            brand,
-            color,
-            license_number
-            FROM cars`
+      `SELECT car_model, license_plate, brand, color, license_number 
+       FROM cars 
+       WHERE driver_id = $1`,
+      [driverIdStr]
     );
 
-    console.log("Drivers fetched successfully:", cars);
-    res.status(200).json(cars);
-  } catch (error) {
-    const errorMessage = (error as Error).message;
-    console.error("Error fetching cars:", errorMessage);
-    res.status(500).json({ title: "Unknown Error", message: errorMessage });
-  }
-});
+    if (cars.length === 0) {
+      return res.status(404).json({
+        title: "No Cars Found",
+        message: "No cars found for the given driver ID.",
+      });
+    }
 
-const asyncHandler =
-  (
-    fn: (
-      req: Request,
-      res: Response,
-      next: express.NextFunction
-    ) => Promise<any>
-  ) =>
-  (req: Request, res: Response, next: express.NextFunction) => {
-    Promise.resolve(fn(req, res, next)).catch(next);
-  };
+    res.status(200).json(cars);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Error fetching cars:", error.message);
+      return res.status(500).json({ title: "Unknown Error", message: error.message });
+    } else {
+      
+      console.error("Unknown error:", error);
+      return res.status(500).json({ title: "Unknown Error", message: "An unexpected error occurred" });
+    }
+  }
+}));
+
 
 router.patch(
   "/update",
