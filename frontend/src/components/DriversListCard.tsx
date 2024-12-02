@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useDeleteDriver } from "../hooks/driver-hooks/useDeleteDriver";
-import { useNavigate } from "react-router-dom";
 
 interface DriverProps {
   id: string; // Add ID to uniquely identify each driver
@@ -41,7 +40,9 @@ const DriverListCard = ({
       alert(`Driver ${lastname}, ${firstname} deleted successfully!`);
       // Optionally, trigger a re-fetch or remove the card from the UI
     } else {
-      alert(`Failed to delete driver: ${deleteError?.message || "Unknown error"}`);
+      alert(
+        `Failed to delete driver: ${deleteError?.message || "Unknown error"}`
+      );
     }
   };
 
@@ -113,40 +114,56 @@ const DriverListCard = ({
         )}
       </div>
 
-      {/* Meatball Menu */}
-      <div className="relative ml-4">
-        <button
-          className="text-white px-2 py-1 rounded-full hover:bg-lime-600"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <span className="text-xl">⋮</span>
-        </button>
-
-        {isMenuOpen && (
-          <div className="absolute right-0 mt-2 w-40 bg-gray-800 text-white rounded-md shadow-lg z-10">
-            {/* Edit Option */}
-            <button
-              className="block w-full text-left px-4 py-2 hover:bg-gray-700"
-              onClick={() => {
-                setIsEditing(true); // Enter edit mode
-                setIsMenuOpen(false); // Close menu
-              }}
-            >
-              Edit
-            </button>
-
-            {/* Delete Option */}
-            <button
-              className="block w-full text-left px-4 py-2 hover:bg-gray-700 text-red-500"
-              onClick={() => {
-                handleDeleteClick(); // Handle delete
-                setIsMenuOpen(false); // Close menu
-              }}
-            >
-              Delete
-            </button>
-          </div>
+      {/* Buttons */}
+      <div className="flex space-x-2 ml-4">
+        {/* Toggle between Edit/Update */}
+        {isEditing ? (
+          <button className="text-white px-3 py-1 rounded-md hover:text-green-500">
+            Update
+          </button>
+        ) : (
+          <button
+            className="text-white px-3 py-1 rounded-md hover:text-green-500"
+            onClick={() => setIsEditing(true)} // Enter edit mode
+          >
+            Edit
+          </button>
         )}
+        {/* Meatball Menu */}
+        <div className="relative ml-4">
+          <button
+            className="text-white px-2 py-1 rounded-full hover:bg-lime-600"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <span className="text-xl">⋮</span>
+          </button>
+
+          {isMenuOpen && (
+            <div className="absolute right-0 mt-2 w-40 bg-gray-800 text-white rounded-md shadow-lg z-10">
+              {/* Edit Option */}
+              <button
+                className="block w-full text-left px-4 py-2 hover:bg-gray-700"
+                onClick={() => {
+                  setIsEditing(true); // Enter edit mode
+                  setIsMenuOpen(false); // Close menu
+                }}
+              >
+                Edit
+              </button>
+
+              {/* Delete Option */}
+              <button
+                className="block w-full text-left px-4 py-2 hover:bg-gray-700 text-red-500"
+                onClick={() => {
+                  handleDeleteClick(); // Handle delete
+                  setIsMenuOpen(false); // Close menu
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

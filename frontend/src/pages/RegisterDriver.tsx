@@ -1,25 +1,81 @@
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
-import { useState } from "react";
+import React, { useState } from "react";
+import Adding from "../components/Adding";
+import Success from "../components/Success";
+import ErrorAlert from "../components/ErrorAlert";
+import { Registration } from "../types/datatypes";
+import { useAddRegistration } from "../hooks/useAddRegistration";
 
 const RegisterDriver = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
+  const { postRegistration, loading, setLoading } = useAddRegistration();
+  const [successMessage, setSuccessMessage] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
 
-  const handleRegisterClick = () => {
+  const handleConfirmClick = async (e: React.FormEvent) => {
+    // if (
+    //   currentStep === 1 &&
+    //   (formData.license_number === "" ||
+    //     formData.school_email ||
+    //     formData.sex === "Select" ||
+    //     formData.first_name === "" ||
+    //     formData.last_name === "" ||
+    //     formData.date_of_birth === "" ||
+    //     formData.driver_type === "Select")
+    // ) {
+    //   setAlertMessage("Please fill in all the required fields.");
+    //   return;
+    // }
+    e.preventDefault();
+    setLoading(true);
+    setSuccessMessage("");
+
+    setAlertMessage("");
     setCurrentStep(currentStep + 1);
+    try {
+      await postRegistration(formData);
+      setLoading(false);
+
+      setSuccessMessage("Success");
+      setTimeout(() => {
+        navigate("/homepage");
+      }, 5000);
+    } catch (error) {
+      setLoading(false);
+      console.error("Error submitting driver:", error);
+    }
+    navigate("/homepage");
   };
-  const handleBackClick = () => {
-    setCurrentStep(currentStep - 1);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
-  const handleConfirmClick = () => {
-    navigate("/homepagedriver");
-  };
+
+  const [formData, setFormData] = useState<Registration>({
+    last_name: "",
+    first_name: "",
+    sex: "Select",
+    date_of_birth: "",
+    driver_type: "Select",
+    license_number: "",
+    school_email: "",
+  });
 
   return (
     <div className="flex flex-col items-center bg-hoverbutton bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
       <div>
         <Header />
+        {loading && <Adding />}
+        {successMessage && <Success />}
+        {alertMessage && <ErrorAlert />}
       </div>
 
       {currentStep === 1 && (
@@ -40,6 +96,8 @@ const RegisterDriver = () => {
                     <input
                       type="text"
                       className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+                      value={formData.last_name}
+                      onChange={handleChange}
                       name="last_name"
                       required
                     />
@@ -52,6 +110,8 @@ const RegisterDriver = () => {
                     <input
                       type="text"
                       className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+                      value={formData.first_name}
+                      onChange={handleChange}
                       name="first_name"
                       required
                     />
@@ -61,6 +121,8 @@ const RegisterDriver = () => {
                     <select
                       className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                       name="sex"
+                      value={formData.sex}
+                      onChange={handleChange}
                       required
                     >
                       <option value="">Select</option>
@@ -73,12 +135,14 @@ const RegisterDriver = () => {
                 <div className="flex space-x-4">
                   <div className="flex-1">
                     <h1 className="text-white font-syke-light text-xl">
-                      Date of Birth
+                      Birth Date
                     </h1>
                     <input
                       type="date"
                       className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
-                      name="birthday"
+                      name="date_of_birth"
+                      value={formData.date_of_birth}
+                      onChange={handleChange}
                       required
                     />
                   </div>
@@ -88,7 +152,9 @@ const RegisterDriver = () => {
                     </h1>
                     <select
                       className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
-                      name="drivertype"
+                      value={formData.driver_type}
+                      onChange={handleChange}
+                      name="driver_type"
                       required
                     >
                       <option value="">Select</option>
@@ -102,23 +168,30 @@ const RegisterDriver = () => {
                 <div className="flex space-x-4">
                   <div className="flex-1">
                     <h1 className="text-white font-syke-light text-xl">
-                      License Number:
+                      License Number
+                    </h1>
+                    <input
+                      type="text"
+                      className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
+                      name="license_number"
+                      value={formData.license_number}
+                      onChange={handleChange}
+                      placeholder="Enter license number"
+                      required
+                    />
+                  </div>
+
+                  <div className="flex-1">
+                    <h1 className="text-white font-syke-light text-xl">
+                      School email:
                     </h1>
                     <input
                       type="text"
                       className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
-                      name="licenseNum"
-                      required
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <h1 className="text-white font-syke-light text-xl">
-                      License Expiration Date
-                    </h1>
-                    <input
-                      type="date"
-                      className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
-                      name="LicenseExp"
+                      name="school_email"
+                      value={formData.school_email}
+                      onChange={handleChange}
+                      placeholder="Enter school email"
                       required
                     />
                   </div>
