@@ -70,7 +70,7 @@ router.post("/login", validateAuth, async (req: Request, res: Response) => {
     }
 
     const salt = user.salt;
-    const hashedPassword = await bcrypt.hash(password, salt);
+    const hashedPassword = await bcrypt.hash(password, salt!);
 
     if (user.password !== hashedPassword) {
       res.status(401).json({
@@ -82,8 +82,8 @@ router.post("/login", validateAuth, async (req: Request, res: Response) => {
     // console.log(user.password);
     // console.log(hashedPassword);
 
-    const refreshToken = generateRefreshToken(user.id);
-    const accessToken = generateAccessToken(user.id);
+    const refreshToken = generateRefreshToken(user.id!);
+    const accessToken = generateAccessToken(user.id!);
     await pool.query("UPDATE users SET refresh_token = $1 WHERE id = $2", [
       refreshToken,
       user.id,
@@ -93,8 +93,7 @@ router.post("/login", validateAuth, async (req: Request, res: Response) => {
       maxAge: 24 * 60 * 60 * 1000,
     });
     // console.log(req.cookies.jwt);
-    res.status(200).json({ accessToken, isAdmin: user.is_admin });
-    // req.headers["authorization"] = `Bearer ${accessToken}`;
+    res.status(200).json({ accessToken, isAdmin: user.is_admin, id: user.id });
   } catch (error) {
     res.sendStatus(500);
     console.log(error);
@@ -140,7 +139,9 @@ router.get("/refresh", async (req: Request, res: Response) => {
 
       console.log(payload.userId);
       const accessToken = generateAccessToken(payload.userId);
-      res.status(200).json({ accessToken, isAdmin: foundUser.is_admin });
+      res
+        .status(200)
+        .json({ accessToken, isAdmin: foundUser.is_admin, id: foundUser.id });
     } catch (error) {
       res.status(403).json({
         title: "No Access Rights",
@@ -178,7 +179,6 @@ router.get("/logout", async (req: Request, res: Response) => {
     if (!foundUser) {
       res.clearCookie("jwt", {
         httpOnly: true,
-        maxAge: 24 * 60 * 60 * 1000,
       });
       res.status(204).json({
         title: "No Content",
@@ -194,7 +194,6 @@ router.get("/logout", async (req: Request, res: Response) => {
     const newUser = await pool.query("SELECT * FROM users WHERE id = $1", [
       foundUser.id,
     ]);
-    console.log(newUser.rows[0]);
 
     res.status(200).json({
       title: "Log Out Successful",

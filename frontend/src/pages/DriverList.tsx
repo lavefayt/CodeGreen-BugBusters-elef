@@ -6,25 +6,23 @@ import DriverListCard from "../components/DriversListCard";
 import useDrivers from "../hooks/driver-hooks/useDrivers";
 import { Spinner } from "react-activity";
 import Loading from "../components/Loading";
-import { Driver } from "../types/datatypes.ts";
-
-
+import { DriverWithViolations } from "../types/datatypes.ts";
 
 const DriversList = () => {
   const { data: Drivers, loading } = useDrivers();
-  const [selectedDriver, setSelectedDriver] = useState<Driver>();
+  const [selectedDriver, setSelectedDriver] = useState<DriverWithViolations>();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   // Handle driver click to show more details
-  const handleDriverClick = (driver: Driver) => {
+  const handleDriverClick = (driver: DriverWithViolations) => {
     setSelectedDriver(driver);
     console.log(driver.id);
   };
 
-  const handleViewProfile = (driver : any) => { 
+  const handleViewProfile = (driver: any) => {
     navigate(`/view-profile/${driver.id}`);
     // navigate(`/view-profile`);
-  }
+  };
 
   if (loading) return <Loading loading={loading} />;
 
@@ -47,67 +45,68 @@ const DriversList = () => {
           </p> */}
           {selectedDriver ? (
             <div>
-
               <h1 className="text-xl text-center text-textgreen font-syke-bold mb-2">
-                  Personal Details : 
+                Personal Details :
               </h1>
 
               <p className="text-white">
-                  <strong className="text-textgreen">Last Name : </strong> {selectedDriver.last_name}
-              </p>
-               
-              <p className="text-white">
-                  <strong className="text-textgreen">First Name : </strong> {selectedDriver.first_name}
+                <strong className="text-textgreen">Last Name : </strong>{" "}
+                {selectedDriver.last_name}
               </p>
 
               <p className="text-white">
-                  <strong className="text-textgreen">Middle Name : </strong> {selectedDriver.middle_name}
+                <strong className="text-textgreen">First Name : </strong>{" "}
+                {selectedDriver.first_name}
               </p>
 
               <p className="text-white">
-                <strong className="text-textgreen">Email : </strong> {selectedDriver.email}
-              </p>
-
-              <h1 className="text-xl text-center text-textgreen font-syke-bold mb-2">
-                  More Details : 
-              </h1>
-
-              <p className="text-white">
-                <strong className="text-textgreen">Sex : </strong> {selectedDriver.sex}
+                <strong className="text-textgreen">Middle Name : </strong>{" "}
+                {selectedDriver.middle_name}
               </p>
 
               <p className="text-white">
-                <strong className="text-textgreen">Date of Birth : </strong> {selectedDriver.date_of_birth}
+                <strong className="text-textgreen">Email : </strong>{" "}
+                {selectedDriver.email}
               </p>
 
               <h1 className="text-xl text-center text-textgreen font-syke-bold mb-2">
-                  License Details : 
+                More Details :
               </h1>
 
               <p className="text-white">
-                <strong className="text-textgreen">License Number : </strong> {selectedDriver.license_number}
+                <strong className="text-textgreen">Sex : </strong>{" "}
+                {selectedDriver.sex}
               </p>
 
               <p className="text-white">
-                <strong className="text-textgreen">License Expiration : </strong>{" "}
+                <strong className="text-textgreen">Date of Birth : </strong>{" "}
+                {selectedDriver.date_of_birth}
+              </p>
+
+              <h1 className="text-xl text-center text-textgreen font-syke-bold mb-2">
+                License Details :
+              </h1>
+
+              <p className="text-white">
+                <strong className="text-textgreen">License Number : </strong>{" "}
+                {selectedDriver.license_number}
+              </p>
+
+              <p className="text-white">
+                <strong className="text-textgreen">
+                  License Expiration :{" "}
+                </strong>{" "}
                 {selectedDriver.license_expiration_date}
               </p>
 
-            <div className="flex justify-center mt-6">
-
-            <div 
-            className="flex justify-center w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm">
-                <button
-                 onClick={() => handleViewProfile(selectedDriver)}>
-                  View Profile
-                </button>
+              <div className="flex justify-center mt-6">
+                <div className="flex justify-center w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm">
+                  <button onClick={() => handleViewProfile(selectedDriver)}>
+                    View Profile
+                  </button>
+                </div>
               </div>
-
             </div>
-              
-
-            </div>
-            
           ) : (
             <p className="text-white">Click a driver to see more details.</p>
           )}
@@ -125,7 +124,7 @@ const DriversList = () => {
             </div>
             <div
               className="w-full h-[23rem] overflow-y-auto rounded-md scrollbar"
-              alt="listcontainer"
+              id="listcontainer"
             >
 
           {/* drivers list header */}

@@ -1,28 +1,11 @@
-import React, { useEffect, useState } from "react";
-import useDrivers from "../../hooks/driver-hooks/useDrivers";
-interface ProfileProps {
-  driverId?: string; 
-}
+import { DriverWithViolations } from "../../types/datatypes";
 
-const Profile = ({ driverId }: ProfileProps) => {
-  const { data, error, loading } = useDrivers(); 
-  const [driver, setDriver] = useState<any>(null); 
-
-  useEffect(() => {
-    console.log("Fetched driver data:", data);
-
-    if (data && driverId) {
-      const selectedDriver = data.find((driver) => driver.id === driverId);
-      console.log("Selected driver:", selectedDriver); 
-      setDriver(selectedDriver || null); 
-    }
-  }, [data, driverId]);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-
-  if (!driver) return <p>No driver found with ID: {driverId}</p>; 
-
+const Profile = ({
+  driver,
+}: {
+  driver: DriverWithViolations;
+}) => {
+  
   return (
     <div className="max-w-full max-h-full flex justify-center items-center">
       <div className="w-[35rem] h-[20rem] bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
@@ -30,19 +13,25 @@ const Profile = ({ driverId }: ProfileProps) => {
           <form className="space-y-[2rem]">
             <div className="flex space-x-1">
               <div className="flex-1">
-                <h1 className="text-white font-syke-light text-l">Last Name:</h1>
+                <h1 className="text-white font-syke-light text-l">
+                  Last Name:
+                </h1>
                 <h1 className="text-textgreen font-syke-medium text-xl">
-                  {driver?.last_name }
+                  {driver?.last_name}
                 </h1>
               </div>
               <div className="flex-1">
-                <h1 className="text-white font-syke-light text-l">First Name:</h1>
+                <h1 className="text-white font-syke-light text-l">
+                  First Name:
+                </h1>
                 <h1 className="text-textgreen font-syke-medium text-xl">
-                  {driver?.first_name }
+                  {driver?.first_name}
                 </h1>
               </div>
               <div className="flex-1">
-                <h1 className="text-white font-syke-light text-l">Middle Name:</h1>
+                <h1 className="text-white font-syke-light text-l">
+                  Middle Name:
+                </h1>
                 <h1 className="text-textgreen font-syke-medium text-xl">
                   {driver?.middle_name || "Unavailable"}
                 </h1>
@@ -56,13 +45,17 @@ const Profile = ({ driverId }: ProfileProps) => {
                 </h1>
               </div>
               <div className="flex-1">
-                <h1 className="text-white font-syke-light text-l">Date of Birth:</h1>
+                <h1 className="text-white font-syke-light text-l">
+                  Date of Birth:
+                </h1>
                 <h1 className="text-textgreen font-syke-medium text-xl">
                   {driver?.date_of_birth}
                 </h1>
               </div>
               <div className="flex-1">
-                <h1 className="text-white font-syke-light text-l">Driver Type:</h1>
+                <h1 className="text-white font-syke-light text-l">
+                  Driver Type:
+                </h1>
                 <h1 className="text-textgreen font-syke-medium text-xl">
                   {driver?.driver_type}
                 </h1>
@@ -79,7 +72,9 @@ const Profile = ({ driverId }: ProfileProps) => {
               </div>
               <div className="flex space-x-4">
                 <div className="flex-1">
-                  <h1 className="text-white font-syke-light text-l">License Number:</h1>
+                  <h1 className="text-white font-syke-light text-l">
+                    License Number:
+                  </h1>
                   <h1 className="text-textgreen font-syke-medium text-xl">
                     {driver?.license_number}
                   </h1>

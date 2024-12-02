@@ -25,7 +25,6 @@ const LoginPage = () => {
 
   return (
     <div className="flex justify-center items-center bg-login-bg bg-no-repeat bg-cover sm:bg-top md:bg-right lg:bg-left h-screen">
-
       <div className="flex bg-transparent p-8 rounded-lg w-full max-w-3xl mx-auto">
         <div className="w-1/2 pr-8">
           <h2 className="text-3xl text-textgreen font-syke-regular">Access</h2>
@@ -53,7 +52,7 @@ const LoginPage = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 focus:shadow-inner border-none focus:outline-none focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                 placeholder="Email or phone number"
-                pattern="([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})|(\d{10})"
+                pattern="[\-a-zA-Z0-9~!$%^&amp;*_=+\}\{'?]+(\.[\-a-zA-Z0-9~!$%^&amp;*_=+\}\{'?]+)*@[a-zA-Z0-9_][\-a-zA-Z0-9_]*(\.[\-a-zA-Z0-9_]+)*\.[cC][oO][mM](:[0-9]{1,5})?"
                 required
               />
             </div>

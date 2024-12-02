@@ -2,19 +2,23 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BackendError } from "../types/error.types";
 import useLogout from "../hooks/useLogout";
+import useAuth from "../hooks/context-hooks/useAuth";
+import { AuthContextType } from "../types/user.types";
 
 const Header = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { logout } = useLogout();
+  const { auth }: AuthContextType = useAuth();
 
   const handleHomePage = () => {
     navigate("/homepage");
   };
 
   const handleProfile = () => {
-    navigate("/driverprofile");
+    console.log(auth)
+    navigate(`/view-profile/${auth!.id}`);
   };
   const toggleDropdown = () => {
     setDropdownOpen((prevState) => !prevState);

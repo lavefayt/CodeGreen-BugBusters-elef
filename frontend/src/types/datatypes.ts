@@ -16,27 +16,28 @@ export interface Driver {
 }
 
 export interface Violation {
-  id: string;
-  driver_id: string;
-  violation_type: string;
-  violation_date: string;
-  paid_status: boolean;
+  id?: string;
+  driver_id?: string;
+  violation_type?: string;
+  violation_date?: string;
+  description?: string;
+  paid_status?: boolean;
 }
 
 export interface DriverWithViolations {
-  date_of_birth: string;
-  driver_type: "Student" | "Faculty" | "Staff" | null;
-  email: string;
-  first_name: string;
-  id: string;
-  is_driver_registered: boolean;
-  last_name: string;
-  license_expiration_date: string;
-  license_number: string;
-  middle_name: string | null;
-  sex: "Male" | "Female";
-  user_id: string | null;
-  Violations: Violation[];
+  date_of_birth?: string;
+  driver_type?: "Select" | "Student" | "Faculty" | "Staff";
+  email?: string;
+  first_name?: string;
+  id?: string;
+  is_driver_registered?: boolean;
+  last_name?: string;
+  license_expiration_date?: string;
+  license_number?: string;
+  middle_name?: string | null;
+  sex?: "Select" | "Male" | "Female";
+  user_id?: string | null;
+  violations?: Violation[];
 }
 
 export interface Registration {

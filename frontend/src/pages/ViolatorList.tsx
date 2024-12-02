@@ -10,41 +10,18 @@ import { useNavigate } from "react-router-dom";
 import AdminHeader from "../components/AdminHeader";
 // import { ViolatorsTable } from "../types/datatypes";
 import { useEffect, useState } from "react";
+import useGetViolators from "../hooks/useGetViolators";
+import Loading from "../components/Loading";
 
 const ViolatorList = () => {
   const navigate = useNavigate();
 
-  // const [violators, setViolators] = useState<ViolatorsTable[]>([
-  const [violators, setViolators] = useState([
-    {
-      id: "1",
-      first_name: "Love",
-      last_name: "Alcorin",
-      paid_status: true,
-      violation_date: "Ror",
-      violation_type: "d",
-    },
-    {
-      id: "2",
-      first_name: "Love",
-      last_name: "Faith",
-      paid_status: true,
-      violation_date: "Ror",
-      violation_type: "d",
-    },
-  ]);
-  
-  useEffect(() => {
-    const getData = async () => {
-      return await fetch("").then((res) => res.json());
-    };
+  // to get the violators
+  const { violators, loading } = useGetViolators();
 
-    getData().then((res) => {
-      setViolators(res);
-    });
-  }, []);
+  console.log(violators);
 
-  // Sample data for violators
+  if (loading) return <Loading loading={loading} />;
 
   return (
     <div className="flex flex-col items-center bg-login-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
@@ -59,9 +36,13 @@ const ViolatorList = () => {
             <tr className="bg-zinc-700 text-white border-b">
               <th className="py-3 px-4 text-left font-semibold">Last Name</th>
               <th className="py-3 px-4 text-left font-semibold">First Name</th>
-              <th className="py-3 px-4 text-left font-semibold">Status</th>
-              <th className="py-3 px-4 text-left font-semibold">Date</th>
-              <th className="py-3 px-4 text-left font-semibold">Type</th>
+              <th className="py-3 px-4 text-left font-semibold">Driver Type</th>
+              <th className="py-3 px-4 text-left font-semibold">
+                License Number
+              </th>
+              <th className="py-3 px-4 text-left font-semibold">
+                Violation Count
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -70,18 +51,18 @@ const ViolatorList = () => {
                 id,
                 first_name,
                 last_name,
-                paid_status,
-                violation_date,
-                violation_type,
+                driver_type,
+                license_number,
+                violations,
               }) => (
                 <tr
                   key={id}
                   className="border-b hover:bg-zinc-500">
                   <td className="py-3 px-4">{last_name}</td>
                   <td className="py-3 px-4">{first_name}</td>
-                  <td className="py-3 px-4">{paid_status}</td>
-                  <td className="py-3 px-4">{violation_date}</td>
-                  <td className="py-3 px-4">{violation_type}</td>
+                  <td className="py-3 px-4">{driver_type}</td>
+                  <td className="py-3 px-4">{license_number}</td>
+                  <td className="py-3 px-4">{violations!.length}</td>
                 </tr>
               )
             )}

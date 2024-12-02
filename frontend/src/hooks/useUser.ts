@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { UserData } from "../types/datatypes.ts";
+import { UserData } from "../types/user.types.ts";
 import { BackendError } from "../types/error.types";
 import useFetch from "./useFetch.ts";
 
