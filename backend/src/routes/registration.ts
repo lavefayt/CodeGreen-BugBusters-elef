@@ -42,10 +42,10 @@ router.post("/add", async (req: Request, res: Response) => {
       license_number,
       school_email,
       first_name,
+      sex,
       last_name,
       date_of_birth,
       driver_type,
-      sex,
     } = req.body as Registration;
 
     console.log(user_id);
@@ -60,6 +60,7 @@ router.post("/add", async (req: Request, res: Response) => {
         school_email,
         first_name,
         last_name,
+        sex,
         date_of_birth,
         driver_type,
         sex,

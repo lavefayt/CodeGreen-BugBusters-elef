@@ -19,11 +19,11 @@ export interface Registration {
   user_id?: string;
   license_number?: string;
   school_email?: string;
+  sex?: "Select" | "Male" | "Female";
   first_name?: string;
   last_name?: string;
   date_of_birth?: string;
   driver_type?: string;
-  sex?: "Select" | "Male" | "Female";
 }
 
 export interface Violation {

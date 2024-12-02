@@ -40,14 +40,14 @@ export interface DriverWithViolations {
 }
 
 export interface Registration {
-  user_id?: string;
-  license_number?: string;
-  school_email?: string;
-  first_name?: string;
-  last_name?: string;
-  date_of_birth?: string;
-  driver_type?: "Select" | "Student" | "Faculty" | "Staff";
-  sex?: "Select" | "Male" | "Female";
+  user_id: string;
+  license_number: string;
+  school_email: string;
+  driver_type: "Student" | "Faculty" | "Staff" | null;
+  first_name: string;
+  last_name: string;
+  sex: "Male" | "Female";
+  date_of_birth: string
 }
 
 export interface User {

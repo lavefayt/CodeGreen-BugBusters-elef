@@ -17,7 +17,7 @@ const UnauthorizedPage = () => {
       </div>
 
       <button
-        className="flex bg-buttongreen text-white py-2 px-10 hover:bg-[#33471a] font-syke-thin transition-colors rounded-sm justify-center items-center text-2xl"
+        className="flex bg-buttongreen font-syke-medium text-white py-2 px-10 hover:bg-[#33471a] transition-colors rounded-sm justify-center items-center text-2xl"
         onClick={handleBackToLogin}>
         BACK TO LOGIN
       </button>
