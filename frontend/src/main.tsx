@@ -38,7 +38,7 @@ const Main = () => {
   const { appLoading }: LoadingContextType = useLoading();
 
   return appLoading ? (
-    <div className="flex justify-center items-center h-screen bg-slate-900">
+    <div className="flex justify-center items-center h-screen bg-hoverbutton">
       <Loading loading={appLoading} />
     </div>
   ) : (
