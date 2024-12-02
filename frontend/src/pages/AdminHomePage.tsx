@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import AdminHeader from "../components/AdminHeader";
-// import React, { useState } from "react";
-// import { AuthContextType } from "../types/user.types";
-// import useAuth from "../hooks/useAuth";
-// import useRefresh from "../hooks/useRefresh";
-// import useFetch from "../hooks/useFetch";
+import useUser from "../hooks/useUser";
 
 const AdminLandingPage = () => {
+  const { data: user } = useUser();
+  console.log(user);
+
   const navigate = useNavigate();
 
   const handleEncodeButton = () => {
@@ -28,35 +27,44 @@ const AdminLandingPage = () => {
         <AdminHeader />
       </div>
 
-      <div className="flex space-x-2 mt-8">
+      <div className="flex space-x-2 p-5">
         <h1 className="text-3xl text-textgreen font-syke-bold">Welcome,</h1>
-        <h1 className="text-3xl text-white font-syke-bold">Admin Rofer!</h1>
+        <h1 className="text-3xl text-white font-syke-bold">
+          Admin {user?.user.first_name}
+        </h1>
       </div>
 
-      <p className="text-xl text-white font-syke-regular text-center mt-8">
-        CodeGreen Gateway is designed to monitor and manage parking violations
-        within the university.
-      </p>
+      <div className="text-xl text-white font-syke-light text-center m-2 w-[60rem]">
+      Your dashboard to monitor, manage, and maintain order within the university premises is ready.
+      <p>Let's create a safer and more organized school environment together. </p>
+      </div>
 
-      <div className="grid grid-cols-3 font-syke-medium text-3xl gap-x-12 gap-y-4 mt-12">
+      <div className="grid-cols-1 font-syke-medium text-3xl mt-10">
         <button
-          className="transition-transform duration-300 hover:scale-105 text-white px-5 py-5 rounded-md bg-buttongreen active:bg-colorhover font-syke-medium"
-          onClick={handleEncodeButton}>
+          className="transition-transform w-[21rem] h-[5rem] duration-300 hover:scale-105 text-white px-5 py-4 rounded-lg bg-buttongreen active:bg-colorhover font-syke-medium"
+          onClick={handleEncodeButton}
+        >
           Encode
         </button>
+        </div>
+      <div className="grid grid-cols-3 font-syke-medium text-3xl gap-x-5 gap-y-5 mt-6">
+    
         <button
           className="transition-transform duration-300 hover:scale-105 text-white px-5 py-4 rounded-md bg-buttongreen active:bg-colorhover font-syke-medium"
-          onClick={handleAddDriverButton}>
+          onClick={handleAddDriverButton}
+        >
           View Drivers
         </button>
         <button
           className="transition-transform duration-300 hover:scale-105 text-white px-5 py-4 rounded-md bg-buttongreen active:bg-colorhover font-syke-medium"
-          onClick={handleAddViolationButton}>
+          onClick={handleAddViolationButton}
+        >
           View Violators
         </button>
         <button
           className="transition-transform duration-300 hover:scale-105 text-white px-5 py-4 rounded-md bg-buttongreen active:bg-colorhover font-syke-medium"
-          onClick={handleRegistrationList}>
+          onClick={handleRegistrationList}
+        >
           View Registration List
         </button>
       </div>

@@ -39,7 +39,7 @@ const DriversList = () => {
       <div className="flex flex-col lg:flex-row items-center justify-center lg:space-x-10 w-full px-5">
         <div className="bg-zinc-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 w-full lg:w-2/5 p-6 rounded-lg shadow-md mb-5 lg:mb-0">
           <h1 className="text-2xl text-center text-textgreen font-syke-bold mb-4">
-            - - - Drivers info - - -
+          Driver's Information
           </h1>
           {/* <p className="text-white">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
@@ -115,21 +115,28 @@ const DriversList = () => {
 
         {/* Move the Drivers List container to the left by 20px */}
         {/* Drivers List Section */}
-        <div className="bg-zinc-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 w-full lg:w-3/5 p-4 rounded-lg shadow-md overflow-hidden">
-          <h1 className="text-xl text-center text-textgreen font-syke-bold">
-            Drivers List
-          </h1>
+        <div className="w-[50%] h-full p-6 rounded-r-md  bg-gray-400 rounded-l-lg bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+          <div className="text-left rounded-xl bg-clip-padding">
+            <div className="text-left font-syke-light text-white">
+              <div className="text-textgreen py-3">
+                <h1 className="text-4xl font-syke-bold">Driver's List</h1>
+                <div>List of Registered Drivers.</div>
+              </div>
+            </div>
+            <div
+              className="w-full h-[23rem] overflow-y-auto rounded-md scrollbar"
+              alt="listcontainer"
+            >
 
           {/* drivers list header */}
-          <div className="flex justify-between items-center border-b-2 pb-2 mb-2 border-gray-400 text-white text-sm">
-            <div className="flex-1 text-center font-bold">First Name</div>
-            <div className="flex-1 text-center font-bold">Last Name</div>
-            <div className="flex-1 text-center font-bold">Driver Type</div>
-            <div className="flex-1 text-center font-bold">License No.</div>
+          <div className="flex justify-between font-syke-medium items-center border-b-2 pb-2 mb-2 border-white text-white text-xl">
+            <div className="flex-1 text-center">First Name</div>
+            <div className="flex-1 text-center">Last Name</div>
+            <div className="flex-1 text-center">License No.</div>
           </div>
 
           {/* Scrollable Driver List */}
-          <div className="flex flex-col overflow-y-auto h-80 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-300 text-white">
+          <div className="flex flex-col overflow-y-auto h-80 scrollbar-thin scrollbar text-white">
             {Drivers && Drivers.length > 0 ? (
               Drivers.map((driver) => (
                 <div
@@ -151,6 +158,8 @@ const DriversList = () => {
               <p className="text-white text-center">No drivers found.</p>
             )}
           </div>
+        </div>
+        </div>
         </div>
       </div>
     </div>
