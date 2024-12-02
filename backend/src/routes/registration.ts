@@ -1,18 +1,8 @@
 import express, { Request, Response, NextFunction } from "express";
 import { pool } from ".."; // Assuming Neon database pool is imported correctly
+import { Registration } from "../types/datatypes";
 
 const router = express.Router();
-
-// Interface for registration data
-interface Registration {
-  user_id: string;
-  license_number: string;
-  school_email: string;
-  first_name: string;
-  last_name: string;
-  date_of_birth: string;
-  driver_type: string;
-}
 
 // The asyncHandler function for catching errors in async routes
 const asyncHandler =
@@ -26,11 +16,16 @@ router.get("/get", async (_req: Request, res: Response) => {
   try {
     console.log("Fetching registration from the database...");
     const { rows: registrations } = await pool.query(
-      "SELECT user_id, license_number, school_email, first_name,last_name, date_of_birth, driver_type FROM registrations"
+      "SELECT user_id, license_number, school_email, first_name,last_name, date_of_birth, driver_type, sex FROM registrations"
     );
     console.log("Registrations fetched successfully:", registrations);
 
     res.json(registrations); // Send the registration list as a response
+    res.status(200).json({
+      title: "Success",
+      message: "Registrations fetched successfully.",
+      isRegistered: registrations[0] ? true : false,
+    });
   } catch (error) {
     const errorMessage = (error as Error).message;
     console.error("Error fetching registration list:", errorMessage);
@@ -42,6 +37,7 @@ router.get("/get", async (_req: Request, res: Response) => {
 router.post("/add", async (req: Request, res: Response) => {
   try {
     // Extract data from the request body
+    const user_id = req.user;
     const {
       license_number,
       school_email,
@@ -49,22 +45,24 @@ router.post("/add", async (req: Request, res: Response) => {
       last_name,
       date_of_birth,
       driver_type,
+      sex,
     } = req.body as Registration;
 
-    console.log(req.user);
+    console.log(user_id);
     await pool.query(
       `
-      INSERT INTO registrations (user_id, license_number, school_email, first_name,last_name, date_of_birth, driver_type ) 
-      VALUES ($1, $2, $3,$4,$5,$6,$7)
+      INSERT INTO registrations (user_id, license_number, school_email, first_name,last_name, date_of_birth, driver_type, sex ) 
+      VALUES ($1, $2, $3,$4,$5,$6,$7, $8)
       `,
       [
-        req.user,
+        user_id,
         license_number,
         school_email,
         first_name,
         last_name,
         date_of_birth,
         driver_type,
+        sex,
       ]
     );
 

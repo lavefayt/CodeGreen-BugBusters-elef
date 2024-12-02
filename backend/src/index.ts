@@ -51,20 +51,29 @@ export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 server.use("/auth", authRoutes);
 // server.use("/driver", driverRoutes); // "/driver/get || /driver/add"
 server.use("/notif", notifRoutes);
-server.use("/registration", registrations);
+// server.use("/registration", registrations);
 server.use("/car", carRoutes);
 server.use("/violation", violations);
+
 // For Verifying Auth
 server.use(verifyToken);
 server.use("/driver", driverRoutes); // "/driver/get || /driver/add"
 
-
-// APIs for Functionality (Must Be Placed Under Verification of Auth)
-server.use(verifyToken);
+// APIs for Functionality (Must Be Placed Under Verification of Auth)server.use(verifyToken);
 server.use("/driver", driverRoutes); // "/driver/get || /driver/add"
 server.use("/registration", registrations);
 server.use("/user", user);
 server.use("/car", carRoutes);
+
+// APIs for Functionality (Must Be Placed Under Verification of Auth)
+server.get("/testing", async (req: Request, res: Response) => {
+  try {
+    res.status(200).json({ title: "Testing Complete", message: "WOWZIES" });
+    // console.log(req.headers["authorization"]);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+});
 
 // For PORT
 const PORT = 4444;

@@ -4,6 +4,10 @@ import { Driver } from "../types/datatypes";
 import { title } from "process";
 import validateDriver from "../middlewares/validateDriver";
 
+const asyncHandler = (fn: (req: Request, res: Response, next: express.NextFunction) => Promise<any>) => 
+  (req: Request, res: Response, next: express.NextFunction) => {
+      Promise.resolve(fn(req, res, next)).catch(next);
+  };
 
 const router = express(); 
 router.post("/add", validateDriver,  async (req : Request, res : Response) => {
@@ -92,13 +96,31 @@ router.get("/get", async (req: Request, res: Response) => {
     }
   });
 
+  router.get("/get/:id",asyncHandler (async (req: Request, res: Response) => {
+    const { id } = req.params;
+  
+    try {
+      console.log(`Fetching driver with ID: ${id}`);
+  
+      const { rows } = await pool.query(
+        `SELECT * FROM drivers WHERE id = $1`,
+        [id]
+      );
+  
+      if (rows.length === 0) {
+        return res.status(404).json({ message: "Driver not found" });
+      }
+  
+      console.log("Driver fetched successfully:", rows[0]);
+      res.json(rows[0]);
+    } catch (error) {
+      const errorMessage = (error as Error).message;
+      console.error("Error fetching driver:", errorMessage);
+      res.status(500).json({ title: "Unknown Error", message: errorMessage });
+    }
+  }));
+  
 
-  const asyncHandler = (fn: (req: Request, res: Response, next: express.NextFunction) => Promise<any>) => 
-    (req: Request, res: Response, next: express.NextFunction) => {
-        Promise.resolve(fn(req, res, next)).catch(next);
-    };
-
-    
 router.patch("/update", asyncHandler(async (req: Request, res: Response) => {
     const { id, ...updates } = req.body;
   

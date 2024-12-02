@@ -1,22 +1,19 @@
 import { useEffect, useState } from "react";
 import { Registration } from "../types/datatypes.ts";
 import { BackendError } from "../types/error.types";
+import useFetch from "../hooks/useFetch";
 
 const useGetRegistration = () => {
   const [data, setData] = useState<Registration[] | null>(null); // Store fetched registrations
   const [error, setError] = useState<BackendError | null>(null); // Handle errors
   const [loading, setLoading] = useState(false); // Track loading state
 
+  const { fetchWithAuth } = useFetch();
+
   const fetchRegistration = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:4444/registration/get`, {
-        method: "GET", // Use GET for fetching data
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
+      const response = await fetchWithAuth("/registration/get", "get");
 
       if (!response.ok) {
         const error: BackendError = await response.json();
@@ -39,7 +36,7 @@ const useGetRegistration = () => {
     fetchRegistration();
   }, []);
 
-  return { data, error, loading };
+  return { data, error, loading, fetchRegistration };
 };
 
 export default useGetRegistration;

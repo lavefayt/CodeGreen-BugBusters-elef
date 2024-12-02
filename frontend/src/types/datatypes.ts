@@ -40,9 +40,14 @@ export interface DriverWithViolations {
 }
 
 export interface Registration {
-  user_id: string;
-  license_number: string;
-  school_email: string;
+  user_id?: string;
+  license_number?: string;
+  school_email?: string;
+  first_name?: string;
+  last_name?: string;
+  date_of_birth?: string;
+  driver_type?: "Select" | "Student" | "Faculty" | "Staff";
+  sex?: "Select" | "Male" | "Female";
 }
 
 export interface User {
@@ -51,12 +56,12 @@ export interface User {
   last_name: string;
 }
 
-export interface Cars { 
-  id? : string; 
-  driver_id? : string; 
-  car_model? : string;
-  color? : string; 
-  license_plate? : string;
-  license_number? : string; 
-  brand? : string;
+export interface Cars {
+  id?: string;
+  driver_id?: string;
+  car_model?: string;
+  color?: string;
+  license_plate?: string;
+  license_number?: string;
+  brand?: string;
 }

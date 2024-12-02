@@ -6,16 +6,25 @@ import DriverListCard from "../components/DriversListCard";
 import useDrivers from "../hooks/driver-hooks/useDrivers";
 import { Spinner } from "react-activity";
 import Loading from "../components/Loading";
+import { Driver } from "../types/datatypes.ts";
+
+
 
 const DriversList = () => {
   const { data: Drivers, loading } = useDrivers();
-  const [selectedDriver, setSelectedDriver] = useState<any>(null);
+  const [selectedDriver, setSelectedDriver] = useState<Driver>();
 
+  const navigate = useNavigate()
   // Handle driver click to show more details
-  const handleDriverClick = (driver: any) => {
+  const handleDriverClick = (driver: Driver) => {
     setSelectedDriver(driver);
-    console.log(driver.id)
+    console.log(driver.id);
   };
+
+  const handleViewProfile = (driver : any) => { 
+    navigate(`/view-profile/${driver.id}`);
+    // navigate(`/view-profile`);
+  }
 
   if (loading) return <Loading loading={loading} />;
 
@@ -38,7 +47,7 @@ const DriversList = () => {
           </p> */}
           {selectedDriver ? (
             <div>
-              
+
               <h1 className="text-xl text-center text-textgreen font-syke-bold mb-2">
                   Personal Details : 
               </h1>
@@ -84,7 +93,21 @@ const DriversList = () => {
                 {selectedDriver.license_expiration_date}
               </p>
 
+            <div className="flex justify-center mt-6">
+
+            <div 
+            className="flex justify-center w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm">
+                <button
+                 onClick={() => handleViewProfile(selectedDriver)}>
+                  View Profile
+                </button>
+              </div>
+
             </div>
+              
+
+            </div>
+            
           ) : (
             <p className="text-white">Click a driver to see more details.</p>
           )}
@@ -116,7 +139,7 @@ const DriversList = () => {
                 >
                   <DriverListCard
                     key={driver.id}
-                    id = {driver.id!}
+                    id={driver.id!}
                     firstname={driver.first_name!}
                     lastname={driver.last_name!}
                     driver_type={driver.driver_type!}
