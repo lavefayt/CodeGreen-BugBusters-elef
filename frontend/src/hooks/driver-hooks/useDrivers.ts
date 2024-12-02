@@ -32,12 +32,12 @@
 // };
 
 import { useEffect, useState } from "react";
-import { Driver } from "../../types/datatypes.ts";
+import { Driver, DriverWithViolations } from "../../types/datatypes.ts";
 import { BackendError } from "../../types/error.types.ts";
 import useFetch from "../useFetch.ts";
 
 const useDrivers = () => {
-  const [data, setData] = useState<Driver[] | null>(null); // Store fetched drivers
+  const [data, setData] = useState<DriverWithViolations[] | null>(null); // Store fetched drivers
   const [error, setError] = useState<BackendError | null>(null); // Handle errors
   const [loading, setLoading] = useState(false); // Track loading state
 
@@ -53,7 +53,7 @@ const useDrivers = () => {
         const error: BackendError = await response.json();
         setError(error);
       } else {
-        const drivers: Driver[] = await response.json();
+        const drivers: DriverWithViolations[] = await response.json();
         setData(drivers);
       }
     } catch (err) {

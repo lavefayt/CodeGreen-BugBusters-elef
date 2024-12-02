@@ -12,6 +12,7 @@ const useLogout = () => {
   const { setAuth }: AuthContextType = useAuth();
   const { setAppLoading }: LoadingContextType = useLoading();
   const { normalFetch } = useFetch();
+  const navigate = useNavigate();
 
   const logout = async () => {
     setAppLoading!(true);
@@ -31,6 +32,7 @@ const useLogout = () => {
         accessToken: undefined,
         isAdmin: undefined,
       });
+      navigate("/login");
     } catch (err) {
       alert(err);
     } finally {

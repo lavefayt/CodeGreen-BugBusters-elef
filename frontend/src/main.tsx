@@ -32,7 +32,7 @@ import { LoadingContextType } from "./types/loading.types.ts";
 import useLoading from "./hooks/context-hooks/useLoading.ts";
 import { LoadingProvider } from "./context/LoadingContext.tsx";
 import { Slide, ToastContainer } from "react-toastify";
-import AdminViewProfile from "./pages/AdminViewProfile.tsx";
+import ViewProfile from "./pages/ViewProfile.tsx";
 
 const Main = () => {
   const { appLoading }: LoadingContextType = useLoading();
@@ -72,6 +72,11 @@ const Main = () => {
         />
 
         <Route element={<PersistLogin />}>
+          {/* FOR ALL LOGGED IN */}
+          <Route
+            path="/view-profile/:driverId"
+            element={<ViewProfile />}
+          />
           {/* USER ROUTES */}
           <Route element={<RequireAuth forAdmin={false} />}>
             <Route
@@ -138,12 +143,6 @@ const Main = () => {
               path="/add-car"
               element={<AddCar />}
             />
-
-            <Route 
-              path="/view-profile/:driverId"
-              element={<AdminViewProfile/>}
-              />
-
           </Route>
         </Route>
       </Routes>

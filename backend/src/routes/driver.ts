@@ -1,33 +1,38 @@
-import express, { Request , Response } from "express";
+import express, { Request, Response } from "express";
 import { pool } from "..";
 import { Driver } from "../types/datatypes";
 import { title } from "process";
 import validateDriver from "../middlewares/validateDriver";
 
-const asyncHandler = (fn: (req: Request, res: Response, next: express.NextFunction) => Promise<any>) => 
+const asyncHandler =
+  (
+    fn: (
+      req: Request,
+      res: Response,
+      next: express.NextFunction
+    ) => Promise<any>
+  ) =>
   (req: Request, res: Response, next: express.NextFunction) => {
-      Promise.resolve(fn(req, res, next)).catch(next);
+    Promise.resolve(fn(req, res, next)).catch(next);
   };
 
-const router = express(); 
-router.post("/add", validateDriver,  async (req : Request, res : Response) => {
-    try{ 
-        const { 
-            email, 
-            first_name, 
-            last_name, 
-            middle_name, 
-            date_of_birth, 
-            sex, 
-            driver_type, 
-            license_number, 
-            license_expiration_date,
-        }
-        = req.body as Driver
-        
+const router = express();
+router.post("/add", validateDriver, async (req: Request, res: Response) => {
+  try {
+    const {
+      email,
+      first_name,
+      last_name,
+      middle_name,
+      date_of_birth,
+      sex,
+      driver_type,
+      license_number,
+      license_expiration_date,
+    } = req.body as Driver;
 
-    const driver = await pool.query( 
-        `INSERT INTO drivers (
+    const driver = await pool.query(
+      `INSERT INTO drivers (
         email, 
         first_name, 
         last_name, 
@@ -39,105 +44,125 @@ router.post("/add", validateDriver,  async (req : Request, res : Response) => {
         license_expiration_date) 
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
 
-        [ 
-            email, 
-            first_name, 
-            last_name, 
-            middle_name, 
-            date_of_birth, 
-            sex, 
-            driver_type, 
-            license_number, 
-            license_expiration_date 
-        ],
-            
-    )
+      [
+        email,
+        first_name,
+        last_name,
+        middle_name,
+        date_of_birth,
+        sex,
+        driver_type,
+        license_number,
+        license_expiration_date,
+      ]
+    );
 
-    console.log(driver.rows)
+    console.log(driver.rows);
     res.status(200).json({
-        title : "Driver Added!", 
-        message : `Driver ${last_name}, ${first_name} ${middle_name} has been added`,
-        
-    })
+      title: "Driver Added!",
+      message: `Driver ${last_name}, ${first_name} ${middle_name} has been added`,
+    });
 
-    return
-
-    } catch (error) {
-        if (error instanceof Error) {
-        console.error("Error occurred:", error.message);
-        res.status(500).json({ title: "Server Error", message: error.message });
-
-        } else {
-        console.error("Unexpected error occurred:", error);
-        res.status(500).json({ title: "Server Error", message: "An unexpected error occurred." });
-        }
+    return;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error("Error occurred:", error.message);
+      res.status(500).json({ title: "Server Error", message: error.message });
+    } else {
+      console.error("Unexpected error occurred:", error);
+      res.status(500).json({
+        title: "Server Error",
+        message: "An unexpected error occurred.",
+      });
     }
-
+  }
 });
 
 router.get("/get", async (req: Request, res: Response) => {
+  try {
+    console.log("Fetching drivers from the database...");
 
-    try {
-      console.log("Fetching drivers from the database...");
-
-      const { rows: drivers } = await pool.query(
-       `SELECT *
+    const { rows: drivers } = await pool.query(
+      `SELECT *
         FROM drivers`
-      );
-      console.log("Drivers fetched successfully:", drivers);
-  
-      // Send the drivers list as a response
-      res.json(drivers);
+    );
+    console.log("Drivers fetched successfully:", drivers);
 
-    } catch (error) {
-      const errorMessage = (error as Error).message;
-      console.error("Error fetching drivers:", errorMessage); // Log the error for debugging
-      res.status(500).json({ title: "Unknown Error", message: errorMessage });
+    // Send the drivers list as a response
+    res.json(drivers);
+  } catch (error) {
+    const errorMessage = (error as Error).message;
+    console.error("Error fetching drivers:", errorMessage); // Log the error for debugging
+    res.status(500).json({ title: "Unknown Error", message: errorMessage });
+  }
+});
+
+router.get("/get/:driverId", async (req: Request, res: Response) => {
+  try {
+    const { driverId } = req.params;
+
+    const { rows: users } = await pool.query(
+      "SELECT * FROM users WHERE id = $1",
+      [req.user]
+    );
+
+    const foundUser = users[0];
+
+    if (driverId !== req.user && !foundUser.is_admin) {
+      res.status(400).json({
+        title: "Access Unauthorized!",
+        message: "You cannot access this information.",
+      });
+      return;
     }
-  });
 
-  router.get("/get/:id",asyncHandler (async (req: Request, res: Response) => {
-    const { id } = req.params;
-  
-    try {
-      console.log(`Fetching driver with ID: ${id}`);
-  
-      const { rows } = await pool.query(
-        `SELECT * FROM drivers WHERE id = $1`,
-        [id]
-      );
-  
-      if (rows.length === 0) {
-        return res.status(404).json({ message: "Driver not found" });
-      }
-  
-      console.log("Driver fetched successfully:", rows[0]);
-      res.json(rows[0]);
-    } catch (error) {
-      const errorMessage = (error as Error).message;
-      console.error("Error fetching driver:", errorMessage);
-      res.status(500).json({ title: "Unknown Error", message: errorMessage });
+    const { rows: drivers } = await pool.query(
+      "SELECT * FROM drivers WHERE id = $1",
+      [driverId]
+    );
+
+    const foundDriver = await drivers[0];
+    console.log(foundDriver);
+
+    if (!foundDriver) {
+      res.status(404).json({ message: "Driver not found" });
+      return;
     }
-  }));
-  
 
-router.patch("/update", asyncHandler(async (req: Request, res: Response) => {
+    const { rows: violations } = await pool.query(
+      "SELECT * FROM violations WHERE driver_id = $1",
+      [foundDriver.id]
+    );
+
+    res.status(200).json({ ...foundDriver, violations });
+  } catch (error) {
+    const errorMessage = (error as Error).message;
+    console.error("Error fetching driver:", errorMessage);
+    res.status(500).json({ title: "Unknown Error", message: errorMessage });
+  }
+});
+
+router.patch(
+  "/update",
+  asyncHandler(async (req: Request, res: Response) => {
     const { id, ...updates } = req.body;
-  
+
     if (!id) {
       return res.status(400).json({
         title: "Validation Error",
         message: "Driver ID is required to update the record.",
       });
     }
-  
+
     // Prepare the fields and values for the query
     const fields = Object.keys(updates);
     const values = Object.values(updates);
-  
+
     // Dynamically create the SET clause for the update
-    const setClause = fields.map((field, index) => `${field} = $${index + 1}`).join(", ");
-  
+    const setClause = fields
+      .map((field, index) => `${field} = $${index + 1}`)
+      .join(", ");
+
     try {
       // Build and run the update query
       const query = `
@@ -146,18 +171,18 @@ router.patch("/update", asyncHandler(async (req: Request, res: Response) => {
         WHERE id = $${fields.length + 1}
         RETURNING *;
       `;
-  
+
       const result = await pool.query(query, [...values, id]);
-  
+
       if (result.rowCount === 0) {
         return res.status(404).json({
           title: "Not Found",
           message: "Driver with the specified ID does not exist.",
         });
       }
-  
+
       const updatedDriver = result.rows[0];
-  
+
       // Return success with the updated driver data
       res.status(200).json({
         title: "Driver Updated!",
@@ -171,14 +196,16 @@ router.patch("/update", asyncHandler(async (req: Request, res: Response) => {
         message: "An error occurred while updating the driver.",
       });
     }
-  }));
-      
+  })
+);
 
-router.delete("/delete", asyncHandler(async (req: Request, res: Response) => {
+router.delete(
+  "/delete",
+  asyncHandler(async (req: Request, res: Response) => {
     console.log("Request body:", req.body); // Log the incoming request body
-  
+
     const { id } = req.body;
-  
+
     if (!id) {
       console.error("No ID provided in the request body");
       return res.status(400).json({
@@ -186,22 +213,16 @@ router.delete("/delete", asyncHandler(async (req: Request, res: Response) => {
         message: "Driver ID is required to delete a record.",
       });
     }
-  
-    await pool.query(
-      `DELETE FROM cars WHERE driver_id = $1 RETURNING *`,
+
+    await pool.query(`DELETE FROM cars WHERE driver_id = $1 RETURNING *`, [id]);
+
+    await pool.query(`DELETE FROM violations WHERE id = $1 RETURNING *`, [id]);
+
+    const resultDriver = await pool.query(
+      `DELETE FROM drivers WHERE id = $1 RETURNING *`,
       [id]
     );
 
-    await pool.query(
-        `DELETE FROM violations WHERE id = $1 RETURNING *`,
-        [id]
-      );
-
-    const resultDriver = await pool.query(
-        `DELETE FROM drivers WHERE id = $1 RETURNING *`,
-        [id]
-      );
-  
     if (resultDriver.rowCount === 0) {
       console.error("Driver not found in the database");
       return res.status(404).json({
@@ -209,15 +230,16 @@ router.delete("/delete", asyncHandler(async (req: Request, res: Response) => {
         message: "Driver with the specified ID does not exist.",
       });
     }
-  
+
     const deletedDriver = resultDriver.rows[0];
     console.log("Driver deleted successfully:", deletedDriver);
-  
+
     res.status(200).json({
       title: "Driver Deleted",
       message: `Driver ${deletedDriver.last_name}, ${deletedDriver.first_name} has been removed.`,
       driver: deletedDriver,
     });
-  }));
-  
+  })
+);
+
 export default router;

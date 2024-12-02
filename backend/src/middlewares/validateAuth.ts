@@ -2,9 +2,9 @@ import { NextFunction, Request, Response } from "express";
 
 const validateAuth = (req: Request, res: Response, next: NextFunction) => {
   const validateEmail = (email: string) => {
-    return email.match(
-      "[-a-zA-Z0-9~!$%^&amp;*_=+}{'?]+(.[-a-zA-Z0-9~!$%^&amp;*_=+}{'?]+)*@[a-zA-Z0-9_][-a-zA-Z0-9_]*(.[-a-zA-Z0-9_]+)*.[cC][oO][mM](:[0-9]{1,5})?"
-    );
+    const regex =
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regex.test(email);
   };
 
   switch (req.path) {
