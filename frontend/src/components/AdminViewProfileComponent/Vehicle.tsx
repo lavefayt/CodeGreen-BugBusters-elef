@@ -1,19 +1,17 @@
-
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import CarListCard from "./CarListCard"; 
-import { Cars } from "../../types/datatypes"; 
+import CarListCard from "./CarListCard";
 import useCars from "../../hooks/car-hooks/useCars";
 
 interface VehicleProps {
-  driverId?: string; 
+  driverId?: string;
 }
 
 const Vehicle = ({ driverId }: VehicleProps) => {
   const { driverId: paramDriverId } = useParams<{ driverId: string }>();
-  const driverIdToUse = driverId || paramDriverId; 
+  const driverIdToUse = driverId || paramDriverId;
 
-  const { data: cars, error, loading } = useCars(driverIdToUse || ""); 
+  const { data: cars, error, loading } = useCars(driverIdToUse || "");
 
   useEffect(() => {
     if (driverIdToUse) {
@@ -35,17 +33,16 @@ const Vehicle = ({ driverId }: VehicleProps) => {
 
   return (
     <div className="flex flex-col items-center w-full">
-      <h2 className="text-3xl text-textgreen font-syke-bold mb-4">
-      </h2>
+      <h2 className="text-3xl text-textgreen font-syke-bold mb-4"></h2>
       <div className="w-[35rem] h-[20rem] bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 overflow-y-auto scrollbar">
         {cars.map((car) => (
           <CarListCard
-            key={car.license_number || "placeholder-license"} 
-            license_number={car.license_number || ""} 
-            license_plate={car.license_plate || ""} 
-            brand={car.brand || ""} 
-            car_model={car.car_model || ""} 
-            color={car.color || ""} 
+            key={car.license_number || "placeholder-license"}
+            license_number={car.license_number || ""}
+            license_plate={car.license_plate || ""}
+            brand={car.brand || ""}
+            car_model={car.car_model || ""}
+            color={car.color || ""}
           />
         ))}
       </div>
