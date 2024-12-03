@@ -18,8 +18,9 @@ const DriversList = () => {
     console.log(driver.id);
   };
 
-  const handleViewProfile = (driver: any) => {
-    navigate(`/view-profile/${driver.id}`);
+  const handleViewProfile = () => {
+    if (!selectedDriver) return;
+    navigate(`/view-profile/${selectedDriver.id}`);
     // navigate(`/view-profile`);
   };
 
@@ -36,7 +37,7 @@ const DriversList = () => {
       <div className="flex flex-col lg:flex-row items-center justify-center lg:space-x-10 w-full px-5">
         <div className="bg-zinc-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 w-full lg:w-2/5 p-6 rounded-lg shadow-md mb-5 lg:mb-0">
           <h1 className="text-2xl text-center text-textgreen font-syke-bold mb-4">
-          Driver's Information
+            Driver's Information
           </h1>
           {/* <p className="text-white">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
@@ -100,7 +101,7 @@ const DriversList = () => {
 
               <div className="flex justify-center mt-6">
                 <div className="flex justify-center w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm">
-                  <button onClick={() => handleViewProfile(selectedDriver)}>
+                  <button onClick={() => handleViewProfile()}>
                     View Profile
                   </button>
                 </div>
@@ -125,39 +126,38 @@ const DriversList = () => {
               className="w-full h-[23rem] overflow-y-auto rounded-md scrollbar"
               id="listcontainer"
             >
+              {/* drivers list header */}
+              <div className="flex justify-between font-syke-medium items-center border-b-2 pb-2 mb-2 border-white text-white text-xl">
+                <div className="flex-1 text-center">First Name</div>
+                <div className="flex-1 text-center">Last Name</div>
+                <div className="flex-1 text-center">License No.</div>
+              </div>
 
-          {/* drivers list header */}
-          <div className="flex justify-between font-syke-medium items-center border-b-2 pb-2 mb-2 border-white text-white text-xl">
-            <div className="flex-1 text-center">First Name</div>
-            <div className="flex-1 text-center">Last Name</div>
-            <div className="flex-1 text-center">License No.</div>
+              {/* Scrollable Driver List */}
+              <div className="flex flex-col overflow-y-auto h-80 scrollbar-thin scrollbar text-white">
+                {Drivers && Drivers.length > 0 ? (
+                  Drivers.map((driver) => (
+                    <div
+                      key={driver.id}
+                      className="cursor-pointer hover:bg-gray-700"
+                      onClick={() => handleDriverClick(driver)} // Show more details on click
+                    >
+                      <DriverListCard
+                        key={driver.id}
+                        id={driver.id!}
+                        firstname={driver.first_name!}
+                        lastname={driver.last_name!}
+                        driver_type={driver.driver_type!}
+                        license_no={driver.license_number!}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-white text-center">No drivers found.</p>
+                )}
+              </div>
+            </div>
           </div>
-
-          {/* Scrollable Driver List */}
-          <div className="flex flex-col overflow-y-auto h-80 scrollbar-thin scrollbar text-white">
-            {Drivers && Drivers.length > 0 ? (
-              Drivers.map((driver) => (
-                <div
-                  key={driver.id}
-                  className="cursor-pointer hover:bg-gray-700"
-                  onClick={() => handleDriverClick(driver)} // Show more details on click
-                >
-                  <DriverListCard
-                    key={driver.id}
-                    id={driver.id!}
-                    firstname={driver.first_name!}
-                    lastname={driver.last_name!}
-                    driver_type={driver.driver_type!}
-                    license_no={driver.license_number!}
-                  />
-                </div>
-              ))
-            ) : (
-              <p className="text-white text-center">No drivers found.</p>
-            )}
-          </div>
-        </div>
-        </div>
         </div>
       </div>
     </div>

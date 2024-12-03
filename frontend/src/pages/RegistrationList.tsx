@@ -2,22 +2,23 @@ import { useState } from "react";
 import useGetRegistration from "../hooks/useGetRegistration";
 import AdminHeader from "../components/AdminHeader";
 import RegistrationListCard from "../components/RegistrationListCard";
+import { Registration } from "../types/datatypes";
 
 const RegistrationList = () => {
   const { data: registrations } = useGetRegistration();
-  const [selectedRegistration, setSelectedRegistration] = useState<any>(null);
-
+  const [selectedRegistration, setSelectedRegistration] =
+    useState<Registration>();
 
   // const handleRegisterClick = async (registration: React.FormEvent) => {
   //   setSelectedRegistration(registration);
   //   // console.log(registration.id);
   // };
 
-  const handleAccept = (registrations: any) => {
+  const handleAccept = (registrations: Registration) => {
     setSelectedRegistration(registrations);
   };
 
-  const handleDecline = (registrations: any) => {
+  const handleDecline = (registrations: Registration) => {
     setSelectedRegistration(registrations);
   };
 
@@ -36,11 +37,13 @@ const RegistrationList = () => {
             {selectedRegistration ? (
               <div className="items-center px-5">
                 <div className="text-left font-syke-light text-white">
-                <div className="text-textgreen py-2 mb-9">
-                  <h1 className="text-4xl font-syke-bold">Registration Details</h1>
-                  <div>Approve or Reject Registration.</div>
+                  <div className="text-textgreen py-2 mb-9">
+                    <h1 className="text-4xl font-syke-bold">
+                      Registration Details
+                    </h1>
+                    <div>Approve or Reject Registration.</div>
+                  </div>
                 </div>
-              </div>
                 <form className="space-y-[2rem]">
                   <div className="flex space-x-1">
                     <div className="flex-1">
@@ -57,14 +60,6 @@ const RegistrationList = () => {
                       </h1>
                       <h1 className="text-textgreen font-syke-medium text-xl">
                         {selectedRegistration.first_name || ""}
-                      </h1>
-                    </div>
-                    <div className="flex-1">
-                      <h1 className="text-white font-syke-light text-l">
-                        Middle Name
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-xl">
-                        {selectedRegistration.middle_name || "N/A"}
                       </h1>
                     </div>
                   </div>
@@ -116,13 +111,19 @@ const RegistrationList = () => {
                         </h1>
                       </div>
                       <div>
-                        <button onClick={handleAccept} className="p-2 px-4 m-2 bg-hoverbutton hover:bg-buttongreen transition-colors rounded-sm text-white font-syke-bold">
+                        <button
+                          onClick={() => handleAccept}
+                          className="p-2 px-4 m-2 bg-hoverbutton hover:bg-buttongreen transition-colors rounded-sm text-white font-syke-bold"
+                        >
                           Accept
                         </button>
-                        <button onClick={handleDecline} className="p-2 px-5  m-2 bg-hoverbutton hover:bg-red-900 transition-colors rounded-sm text-white font-syke-bold">
+                        <button
+                          onClick={handleDecline}
+                          className="p-2 px-5  m-2 bg-hoverbutton hover:bg-red-900 transition-colors rounded-sm text-white font-syke-bold"
+                        >
                           Reject
                         </button>
-                    </div>
+                      </div>
                     </div>
                   </div>
                 </form>

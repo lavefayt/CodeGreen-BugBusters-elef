@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Registration } from "../types/datatypes.ts";
 import { BackendError } from "../types/error.types";
 import useFetch from "../hooks/useFetch";
@@ -10,8 +10,9 @@ const useGetRegistration = () => {
 
   const { fetchWithAuth } = useFetch();
 
-  const fetchRegistration = async () => {
+  const fetchRegistration = useCallback(async () => {
     setLoading(true);
+
     try {
       const response = await fetchWithAuth("/registration/get", "get");
 
@@ -30,11 +31,11 @@ const useGetRegistration = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [fetchWithAuth]);
 
   useEffect(() => {
     fetchRegistration();
-  }, []);
+  }, [fetchWithAuth, fetchRegistration]);
 
   return { data, error, loading, fetchRegistration };
 };

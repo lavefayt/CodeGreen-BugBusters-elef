@@ -2,12 +2,12 @@ import useRefresh from "./useRefresh";
 import { BackendError } from "../types/error.types";
 import useAuth from "./context-hooks/useAuth";
 import { AuthContextType } from "../types/user.types";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const useFetch = () => {
   const { refresh } = useRefresh();
   const { auth }: AuthContextType = useAuth();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const normalFetch = async (route: string, method: string, body?: object) => {
     const response = await fetch(`http://localhost:4444${route}`, {
@@ -55,7 +55,7 @@ const useFetch = () => {
 
       if (!newResponse.ok) {
         const backendError: BackendError = await newResponse.json();
-        navigate("/unauthorized");
+        // navigate("/unauthorized");
         throw new Error(backendError.title + ": " + backendError.message);
       }
 
