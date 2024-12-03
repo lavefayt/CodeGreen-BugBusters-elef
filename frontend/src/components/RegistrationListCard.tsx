@@ -1,19 +1,10 @@
-import AdminHeader from "../components/AdminHeader";
-interface RegistrationProps {
-  user_id: string;
-  school_email: string;
-  license_number: string;
-  sex: "Male" | "Female";
-  driver_type: "Student" | "Faculty" | "Staff" | null;
-  first_name: string;
-  last_name: string;
-}
+import { Registration } from "../types/datatypes";
 
 const RegistrationListCard = ({
   driver_type,
   first_name,
   last_name,
-}: RegistrationProps) => {
+}: Registration) => {
   return (
     <div
       className="border-b-2 flex-col flex-2 border-t-transparent w-full border-b-inputfield space-y-[20px]"

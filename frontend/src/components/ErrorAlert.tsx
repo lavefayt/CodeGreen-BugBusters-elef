@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const ErrorAlert = () => {
   const [isVisible, setIsVisible] = useState(true); 

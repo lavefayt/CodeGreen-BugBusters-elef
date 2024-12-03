@@ -1,19 +1,17 @@
-import React, { FormEvent, useState } from "react";
+import { useState } from "react";
 import useGetRegistration from "../hooks/useGetRegistration";
 import AdminHeader from "../components/AdminHeader";
-import Loading from "../components/Loading";
 import RegistrationListCard from "../components/RegistrationListCard";
 
 const RegistrationList = () => {
-  const { data: registrations, loading } = useGetRegistration();
+  const { data: registrations } = useGetRegistration();
   const [selectedRegistration, setSelectedRegistration] = useState<any>(null);
-  const [successMessage, setSuccessMessage] = useState("");
 
 
-  const handleRegisterClick = async (registration: React.FormEvent) => {
-    setSelectedRegistration(registration);
-    console.log(registration.id);
-  };
+  // const handleRegisterClick = async (registration: React.FormEvent) => {
+  //   setSelectedRegistration(registration);
+  //   // console.log(registration.id);
+  // };
 
   const handleAccept = (registrations: any) => {
     setSelectedRegistration(registrations);
@@ -153,7 +151,7 @@ const RegistrationList = () => {
                       <div
                         key={registration.user_id}
                         className="cursor-pointer hover:bg-gray-700"
-                        onClick={() => handleRegisterClick(registration)} // Show more details on click
+                        // onClick={() => handleRegisterClick(registration)} // Show more details on click
                       >
                         <RegistrationListCard
                           key={registration.user_id}

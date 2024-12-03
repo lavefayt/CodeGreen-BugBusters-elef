@@ -10,7 +10,7 @@ import ErrorAlert from "../components/ErrorAlert";
 const AddDriver = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
-  const { postDriver, loading, error, setLoading } = useAddDriver();
+  const { postDriver, loading, setLoading } = useAddDriver();
   const [successMessage, setSuccessMessage] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
   const [formData, setFormData] = useState<Driver>({

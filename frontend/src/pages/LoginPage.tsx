@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Forgot from "./Forgot";
 import useLogin from "../hooks/useLogin";
 import { Spinner } from "react-activity";
 

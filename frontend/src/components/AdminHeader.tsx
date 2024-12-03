@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { BackendError } from "../types/error.types";
 import useLogout from "../hooks/useLogout";
 
 const AdminHeader = () => {

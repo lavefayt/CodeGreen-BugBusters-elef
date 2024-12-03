@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 interface NotificationPopUpProps {
   title: string;
@@ -41,7 +41,13 @@ export const NotificationPopUp = ({
           }`}>
           <span className="font-semibold font-syke">{title}</span>
           <p className="text-sm">{message}</p>
-          {confirm && <button className="bg-buttongreen rounded-md py-1 px-4 self-end" onClick={handleConfirm}>Confirm</button>}
+          {confirm && (
+            <button
+              className="bg-buttongreen rounded-md py-1 px-4 self-end"
+              onClick={handleConfirm}>
+              Confirm
+            </button>
+          )}
         </div>
       )}
     </div>

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import AdminHeader from "../components/AdminHeader";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const AddViolation = () => {
   const navigate = useNavigate();

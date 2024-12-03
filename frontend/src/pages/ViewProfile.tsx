@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Violation from "../components/AdminViewProfileComponent/ViolationList";
 import Vehicle from "../components/AdminViewProfileComponent/Vehicle";
@@ -8,13 +8,12 @@ import Header from "../components/Header";
 import useGetDriver from "../hooks/driver-hooks/useGetDriver";
 import { AuthContextType } from "../types/user.types";
 import useAuth from "../hooks/context-hooks/useAuth";
-import { DriverWithViolations } from "../types/datatypes";
 import Loading from "../components/Loading";
 
 const ViewProfile = () => {
   const { driverId } = useParams<{ driverId: string }>();
   const [activeSection, SetActiveSection] = useState("profile");
-  const { fetchDriver, loading, driver } = useGetDriver(driverId!);
+  const { loading, driver } = useGetDriver(driverId!);
   const { auth }: AuthContextType = useAuth();
 
   if (loading) {

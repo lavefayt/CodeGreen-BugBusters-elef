@@ -1,8 +1,6 @@
 import Header from "../components/Header";
-import { useNavigate } from "react-router-dom";
 
 const HomepageDriver = () => {
-  const navigate = useNavigate();
 
   return (
     <div className="flex flex-col items-center bg-homepage-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
@@ -15,7 +13,7 @@ const HomepageDriver = () => {
           <h1 className="text-xl font-syke-medium text-white">Notices</h1>
           <div
             className="mt-2 h-[22rem] bg-[#474B4F] w-[40rem] py-3 px-3 overflow-y-auto rounded scrollbar"
-            alt="2ndcontainer"
+            id="2ndcontainer"
           >
             <p className="text-white p-2">
               Event 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit.

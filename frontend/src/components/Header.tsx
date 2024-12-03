@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { BackendError } from "../types/error.types";
 import useLogout from "../hooks/useLogout";
 import useAuth from "../hooks/context-hooks/useAuth";
 import { AuthContextType } from "../types/user.types";
@@ -17,7 +16,7 @@ const Header = () => {
   };
 
   const handleProfile = () => {
-    console.log(auth)
+    console.log(auth);
     navigate(`/view-profile/${auth!.id}`);
   };
   const toggleDropdown = () => {

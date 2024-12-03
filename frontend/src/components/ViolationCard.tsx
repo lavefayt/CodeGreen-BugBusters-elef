@@ -1,4 +1,3 @@
-import React from "react";
 import { Violation } from "../types/datatypes";
 
 const ViolationCard = ({ violation }: { violation: Violation }) => {

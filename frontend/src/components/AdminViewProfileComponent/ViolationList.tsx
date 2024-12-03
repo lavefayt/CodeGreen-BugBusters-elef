@@ -1,10 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { Violation } from "../../types/datatypes";
 import ViolationCard from "../ViolationCard";
 
 const ViolationList = ({ violations }: { violations: Violation[] }) => {
-  const navigate = useNavigate();
 
   return (
     <div className="max-w-full max-h-full justify-center">

@@ -7,7 +7,7 @@ import useCheckLicenseNumber from "../hooks/car-hooks/useCheckLicenseNumber"; //
 
 const AddCar = () => {
   const navigate = useNavigate();
-  const { postCar, loading, error } = useAddCar();
+  const { postCar, error } = useAddCar();
   const { checkLicenseNumber } = useCheckLicenseNumber(); // Ensure you're getting the checkLicenseNumber function
 
   const [formData, setFormData] = useState<Cars>({

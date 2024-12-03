@@ -1,21 +1,9 @@
-// const ViolatorList = () => {
-//     return (
-//         <p>Violator List Page!</p>
-//     )
-// }
-
-// export default ViolatorList;
-
-import { useNavigate } from "react-router-dom";
 import AdminHeader from "../components/AdminHeader";
 // import { ViolatorsTable } from "../types/datatypes";
-import { useEffect, useState } from "react";
 import useGetViolators from "../hooks/useGetViolators";
 import Loading from "../components/Loading";
 
 const ViolatorList = () => {
-  const navigate = useNavigate();
-
   // to get the violators
   const { violators, loading } = useGetViolators();
 

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { UserData } from "../types/user.types.ts";
 import { BackendError } from "../types/error.types";
 import useFetch from "./useFetch.ts";
+import { UserType } from "../types/datatypes.ts";
 
 const useUser = () => {
-  const [data, setData] = useState<UserData | null>(null); // Store fetched drivers
+  const [data, setData] = useState<UserType | null>(null); // Store fetched drivers
   const [error, setError] = useState<BackendError | null>(null); // Handle errors
   const [loading, setLoading] = useState(false); // Track loading state
 
@@ -19,7 +19,7 @@ const useUser = () => {
         setError(error);
         return;
       }
-      const user: UserData = await response.json();
+      const user: UserType = await response.json();
       console.log(user);
       setData(user);
     } catch (err) {

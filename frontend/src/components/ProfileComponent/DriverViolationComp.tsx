@@ -1,9 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
 
 const DriverViolationComponent = () => {
-  const navigate = useNavigate();
-
   return (
     <div className="max-w-full max-h-full justify-center">
       <div className="w-[35rem] h-[20rem] bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 overflow-y-auto rounded-md scrollbar">
@@ -29,13 +25,11 @@ const DriverViolationComponent = () => {
               <div className="flex-1">
                 <h1 className="text-white font-syke">Description</h1>
                 <h1 className="text-textgreen font-syke text-l w-[15rem]">
-                Operating with expired vehicle registration inside the campus.
+                  Operating with expired vehicle registration inside the campus.
                 </h1>
               </div>
               <div className="flex-1">
-                <h1 className="text-white font-syke-light text-m">
-                  Status
-                </h1>
+                <h1 className="text-white font-syke-light text-m">Status</h1>
                 <h1 className="text-textgreen font-syke-medium text-xl">
                   Paid
                 </h1>
@@ -63,15 +57,13 @@ const DriverViolationComponent = () => {
             </div>
             <div className="flex space-x-4 ">
               <div className="flex-1">
-              <h1 className="text-white font-syke">Description</h1>
-              <h1 className="text-textgreen font-syke text-l w-[15rem]">
-                Operating with expired vehicle registration inside the campus.
+                <h1 className="text-white font-syke">Description</h1>
+                <h1 className="text-textgreen font-syke text-l w-[15rem]">
+                  Operating with expired vehicle registration inside the campus.
                 </h1>
               </div>
               <div className="flex-1">
-                <h1 className="text-white font-syke-light text-m">
-                  Status
-                </h1>
+                <h1 className="text-white font-syke-light text-m">Status</h1>
                 <h1 className="text-textgreen font-syke-medium text-xl">
                   Paid
                 </h1>
@@ -99,15 +91,13 @@ const DriverViolationComponent = () => {
             </div>
             <div className="flex space-x-4 ">
               <div className="flex-1">
-              <h1 className="text-white font-syke">Description</h1>
-              <h1 className="text-textgreen font-syke text-l w-[15rem]">
-                Operating with expired vehicle registration inside the campus.
+                <h1 className="text-white font-syke">Description</h1>
+                <h1 className="text-textgreen font-syke text-l w-[15rem]">
+                  Operating with expired vehicle registration inside the campus.
                 </h1>
               </div>
               <div className="flex-1">
-                <h1 className="text-white font-syke-light text-m">
-                  Status
-                </h1>
+                <h1 className="text-white font-syke-light text-m">Status</h1>
                 <h1 className="text-textgreen font-syke-medium text-xl">
                   Paid
                 </h1>
