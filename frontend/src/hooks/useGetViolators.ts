@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useFetch from "./useFetch";
 import { toast } from "react-toastify";
 import { BackendError } from "../types/error.types";

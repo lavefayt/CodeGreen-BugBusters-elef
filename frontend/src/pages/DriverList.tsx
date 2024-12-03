@@ -1,10 +1,9 @@
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import AdminHeader from "../components/AdminHeader";
 import DriverListCard from "../components/DriversListCard";
 import useDrivers from "../hooks/driver-hooks/useDrivers";
-import { Spinner } from "react-activity";
 import Loading from "../components/Loading";
 import { DriverWithViolations } from "../types/datatypes.ts";
 

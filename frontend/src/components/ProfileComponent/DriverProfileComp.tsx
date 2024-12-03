@@ -1,10 +1,9 @@
-import React from "react";
 
 const DriverProfileComponent = () => {
   return (
     <div className="max-w-full max-h-full flex justify-center items-center">
       <div
-        alt="container"
+        id="container"
         className="w-[35rem] h-[20rem] bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10"
       >
         <div className="items-center p-4">

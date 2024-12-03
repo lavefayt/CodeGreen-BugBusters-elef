@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { NotificationPopUp } from "../components/NotificationPopUp";
 import { UserSignUp } from "../types/user.types";
 import useSignUp from "../hooks/useSignUp";
 import { Spinner } from "react-activity";

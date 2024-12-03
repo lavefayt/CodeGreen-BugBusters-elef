@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { BackendError } from "../types/error.types";
 import { AuthContextType } from "../types/user.types";
 import useAuth from "./context-hooks/useAuth";

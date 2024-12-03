@@ -1,4 +1,3 @@
-import React from "react";
 import { Spinner } from "react-activity";
 
 const Loading = ({ loading }: { loading: boolean }) => {

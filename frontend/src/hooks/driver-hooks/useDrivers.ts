@@ -32,7 +32,7 @@
 // };
 
 import { useEffect, useState } from "react";
-import { Driver, DriverWithViolations } from "../../types/datatypes.ts";
+import {  DriverWithViolations } from "../../types/datatypes.ts";
 import { BackendError } from "../../types/error.types.ts";
 import useFetch from "../useFetch.ts";
 

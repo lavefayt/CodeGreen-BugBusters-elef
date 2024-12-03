@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { UserSignUp } from "../types/user.types";
 import useFetch from "./useFetch";
 import { BackendError } from "../types/error.types";
