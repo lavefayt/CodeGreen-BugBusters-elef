@@ -1,16 +1,16 @@
 export interface Driver {
-  date_of_birth?: string;
-  driver_type?: "Select" | "Student" | "Faculty" | "Staff";
-  email?: string;
-  first_name?: string;
-  id?: string;
-  is_driver_registered?: boolean;
-  last_name?: string;
-  license_expiration_date?: string;
-  license_number?: string;
+  date_of_birth: string;
+  driver_type: "Select" | "Student" | "Faculty" | "Staff";
+  email: string;
+  first_name: string;
+  id: string;
+  is_driver_registered: boolean;
+  last_name: string;
+  license_expiration_date: string;
+  license_number: string;
   middle_name?: string;
-  sex?: "Select" | "Male" | "Female";
-  user_id?: string | null;
+  sex: "Select" | "Male" | "Female";
+  user_id: string | null;
 }
 
 export interface Violation {
@@ -69,5 +69,5 @@ export interface Cars {
 export interface UserType {
   user: User;
   hasRegistered: boolean;
-  isDriver: boolean
+  isDriver: boolean;
 }

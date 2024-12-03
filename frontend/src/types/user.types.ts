@@ -11,7 +11,7 @@ export interface User {
 
 export interface AuthContextType {
   auth?: User | undefined;
-  setAuth?: React.Dispatch<React.SetStateAction<{}>> | undefined;
+  setAuth?: React.Dispatch<React.SetStateAction<object>> | undefined;
 }
 
 export interface UserSignUp {

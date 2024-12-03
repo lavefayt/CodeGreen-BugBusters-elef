@@ -5,12 +5,12 @@ dotenv.config();
 
 export const generateRefreshToken = (userId: string) => {
   return jwt.sign({ userId }, process.env.REFRESH_TOKEN_SECRET!, {
-    expiresIn: "30d",
+    expiresIn: "15s",
   });
 };
 
 export const generateAccessToken = (userId: string) => {
   return jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET!, {
-    expiresIn: "15min",
+    expiresIn: "10s",
   });
 };
