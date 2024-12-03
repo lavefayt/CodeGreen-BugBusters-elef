@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 
 interface CarProps {
 license_number: string;
@@ -16,8 +15,6 @@ const CarListCard: React.FC<CarProps> = ({
   car_model,
   color,
 }) => {
-
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
         
