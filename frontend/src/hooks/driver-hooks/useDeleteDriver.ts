@@ -26,14 +26,21 @@ export const useDeleteDriver = () => {
         console.log("Driver deleted successfully");
         setError(null); // Clear any previous errors
         return true;
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error("Network error:", err);
+      
+        // Narrow down `err` to ensure it has a `message` property
+        const errorMessage = 
+          err instanceof Error ? err.message : "Failed to connect to the server";
+      
         setError({
           title: "Network Error",
-          message: err.message || "Failed to connect to the server",
+          message: errorMessage,
         });
+      
         return false;
       }
+      
     };
   
     return { deleteDriver, error };
