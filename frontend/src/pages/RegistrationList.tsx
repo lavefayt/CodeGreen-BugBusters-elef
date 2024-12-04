@@ -18,9 +18,9 @@ const RegistrationList = () => {
     setSelectedRegistration(registrations);
   };
 
-  const handleDecline = (registrations: Registration) => {
-    setSelectedRegistration(registrations);
-  };
+  // const handleDecline = (registrations: Registration) => {
+  //   setSelectedRegistration(registrations);
+  // };
 
   if (!registrations || registrations.length === 0) {
     return <div>No registrations found.</div>;
@@ -118,7 +118,7 @@ const RegistrationList = () => {
                           Accept
                         </button>
                         <button
-                          onClick={handleDecline}
+                          // onClick={handleDecline}
                           className="p-2 px-5  m-2 bg-hoverbutton hover:bg-red-900 transition-colors rounded-sm text-white font-syke-bold"
                         >
                           Reject
