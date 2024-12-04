@@ -1,19 +1,25 @@
 import { useEffect, useState, useCallback } from "react";
 import { DriverWithViolations } from "../../types/datatypes.ts";
 import { BackendError } from "../../types/error.types.ts";
-import useFetch from "../useFetch.ts";
+import { fetchWithAuth } from "../../utils/fetch.tsx";
+import useFetchWithAuthExports from "../context-hooks/useFetchWithAuthExports.ts";
 
 const useDrivers = () => {
   const [data, setData] = useState<DriverWithViolations[] | null>(null);
   const [error, setError] = useState<BackendError | null>(null);
   const [loading, setLoading] = useState(false);
-
-  const { fetchWithAuth } = useFetch();
+  const { auth, refresh, navigate } = useFetchWithAuthExports();
 
   const fetchDrivers = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetchWithAuth("/driver/get", "get");
+      const response = await fetchWithAuth(
+        navigate,
+        refresh,
+        auth,
+        "/driver/get",
+        "get"
+      );
 
       if (!response.ok) {
         const error: BackendError = await response.json();
@@ -28,7 +34,7 @@ const useDrivers = () => {
     } finally {
       setLoading(false);
     }
-  }, [fetchWithAuth]);
+  }, [auth]);
 
   useEffect(() => {
     fetchDrivers();

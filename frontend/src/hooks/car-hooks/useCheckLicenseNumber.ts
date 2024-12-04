@@ -1,12 +1,13 @@
 import { useState } from "react";
-import useFetch from "../useFetch";
 import { toast } from "react-toastify";
 import { BackendError } from "../../types/error.types";
+import { fetchWithAuth } from "../../utils/fetch";
+import useFetchWithAuthExports from "../context-hooks/useFetchWithAuthExports";
 
 const useCheckLicenseNumber = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const { fetchWithAuth } = useFetch();
+  const { auth, refresh, navigate } = useFetchWithAuthExports();
 
   const checkLicenseNumber = async (
     license_number: string
@@ -17,9 +18,16 @@ const useCheckLicenseNumber = () => {
     try {
       // Make sure license_number is URL-safe
       console.log(license_number);
-      const response = await fetchWithAuth("/car/check-license", "post", {
-        license_number,
-      });
+      const response = await fetchWithAuth(
+        navigate,
+        refresh,
+        auth,
+        "/car/check-license",
+        "post",
+        {
+          license_number,
+        }
+      );
 
       if (!response.ok) {
         const backendError: BackendError = await response.json();

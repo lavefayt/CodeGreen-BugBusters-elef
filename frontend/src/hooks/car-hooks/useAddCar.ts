@@ -1,19 +1,27 @@
 import { useState } from "react";
 import { BackendError } from "../../types/error.types";
 import { Cars } from "../../types/datatypes";
-import useFetch from "../useFetch";
+import { fetchWithAuth } from "../../utils/fetch";
+import useFetchWithAuthExports from "../context-hooks/useFetchWithAuthExports";
 
 const useAddCar = () => {
   const [error, setError] = useState<BackendError | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-
-  const { fetchWithAuth } = useFetch()
+  const { auth, refresh, navigate} = useFetchWithAuthExports()
+  
 
   const postCar = async (formData: Cars): Promise<boolean> => {
     setLoading(true);
 
     try {
-    const response = await fetchWithAuth("/car/add", "post", formData)
+      const response = await fetchWithAuth(
+        navigate,
+        refresh,
+        auth,
+        "/car/add",
+        "post",
+        formData
+      );
 
       if (!response.ok) {
         const error: BackendError = await response.json();

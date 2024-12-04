@@ -4,13 +4,12 @@ import { AuthContextType } from "../types/user.types";
 import useAuth from "./context-hooks/useAuth";
 import { LoadingContextType } from "../types/loading.types";
 import useLoading from "./context-hooks/useLoading";
-import useFetch from "./useFetch";
 import { toast } from "react-toastify";
+import { normalFetch } from "../utils/fetch";
 
 const useLogout = () => {
   const { setAuth }: AuthContextType = useAuth();
   const { setAppLoading }: LoadingContextType = useLoading();
-  const { normalFetch } = useFetch();
   const navigate = useNavigate();
 
   const logout = async () => {

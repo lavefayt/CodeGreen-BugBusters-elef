@@ -6,7 +6,7 @@ import useAuth from "./context-hooks/useAuth";
 import { LoadingContextType } from "../types/loading.types";
 import useLoading from "./context-hooks/useLoading";
 import { toast } from "react-toastify";
-import useFetch from "./useFetch";
+import { normalFetch } from "../utils/fetch";
 
 const useLogin = () => {
   // loading for the button
@@ -17,8 +17,6 @@ const useLogin = () => {
 
   // loading for the app
   const { setAppLoading }: LoadingContextType = useLoading();
-
-  const { normalFetch } = useFetch();
 
   const navigate = useNavigate();
 

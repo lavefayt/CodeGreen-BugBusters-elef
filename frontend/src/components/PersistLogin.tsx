@@ -20,8 +20,8 @@ const PersistLogin = () => {
       }
     };
 
-    !auth?.accessToken ? verifyRefreshToken() : setLoading(false);
-  }, []);
+    verifyRefreshToken();
+  }, [auth?.accessToken]);
 
   return <>{!loading && <Outlet />}</>;
 };
