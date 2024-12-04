@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { Registration } from "../types/datatypes.ts";
 import { BackendError } from "../types/error.types";
 import { fetchWithAuth } from "../utils/fetch.tsx";
 import useFetchWithAuthExports from "./context-hooks/useFetchWithAuthExports.ts";
 
 const useGetRegistration = () => {
-  const [data, setData] = useState<Registration[] | null>(null); // Store fetched registrations
-  const [error, setError] = useState<BackendError | null>(null); // Handle errors
+  const [registration, setRegistration] = useState<Registration[] | null>(null); // Store fetched registrations
   const [loading, setLoading] = useState(false); // Track loading state
 
   const { auth, refresh, navigate } = useFetchWithAuthExports();
@@ -25,25 +25,23 @@ const useGetRegistration = () => {
         );
 
         if (!response.ok) {
-          const error: BackendError = await response.json();
-          setError(error);
-          console.error("Error fetching registrations:", error);
-        } else {
-          const registrations: Registration[] = await response.json();
-          setData(registrations);
-          console.log("Registrations fetched successfully:", registrations);
+          const backendError: BackendError = await response.json();
+          toast.error(backendError.message);
+          return;
         }
+        const registration = await response.json();
+        setRegistration(registration);
       } catch (err) {
         console.error("Unexpected error:", err);
-        setError({ message: "An unexpected error occurred" } as BackendError);
+        alert(err);
       } finally {
         setLoading(false);
       }
     };
     fetchRegistration();
-  }, [auth, navigate, refresh]);
+  }, [auth]);
 
-  return { data, error, loading };
+  return { registration, loading };
 };
 
 export default useGetRegistration;

@@ -5,7 +5,7 @@ import RegistrationListCard from "../components/RegistrationListCard";
 import { Registration } from "../types/datatypes";
 
 const RegistrationList = () => {
-  const { data: registrations } = useGetRegistration();
+  const { registration: registrations } = useGetRegistration();
   const [selectedRegistration, setSelectedRegistration] =
     useState<Registration>();
 
