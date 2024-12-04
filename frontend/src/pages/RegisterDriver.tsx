@@ -70,7 +70,7 @@ const RegisterDriver = () => {
   });
 
   return (
-    <div className="flex flex-col items-center bg-hoverbutton bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
+    <div className="flex flex-col items-center bg-homepage-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
       <div>
         <Header />
         {loading && <Adding />}
@@ -79,14 +79,16 @@ const RegisterDriver = () => {
       </div>
 
       {currentStep === 1 && (
+      <div className="h-auto w-auto px-7 py-5 bg-zinc-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+
         <div className="text-center font-syke-light text-white justify-center items-center">
-          <div className="text-textgreen text-3xl text-left font-syke-medium">
-            <h1>Registering as Driver</h1>
+          <div className="text-textgreen text-3xl text-left font-syke-light">
+            <h1 className="font-syke-medium">Registering as Driver</h1>
             <h1 className="text-sm font-syke-light">
               Please enter your information
             </h1>
 
-            <div className="bg- w-[40rem] h-[25rem] mt-4">
+            <div className="bg- w-[40rem] h-auto mt-4">
               <form className="space-y-2">
                 <div className="flex space-x-4">
                   <div className="flex-1">
@@ -214,12 +216,13 @@ const RegisterDriver = () => {
               </div>
               <button
                 onClick={handleConfirmClick}
-                className="bg-buttongreen hover:bg-colorhover text-xl text-white py-2 px-4 w-[9rem]  mt-[1rem] rounded-sm"
+                className="bg-buttongreen hover:bg-colorhover text-xl text-white py-2 px-4 w-[9rem] mt-[1rem] rounded-sm font-syke-bold"
               >
                 Confirm
               </button>
             </div>
           </div>
+        </div>
         </div>
       )}
     </div>

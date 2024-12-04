@@ -33,6 +33,8 @@ import useLoading from "./hooks/context-hooks/useLoading.ts";
 import { LoadingProvider } from "./context/LoadingContext.tsx";
 import { Slide, ToastContainer } from "react-toastify";
 import ViewProfile from "./pages/ViewProfile.tsx";
+import Protocols from "./components/Policies/protocols.tsx";
+import Rules from "./components/Policies/rules.tsx";
 
 const Main = () => {
   const { appLoading }: LoadingContextType = useLoading();
@@ -63,6 +65,8 @@ const Main = () => {
             <Route path="/driverprofile" element={<DriverProfile />} />
             <Route path="/homepagedriver" element={<HomepageDriver />} />
             <Route path="/notificationlist" element={<NotificationList />} />
+            <Route path="/protocols" element={<Protocols/>}/>
+            <Route path="/rules" element={<Rules/>}/>
           </Route>
 
           {/* ADMIN ROUTES */}
