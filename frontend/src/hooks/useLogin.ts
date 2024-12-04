@@ -43,7 +43,7 @@ const useLogin = () => {
       setAuth!(userInfo);
 
       // notify success login
-      toast.success("Login Successfully!");
+      toast.success("Logged In Successfully!");
 
       // To either navigate to the previous page where they go logged off or the landing page
       navigate(userInfo.isAdmin ? "/admin" : "/homepage");

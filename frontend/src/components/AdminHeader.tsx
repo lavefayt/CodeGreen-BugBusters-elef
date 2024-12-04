@@ -4,16 +4,37 @@ import useLogout from "../hooks/useLogout";
 
 const AdminHeader = () => {
   const navigate = useNavigate();
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [isDropdownOpenAccount, setDropdownOpenAccount] = useState(false);
+  const [isDropdownOpenList, setDropdownOpenList] = useState(false);
+
+  // Separate refs for each dropdown
+  const dropdownRefList = useRef<HTMLDivElement>(null);
+  const dropdownRefAccount = useRef<HTMLDivElement>(null);
+
   const { logout } = useLogout();
+
+  const handleViolators = () => {
+    navigate("/violatorslist");
+  };
+
+  const handleDrivers = () => {
+    navigate("/driverslist");
+  };
+
+  const handleRegistrations = () => {
+    navigate("/registration-list");
+  };
 
   const handleHomePage = () => {
     navigate("/admin");
   };
 
-  const toggleDropdown = () => {
-    setDropdownOpen((prevState) => !prevState);
+  const toggleDropdownAccount = () => {
+    setDropdownOpenAccount((prevState) => !prevState);
+  };
+
+  const toggleDropdownList = () => {
+    setDropdownOpenList((prevState) => !prevState);
   };
 
   const handleLogOut = async () => {
@@ -23,10 +44,16 @@ const AdminHeader = () => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
+        dropdownRefList.current &&
+        !dropdownRefList.current.contains(event.target as Node)
       ) {
-        setDropdownOpen(false);
+        setDropdownOpenList(false);
+      }
+      if (
+        dropdownRefAccount.current &&
+        !dropdownRefAccount.current.contains(event.target as Node)
+      ) {
+        setDropdownOpenAccount(false);
       }
     };
 
@@ -38,7 +65,7 @@ const AdminHeader = () => {
     <header className="flex items-center font-syke-medium justify-start w-full p-4">
       <div className="flex items-center w-full justify-between">
         {/* Logo Section */}
-        <div className="flex items-center w-[11rem] mr-[150px]">
+        <div className="flex items-center w-[15rem] mr-[150px]">
           <button
             onClick={handleHomePage}
             className="flex text-left items-center gap-4 group overflow-hidden rounded-md pr-20 py-2 text-white font-medium text-lg"
@@ -48,49 +75,63 @@ const AdminHeader = () => {
               alt="Logo"
               className="w-10 h-5 object-contain md:w-[4rem] md:h-[4rem] transition-transform duration-300 hover:scale-105"
             />
-            <h1 className="text-lg md:text-xl  transition-colors font-syke-medium hover:text-buttongreen">
+            <h1 className="text-lg md:text-xl transition-colors font-syke-medium hover:text-buttongreen">
               CodeGreen Gateway
             </h1>
           </button>
         </div>
 
         {/* Navigation Section */}
-        <nav className="flex space-x-20 text-white font-syke-medium text-lg">
+        <nav className="flex space-x-[8rem] text-white font-syke-medium text-lg">
           <Link to="/encode" className="hover:text-textgreen transition-colors">
             Encode
           </Link>
-          <Link
-            to="/driverslist"
-            className="hover:text-textgreen transition-colors"
-          >
-            Drivers
-          </Link>
-          <Link
-            to="/violatorslist"
-            className="hover:text-textgreen transition-colors"
-          >
-            Violators
-          </Link>
 
-          {/* Dropdown Menu */}
-          <div className="relative" ref={dropdownRef}>
+          {/* List Dropdown */}
+          <div className="relative" ref={dropdownRefList}>
             <button
-              onClick={toggleDropdown}
+              onClick={toggleDropdownList}
+              className="hover:text-buttongreen transition-colors"
+            >
+              Lists
+            </button>
+            {isDropdownOpenList && (
+              <div className="absolute right-0 mt-4 w-48 bg-hoverbutton text-white rounded-md shadow-lg z-10">
+                <span
+                  onClick={handleViolators}
+                  className="block font-syke-medium rounded-t-lg text-sm px-4 py-2 hover:bg-buttongreen cursor-pointer"
+                >
+                  Violator's List
+                </span>
+                <span
+                  onClick={handleDrivers}
+                  className="block font-syke-medium text-sm px-4 py-2 hover:bg-buttongreen cursor-pointer"
+                >
+                  Driver's List
+                </span>
+                <span
+                  onClick={handleRegistrations}
+                  className="block font-syke-medium text-sm rounded-b-lg px-4 py-2 hover:bg-buttongreen cursor-pointer"
+                >
+                  Registration's List
+                </span>
+              </div>
+            )}
+          </div>
+
+          {/* Account Dropdown */}
+          <div className="relative" ref={dropdownRefAccount}>
+            <button
+              onClick={toggleDropdownAccount}
               className="hover:text-buttongreen transition-colors"
             >
               Account
             </button>
-            {isDropdownOpen && (
+            {isDropdownOpenAccount && (
               <div className="absolute right-0 mt-4 w-48 bg-hoverbutton text-white rounded-md shadow-lg z-10">
-                <span className="block font-syke-medium rounded-t-lg text-sm px-4 py-2 hover:bg-buttongreen cursor-pointer ">
+                <span className="block font-syke-medium rounded-t-lg text-sm px-4 py-2 hover:bg-buttongreen cursor-pointer">
                   Reset Password
                 </span>
-                {/* <span
-                  onClick={handleSignOut}
-                  className="block font-syke-medium text-sm px-4 py-2 hover:bg-buttongreen cursor-pointer"
-                >
-                  Reset Password
-                </span> */}
                 <span
                   onClick={handleLogOut}
                   className="block font-syke-medium text-sm rounded-b-lg px-4 py-2 hover:bg-buttongreen cursor-pointer"
