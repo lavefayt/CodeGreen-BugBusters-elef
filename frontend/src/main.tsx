@@ -45,104 +45,36 @@ const Main = () => {
     <BrowserRouter>
       <Routes>
         {/* PUBLIC ROUTES */}
-        <Route
-          path="/"
-          element={
-            <Navigate
-              to="/login"
-              replace
-            />
-          }
-        />
-        <Route
-          path="/login"
-          element={<LoginPage />}
-        />
-        <Route
-          path="/signup"
-          element={<SignUp />}
-        />
-        <Route
-          path="/forgot"
-          element={<Forgot />}
-        />
-        <Route
-          path="/unauthorized"
-          element={<UnauthorizedPage />}
-        />
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/forgot" element={<Forgot />} />
+        <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
         <Route element={<PersistLogin />}>
           {/* FOR ALL LOGGED IN */}
-          <Route
-            path="/view-profile/:driverId"
-            element={<ViewProfile />}
-          />
+          <Route path="/view-profile/:driverId" element={<ViewProfile />} />
           {/* USER ROUTES */}
           <Route element={<RequireAuth forAdmin={false} />}>
-            <Route
-              path="/homepage"
-              element={<HomePage />}
-            />
-            <Route
-              path="/about"
-              element={<AboutPage />}
-            />
-            <Route
-              path="/register-driver"
-              element={<RegisterDriver />}
-            />
-            <Route
-              path="/policies"
-              element={<Policies />}
-            />
-            <Route
-              path="/driverprofile"
-              element={<DriverProfile />}
-            />
-            <Route
-              path="/homepagedriver"
-              element={<HomepageDriver />}
-            />
-            <Route
-              path="/notificationlist"
-              element={<NotificationList />}
-            />
+            <Route path="/homepage" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/register-driver" element={<RegisterDriver />} />
+            <Route path="/policies" element={<Policies />} />
+            <Route path="/driverprofile" element={<DriverProfile />} />
+            <Route path="/homepagedriver" element={<HomepageDriver />} />
+            <Route path="/notificationlist" element={<NotificationList />} />
           </Route>
 
           {/* ADMIN ROUTES */}
           <Route element={<RequireAuth forAdmin={true} />}>
-            <Route
-              path="/admin"
-              element={<AdminLandingPage />}
-            />
-            <Route
-              path="/driverslist"
-              element={<DriversList />}
-            />
-            <Route
-              path="/encode"
-              element={<EncodePage />}
-            />
-            <Route
-              path="/add-driver"
-              element={<AddDriver />}
-            />
-            <Route
-              path="/add-violation"
-              element={<AddViolation />}
-            />
-            <Route
-              path="/violatorslist"
-              element={<ViolatorList />}
-            />
-            <Route
-              path="/registration-list"
-              element={<RegistrationList />}
-            />
-            <Route
-              path="/add-car"
-              element={<AddCar />}
-            />
+            <Route path="/admin" element={<AdminLandingPage />} />
+            <Route path="/driverslist" element={<DriversList />} />
+            <Route path="/encode" element={<EncodePage />} />
+            <Route path="/add-driver" element={<AddDriver />} />
+            <Route path="/add-violation" element={<AddViolation />} />
+            <Route path="/violatorslist" element={<ViolatorList />} />
+            <Route path="/registration-list" element={<RegistrationList />} />
+            <Route path="/add-car" element={<AddCar />} />
           </Route>
         </Route>
       </Routes>
@@ -157,13 +89,13 @@ if (rootElement) {
     <StrictMode>
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={4000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
         rtl={false}
         pauseOnFocusLoss
-        draggable
+        draggable={false}
         pauseOnHover
         theme="dark"
         transition={Slide}

@@ -2,7 +2,7 @@ import { Spinner } from "react-activity";
 
 const Loading = ({ loading }: { loading: boolean }) => {
   return (
-    <div className="flex justify-center items-center h-screen bg-hoverbutton">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-hoverbutton">
       <Spinner
         size={50}
         color="#008000"

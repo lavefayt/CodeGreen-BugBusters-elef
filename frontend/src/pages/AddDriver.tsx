@@ -6,6 +6,8 @@ import Success from "../components/Success";
 import { Driver } from "../types/datatypes";
 import useAddDriver from "../hooks/driver-hooks/useAddDriver";
 import ErrorAlert from "../components/ErrorAlert";
+import { toast } from "react-toastify";
+
 
 const AddDriver = () => {
   const navigate = useNavigate();
@@ -36,7 +38,7 @@ const AddDriver = () => {
         (formData.license_number === "" ||
           formData.license_expiration_date === ""))
     ) {
-      setAlertMessage("Please fill in all the required fields.");
+      toast.error("Missing input fields.");
       return;
     }
     setAlertMessage("");
@@ -106,7 +108,7 @@ const AddDriver = () => {
                       </h1>
                       <input
                         type="text"
-                        className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
+                        className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                         name="last_name"
                         value={formData.last_name}
                         onChange={handleChange}
