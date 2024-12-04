@@ -14,11 +14,6 @@ router.get("/get", async (_req: Request, res: Response) => {
     console.log("Registrations fetched successfully:", registrations);
 
     res.json(registrations); // Send the registration list as a response
-    // res.status(200).json({
-    //   title: "Success",
-    //   message: "Registrations fetched successfully.",
-    //   isRegistered: registrations[0] ? true : false,
-    // });
   } catch (error) {
     const errorMessage = (error as Error).message;
     console.error("Error fetching registration list:", errorMessage);
@@ -44,8 +39,8 @@ router.post("/add", async (req: Request, res: Response) => {
     console.log(user_id);
     await pool.query(
       `
-      INSERT INTO registrations (user_id, license_number, school_email, first_name,last_name, date_of_birth, driver_type, sex ) 
-      VALUES ($1, $2, $3,$4,$5,$6,$7, $8)
+      INSERT INTO registrations (user_id, license_number, school_email, first_name, last_name, date_of_birth, driver_type, sex) 
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
       `,
       [
         user_id,
@@ -53,13 +48,11 @@ router.post("/add", async (req: Request, res: Response) => {
         school_email,
         first_name,
         last_name,
-        sex,
         date_of_birth,
         driver_type,
         sex,
       ]
     );
-
     res.status(201).json({
       title: "Success",
       message: "Registration created successfully.",
