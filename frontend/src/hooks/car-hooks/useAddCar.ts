@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BackendError } from "../../types/error.types";
-import { Cars } from "../../types/datatypes";
+import { Car } from "../../types/datatypes";
 import { fetchWithAuth } from "../../utils/fetch";
 import useFetchWithAuthExports from "../context-hooks/useFetchWithAuthExports";
 
@@ -10,7 +10,7 @@ const useAddCar = () => {
   const { auth, refresh, navigate} = useFetchWithAuthExports()
   
 
-  const postCar = async (formData: Cars): Promise<boolean> => {
+  const postCar = async (formData: Car): Promise<boolean> => {
     setLoading(true);
 
     try {

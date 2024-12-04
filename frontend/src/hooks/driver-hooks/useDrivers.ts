@@ -1,11 +1,11 @@
 import { useEffect, useState, useCallback } from "react";
-import { DriverWithViolations } from "../../types/datatypes.ts";
+import { DriverWithVandC } from "../../types/datatypes.ts";
 import { BackendError } from "../../types/error.types.ts";
 import { fetchWithAuth } from "../../utils/fetch.tsx";
 import useFetchWithAuthExports from "../context-hooks/useFetchWithAuthExports.ts";
 
 const useDrivers = () => {
-  const [data, setData] = useState<DriverWithViolations[] | null>(null);
+  const [data, setData] = useState<DriverWithVandC[] | null>(null);
   const [error, setError] = useState<BackendError | null>(null);
   const [loading, setLoading] = useState(false);
   const { auth, refresh, navigate } = useFetchWithAuthExports();
@@ -25,7 +25,7 @@ const useDrivers = () => {
         const error: BackendError = await response.json();
         setError(error);
       } else {
-        const drivers: DriverWithViolations[] = await response.json();
+        const drivers: DriverWithVandC[] = await response.json();
         setData(drivers);
       }
     } catch (err) {
