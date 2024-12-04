@@ -2,12 +2,12 @@ import Header from "../components/Header";
 
 const AboutPage = () => {
   return (
-    <div className="flex flex-col items-center bg-adminlanding-bg min-h-screen">
+    <div className="flex flex-col items-center bg-policies-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
       <div>
         <Header />
       </div>
       <div className="w-[50rem] h-[30rem] bg-gray-400 overflow-y-auto rounded-md z-auto scrollbar bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
-      <div className="text-left py-2 px-6 rounded-xl bg-clip-padding ">
+        <div className="text-left py-2 px-6 rounded-xl bg-clip-padding ">
         <div className=" overflow-y-auto scrollbar">
           <h1 className="text-textgreen font-syke-medium text-2xl mt-4">About Us</h1>
 
