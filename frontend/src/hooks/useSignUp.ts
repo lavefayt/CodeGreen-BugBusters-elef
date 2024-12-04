@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { UserSignUp } from "../types/user.types";
-import useFetch from "./useFetch";
 import { BackendError } from "../types/error.types";
 import { toast } from "react-toastify";
+import { normalFetch } from "../utils/fetch";
 
 const useSignUp = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const { normalFetch } = useFetch();
 
   const submitSignUp = async (formData: UserSignUp) => {
     setLoading(true);

@@ -1,19 +1,22 @@
 import { useState } from "react";
 import { BackendError } from "../types/error.types";
 import { Registration } from "../types/datatypes";
-import useFetch from "../hooks/useFetch";
+import { fetchWithAuth } from "../utils/fetch";
+import useFetchWithAuthExports from "./context-hooks/useFetchWithAuthExports";
 
 export const useAddRegistration = () => {
   const [error, setError] = useState<BackendError | null>(null); // Handle errors
   const [loading, setLoading] = useState<boolean>(); // Track loading state
-
-  const { fetchWithAuth } = useFetch();
+  const { auth, refresh, navigate } = useFetchWithAuthExports();
 
   const postRegistration = async (formData: Registration) => {
     setLoading(true);
 
     try {
       const response = await fetchWithAuth(
+        navigate,
+        refresh,
+        auth,
         "/registration/add",
         "POST",
         formData

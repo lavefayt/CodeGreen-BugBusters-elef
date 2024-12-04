@@ -21,7 +21,7 @@ const useRefresh = () => {
       const backendError: BackendError = await response.json();
       setError(backendError);
       setLoading(false);
-      return;
+      return undefined;
     }
 
     const foundUser = await response.json();

@@ -1,25 +1,23 @@
-import { useEffect, useState, useCallback } from "react";
-import useFetch from "../useFetch";
+import { useEffect, useState } from "react";
 import { BackendError } from "../../types/error.types";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import { DriverWithViolations } from "../../types/datatypes";
-import useAuth from "../context-hooks/useAuth";
-import { AuthContextType } from "../../types/user.types";
+import { fetchWithAuth } from "../../utils/fetch";
+import useFetchWithAuthExports from "../context-hooks/useFetchWithAuthExports";
 
 const useGetDriver = (id: string) => {
-  const { fetchWithAuth } = useFetch();
   const [loading, setLoading] = useState<boolean>(true);
   const [driver, setDriver] = useState<DriverWithViolations>({});
-  const { auth }: AuthContextType = useAuth();
+  const { auth, refresh, navigate } = useFetchWithAuthExports();
 
-  const navigate = useNavigate();
-
-  const fetchDriver = useCallback(
-    async (id: string) => {
+  useEffect(() => {
+    const fetchDriver = async (id: string) => {
       setLoading(true);
       try {
         const response = await fetchWithAuth(
+          navigate,
+          refresh,
+          auth,
           auth?.isAdmin ? `/driver/get/${id}` : `/profile/get/${id}`,
           "get"
         );
@@ -45,15 +43,11 @@ const useGetDriver = (id: string) => {
       } finally {
         setLoading(false);
       }
-    },
-    [auth, fetchWithAuth, navigate]
-  );
+    };
+    fetchDriver(id);
+  }, [auth]);
 
-  useEffect(() => {
-    fetchDriver(id!);
-  }, [fetchDriver, id]);
-
-  return { driver, loading, fetchDriver };
+  return { driver, loading };
 };
 
 export default useGetDriver;
