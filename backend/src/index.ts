@@ -1,11 +1,9 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import cors from "cors";
-import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import { Pool, neonConfig } from "@neondatabase/serverless";
 import ws from "ws";
 import authRoutes from "./routes/auth";
-import { User } from "./types/datatypes";
 import verifyToken from "./middlewares/verifyToken";
 import cookieParser from "cookie-parser";
 import allowedOrigins from "./config/allowedOrigins";

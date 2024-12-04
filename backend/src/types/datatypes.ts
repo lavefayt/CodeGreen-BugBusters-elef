@@ -1,5 +1,3 @@
-import { NextFunction, Request, Response } from "express";
-import { Database } from "./database.types";
 
 export interface Driver {
   date_of_birth: string;

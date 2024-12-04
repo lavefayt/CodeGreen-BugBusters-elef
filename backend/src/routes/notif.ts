@@ -4,7 +4,7 @@ import { pool } from "..";
 const router = express();
 
 // Get all notifications
-router.get("/get", async (req: Req, res: Response) => {
+router.get("/get", async (_req: Req, res: Response) => {
     try {
         const notification = await pool.query('SELECT * FROM notifications');
         res.status(200).json({

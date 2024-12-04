@@ -1,15 +1,8 @@
-import express, { Request, Response, NextFunction } from "express";
+import express, { Request, Response } from "express";
 import { pool } from ".."; // Assuming Neon database pool is imported correctly
 import { Registration } from "../types/datatypes";
 
 const router = express.Router();
-
-// The asyncHandler function for catching errors in async routes
-const asyncHandler =
-  (fn: (req: Request, res: Response, next: NextFunction) => Promise<any>) =>
-  (req: Request, res: Response, next: NextFunction) => {
-    return Promise.resolve(fn(req, res, next)).catch(next); // Ensure the promise is returned
-  };
 
 // GET route to fetch all registrations
 router.get("/get", async (_req: Request, res: Response) => {
@@ -87,82 +80,86 @@ router.post("/add", async (req: Request, res: Response) => {
 
 router.post(
   "/approve",
-  asyncHandler(
-    async (req: Request<{}, {}, { license_number: string }>, res: Response) => {
-      const { license_number } = req.body;
+  async (req: Request<{}, {}, { license_number: string }>, res: Response) => {
+    const { license_number } = req.body;
 
-      if (!license_number) {
-        return res.status(400).json({
-          title: "Validation Error",
-          message: "License number is required.",
-        });
-      }
+    if (!license_number) {
+      res.status(400).json({
+        title: "Validation Error",
+        message: "License number is required.",
+      });
+      return;
+    }
 
-      const { rows: registrations } = await pool.query(
-        // Fetch based on license number
-        `SELECT school_email, user_id FROM registrations WHERE license_number = $1`,
-        [license_number]
-      );
+    const { rows: registrations } = await pool.query(
+      // Fetch based on license number
+      `SELECT school_email, user_id FROM registrations WHERE license_number = $1`,
+      [license_number]
+    );
 
-      if (registrations.length === 0) {
-        return res.status(404).json({
-          title: "Not Found",
-          message: "Registration with the specified license number not found.",
-        });
-      }
+    if (registrations.length === 0) {
+      res.status(404).json({
+        title: "Not Found",
+        message: "Registration with the specified license number not found.",
+      });
+      return;
+    }
 
-      const registration = registrations[0];
-      const { school_email, user_id } = registration;
+    const registration = registrations[0];
+    const { school_email, user_id } = registration;
 
-      const { rows: existingDrivers } = await pool.query(
-        // Check if license exists in the driver table
-        `SELECT id, email FROM drivers WHERE license_number = $1`,
-        [license_number]
-      );
+    const { rows: existingDrivers } = await pool.query(
+      // Check if license exists in the driver table
+      `SELECT id, email FROM drivers WHERE license_number = $1`,
+      [license_number]
+    );
 
-      if (existingDrivers.length > 0) {
-        const existingDriver = existingDrivers[0];
+    if (existingDrivers.length > 0) {
+      const existingDriver = existingDrivers[0];
 
-        // Only update the email if it's NULL or an empty string
-        if (existingDriver.email === "") {
-          await pool.query(
-            `UPDATE drivers 
+      // Only update the email if it's NULL or an empty string
+      if (existingDriver.email === "") {
+        await pool.query(
+          `UPDATE drivers 
          SET email = $1, user_id = $2 
          WHERE license_number = $3`,
-            [school_email, user_id, license_number]
-          );
+          [school_email, user_id, license_number]
+        );
 
-          return res.status(200).json({
-            title: "Driver Updated!",
-            message: `Driver's email and user_id have been updated successfully.`,
-          });
-        }
+        res.status(200).json({
+          title: "Driver Updated!",
+          message: `Driver's email and user_id have been updated successfully.`,
+        });
+        return;
+      }
 
-        if (existingDriver.email) {
-          await pool.query(
-            `UPDATE drivers 
+      if (existingDriver.email) {
+        await pool.query(
+          `UPDATE drivers 
          SET user_id = $1 
          WHERE license_number = $2`,
-            [user_id, license_number]
-          );
-          return res.status(200).json({
-            title: "Driver Updated!",
-            message: `Driver's user_id have been updated successfully.`,
-          });
-        } else {
-          return res.status(200).json({
-            title: "No Update Needed",
-            message: `Driver already has an email. No changes were made.`,
-          });
-        }
-      } else {
-        return res.status(404).json({
-          title: "License Number Not Found",
-          message: "No driver found with the provided license number.",
+          [user_id, license_number]
+        );
+        res.status(200).json({
+          title: "Driver Updated!",
+          message: `Driver's user_id have been updated successfully.`,
         });
+        return;
+      } else {
+        res.status(200).json({
+          title: "No Update Needed",
+          message: `Driver already has an email. No changes were made.`,
+        });
+        return;
       }
+    } else {
+      res.status(404).json({
+        title: "License Number Not Found",
+        message: "No driver found with the provided license number.",
+      });
+      return;
     }
-  )
+  }
 );
 
 export default router;

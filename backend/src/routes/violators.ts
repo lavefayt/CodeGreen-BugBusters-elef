@@ -34,6 +34,7 @@ router.get("/get", async (_req: Request, res: Response) => {
 
     res.status(200).json(violators);
   } catch (error) {
+    console.log(error);
     res.sendStatus(500);
   }
 });

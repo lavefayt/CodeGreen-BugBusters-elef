@@ -23,7 +23,7 @@ const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
     req.user = payload.userId;
     console.log(`UserId: ${req.user}`);
   } catch (error) {
-    // console.log(error)
+    console.log(error);
     res
       .status(403)
       .json({ title: "Token Invalid", message: "Access has expired." });

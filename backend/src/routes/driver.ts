@@ -1,20 +1,7 @@
 import express, { Request, Response } from "express";
 import { pool } from "..";
 import { Driver } from "../types/datatypes";
-import { title } from "process";
 import validateDriver from "../middlewares/validateDriver";
-
-const asyncHandler =
-  (
-    fn: (
-      req: Request,
-      res: Response,
-      next: express.NextFunction
-    ) => Promise<any>
-  ) =>
-  (req: Request, res: Response, next: express.NextFunction) => {
-    Promise.resolve(fn(req, res, next)).catch(next);
-  };
 
 const router = express();
 router.post("/add", validateDriver, async (req: Request, res: Response) => {
@@ -134,12 +121,10 @@ router.get("/get/:driverId", async (req: Request, res: Response) => {
       [foundDriver.id]
     );
 
-
-    const { rows : cars } = await pool.query(
+    const { rows: cars } = await pool.query(
       "SELECT * FROM cars WHERE driver_id = $1",
       [foundDriver.id]
-    )
-
+    );
 
     res.status(200).json({ ...foundDriver, violations, cars });
   } catch (error) {
@@ -149,104 +134,102 @@ router.get("/get/:driverId", async (req: Request, res: Response) => {
   }
 });
 
-router.patch(
-  "/update",
-  asyncHandler(async (req: Request, res: Response) => {
-    const { id, ...updates } = req.body;
+router.patch("/update", async (req: Request, res: Response) => {
+  const { id, ...updates } = req.body;
 
-    if (!id) {
-      return res.status(400).json({
-        title: "Validation Error",
-        message: "Driver ID is required to update the record.",
-      });
-    }
+  if (!id) {
+    res.status(400).json({
+      title: "Validation Error",
+      message: "Driver ID is required to update the record.",
+    });
+    return;
+  }
 
-    // Prepare the fields and values for the query
-    const fields = Object.keys(updates);
-    const values = Object.values(updates);
+  // Prepare the fields and values for the query
+  const fields = Object.keys(updates);
+  const values = Object.values(updates);
 
-    // Dynamically create the SET clause for the update
-    const setClause = fields
-      .map((field, index) => `${field} = $${index + 1}`)
-      .join(", ");
+  // Dynamically create the SET clause for the update
+  const setClause = fields
+    .map((field, index) => `${field} = $${index + 1}`)
+    .join(", ");
 
-    try {
-      // Build and run the update query
-      const query = `
+  try {
+    // Build and run the update query
+    const query = `
         UPDATE drivers
         SET ${setClause}
         WHERE id = $${fields.length + 1}
         RETURNING *;
       `;
 
-      const result = await pool.query(query, [...values, id]);
+    const result = await pool.query(query, [...values, id]);
 
-      if (result.rowCount === 0) {
-        return res.status(404).json({
-          title: "Not Found",
-          message: "Driver with the specified ID does not exist.",
-        });
-      }
-
-      const updatedDriver = result.rows[0];
-
-      // Return success with the updated driver data
-      res.status(200).json({
-        title: "Driver Updated!",
-        message: `Driver ${updatedDriver.last_name}, ${updatedDriver.first_name} has been updated successfully.`,
-        driver: updatedDriver,
-      });
-    } catch (error) {
-      console.error("Error updating driver:", error);
-      res.status(500).json({
-        title: "Server Error",
-        message: "An error occurred while updating the driver.",
-      });
-    }
-  })
-);
-
-router.delete(
-  "/delete",
-  asyncHandler(async (req: Request, res: Response) => {
-    console.log("Request body:", req.body); // Log the incoming request body
-
-    const { id } = req.body;
-
-    if (!id) {
-      console.error("No ID provided in the request body");
-      return res.status(400).json({
-        title: "Validation Error",
-        message: "Driver ID is required to delete a record.",
-      });
-    }
-
-    await pool.query(`DELETE FROM cars WHERE driver_id = $1 RETURNING *`, [id]);
-
-    await pool.query(`DELETE FROM violations WHERE id = $1 RETURNING *`, [id]);
-
-    const resultDriver = await pool.query(
-      `DELETE FROM drivers WHERE id = $1 RETURNING *`,
-      [id]
-    );
-
-    if (resultDriver.rowCount === 0) {
-      console.error("Driver not found in the database");
-      return res.status(404).json({
+    if (result.rowCount === 0) {
+      res.status(404).json({
         title: "Not Found",
         message: "Driver with the specified ID does not exist.",
       });
+      return;
     }
 
-    const deletedDriver = resultDriver.rows[0];
-    console.log("Driver deleted successfully:", deletedDriver);
+    const updatedDriver = result.rows[0];
 
+    // Return success with the updated driver data
     res.status(200).json({
-      title: "Driver Deleted",
-      message: `Driver ${deletedDriver.last_name}, ${deletedDriver.first_name} has been removed.`,
-      driver: deletedDriver,
+      title: "Driver Updated!",
+      message: `Driver ${updatedDriver.last_name}, ${updatedDriver.first_name} has been updated successfully.`,
+      driver: updatedDriver,
     });
-  })
-);
+  } catch (error) {
+    console.error("Error updating driver:", error);
+    res.status(500).json({
+      title: "Server Error",
+      message: "An error occurred while updating the driver.",
+    });
+  }
+});
+
+router.delete("/delete", async (req: Request, res: Response) => {
+  console.log("Request body:", req.body); // Log the incoming request body
+
+  const { id } = req.body;
+
+  if (!id) {
+    console.error("No ID provided in the request body");
+    res.status(400).json({
+      title: "Validation Error",
+      message: "Driver ID is required to delete a record.",
+    });
+    return;
+  }
+
+  await pool.query(`DELETE FROM cars WHERE driver_id = $1 RETURNING *`, [id]);
+
+  await pool.query(`DELETE FROM violations WHERE id = $1 RETURNING *`, [id]);
+
+  const resultDriver = await pool.query(
+    `DELETE FROM drivers WHERE id = $1 RETURNING *`,
+    [id]
+  );
+
+  if (resultDriver.rowCount === 0) {
+    console.error("Driver not found in the database");
+    res.status(404).json({
+      title: "Not Found",
+      message: "Driver with the specified ID does not exist.",
+    });
+    return;
+  }
+
+  const deletedDriver = resultDriver.rows[0];
+  console.log("Driver deleted successfully:", deletedDriver);
+
+  res.status(200).json({
+    title: "Driver Deleted",
+    message: `Driver ${deletedDriver.last_name}, ${deletedDriver.first_name} has been removed.`,
+    driver: deletedDriver,
+  });
+});
 
 export default router;
