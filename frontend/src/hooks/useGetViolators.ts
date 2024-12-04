@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { BackendError } from "../types/error.types";
-import { DriverWithViolations } from "../types/datatypes";
+import { DriverWithVandC } from "../types/datatypes";
 import { fetchWithAuth } from "../utils/fetch";
 import useFetchWithAuthExports from "./context-hooks/useFetchWithAuthExports";
 
 const useGetViolators = () => {
-  const [violators, setViolators] = useState<DriverWithViolations[]>([]);
+  const [violators, setViolators] = useState<DriverWithVandC[]>([]);
   const [loading, setLoading] = useState<boolean>();
   const { auth, refresh, navigate } = useFetchWithAuthExports();
 

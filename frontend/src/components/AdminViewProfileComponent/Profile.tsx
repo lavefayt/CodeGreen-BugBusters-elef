@@ -1,9 +1,9 @@
-import { DriverWithViolations } from "../../types/datatypes";
+import { DriverWithVandC } from "../../types/datatypes";
 
 const Profile = ({
   driver,
 }: {
-  driver: DriverWithViolations;
+  driver: DriverWithVandC;
 }) => {
   
   return (
