@@ -14,11 +14,11 @@ router.get("/get", async (_req: Request, res: Response) => {
     console.log("Registrations fetched successfully:", registrations);
 
     res.json(registrations); // Send the registration list as a response
-    res.status(200).json({
-      title: "Success",
-      message: "Registrations fetched successfully.",
-      isRegistered: registrations[0] ? true : false,
-    });
+    // res.status(200).json({
+    //   title: "Success",
+    //   message: "Registrations fetched successfully.",
+    //   isRegistered: registrations[0] ? true : false,
+    // });
   } catch (error) {
     const errorMessage = (error as Error).message;
     console.error("Error fetching registration list:", errorMessage);
