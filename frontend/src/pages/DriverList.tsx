@@ -5,15 +5,15 @@ import AdminHeader from "../components/AdminHeader";
 import DriverListCard from "../components/DriversListCard";
 import useDrivers from "../hooks/driver-hooks/useDrivers";
 import Loading from "../components/Loading";
-import { DriverWithViolations } from "../types/datatypes.ts";
+import { DriverWithVandC } from "../types/datatypes.ts";
 
 const DriversList = () => {
   const { data: Drivers, loading } = useDrivers();
-  const [selectedDriver, setSelectedDriver] = useState<DriverWithViolations>();
+  const [selectedDriver, setSelectedDriver] = useState<DriverWithVandC>();
 
   const navigate = useNavigate();
   // Handle driver click to show more details
-  const handleDriverClick = (driver: DriverWithViolations) => {
+  const handleDriverClick = (driver: DriverWithVandC) => {
     setSelectedDriver(driver);
     console.log(driver.id);
   };

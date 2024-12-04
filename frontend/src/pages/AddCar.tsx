@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import AdminHeader from "../components/AdminHeader";
 import React, { useState } from "react";
-import { Cars } from "../types/datatypes";
+import { Car } from "../types/datatypes";
 import useAddCar from "../hooks/car-hooks/useAddCar";
 import useCheckLicenseNumber from "../hooks/car-hooks/useCheckLicenseNumber"; // Ensure this is correctly imported
 
@@ -10,7 +10,7 @@ const AddCar = () => {
   const { postCar, error } = useAddCar();
   const { checkLicenseNumber } = useCheckLicenseNumber(); // Ensure you're getting the checkLicenseNumber function
 
-  const [formData, setFormData] = useState<Cars>({
+  const [formData, setFormData] = useState<Car>({
     license_number: "",
     license_plate: "",
     brand: "",
