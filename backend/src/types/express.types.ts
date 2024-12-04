@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import "express";
 
 declare module "express" {
   interface Request {

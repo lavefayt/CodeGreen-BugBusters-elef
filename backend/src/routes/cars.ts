@@ -4,18 +4,6 @@ import { Cars } from "../types/datatypes";
 
 const router = express();
 
-const asyncHandler =
-  (
-    fn: (
-      req: Request,
-      res: Response,
-      next: express.NextFunction
-    ) => Promise<any>
-  ) =>
-  (req: Request, res: Response, next: express.NextFunction) => {
-    Promise.resolve(fn(req, res, next)).catch(next);
-  };
-
 router.post("/check-license", async (req: Request, res: Response) => {
   try {
     const { license_number } = req.body;
@@ -28,7 +16,7 @@ router.post("/check-license", async (req: Request, res: Response) => {
     );
 
     const driverFound = drivers[0];
-    console.log(drivers)
+    console.log(drivers);
 
     if (!driverFound) {
       res.status(401).json({
@@ -43,6 +31,7 @@ router.post("/check-license", async (req: Request, res: Response) => {
       message: "Driver with this license number exists.",
     });
   } catch (error) {
+    console.log(error);
     res.sendStatus(500);
   }
 });
@@ -86,17 +75,18 @@ router.post("/add", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/get", asyncHandler(async (req: Request, res: Response) => {
+router.get("/get", async (req: Request, res: Response) => {
   try {
     const { driverId } = req.query;
 
     console.log("Received driverId:", driverId);
 
     if (!driverId) {
-      return res.status(400).json({
+      res.status(400).json({
         title: "Driver ID is required",
         message: "Please provide a driver ID.",
       });
+      return;
     }
 
     const driverIdStr = String(driverId);
@@ -109,68 +99,71 @@ router.get("/get", asyncHandler(async (req: Request, res: Response) => {
     );
 
     if (cars.length === 0) {
-      return res.status(404).json({
+      res.status(404).json({
         title: "No Cars Found",
         message: "No cars found for the given driver ID.",
       });
+      return;
     }
 
     res.status(200).json(cars);
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error("Error fetching cars:", error.message);
-      return res.status(500).json({ title: "Unknown Error", message: error.message });
+      res.status(500).json({ title: "Unknown Error", message: error.message });
+      return;
     } else {
-      
       console.error("Unknown error:", error);
-      return res.status(500).json({ title: "Unknown Error", message: "An unexpected error occurred" });
+      res.status(500).json({
+        title: "Unknown Error",
+        message: "An unexpected error occurred",
+      });
+      return;
     }
   }
-}));
+});
 
+router.patch("/update", async (req: Request, res: Response) => {
+  const { license_plate, ...updates } = req.body;
 
-router.patch(
-  "/update",
-  asyncHandler(async (req: Request, res: Response) => {
-    const { license_plate, ...updates } = req.body;
+  if (!license_plate) {
+    res.status(400).json({
+      title: "Validation Error",
+      message: "License plate is required to update the record.",
+    });
+    return;
+  }
 
-    if (!license_plate) {
-      return res.status(400).json({
-        title: "Validation Error",
-        message: "License plate is required to update the record.",
-      });
-    }
+  const fields = Object.keys(updates);
+  const values = Object.values(updates);
 
-    const fields = Object.keys(updates);
-    const values = Object.values(updates);
+  const setClause = fields
+    .map((field, index) => `${field} = $${index + 1}`)
+    .join(", ");
 
-    const setClause = fields
-      .map((field, index) => `${field} = $${index + 1}`)
-      .join(", ");
-
-    const query = `UPDATE cars SET ${setClause}
+  const query = `UPDATE cars SET ${setClause}
          WHERE license_plate = $${fields.length + 1} 
          RETURNING *`;
 
-    const result = await pool.query(query, [...values, license_plate]);
+  const result = await pool.query(query, [...values, license_plate]);
 
-    if (result.rowCount === 0) {
-      return res.status(404).json({
-        title: "Not Found",
-        message: "Cars with the specified ID does not exist.",
-      });
-    }
-
-    const updateCar = result.rows[0];
-    console.log("Car updated successfully:", updateCar);
-
-    res.status(200).json({
-      title: "Car Updated!",
-      message: `Driver ${updateCar.last_name}, ${updateCar.first_name} has been updated successfully.`,
-      driver: updateCar,
+  if (result.rowCount === 0) {
+    res.status(404).json({
+      title: "Not Found",
+      message: "Cars with the specified ID does not exist.",
     });
-  })
-);
+    return;
+  }
+
+  const updateCar = result.rows[0];
+  console.log("Car updated successfully:", updateCar);
+
+  res.status(200).json({
+    title: "Car Updated!",
+    message: `Driver ${updateCar.last_name}, ${updateCar.first_name} has been updated successfully.`,
+    driver: updateCar,
+  });
+});
 
 router.delete("/delete", async (req: Request, res: Response) => {
   try {
@@ -184,9 +177,11 @@ router.delete("/delete", async (req: Request, res: Response) => {
             RETURNING *`,
       [req.body.id]
     );
+
+    res.status(200).json({ message: "Car Added Successfully" });
     console.log("Driver deleted successfully:", car);
   } catch (error) {
-    console.log("Error!");
+    res.status(500).json({ message: error });
   }
 });
 

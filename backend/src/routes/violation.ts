@@ -1,8 +1,5 @@
 import express, { Request, Response } from "express";
 import { pool } from "..";
-import { Violation } from "../types/datatypes";
-import { title } from "process";
-// import validateDriver from "../middlewares/validateDriver";
 
 const router = express();
 

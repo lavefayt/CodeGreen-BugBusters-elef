@@ -36,7 +36,7 @@ router.post("/signup", validateAuth, async (req: Request, res: Response) => {
     }
     const salt = (await bcrypt.genSalt(11)) as string;
     const hashedPassword = await bcrypt.hash(password!, salt);
-    const user = await pool.query(
+    await pool.query(
       "INSERT INTO users (first_name, last_name, email, password, salt) VALUES ($1, $2, $3, $4, $5)",
       [first_name, last_name, email, hashedPassword, salt]
     );
@@ -143,6 +143,7 @@ router.get("/refresh", async (req: Request, res: Response) => {
         .status(200)
         .json({ accessToken, isAdmin: foundUser.is_admin, id: foundUser.id });
     } catch (error) {
+      console.log(error);
       res.status(403).json({
         title: "No Access Rights",
         message: "You do not have access to these features.",
@@ -191,7 +192,7 @@ router.get("/logout", async (req: Request, res: Response) => {
       foundUser.id,
     ]);
 
-    const newUser = await pool.query("SELECT * FROM users WHERE id = $1", [
+    await pool.query("SELECT * FROM users WHERE id = $1", [
       foundUser.id,
     ]);
 
