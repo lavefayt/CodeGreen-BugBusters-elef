@@ -22,7 +22,7 @@ export interface Violation {
   paid_status?: boolean;
 }
 
-export interface DriverWithViolations {
+export interface DriverWithVandC {
   date_of_birth?: string;
   driver_type?: "Select" | "Student" | "Faculty" | "Staff";
   email?: string;
@@ -36,6 +36,7 @@ export interface DriverWithViolations {
   sex?: "Select" | "Male" | "Female";
   user_id?: string | null;
   violations?: Violation[];
+  cars?: Car[]
 }
 
 export interface Registration {
@@ -56,7 +57,7 @@ export interface User {
   last_name: string;
 }
 
-export interface Cars {
+export interface Car {
   id?: string;
   driver_id?: string;
   car_model?: string;

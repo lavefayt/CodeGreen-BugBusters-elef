@@ -1,11 +1,11 @@
-import { Cars } from "../../types/datatypes.ts";
+import { Car } from "../../types/datatypes.ts";
 import { BackendError } from "../../types/error.types.ts";
 import useFetch from "../useFetch.ts";
 
 import { useEffect, useState, useCallback } from "react";
 
 const useCars = (driverId: string) => {
-  const [data, setData] = useState<Cars[] | null>(null);
+  const [data, setData] = useState<Car[] | null>(null);
   const [error, setError] = useState<BackendError | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -20,7 +20,7 @@ const useCars = (driverId: string) => {
         const error: BackendError = await response.json();
         setError(error);
       } else {
-        const cars: Cars[] = await response.json();
+        const cars: Car[] = await response.json();
         setData(cars);
       }
     } catch (err) {

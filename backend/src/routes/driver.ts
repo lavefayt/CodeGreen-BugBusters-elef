@@ -134,7 +134,14 @@ router.get("/get/:driverId", async (req: Request, res: Response) => {
       [foundDriver.id]
     );
 
-    res.status(200).json({ ...foundDriver, violations });
+
+    const { rows : cars } = await pool.query(
+      "SELECT * FROM cars WHERE driver_id = $1",
+      [foundDriver.id]
+    )
+
+
+    res.status(200).json({ ...foundDriver, violations, cars });
   } catch (error) {
     const errorMessage = (error as Error).message;
     console.error("Error fetching driver:", errorMessage);
