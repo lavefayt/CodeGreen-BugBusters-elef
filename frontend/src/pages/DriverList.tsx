@@ -27,94 +27,146 @@ const DriversList = () => {
   if (loading) return <Loading loading={loading} />;
 
   return (
-    <div className="flex flex-col items-center bg-login-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
+    <div className="flex flex-col items-center bg-adminlanding-bg min-h-screen">
       <div>
         <AdminHeader />
       </div>
 
-      {/* Main Content */}
-      {/* drivers info left side */}
-      <div className="flex flex-col lg:flex-row items-center justify-center lg:space-x-10 w-full px-5">
-        <div className="bg-zinc-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 w-full lg:w-2/5 p-6 rounded-lg shadow-md mb-5 lg:mb-0">
-          <h1 className="text-2xl text-center text-textgreen font-syke-bold mb-4">
-            Driver's Information
-          </h1>
-          {/* <p className="text-white">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-            scelerisque felis sit amet odio ultricies, in tristique metus
-          </p> */}
-          {selectedDriver ? (
-            <div>
-              <h1 className="text-xl text-center text-textgreen font-syke-bold mb-2">
-                Personal Details :
-              </h1>
+      <div className="w-[75rem] h-auto bg-gray-400 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+        <div className="max-w-full max-h-full flex justify-center items-center">
+          <div className="w-[35rem] p-3 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+            {selectedDriver ? (
+              <div className="items-center px-5">
+                <div className="text-left font-syke-light text-white">
+                  <div className="text-textgreen py-2 mb-5">
+                    <h1 className="text-4xl font-syke-bold">Driver Details</h1>
+                    <div>Full Information</div>
+                  </div>
+                </div>
+                <form className="space-y-[2rem]">
+                  <div className="flex space-x-1">
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-l">
+                        Last Name
+                      </h1>
+                      <h1 className="text-textgreen font-syke-medium text-xl">
+                        {selectedDriver.last_name || ""}
+                      </h1>
+                    </div>
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-l">
+                        First Name
+                      </h1>
+                      <h1 className="text-textgreen font-syke-medium text-xl">
+                        {selectedDriver.first_name || ""}
+                      </h1>
+                    </div>
+                  </div>
 
-              <p className="text-white">
-                <strong className="text-textgreen">Last Name : </strong>{" "}
-                {selectedDriver.last_name}
-              </p>
+                  <div className="flex space-x-4">
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-l">Sex</h1>
+                      <h1 className="text-textgreen font-syke-medium text-xl">
+                        {selectedDriver.sex || ""}
+                      </h1>
+                    </div>
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-l">
+                        Date of Birth
+                      </h1>
+                      <h1 className="text-textgreen font-syke-medium text-xl">
+                        {selectedDriver.date_of_birth || "MM/DD/YY"}
+                      </h1>
+                    </div>
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-l">
+                        Driver Type
+                      </h1>
+                      <h1 className="text-textgreen font-syke-medium text-xl">
+                        {selectedDriver.driver_type || ""}
+                      </h1>
+                    </div>
+                  </div>
 
-              <p className="text-white">
-                <strong className="text-textgreen">First Name : </strong>{" "}
-                {selectedDriver.first_name}
-              </p>
+                  <div className="space-y-2">
+                    <div className="flex space-x-4">
+                      <div className="flex-1">
+                        <h1 className="text-white font-syke-light text-l">
+                          License Number
+                        </h1>
+                        <h1 className="text-textgreen font-syke-medium text-xl">
+                          {selectedDriver.license_number || ""}
+                        </h1>
+                      </div>
+                    </div>
 
-              <p className="text-white">
-                <strong className="text-textgreen">Middle Name : </strong>{" "}
-                {selectedDriver.middle_name}
-              </p>
+                    <div className="flex">
+                      <div className="flex-1">
+                        <h1 className="text-white font-syke-light text-l">
+                          License Expiration Date
+                        </h1>
+                        <h1 className="text-textgreen font-syke-medium text-xl">
+                          {selectedDriver.license_expiration_date || ""}
+                        </h1>
+                      </div>
+                      <div>
+                        <button
+                          // onClick={handleAccept}
+                          className="p-2 px-4 m-2 bg-buttongreen active:bg-colorhover transition-colors rounded-sm text-white font-syke-bold"
+                        >
+                          View Profile
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            ) : (
+              <div className="text-white text-center font-syke p-2">
+                Select a driver to see details.
+              </div>
+            )}
+          </div>
 
-              <p className="text-white">
-                <strong className="text-textgreen">Email : </strong>{" "}
-                {selectedDriver.email}
-              </p>
-
-              <h1 className="text-xl text-center text-textgreen font-syke-bold mb-2">
-                More Details :
-              </h1>
-
-              <p className="text-white">
-                <strong className="text-textgreen">Sex : </strong>{" "}
-                {selectedDriver.sex}
-              </p>
-
-              <p className="text-white">
-                <strong className="text-textgreen">Date of Birth : </strong>{" "}
-                {selectedDriver.date_of_birth}
-              </p>
-
-              <h1 className="text-xl text-center text-textgreen font-syke-bold mb-2">
-                License Details :
-              </h1>
-
-              <p className="text-white">
-                <strong className="text-textgreen">License Number : </strong>{" "}
-                {selectedDriver.license_number}
-              </p>
-
-              <p className="text-white">
-                <strong className="text-textgreen">
-                  License Expiration :{" "}
-                </strong>{" "}
-                {selectedDriver.license_expiration_date}
-              </p>
-
-              <div className="flex justify-center mt-6">
-                <div className="flex justify-center w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm">
-                  <button onClick={() => handleViewProfile()}>
-                    View Profile
-                  </button>
+          <div className="w-[50%] h-full p-6 rounded-md">
+            <div className="text-left rounded-xl bg-clip-padding">
+              <div className="text-left font-syke-light text-white">
+                <div className="text-textgreen py-3">
+                  <h1 className="text-4xl font-syke-bold">Driver's List</h1>
+                  <div>List of Drivers</div>
+                </div>
+              </div>
+              <div
+                className="w-full h-[20rem] overflow-y-auto"
+                id="listcontainer"
+              >
+                <div className="flex flex-col overflow-y-auto h-80 scrollbar-thin scrollbar text-white">
+                  {Drivers && Drivers.length > 0 ? (
+                    Drivers.map((driver) => (
+                      <div
+                        key={driver.id}
+                        className="cursor-pointer hover:bg-secondgrey"
+                        onClick={() => handleDriverClick(driver)} // Show more details on click
+                      >
+                        <DriverListCard
+                          key={driver.id}
+                          id={driver.id!}
+                          firstname={driver.first_name!}
+                          lastname={driver.last_name!}
+                          driver_type={driver.driver_type!}
+                          license_no={driver.license_number!}
+                        />
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-white text-center">No drivers found.</p>
+                  )}
                 </div>
               </div>
             </div>
-          ) : (
-            <p className="text-white">Click a driver to see more details.</p>
-          )}
-        </div>
+          </div>
 
-        {/* Move the Drivers List container to the left by 20px */}
-        {/* Drivers List Section */}
-        <div className="w-[50%] h-full p-6 rounded-r-md  bg-gray-400 rounded-l-lg bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+          {/* <div className="w-[50%] h-full p-6 rounded-r-md  bg-gray-400 rounded-l-lg bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
           <div className="text-left rounded-xl bg-clip-padding">
             <div className="text-left font-syke-light text-white">
               <div className="text-textgreen py-3">
@@ -126,14 +178,13 @@ const DriversList = () => {
               className="w-full h-[23rem] overflow-y-auto rounded-md scrollbar"
               id="listcontainer"
             >
-              {/* drivers list header */}
+              
               <div className="flex justify-between font-syke-medium items-center border-b-2 pb-2 mb-2 border-white text-white text-xl">
                 <div className="flex-1 text-center">First Name</div>
                 <div className="flex-1 text-center">Last Name</div>
                 <div className="flex-1 text-center">License No.</div>
               </div>
 
-              {/* Scrollable Driver List */}
               <div className="flex flex-col overflow-y-auto h-80 scrollbar-thin scrollbar text-white">
                 {Drivers && Drivers.length > 0 ? (
                   Drivers.map((driver) => (
@@ -158,6 +209,7 @@ const DriversList = () => {
               </div>
             </div>
           </div>
+        </div> */}
         </div>
       </div>
     </div>

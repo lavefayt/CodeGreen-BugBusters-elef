@@ -17,7 +17,7 @@ const RegistrationListCard = ({
           </h1>
         </div>
         <div className="flex-2 text-left">
-          <h1 className="text-white font-syke-light text-l">Driver Type</h1>
+          <h1 className="text-white font-syke-light text-md">Driver Type</h1>
           <h1 className="text-textgreen font-syke-medium text-xl">
             {driver_type}
           </h1>

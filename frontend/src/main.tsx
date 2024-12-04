@@ -13,7 +13,6 @@ import AdminLandingPage from "./pages/AdminHomePage.tsx";
 import EncodePage from "./pages/EncodePage.tsx";
 import ViolatorList from "./pages/ViolatorList.tsx";
 import DriversList from "./pages/DriverList.tsx";
-import Policies from "./pages/Policies.tsx";
 import DriverProfile from "./pages/DriverProfileSection.tsx";
 import RegisterDriver from "./pages/RegisterDriver.tsx";
 import AddDriver from "./pages/AddDriver.tsx";
@@ -61,7 +60,6 @@ const Main = () => {
             <Route path="/homepage" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/register-driver" element={<RegisterDriver />} />
-            <Route path="/policies" element={<Policies />} />
             <Route path="/driverprofile" element={<DriverProfile />} />
             <Route path="/homepagedriver" element={<HomepageDriver />} />
             <Route path="/notificationlist" element={<NotificationList />} />
