@@ -70,7 +70,7 @@ server.use("/profile", profileRoutes);
 // });
 
 // For PORT
-const PORT = 4444;
+const PORT = process.env.PORT || 4444;
 
 server.listen(PORT, () => {
   console.log(

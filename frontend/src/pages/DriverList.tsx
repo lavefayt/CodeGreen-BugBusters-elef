@@ -21,7 +21,6 @@ const DriversList = () => {
   const handleViewProfile = () => {
     if (!selectedDriver) return;
     navigate(`/view-profile/${selectedDriver.id}`);
-    navigate(`/view-profile`);
   };
 
   if (loading) return <Loading loading={loading} />;
