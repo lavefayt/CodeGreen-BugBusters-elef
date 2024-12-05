@@ -109,14 +109,15 @@ router.post("/approve", async (req: Request, res: Response) => {
     const existingDriver = existingDrivers[0];
 
     // Only update the email if it's NULL or an empty string
-    if (existingDriver.email === "") {
+    if (!existingDriver.email) { 
+      // If email is null, undefined, or an empty string
       await pool.query(
         `UPDATE drivers 
          SET email = $1, user_id = $2 
          WHERE license_number = $3`,
         [school_email, user_id, license_number]
       );
-
+    
       res.status(200).json({
         title: "Driver Updated!",
         message: `Driver's email and user_id have been updated successfully.`,
