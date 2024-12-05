@@ -70,9 +70,9 @@ server.use("/profile", profileRoutes);
 // });
 
 // For PORT
-const PORT = process.env.PORT || 4444;
+const PORT = Number(process.env.PORT) || 4444;
 
-server.listen(PORT, () => {
+server.listen(PORT, "0.0.0.0", () => {
   console.log(
     `The Server for CodeGreen has Started at http://localhost:${PORT}`
   );
