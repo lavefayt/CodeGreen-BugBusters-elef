@@ -27,9 +27,14 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         
-    - name: Install All Packages
-      run: npm run allinstall
+    - name: Install All Packages (Frontend)
+      working-directory: ./frontend
+      run: npm ci
+    - name: Install All Packages (Backend)
+      working-directory: ./backend
+      run: npm ci
+      
     - name: Run Eslint
-      run: npm run lint
+      run: npx eslint .
     - run: npm run build --if-present
     - run: npm test --if-present
