@@ -10,10 +10,7 @@ const Header = () => {
   const [isDropdownOpenPolicies, setDropdownOpenPolicies] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const droopdownRefPolicies = useRef<HTMLAnchorElement>(null);
-
-  const [activeSection, setActiveSection] = useState("protocols");
-
+  const droopdownRefPolicies = useRef<HTMLDivElement>(null);
 
   const { logout } = useLogout();
   const { auth }: AuthContextType = useAuth();
