@@ -28,13 +28,7 @@ jobs:
         cache: 'npm'
 
     - name: Install All Packages (Root)
-      run: npm ci
-    - name: Install All Packages (Frontend)
-      working-directory: ./frontend
-      run: npm ci
-    - name: Install All Packages (Backend)
-      working-directory: ./backend
-      run: npm ci
+      run: npm run allinstall
       
     - name: Run Eslint
       run: npm run lint
