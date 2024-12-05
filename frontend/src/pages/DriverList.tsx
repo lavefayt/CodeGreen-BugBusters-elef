@@ -21,7 +21,7 @@ const DriversList = () => {
   const handleViewProfile = () => {
     if (!selectedDriver) return;
     navigate(`/view-profile/${selectedDriver.id}`);
-    // navigate(`/view-profile`);
+    navigate(`/view-profile`);
   };
 
   if (loading) return <Loading loading={loading} />;
@@ -40,7 +40,7 @@ const DriversList = () => {
                 <div className="text-left font-syke-light text-white">
                   <div className="text-textgreen py-2 mb-5">
                     <h1 className="text-4xl font-syke-bold">Driver Details</h1>
-                    <div>Full Information</div>
+                    <div>Driver's key data.</div>
                   </div>
                 </div>
                 <form className="space-y-[2rem]">
@@ -111,8 +111,8 @@ const DriversList = () => {
                       </div>
                       <div>
                         <button
-                          // onClick={handleAccept}
-                          className="p-2 px-4 m-2 bg-buttongreen active:bg-colorhover transition-colors rounded-sm text-white font-syke-bold"
+                        onClick={handleViewProfile}
+                        className="p-2 px-4 m-2 bg-buttongreen active:bg-colorhover transition-colors rounded-sm text-white font-syke-bold"
                         >
                           View Profile
                         </button>
@@ -133,7 +133,7 @@ const DriversList = () => {
               <div className="text-left font-syke-light text-white">
                 <div className="text-textgreen py-3">
                   <h1 className="text-4xl font-syke-bold">Driver's List</h1>
-                  <div>List of Drivers</div>
+                  <div>List of Drivers within the university.</div>
                 </div>
               </div>
               <div
@@ -151,10 +151,10 @@ const DriversList = () => {
                         <DriverListCard
                           key={driver.id}
                           id={driver.id!}
-                          firstname={driver.first_name!}
-                          lastname={driver.last_name!}
+                          first_name={driver.first_name!}
+                          last_name={driver.last_name!}
                           driver_type={driver.driver_type!}
-                          license_no={driver.license_number!}
+                          license_number={driver.license_number!}
                         />
                       </div>
                     ))

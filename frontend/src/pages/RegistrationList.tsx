@@ -9,14 +9,14 @@ const RegistrationList = () => {
   const [selectedRegistration, setSelectedRegistration] =
     useState<Registration>();
 
-  // const handleRegisterClick = async (registration: React.FormEvent) => {
-  //   setSelectedRegistration(registration);
-  //   // console.log(registration.id);
-  // };
-
-  const handleAccept = (registrations: Registration) => {
-    setSelectedRegistration(registrations);
+  const handleRegisterClick = (registration: Registration) => {
+    setSelectedRegistration(registration)
   };
+
+  // const handleAccept = () => {
+  //   // Implement accept logic here
+  //   console.log("Accepting registration:", selectedRegistration);
+  // };
 
   // const handleDecline = (registrations: Registration) => {
   //   setSelectedRegistration(registrations);
@@ -33,7 +33,7 @@ const RegistrationList = () => {
       </div>
       <div className="w-[75rem] h-auto bg-gray-400 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
         <div className="max-w-full max-h-full flex justify-center items-center">
-          <div className="w-[35rem] h- p-3 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+          <div className="w-[35rem] p-3 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
             {selectedRegistration ? (
               <div className="items-center px-5">
                 <div className="text-left font-syke-light text-white">
@@ -112,7 +112,7 @@ const RegistrationList = () => {
                       </div>
                       <div>
                         <button
-                          onClick={() => handleAccept}
+                          // onClick={handleAccept}
                           className="p-2 px-4 m-2 bg-hoverbutton hover:bg-buttongreen transition-colors rounded-sm text-white font-syke-bold"
                         >
                           Accept
@@ -133,17 +133,17 @@ const RegistrationList = () => {
                 Select a registration to see details.
               </div>
             )}
-          </div>
-          <div className="w-[50%] h-full p-6 rounded-r-md">
+          </div>  
+          <div className="w-[50%] h-full p-6 rounded-md">
             <div className="text-left rounded-xl bg-clip-padding">
               <div className="text-left font-syke-light text-white">
                 <div className="text-textgreen py-3">
-                  <h1 className="text-4xl font-syke-bold">Registration List</h1>
+                  <h1 className="text-4xl font-syke-bold">Registration's List</h1>
                   <div>List of Users that Registered.</div>
                 </div>
               </div>
               <div
-                className="w-full h-[20rem] overflow-y-auto rounded-md"
+                className="w-full h-[20rem] overflow-y-auto"
                 id="listcontainer"
               >
                 <div className="flex flex-col overflow-y-auto h-80 scrollbar-thin scrollbar text-white">
@@ -151,8 +151,8 @@ const RegistrationList = () => {
                     registrations.map((registration) => (
                       <div
                         key={registration.user_id}
-                        className="cursor-pointer hover:bg-gray-700"
-                        // onClick={() => handleRegisterClick(registration)} // Show more details on click
+                        className="cursor-pointer hover:bg-secondgrey"
+                        onClick={() => handleRegisterClick(registration)}
                       >
                         <RegistrationListCard
                           key={registration.user_id}

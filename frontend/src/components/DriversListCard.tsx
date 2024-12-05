@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { useDeleteDriver } from "../hooks/driver-hooks/useDeleteDriver";
+// import { useState } from "react";
+//import { useDeleteDriver } from "../hooks/driver-hooks/useDeleteDriver";
+import { DriverWithVandC } from "../types/datatypes";
 
 // interface DriverProps {
 //   id: string; // Add ID to uniquely identify each driver
@@ -10,11 +11,11 @@ import { useDeleteDriver } from "../hooks/driver-hooks/useDeleteDriver";
 // }
 
 const DriverListCard = ({
-  firstname,
-  lastname,
+  first_name,
+  last_name,
   driver_type,
-  license_no,
-}: DriverProps) => {
+  license_number,
+}: DriverWithVandC) => {
   // Track whether the driver is in edit mode
   // const [isEditing, setIsEditing] = useState(false);
 
@@ -62,7 +63,7 @@ const DriverListCard = ({
           <div className="flex-2 min-w-[45%]">
             <h1 className="text-white font-syke-light text-sm">Name</h1>
             <h1 className="text-textgreen font-syke-medium text-md">
-              {firstname} {lastname}
+              {first_name} {last_name}
             </h1>
           </div>
           <div className="flex-2 text-left min-w-[25%]">
@@ -74,7 +75,7 @@ const DriverListCard = ({
           <div className="flex-2  text-left">
             <h1 className="text-white font-syke-light text-sm">License Number</h1>
             <h1 className="text-textgreen font-syke-medium text-md">
-              {license_no}
+              {license_number}
             </h1>
           </div>
         </div>
