@@ -7,7 +7,7 @@ export const normalFetch = async (
   method: string,
   body?: object
 ) => {
-  const response = await fetch(`http://localhost:4444${route}`, {
+  const response = await fetch(`${import.meta.env.VITE_SERVER_URL}${route}`, {
     method: method.toUpperCase(),
     headers: {
       "Content-type": "application/json",
@@ -27,7 +27,7 @@ export const fetchWithAuth = async (
   method: string,
   body?: object
 ) => {
-  const response = await fetch(`http://localhost:4444${route}`, {
+  const response = await fetch(`${import.meta.env.VITE_SERVER_URL}${route}`, {
     method: method.toUpperCase(),
     headers: {
       "Content-type": "application/json",
