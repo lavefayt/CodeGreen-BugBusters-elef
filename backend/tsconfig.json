@@ -1,17 +1,3 @@
-// {
-//   "compilerOptions": {
-//     "target": "es2016",
-//     "module": "commonjs",
-//     "esModuleInterop": true,
-//     "forceConsistentCasingInFileNames": true,
-//     "strict": true,
-//     "skipLibCheck": true
-//   },
-//   "include": ["lib/**/*.ts"],
-//   "exclude": ["node_modules"],
-//   "files": ["./src/types/express.types.ts"]
-// }
-
 {
   "compilerOptions": {
     "target": "es6",
@@ -25,6 +11,6 @@
     "rootDir": "./src"
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "dist"],
   "files": ["./src/types/express.types.ts"]
 }
