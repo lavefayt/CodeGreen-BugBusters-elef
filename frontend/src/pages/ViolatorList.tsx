@@ -2,21 +2,49 @@ import AdminHeader from "../components/AdminHeader";
 // import { ViolatorsTable } from "../types/datatypes";
 import useGetViolators from "../hooks/useGetViolators";
 import Loading from "../components/Loading";
-import { Violators } from "../types/datatypes";
+import { DriverWithVandC, Violators } from "../types/datatypes";
 import ViolatorsListCard from "../components/ViolatorsListCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import SearchAndSort from "../components/SearchAndSort";
 
 const ViolatorList = () => {
   // to get the violators
   const { violators: violators, loading } = useGetViolators();
   const [selectedViolator, setSelectedViolator] = useState<Violators>();
+  const [sortedViolators, setSortedViolators] = useState<DriverWithVandC[]>([]);
+  const [isSorted, setIsSorted] = useState(false); // Tracks toggle state
+  const [originalViolators, setOriginalViolators] = useState<DriverWithVandC[]>(
+    []
+  ); // Stores the original list
 
   const handleViolatorsClick = (violator: Violators) => {
     setSelectedViolator(violator);
     console.log(violator.id);
   };
 
-  console.log(violators);
+  // Toggle sorting between alphabetical and default
+  const handleSortToggle = () => {
+    if (!violators) return;
+
+    if (isSorted) {
+      setSortedViolators(originalViolators); // Reset to original order
+    } else {
+      const sorted = [...violators].sort((a, b) => {
+        const nameA = `${a.first_name} ${a.last_name}`.toLowerCase();
+        const nameB = `${b.first_name} ${b.last_name}`.toLowerCase();
+        return nameA.localeCompare(nameB);
+      });
+      setSortedViolators(sorted);
+    }
+    setIsSorted(!isSorted); // Toggle the sort state
+  };
+
+  useEffect(() => {
+    if (violators) {
+      setOriginalViolators(violators);
+      setSortedViolators(violators); // Default display
+    }
+  }, [violators]);
 
   if (loading) return <Loading loading={loading} />;
 
@@ -115,8 +143,7 @@ const ViolatorList = () => {
                       <div>
                         <button
                           // onClick={handleViolatorClick}
-                          className="p-2 px-4 m-2 bg-buttongreen active:bg-colorhover transition-colors rounded-sm text-white font-syke-bold"
-                        >
+                          className="p-2 px-4 m-2 bg-buttongreen active:bg-colorhover transition-colors rounded-sm text-white font-syke-bold">
                           View Profile
                         </button>
                       </div>
@@ -139,12 +166,17 @@ const ViolatorList = () => {
                   <div>List of Violators within the university.</div>
                 </div>
               </div>
+              <SearchAndSort
+                entries={violators}
+                setFilteredEntries={setSortedViolators}
+                handleSortToggle={handleSortToggle}
+                isSorted={isSorted}
+              />
               <div
                 className="w-full h-[20rem] overflow-y-auto"
-                id="listcontainer"
-              >
+                id="listcontainer">
                 <div className="flex flex-col overflow-y-auto h-80 scrollbar-thin scrollbar text-white">
-                  {violators && violators.length > 0 ? (
+                  {sortedViolators && sortedViolators.length > 0 ? (
                     violators.map((violator) => (
                       <div
                         key={violator.id}

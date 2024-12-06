@@ -6,6 +6,7 @@ import DriverListCard from "../components/DriversListCard";
 import useDrivers from "../hooks/driver-hooks/useDrivers";
 import Loading from "../components/Loading";
 import { DriverWithVandC } from "../types/datatypes.ts";
+import SearchAndSort from "../components/SearchAndSort.tsx";
 
 const DriversList = () => {
   const { data: Drivers, loading } = useDrivers();
@@ -13,7 +14,6 @@ const DriversList = () => {
   const [sortedDrivers, setSortedDrivers] = useState<DriverWithVandC[]>([]);
   const [isSorted, setIsSorted] = useState(false); // Tracks toggle state
   const [originalDrivers, setOriginalDrivers] = useState<DriverWithVandC[]>([]); // Stores the original list
-  const [searchQuery, setSearchQuery] = useState(""); // Tracks the search input
 
   const navigate = useNavigate();
 
@@ -43,21 +43,6 @@ const DriversList = () => {
       setSortedDrivers(sorted);
     }
     setIsSorted(!isSorted); // Toggle the sort state
-  };
-
-  // Filter drivers based on search query
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-    if (!query) {
-      setSortedDrivers(isSorted ? sortedDrivers : originalDrivers); // Reset to original or sorted list
-      return;
-    }
-
-    const filtered = Drivers?.filter((driver) => {
-      const fullName = `${driver.first_name} ${driver.last_name}`.toLowerCase();
-      return fullName.includes(query.toLowerCase());
-    });
-    setSortedDrivers(filtered || []);
   };
 
   // Initialize drivers and store the original list
@@ -156,8 +141,7 @@ const DriversList = () => {
                       <div>
                         <button
                           onClick={handleViewProfile}
-                          className="p-2 px-4 m-2 bg-buttongreen active:bg-colorhover transition-colors rounded-sm text-white font-syke-bold"
-                        >
+                          className="p-2 px-4 m-2 bg-buttongreen active:bg-colorhover transition-colors rounded-sm text-white font-syke-bold">
                           View Profile
                         </button>
                       </div>
@@ -180,27 +164,17 @@ const DriversList = () => {
                     <h1 className="text-4xl font-syke-bold">Driver's List</h1>
                     <div>List of Drivers within the university.</div>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <input
-                      type="text"
-                      placeholder="Search..."
-                      value={searchQuery}
-                      onChange={(e) => handleSearch(e.target.value)}
-                      className="p-2 rounded-md bg-white text-black"
-                    />
-                    <button
-                      className="text-white bg-textgreen w-20 h-8 rounded-md"
-                      onClick={handleSortToggle}
-                    >
-                      {isSorted ? "Default" : "Sort"}
-                    </button>
-                  </div>
+                  <SearchAndSort
+                    entries={Drivers!}
+                    setFilteredEntries={setSortedDrivers}
+                    handleSortToggle={handleSortToggle}
+                    isSorted={isSorted}
+                  />
                 </div>
               </div>
               <div
                 className="w-full h-[20rem] overflow-y-auto"
-                id="listcontainer"
-              >
+                id="listcontainer">
                 <div className="flex flex-col overflow-y-auto h-80 scrollbar-thin scrollbar text-white">
                   {sortedDrivers && sortedDrivers.length > 0 ? (
                     sortedDrivers.map((driver) => (
