@@ -49,10 +49,6 @@ export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 // Routes
 server.use("/auth", authRoutes);
-server.use("/notif", notifRoutes);
-server.use("/violation", violationRoutes);
-server.use("/violator", violatorRoutes);
-
 // APIs for Functionality (Must Be Placed Under Verification of Auth)
 server.use(verifyToken);
 server.use("/driver", driverRoutes); // "/driver/get || /driver/add"
@@ -60,6 +56,9 @@ server.use("/registration", registrations);
 server.use("/user", user);
 server.use("/car", carRoutes);
 server.use("/profile", profileRoutes);
+server.use("/notif", notifRoutes);
+server.use("/violation", violationRoutes);
+server.use("/violator", violatorRoutes);
 
 // server.get("/testing", async (req: Request, res: Response) => {
 //   try {
