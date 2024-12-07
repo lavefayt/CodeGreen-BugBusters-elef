@@ -2,17 +2,18 @@ import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 import useUser from "../hooks/useUser";
 import NotificationsList from "../components/NotificationsList";
+import Loading from "../components/Loading";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const { data: data } = useUser();
-
-  console.log(data);
+  const { data: data, loading } = useUser();
 
   const handleRegisterButton = () => {
     navigate("/register-driver");
   };
-
+  if (loading) {
+    return <Loading loading={loading} />;
+  }
   return (
     <div className="flex flex-col items-center bg-homepage-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
       <div>
