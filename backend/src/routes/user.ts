@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import { pool } from "..";
+import bcrypt from "bcrypt";
 
 const router = express.Router();
 
@@ -35,6 +36,71 @@ router.get("/get", async (req: Request, res: Response) => {
     const errorMessage = (error as Error).message;
     console.error("Error fetching the user:", errorMessage);
     res.status(500).json({ title: "Unknown Error", message: errorMessage });
+  }
+});
+
+router.patch("/change-password", async (req: Request, res: Response) => {
+  try {
+    const { currentPassword, newPassword, confirmNewPassword } = req.body;
+    const userId = req.user;
+
+    console.log(userId);
+
+    if (newPassword !== confirmNewPassword) {
+      res.status(406).json({
+        title: "New Password Does Not Match Confirm Password",
+        message:
+          "Please make sure that our new password is the same as the confirm password.",
+      });
+      return;
+    }
+
+    const { rows: users } = await pool.query(
+      "SELECT * FROM users WHERE id = $1",
+      [userId]
+    );
+
+    if (users.length === 0) {
+      res.status(404).json({
+        title: "User Not Found",
+        message: "User was not found in the database.",
+      });
+      return;
+    }
+
+    const foundUser = await users[0];
+
+    console.log(foundUser);
+    console.log(currentPassword);
+    console.log(foundUser.password);
+
+    const matchPassword = await bcrypt.compare(
+      currentPassword,
+      foundUser.password
+    );
+
+    if (!matchPassword) {
+      res.status(406).json({
+        title: "Incorrect Password",
+        message: "Please make sure to input the correct current password.",
+      });
+      return;
+    }
+    const salt = (await bcrypt.genSalt(11)) as string;
+    const hashedNewPassword = await bcrypt.hash(newPassword, salt);
+
+    await pool.query("UPDATE users SET password = $1, salt = $2", [
+      hashedNewPassword,
+      salt,
+    ]);
+
+    res.status(200).json({
+      title: "Password Changed",
+      message: "Password has been successfully changed.",
+    });
+  } catch (error) {
+    res.status(500).json({ message: "An Unknown Error Occured" });
+    console.log(error);
   }
 });
 
