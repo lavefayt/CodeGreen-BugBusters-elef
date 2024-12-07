@@ -66,3 +66,12 @@ export interface RegisterUser {
   violation_date: string;
   paid_status: boolean;
 }
+
+export interface Notification {
+  id: string;
+  user_id: number;
+  message: string;
+  sender: "Admin" | "User";
+  date_sent: string;
+}
+

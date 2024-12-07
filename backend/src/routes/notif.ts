@@ -34,17 +34,17 @@ router.get("/get/:id", async (req: Req, res: Response) => {
 });
 
 // Create a new notification
-router.post("/notifications", async (req: Req, res: Response) => {
-    const { user_id, message, sender, date_sent, user_id_user_id } = req.body;
-    try {
-        const newNotification = await pool.query('INSERT INTO notifications (user_id, message, sender, date_sent, user_id_user_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-            [user_id, message, sender, date_sent, user_id_user_id]);
-        res.status(201).json(newNotification.rows[0]);
-    } catch (err) {
-        console.error("ERROR", err);
-        res.status(500).json({ error: 'An error occurred while creating notification.' });
-    }
-});
+// router.post("/notifications", async (req: Req, res: Response) => {
+//     const { user_id, message, sender, date_sent, user_id_user_id } = req.body;
+//     try {
+//         const newNotification = await pool.query('INSERT INTO notifications (user_id, message, sender, date_sent, user_id_user_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+//             [user_id, message, sender, date_sent, user_id_user_id]);
+//         res.status(201).json(newNotification.rows[0]);
+//     } catch (err) {
+//         console.error("ERROR", err);
+//         res.status(500).json({ error: 'An error occurred while creating notification.' });
+//     }
+// });
 
 // Update a notification
 router.put("/notifications/:id", async (req: Req, res: Response) => {
