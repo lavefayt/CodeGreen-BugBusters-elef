@@ -9,14 +9,14 @@ export default {
         inputfield: "#6B6E70",
         hoverbutton: "#222629",
         secondgrey: "#474B4F",
-        colorhover: "#33471a"
+        colorhover: "#33471a",
       },
       backgroundImage: {
         "login-bg": "url('/assets/login.jpg')",
         "signup-bg": "url('/assets/signup.png')",
         "homepage-bg": "url('/assets/homepage.jpg')",
         "about-bg": "url('/assets/about.png')",
-        'adminlanding-bg': "url('/assets/adminlanding.png')",
+        "adminlanding-bg": "url('/assets/adminlanding.png')",
         "policies-bg": "url('/assets/bg-lib.jpg')",
       },
       fontFamily: {
@@ -36,12 +36,31 @@ export default {
           "0%": { opacity: "100", right: "1rem" },
           "100%": { opacity: "0", right: "-400px" },
         },
+        fadeInZoom: {
+          "0%": {
+            opacity: "0",
+            transform: "scale(0.95)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "scale(1)",
+          },
+        },
+        typewriter: {
+          "0%": { width: "0%" },
+          "100%": { width: "100%" },
+        },
+        blink: {
+          "50%": { borderColor: "transparent" },
+        },
       },
       animation: {
         fadeIn: "fadeIn 0.5s ease-in",
         fadeOut: "fadeOut 0.5s ease-out",
+        fadeInZoom: "fadeInZoom 0.8s ease-out",
+        typewriter: "typewriter 4s steps(40, end) 1s 1 normal both, blink 0.75s step-end infinite",
       },
-      plugins: [],
     },
   },
+  plugins: [],
 };

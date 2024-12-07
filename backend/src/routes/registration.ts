@@ -109,7 +109,7 @@ router.post("/approve", async (req: Request, res: Response) => {
     const existingDriver = existingDrivers[0];
 
     // Only update the email if it's NULL or an empty string
-    if (!existingDriver.email) { 
+    if (!existingDriver.email) {
       // If email is null, undefined, or an empty string
       await pool.query(
         `UPDATE drivers 
@@ -117,7 +117,12 @@ router.post("/approve", async (req: Request, res: Response) => {
          WHERE license_number = $3`,
         [school_email, user_id, license_number]
       );
-    
+
+      // Remove from registrations after successful update
+      await pool.query(`DELETE FROM registrations WHERE license_number = $1`, [
+        license_number,
+      ]);
+
       res.status(200).json({
         title: "Driver Updated!",
         message: `Driver's email and user_id have been updated successfully.`,
@@ -132,9 +137,15 @@ router.post("/approve", async (req: Request, res: Response) => {
          WHERE license_number = $2`,
         [user_id, license_number]
       );
+
+      // Remove from registrations after successful update
+      await pool.query(`DELETE  FROM registrations WHERE license_number = $1`, [
+        license_number,
+      ]);
+
       res.status(200).json({
         title: "Driver Updated!",
-        message: `Driver's user_id have been updated successfully.`,
+        message: `Driver's user_id has been updated successfully.`,
       });
       return;
     } else {
