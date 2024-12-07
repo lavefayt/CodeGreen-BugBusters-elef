@@ -148,6 +148,7 @@ router.patch("/change-password", async (req: Request, res: Response) => {
     });
   } catch (error) {
     res.status(500).json({ message: "An Unknown Error Occured" });
+    console.log(error);
   }
 });
 
