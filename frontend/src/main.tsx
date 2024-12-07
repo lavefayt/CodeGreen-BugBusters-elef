@@ -33,6 +33,7 @@ import { Slide, ToastContainer } from "react-toastify";
 import ViewProfile from "./pages/ViewProfile.tsx";
 import Protocols from "./components/Policies/protocols.tsx";
 import Rules from "./components/Policies/rules.tsx";
+import ChangePassword from "./pages/ChangePassword.tsx";
 
 const Main = () => {
   const { appLoading }: LoadingContextType = useLoading();
@@ -107,7 +108,14 @@ const Main = () => {
               path="/rules"
               element={<Rules />}
             />
+
+            <Route 
+            path="/changepassword"
+            element = { <ChangePassword/> }
+            />
+            
           </Route>
+          
 
           {/* ADMIN ROUTES */}
           <Route element={<RequireAuth forAdmin={true} />}>

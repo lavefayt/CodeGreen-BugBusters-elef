@@ -43,6 +43,10 @@ const Header = () => {
     logout();
   };
 
+  const handleChangePassword = () => ( 
+    navigate("/changepassword")
+  )
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -144,10 +148,10 @@ const Header = () => {
                 </span>
                 <span
                   // THIS SHOULD BE FOR RESETTING PASSWORD NOT LOG OUT
-                  onClick={handleLogOut}
+                  onClick={ handleChangePassword }
                   className="block font-syke-medium text-sm px-4 py-2 hover:bg-buttongreen cursor-pointer"
                 >
-                  Reset Password
+                  Change Password
                 </span>
                 <span
                   onClick={handleLogOut}
