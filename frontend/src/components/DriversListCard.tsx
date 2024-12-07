@@ -16,45 +16,6 @@ const DriverListCard = ({
   driver_type,
   license_number,
 }: DriverWithVandC) => {
-  // Track whether the driver is in edit mode
-  // const [isEditing, setIsEditing] = useState(false);
-
-  // // Track menu visibility
-  // const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // Store the updated driver details in state
-  // const [updatedDriver, setUpdatedDriver] = useState({
-  //   firstname,
-  //   lastname,
-  //   driver_type,
-  //   license_no,
-  // });
-
-  // // Hooks for update and delete
-  // const { deleteDriver, error: deleteError } = useDeleteDriver();
-
-  // Handle deleting a driver
-  // const handleDeleteClick = async () => {
-  //   const success = await deleteDriver(id);
-  //   if (success) {
-  //     alert(`Driver ${lastname}, ${firstname} deleted successfully!`);
-  //     // Optionally, trigger a re-fetch or remove the card from the UI
-  //   } else {
-  //     alert(
-  //       `Failed to delete driver: ${deleteError?.message || "Unknown error"}`
-  //     );
-  //   }
-
-
-  // Handle the input field changes for editing
-  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target;
-  //   setUpdatedDriver((prevState) => ({
-  //     ...prevState,
-  //     [name]: value,
-  //   }));
-  // };
-
   return (
       <div
         className="border-b-2 flex-col flex-1 border-t-transparent w-full border-b-inputfield space-y-[20px]"

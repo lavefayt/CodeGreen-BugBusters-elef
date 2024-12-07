@@ -34,8 +34,7 @@ export interface Violators {
   license_number?: string;
   middle_name?: string | null;
   sex?: "Select" | "Male" | "Female";
-  violations?: Violation[] ;
-
+  violations?: Violation[];
 }
 export interface DriverWithVandC {
   date_of_birth?: string;
@@ -86,4 +85,12 @@ export interface UserType {
   user: User;
   hasRegistered: boolean;
   isDriver: boolean;
+}
+
+export interface UserNotification {
+  id?: string;
+  driver_id?: string;
+  message?: string;
+  sender?: "Central Philippine School";
+  date_sent?: string;
 }

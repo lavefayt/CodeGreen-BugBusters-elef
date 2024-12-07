@@ -9,10 +9,10 @@ import cookieParser from "cookie-parser";
 import allowedOrigins from "./config/allowedOrigins";
 import { credentials } from "./middlewares/credentials";
 import driverRoutes from "./routes/driver";
-import user from "./routes/user";
+import userRoutes from "./routes/user";
 
-import notifRoutes from "./routes/notif";
-import registrations from "./routes/registration";
+import notificationRoutes from "./routes/notification";
+import registrationRoutes from "./routes/registration";
 import carRoutes from "./routes/cars";
 import violationRoutes from "./routes/violation";
 import violatorRoutes from "./routes/violators";
@@ -52,11 +52,11 @@ server.use("/auth", authRoutes);
 // APIs for Functionality (Must Be Placed Under Verification of Auth)
 server.use(verifyToken);
 server.use("/driver", driverRoutes); // "/driver/get || /driver/add"
-server.use("/registration", registrations);
-server.use("/user", user);
+server.use("/registration", registrationRoutes);
+server.use("/user", userRoutes);
 server.use("/car", carRoutes);
 server.use("/profile", profileRoutes);
-server.use("/notif", notifRoutes);
+server.use("/notification", notificationRoutes);
 server.use("/violation", violationRoutes);
 server.use("/violator", violatorRoutes);
 
