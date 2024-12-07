@@ -44,13 +44,10 @@ router.patch("/change-password", async (req: Request, res: Response) => {
     const { currentPassword, newPassword, confirmNewPassword } = req.body;
     const userId = req.user;
 
-    console.log(userId);
-
-    if (newPassword !== confirmNewPassword) {
-      res.status(406).json({
-        title: "New Password Does Not Match Confirm Password",
-        message:
-          "Please make sure that our new password is the same as the confirm password.",
+    if (![currentPassword, newPassword, confirmNewPassword].every(Boolean)) {
+      res.status(401).json({
+        title: "Missing Credentials",
+        message: "Please input all information needed.",
       });
       return;
     }
@@ -70,10 +67,6 @@ router.patch("/change-password", async (req: Request, res: Response) => {
 
     const foundUser = await users[0];
 
-    console.log(foundUser);
-    console.log(currentPassword);
-    console.log(foundUser.password);
-
     const matchPassword = await bcrypt.compare(
       currentPassword,
       foundUser.password
@@ -86,6 +79,16 @@ router.patch("/change-password", async (req: Request, res: Response) => {
       });
       return;
     }
+
+    if (newPassword !== confirmNewPassword) {
+      res.status(406).json({
+        title: "New Password Does Not Match Confirm Password",
+        message:
+          "Please make sure that our new password is the same as the confirm password.",
+      });
+      return;
+    }
+
     const salt = (await bcrypt.genSalt(11)) as string;
     const hashedNewPassword = await bcrypt.hash(newPassword, salt);
 

@@ -18,7 +18,7 @@ const useChangePassword = () => {
         navigate,
         refresh,
         auth,
-        "/auth/change-password",
+        "/user/change-password",
         "patch",
         data
       );

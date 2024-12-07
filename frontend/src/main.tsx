@@ -78,6 +78,11 @@ const Main = () => {
             path="/view-profile/:driverId"
             element={<ViewProfile />}
           />
+          <Route
+            path="/changepassword"
+            element={<ChangePassword />}
+          />
+
           {/* USER ROUTES */}
           <Route element={<RequireAuth forAdmin={false} />}>
             <Route
@@ -108,14 +113,7 @@ const Main = () => {
               path="/rules"
               element={<Rules />}
             />
-
-            <Route 
-            path="/changepassword"
-            element = { <ChangePassword/> }
-            />
-            
           </Route>
-          
 
           {/* ADMIN ROUTES */}
           <Route element={<RequireAuth forAdmin={true} />}>
