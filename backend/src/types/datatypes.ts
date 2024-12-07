@@ -69,7 +69,6 @@ export interface RegisterUser {
   confirm_password?: string;
 }
 
-<<<<<<< Updated upstream
 export interface Cars {
   id?: string;
   driver_id?: string;
@@ -79,7 +78,7 @@ export interface Cars {
   license_number?: string;
   brand?: string;
 }
-=======
+
 export interface Notification {
   id: string;
   user_id: number;
@@ -88,4 +87,3 @@ export interface Notification {
   date_sent: string;
 }
 
->>>>>>> Stashed changes

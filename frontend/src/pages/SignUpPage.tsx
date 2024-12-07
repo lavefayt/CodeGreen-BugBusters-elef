@@ -35,10 +35,6 @@ const SignUp = () => {
 
   return (
     <div className="flex relative justify-center items-center bg-signup-bg bg-cover bg-no-repeat sm:bg-top md:bg-right h-screen overflow-hidden">
-      {/* <div className="w-full max-w-3xl mb-8 mt-5">
-        <LogInSignUpHeader />
-    </div> */}
-
       <div className="flex bg-transparent p-8 rounded-lg w-full max-w-3xl mt-10">
         <div className="w-1/2 pl-8 flex flex-col justify-center items-start font-syke-medium text-textgreen text-4xl gap-2">
           <h1>Stay compliant.</h1>
