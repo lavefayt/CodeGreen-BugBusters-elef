@@ -9,6 +9,7 @@ const Vehicle = ({ driver }: { driver: DriverWithVandC }) => {
         {driver.cars!.map((car) => (
           <CarListCard
             key={car.license_number || "placeholder-license"}
+            id={car.id!}
             license_number={car.license_number || ""}
             license_plate={car.license_plate || ""}
             brand={car.brand || ""}
