@@ -18,10 +18,6 @@ const LoginPage = () => {
     navigate("/signup");
   };
 
-  const handleForgot = () => {
-    navigate("/forgot");
-  };
-
   return (
     <div className="flex justify-center items-center bg-login-bg bg-no-repeat bg-cover sm:bg-top md:bg-right lg:bg-left h-screen">
       <div className="flex bg-transparent p-8 rounded-lg w-full max-w-3xl mx-auto">
@@ -66,9 +62,10 @@ const LoginPage = () => {
                 required
               />
               <h1
-                className="mt-2 mb-2 text-buttongreen cursor-pointer font-syke-medium text-sm"
-                onClick={handleForgot}>
-                Forgot Password?
+                className="mt-2 mb-2 text-buttongreen font-syke-medium text-sm"
+                >
+                Please remember you password!<br>
+                </br>Store it somewhere safe.
               </h1>
             </div>
             <button
