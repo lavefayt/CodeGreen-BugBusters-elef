@@ -9,7 +9,7 @@ router.get("/get", async (_req: Request, res: Response) => {
   try {
     console.log("Fetching registration from the database...");
     const { rows: registrations } = await pool.query(
-      "SELECT user_id, license_number, school_email, first_name,last_name, date_of_birth, driver_type, sex FROM registrations"
+      "SELECT user_id, license_number, school_email, first_name,last_name, middle_name, date_of_birth, driver_type, sex FROM registrations"
     );
     console.log("Registrations fetched successfully:", registrations);
 
@@ -32,6 +32,7 @@ router.post("/add", async (req: Request, res: Response) => {
       first_name,
       sex,
       last_name,
+      middle_name,
       date_of_birth,
       driver_type,
     } = req.body as Registration;
@@ -39,8 +40,8 @@ router.post("/add", async (req: Request, res: Response) => {
     console.log(user_id);
     await pool.query(
       `
-      INSERT INTO registrations (user_id, license_number, school_email, first_name, last_name, date_of_birth, driver_type, sex) 
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      INSERT INTO registrations (user_id, license_number, school_email, first_name, last_name,middle_name, date_of_birth, driver_type, sex) 
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
       `,
       [
         user_id,
@@ -48,6 +49,7 @@ router.post("/add", async (req: Request, res: Response) => {
         school_email,
         first_name,
         last_name,
+        middle_name,
         date_of_birth,
         driver_type,
         sex,

@@ -61,6 +61,7 @@ export interface Registration {
   driver_type?: "Select" | "Student" | "Faculty" | "Staff";
   first_name?: string;
   last_name?: string;
+  middle_name?: string;
   sex?: "Select" | "Male" | "Female";
   date_of_birth?: string;
 }

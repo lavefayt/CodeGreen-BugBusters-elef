@@ -1,4 +1,3 @@
-
 export interface Driver {
   date_of_birth: string;
   driver_type: "Student" | "Faculty" | "Staff" | null;
@@ -20,6 +19,7 @@ export interface Registration {
   sex?: "Select" | "Male" | "Female";
   first_name?: string;
   last_name?: string;
+  middle_name?: string;
   date_of_birth?: string;
   driver_type?: string;
 }
@@ -86,4 +86,3 @@ export interface Notification {
   sender: "Admin" | "User";
   date_sent: string;
 }
-
