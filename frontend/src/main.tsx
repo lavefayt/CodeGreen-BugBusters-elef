@@ -45,107 +45,39 @@ const Main = () => {
     <BrowserRouter>
       <Routes>
         {/* PUBLIC ROUTES */}
-        <Route
-          path="/"
-          element={
-            <Navigate
-              to="/login"
-              replace
-            />
-          }
-        />
-        <Route
-          path="/login"
-          element={<LoginPage />}
-        />
-        
-        <Route
-          path="/signup"
-          element={<SignUp />}
-        />
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/login" element={<LoginPage />} />
 
-        <Route
-          path="/unauthorized"
-          element={<UnauthorizedPage />}
-        />
+        <Route path="/signup" element={<SignUp />} />
+
+        <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
         <Route element={<PersistLogin />}>
           {/* FOR ALL LOGGED IN */}
-          <Route
-            path="/view-profile/:driverId"
-            element={<ViewProfile />}
-          />
-          <Route
-            path="/changepassword"
-            element={<ChangePassword />}
-          />
+          <Route path="/view-profile/:driverId" element={<ViewProfile />} />
+          <Route path="/changepassword" element={<ChangePassword />} />
 
           {/* USER ROUTES */}
           <Route element={<RequireAuth forAdmin={false} />}>
-            <Route
-              path="/homepage"
-              element={<HomePage />}
-            />
-            <Route
-              path="/about"
-              element={<AboutPage />}
-            />
-            <Route
-              path="/register-driver"
-              element={<RegisterDriver />}
-            />
-            <Route
-              path="/driverprofile"
-              element={<DriverProfile />}
-            />
-            <Route
-              path="/homepagedriver"
-              element={<HomepageDriver />}
-            />
-            <Route
-              path="/protocols"
-              element={<Protocols />}
-            />
-            <Route
-              path="/rules"
-              element={<Rules />}
-            />
+            <Route path="/homepage" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/register-driver" element={<RegisterDriver />} />
+            <Route path="/driverprofile" element={<DriverProfile />} />
+            <Route path="/homepagedriver" element={<HomepageDriver />} />
+            <Route path="/protocols" element={<Protocols />} />
+            <Route path="/rules" element={<Rules />} />
           </Route>
 
           {/* ADMIN ROUTES */}
           <Route element={<RequireAuth forAdmin={true} />}>
-            <Route
-              path="/admin"
-              element={<AdminLandingPage />}
-            />
-            <Route
-              path="/driverslist"
-              element={<DriversList />}
-            />
-            <Route
-              path="/encode"
-              element={<EncodePage />}
-            />
-            <Route
-              path="/add-driver"
-              element={<AddDriver />}
-            />
-            <Route
-              path="/add-violation"
-              element={<AddViolation />}
-            />
-            <Route
-              path="/violatorslist"
-              element={<ViolatorList />}
-            />
-            <Route
-              path="/registration-list"
-              element={<RegistrationList />}
-            />
-            <Route
-              path="/add-car"
-              element={<AddCar />}
-            />
+            <Route path="/admin" element={<AdminLandingPage />} />
+            <Route path="/driverslist" element={<DriversList />} />
+            <Route path="/encode" element={<EncodePage />} />
+            <Route path="/add-driver" element={<AddDriver />} />
+            <Route path="/add-violation" element={<AddViolation />} />
+            <Route path="/violatorslist" element={<ViolatorList />} />
+            <Route path="/registration-list" element={<RegistrationList />} />
+            <Route path="/add-car" element={<AddCar />} />
           </Route>
         </Route>
       </Routes>

@@ -62,6 +62,7 @@ const RegisterDriver = () => {
   const [formData, setFormData] = useState<Registration>({
     last_name: "",
     first_name: "",
+    middle_name: "",
     sex: "Select",
     date_of_birth: "",
     driver_type: "Select",
@@ -104,7 +105,19 @@ const RegisterDriver = () => {
                         required
                       />
                     </div>
-
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-xl">
+                        Middle Name
+                      </h1>
+                      <input
+                        type="text"
+                        className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
+                        name="middle_name"
+                        value={formData.middle_name}
+                        onChange={handleChange}
+                        placeholder="Optional"
+                      />
+                    </div>
                     <div className="flex-1">
                       <h1 className="text-white font-syke-light text-xl">
                         First Name
