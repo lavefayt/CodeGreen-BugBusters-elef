@@ -31,18 +31,19 @@ const SearchAndSort = ({
 
   return (
     <div className="flex items-center space-x-2">
-      <button
-        className="text-white bg-textgreen w-20 h-8 rounded-md"
-        onClick={handleSortToggle}>
-        {isSorted ? "Default" : "Sort"}
-      </button>
       <input
         type="text"
-        placeholder="Search..."
+        placeholder="Search"
         value={searchQuery}
         onChange={handleInputChange}
-        className="p-2 rounded-md bg-white text-black"
+        className="p-2 rounded font-syke-medium bg-hoverbutton w-40 text-white focus:outline-none focus:ring-0 active:outline-none"
       />
+      <button
+        className="text-white bg-buttongreen w-20 h-10 rounded font-syke-medium active:bg-colorhover "
+        onClick={handleSortToggle}
+      >
+        {isSorted ? "Default" : "Sort"}
+      </button>
     </div>
   );
 };
