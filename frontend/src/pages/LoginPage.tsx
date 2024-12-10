@@ -64,7 +64,7 @@ const LoginPage = () => {
               <h1
                 className="mt-2 mb-2 text-buttongreen font-syke-medium text-sm"
                 >
-                Please remember you password!<br>
+                Please remember your password!<br>
                 </br>Store it somewhere safe.
               </h1>
             </div>
