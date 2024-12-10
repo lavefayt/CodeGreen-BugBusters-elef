@@ -17,7 +17,6 @@ import DriverProfile from "./pages/DriverProfileSection.tsx";
 import RegisterDriver from "./pages/RegisterDriver.tsx";
 import AddDriver from "./pages/AddDriver.tsx";
 import AddViolation from "./pages/AddViolation.tsx";
-import Forgot from "./pages/Forgot.tsx";
 import { AuthProvider } from "./context/AuthContext.tsx";
 import UnauthorizedPage from "./pages/UnauthorizedPage.tsx";
 import HomepageDriver from "./components/NotificationsList.tsx";
@@ -59,14 +58,12 @@ const Main = () => {
           path="/login"
           element={<LoginPage />}
         />
+        
         <Route
           path="/signup"
           element={<SignUp />}
         />
-        <Route
-          path="/forgot"
-          element={<Forgot />}
-        />
+
         <Route
           path="/unauthorized"
           element={<UnauthorizedPage />}
