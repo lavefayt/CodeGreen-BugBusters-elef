@@ -1,17 +1,17 @@
-import { useState } from "react";
-import { BackendError } from "../../types/error.types";
 import { Car } from "../../types/datatypes";
 import { fetchWithAuth } from "../../utils/fetch";
 import useFetchWithAuthExports from "../context-hooks/useFetchWithAuthExports";
+import { toast } from "react-toastify";
+import { LoadingContextType } from "../../types/loading.types";
+import useLoading from "../context-hooks/useLoading";
 
 const useAddCar = () => {
-  const [error, setError] = useState<BackendError | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
   const { auth, refresh, navigate} = useFetchWithAuthExports()
+  const { setAppLoading }: LoadingContextType = useLoading()
   
 
-  const postCar = async (formData: Car): Promise<boolean> => {
-    setLoading(true);
+  const postCar = async (formData: Car) => {
+    setAppLoading!(true);
 
     try {
       const response = await fetchWithAuth(
@@ -23,24 +23,32 @@ const useAddCar = () => {
         formData
       );
 
+
       if (!response.ok) {
-        const error: BackendError = await response.json();
-        setError(error);
-        console.error("Error adding car:", error.message);
-        return false; // Return false on failure
+        const errorData = await response.json();
+        console.error("Error response from server:", errorData); // Log server response
+        toast.error(errorData.message)
+        return;
       }
 
-      return true; // Return true on success
-    } catch (error) {
-      console.error("Unexpected error:", error);
-      setError({ message: "An unexpected error occurred" } as BackendError);
-      return false; // Return false on failure
+      const notificationAPI = await response.json()
+
+      toast.success(notificationAPI.message)
+
+      return ; // Return true on success
+      } 
+
+      catch (err: unknown) {
+      // Narrow down `err` to ensure it has a `message` property
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to connect to the server";
+      toast.error(errorMessage)
     } finally {
-      setLoading(false);
+      setAppLoading!(false)
     }
   };
 
-  return { postCar, error, loading };
+  return { postCar };
 };
 
 export default useAddCar;
