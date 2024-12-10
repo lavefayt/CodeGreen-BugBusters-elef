@@ -20,7 +20,9 @@ const AdminLandingPage = () => {
   const handleRegistrationList = () => {
     navigate("/registration-list");
   };
-
+  const handleSendNotif = () => {
+    navigate("/send-notif")
+  }
   return (
     <div className="flex flex-col items-center bg-adminlanding-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
       <div>
@@ -48,7 +50,7 @@ const AdminLandingPage = () => {
         </button>
         <button
           className="transition-transform w-[21rem] h-[5rem] duration-300 hover:scale-105 text-white px-5 py-4 rounded-lg bg-buttongreen active:bg-colorhover font-syke-medium"
-          // onClick={handleEncodeButton}
+          onClick={handleSendNotif}
         >
           Send Notification
         </button>

@@ -33,6 +33,7 @@ import ViewProfile from "./pages/ViewProfile.tsx";
 import Protocols from "./components/Policies/protocols.tsx";
 import Rules from "./components/Policies/rules.tsx";
 import ChangePassword from "./pages/ChangePassword.tsx";
+import SendNotif from "./pages/SendNotif.tsx";
 
 const Main = () => {
   const { appLoading }: LoadingContextType = useLoading();
@@ -70,14 +71,42 @@ const Main = () => {
 
           {/* ADMIN ROUTES */}
           <Route element={<RequireAuth forAdmin={true} />}>
-            <Route path="/admin" element={<AdminLandingPage />} />
-            <Route path="/driverslist" element={<DriversList />} />
-            <Route path="/encode" element={<EncodePage />} />
-            <Route path="/add-driver" element={<AddDriver />} />
-            <Route path="/add-violation" element={<AddViolation />} />
-            <Route path="/violatorslist" element={<ViolatorList />} />
-            <Route path="/registration-list" element={<RegistrationList />} />
-            <Route path="/add-car" element={<AddCar />} />
+            <Route
+              path="/admin"
+              element={<AdminLandingPage />}
+            />
+            <Route
+              path="/driverslist"
+              element={<DriversList />}
+            />
+            <Route
+              path="/encode"
+              element={<EncodePage />}
+            />
+            <Route
+              path="/add-driver"
+              element={<AddDriver />}
+            />
+            <Route
+              path="/add-violation"
+              element={<AddViolation />}
+            />
+            <Route
+              path="/violatorslist"
+              element={<ViolatorList />}
+            />
+            <Route
+              path="/registration-list"
+              element={<RegistrationList />}
+            />
+            <Route
+              path="/add-car"
+              element={<AddCar />}
+            />
+            <Route
+              path="/send-notif"
+              element={<SendNotif />}
+            />
           </Route>
         </Route>
       </Routes>

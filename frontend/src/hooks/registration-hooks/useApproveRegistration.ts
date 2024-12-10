@@ -4,7 +4,7 @@ import { fetchWithAuth } from "../../utils/fetch"; // Custom fetch utility
 import useFetchWithAuthExports from "../context-hooks/useFetchWithAuthExports";
 
 export const useApproveRegistration = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [processLoading, setProcessLoading] = useState<boolean>(false);
   const { auth, refresh, navigate } = useFetchWithAuthExports();
 
   const approveRegistration = async (licenseNumber: string): Promise<void> => {
@@ -13,7 +13,7 @@ export const useApproveRegistration = () => {
       return;
     }
 
-    setLoading(true);
+    setProcessLoading(true);
 
     try {
       const response = await fetchWithAuth(
@@ -39,9 +39,9 @@ export const useApproveRegistration = () => {
         "Network error occurred. Could not connect to the server. Please try again."
       );
     } finally {
-      setLoading(false);
+      setProcessLoading(false);
     }
   };
 
-  return { approveRegistration, loading };
+  return { approveRegistration, processLoading };
 };
