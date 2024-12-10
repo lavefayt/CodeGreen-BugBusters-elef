@@ -6,6 +6,7 @@ import { DriverWithVandC, Violators } from "../types/datatypes";
 import ViolatorsListCard from "../components/ViolatorsListCard";
 import { useEffect, useState } from "react";
 import SearchAndSort from "../components/SearchAndSort";
+import { useNavigate } from "react-router-dom";
 
 const ViolatorList = () => {
   // to get the violators
@@ -17,9 +18,16 @@ const ViolatorList = () => {
     []
   ); // Stores the original list
 
+  const navigate = useNavigate();
+
   const handleViolatorsClick = (violator: Violators) => {
     setSelectedViolator(violator);
     console.log(violator.id);
+  };
+
+  const handleViewProfile = () => {
+    if (!selectedViolator) return;
+    navigate(`/view-profile/${selectedViolator.id}`);
   };
 
   // Toggle sorting between alphabetical and default
@@ -142,8 +150,9 @@ const ViolatorList = () => {
                       </div>
                       <div>
                         <button
-                          // onClick={handleViolatorClick}
-                          className="p-2 px-4 m-2 bg-buttongreen active:bg-colorhover transition-colors rounded-sm text-white font-syke-bold">
+                          onClick={handleViewProfile} // Navigate to Driver Profile
+                          className="p-2 px-4 m-2 bg-buttongreen active:bg-colorhover transition-colors rounded-sm text-white font-syke-bold"
+                        >
                           View Profile
                         </button>
                       </div>
@@ -174,7 +183,8 @@ const ViolatorList = () => {
               />
               <div
                 className="w-full h-[20rem] overflow-y-auto"
-                id="listcontainer">
+                id="listcontainer"
+              >
                 <div className="flex flex-col overflow-y-auto h-80 scrollbar-thin scrollbar text-white">
                   {sortedViolators && sortedViolators.length > 0 ? (
                     violators.map((violator) => (
