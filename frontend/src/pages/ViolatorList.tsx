@@ -11,12 +11,13 @@ import { useNavigate } from "react-router-dom";
 const ViolatorList = () => {
   // to get the violators
   const { violators: violators, loading } = useGetViolators();
-  const [selectedViolator, setSelectedViolator] = useState<Violators>();
+  const [selectedViolator, setSelectedViolator] = useState<DriverWithVandC>();
   const [sortedViolators, setSortedViolators] = useState<DriverWithVandC[]>([]);
   const [isSorted, setIsSorted] = useState(false); // Tracks toggle state
   const [originalViolators, setOriginalViolators] = useState<DriverWithVandC[]>(
     []
   ); // Stores the original list
+  console.log(sortedViolators)
 
   const navigate = useNavigate();
 
@@ -189,7 +190,7 @@ const ViolatorList = () => {
               >
                 <div className="flex flex-col overflow-y-auto h-80 scrollbar-thin scrollbar text-white">
                   {sortedViolators && sortedViolators.length > 0 ? (
-                    violators.map((violator) => (
+                    sortedViolators.map((violator) => (
                       <div
                         key={violator.id}
                         className="cursor-pointer hover:bg-secondgrey"
