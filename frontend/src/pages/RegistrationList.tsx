@@ -2,15 +2,17 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import useGetRegistration from "../hooks/registration-hooks/useGetRegistration";
 import AdminHeader from "../components/AdminHeader";
+import Loading from "../components/Loading";
 import RegistrationListCard from "../components/RegistrationListCard";
 import { Registration } from "../types/datatypes";
 import { useApproveRegistration } from "../hooks/registration-hooks/useApproveRegistration";
 
+
 const RegistrationList = () => {
-  const { registration: registrations } = useGetRegistration();
+  const { registration: registrations, loading} = useGetRegistration();
   const [selectedRegistration, setSelectedRegistration] =
     useState<Registration>();
-  const { approveRegistration, loading } = useApproveRegistration();
+  const { approveRegistration, processLoading } = useApproveRegistration();
 
   const handleRegisterClick = (registration: Registration) => {
     setSelectedRegistration(registration);
@@ -23,7 +25,12 @@ const RegistrationList = () => {
     }
 
     await approveRegistration(selectedRegistration.license_number);
+    setTimeout(() => {
+      window.location.reload();
+    }, 500); 
   };
+
+  if (loading) return <Loading loading={loading} />;
 
   if (!registrations || registrations.length === 0) {
     return <div>No registrations found.</div>;
@@ -116,10 +123,10 @@ const RegistrationList = () => {
                       <div>
                         <button
                           onClick={handleAccept}
-                          disabled={loading}
+                          disabled={processLoading}
                           className="p-2 px-4 m-2 bg-hoverbutton hover:bg-buttongreen transition-colors rounded-sm text-white font-syke-bold"
                         >
-                          {loading ? "Processing..." : "Accept"}
+                          {processLoading ? "Processing..." : "Accept"}
                         </button>
                         <button className="p-2 px-5  m-2 bg-hoverbutton hover:bg-red-900 transition-colors rounded-sm text-white font-syke-bold">
                           Reject

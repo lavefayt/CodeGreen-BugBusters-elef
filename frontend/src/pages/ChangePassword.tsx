@@ -33,14 +33,19 @@ const ChangePassword = () => {
       <div>
         <Header />
       </div>
-
-      <div className="space-y-5 w-full max-w-md mt-8">
+      <div className="h-auto w-[30rem] px-7 py-5 bg-zinc-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+      <div className="space-y-5 w-full max-w-md">
         <div className="flex flex-col space-y-4">
+        <div className="text-textgreen">
+                <h1 className="text-4xl font-syke-bold">Change Password</h1>
+                <div className="font-syke-light">Please enter your current and new password.</div>
+              </div>
           <div className="flex-1">
             <h1 className="text-white font-syke-light text-xl">
               Current Password
             </h1>
             <input
+              title="currentpw"
               type="password"
               className="bg-secondgrey border-b font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
               name="currentPassword"
@@ -52,6 +57,7 @@ const ChangePassword = () => {
           <div className="flex-1">
             <h1 className="text-white font-syke-light text-xl">New Password</h1>
             <input
+              title="newpw"
               type="password"
               className="bg-secondgrey border-b font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
               name="newPassword"
@@ -65,6 +71,7 @@ const ChangePassword = () => {
               Confirm Password
             </h1>
             <input
+              title="confirmpw"
               type="password"
               className="bg-secondgrey border-b font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
               name="confirmNewPassword"
@@ -73,6 +80,8 @@ const ChangePassword = () => {
             />
           </div>
         </div>
+        </div>
+
       </div>
 
       <div className="flex justify-between w-full max-w-sm p-5">

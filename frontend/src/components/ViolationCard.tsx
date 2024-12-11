@@ -1,15 +1,29 @@
-import { useState } from "react";
 import { Violation } from "../types/datatypes";
 import { useDeleteViolation } from "../hooks/useDeleteViolation";
+import { useState, useRef, useEffect } from "react";
 
 const ViolationCard = ({ violation }: { violation: Violation }) => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { deleteViolation } = useDeleteViolation()
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleDeleteViolation = () => { 
     deleteViolation(violation.id!)
   }
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   
   return (
 
@@ -67,7 +81,9 @@ const ViolationCard = ({ violation }: { violation: Violation }) => {
 
       </div>
 
-      <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-20">
+      <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-20" 
+      ref={dropdownRef}>
+        
         <button
           className="text-white px-2 py-1 rounded-full hover:bg-lime-600"
           onClick={() => setIsMenuOpen(!isMenuOpen)}

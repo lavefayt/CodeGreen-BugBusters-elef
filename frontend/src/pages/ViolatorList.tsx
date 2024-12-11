@@ -171,17 +171,19 @@ const ViolatorList = () => {
           <div className="w-[50%] h-full p-6 rounded-md">
             <div className="text-left rounded-xl bg-clip-padding">
               <div className="text-left font-syke-light text-white">
-                <div className="text-textgreen py-3">
-                  <h1 className="text-4xl font-syke-bold">Violator's List</h1>
-                  <div>List of Violators within the university.</div>
+                <div className="text-textgreen py-3 flex justify-between items-center">
+                  <div>
+                    <h1 className="text-4xl font-syke-bold">Violator's List</h1>
+                    <div>List of Violators within the university.</div>
+                  </div>
+                  <SearchAndSort
+                    entries={violators}
+                    setFilteredEntries={setSortedViolators}
+                    handleSortToggle={handleSortToggle}
+                    isSorted={isSorted}
+                  />
                 </div>
               </div>
-              <SearchAndSort
-                entries={violators}
-                setFilteredEntries={setSortedViolators}
-                handleSortToggle={handleSortToggle}
-                isSorted={isSorted}
-              />
               <div
                 className="w-full h-[20rem] overflow-y-auto"
                 id="listcontainer"

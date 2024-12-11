@@ -30,7 +30,6 @@ const AddCar = () => {
     const success = await postCar(formData);
 
     if (success) {
-      alert("Car added successfully!");
       navigate("/encode"); // Redirect on success
     } else if (error) {
       alert(`Error: ${error.message}`);

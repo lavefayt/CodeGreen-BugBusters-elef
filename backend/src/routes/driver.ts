@@ -84,6 +84,46 @@ router.get("/get", async (req: Request, res: Response) => {
   }
 });
 
+router.get("/get/:licenseNum", async (req: Request, res: Response) => {
+  try {
+    const { licenseNum } = req.params;
+
+    const { rows: users } = await pool.query(
+      "SELECT * FROM users WHERE licenseNum = $8",
+      [req.user]
+    );
+
+    const foundUser = users[0];
+
+    if (licenseNum !== req.user && !foundUser.is_admin) {
+      res.status(400).json({
+        title: "Access Unauthorized!",
+        message: "You cannot access this information.",
+      });
+      return;
+    }
+
+    const { rows: drivers } = await pool.query(
+      "SELECT * FROM drivers WHERE licenseNum = $8",
+      [licenseNum]
+    );
+
+    const foundDriver = await drivers[0];
+    console.log(foundDriver);
+
+    if (!foundDriver) {
+      res.status(404).json({ message: "Driver not found" });
+      return;
+    }
+
+    res.status(200).json({ ...foundDriver});
+  } catch (error) {
+    const errorMessage = (error as Error).message;
+    console.error("Error fetching driver:", errorMessage);
+    res.status(500).json({ title: "Unknown Error", message: errorMessage });
+  }
+});
+
 router.get("/get/:driverId", async (req: Request, res: Response) => {
   try {
     const { driverId } = req.params;

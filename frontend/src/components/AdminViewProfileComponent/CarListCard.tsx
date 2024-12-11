@@ -1,6 +1,5 @@
-import React, { useState } from "react";
 import { useDeleteCar } from "../../hooks/car-hooks/useDeleteCar";
-
+import { useState, useRef, useEffect } from "react";
 
 interface CarProps {
   id: string
@@ -22,10 +21,25 @@ const CarListCard: React.FC<CarProps> = ({
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const {deleteCar} = useDeleteCar()
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleDeleteCar = () => { 
     deleteCar(id)
+    setIsMenuOpen(false);
   }
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <ul className="border-b-2 border-t-2 border-t-transparent border-b-inputfield space-y-[10px] relative">
@@ -104,7 +118,9 @@ const CarListCard: React.FC<CarProps> = ({
 
 
 
-      <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-50">
+      <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-50" 
+        ref = {dropdownRef}>
+          
         <button
           className="text-white px-2 py-1 rounded-full hover:bg-lime-600"
           onClick={() => setIsMenuOpen(!isMenuOpen)}

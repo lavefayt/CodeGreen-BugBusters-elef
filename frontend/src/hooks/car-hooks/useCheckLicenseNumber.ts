@@ -36,8 +36,7 @@ const useCheckLicenseNumber = () => {
       }
 
       const notification = await response.json();
-
-      toast.info(notification.message);
+      toast.success(notification.message);
 
       return true; // Assuming the backend sends { exists: true/false }
     } catch (error) {
