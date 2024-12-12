@@ -34,8 +34,7 @@ const useAddCar = () => {
       const notificationAPI = await response.json()
 
       toast.success(notificationAPI.message)
-
-      return ; // Return true on success
+      return; // Return true on success
       } 
 
       catch (err: unknown) {

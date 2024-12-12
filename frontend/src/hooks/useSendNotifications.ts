@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { DriverWithVandC } from "../types/datatypes";
 import useCheckLicenseNumber from "../hooks/car-hooks/useCheckLicenseNumber";
 
 const useSendNotification = () => {
   const [licenseNumber, setLicenseNumber] = useState<string>("");
   const [licenseError, setLicenseError] = useState<string>("");
-  const [driver, setDriver] = useState<DriverWithVandC | null>(null);
+  const [licenseExists, setLicenseExists] = useState<boolean>(false);
   const [currentStep, setCurrentStep] = useState(1);
   
   const { checkLicenseNumber } = useCheckLicenseNumber();
@@ -25,7 +24,7 @@ const useSendNotification = () => {
       }
 
       // Set driver data and clear error
-      setDriver(driverData);
+      setLicenseExists(driverData);
       setLicenseError("");
       setCurrentStep(2);  // Move to the next step
     } catch (error) {
@@ -38,7 +37,7 @@ const useSendNotification = () => {
     licenseNumber,
     setLicenseNumber,
     licenseError,
-    driver,
+    licenseExists,
     currentStep,
     setCurrentStep,
     handleCheckLicense,

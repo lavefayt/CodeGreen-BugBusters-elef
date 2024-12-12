@@ -23,7 +23,6 @@ import HomepageDriver from "./components/NotificationsList.tsx";
 import RegistrationList from "./pages/RegistrationList.tsx";
 import RequireAuth from "./components/RequireAuth.tsx";
 import PersistLogin from "./components/PersistLogin.tsx";
-import AddCar from "./pages/AddCar.tsx";
 import Loading from "./components/Loading.tsx";
 import { LoadingContextType } from "./types/loading.types.ts";
 import useLoading from "./hooks/context-hooks/useLoading.ts";
@@ -33,7 +32,7 @@ import ViewProfile from "./pages/ViewProfile.tsx";
 import Protocols from "./components/Policies/protocols.tsx";
 import Rules from "./components/Policies/rules.tsx";
 import ChangePassword from "./pages/ChangePassword.tsx";
-import SendNotif from "./pages/SendNotif.tsx";
+// import SendNotif from "./pages/SendNotif.tsx";
 
 const Main = () => {
   const { appLoading }: LoadingContextType = useLoading();
@@ -99,14 +98,10 @@ const Main = () => {
               path="/registration-list"
               element={<RegistrationList />}
             />
-            <Route
-              path="/add-car"
-              element={<AddCar />}
-            />
-            <Route
+            {/* <Route
               path="/send-notif"
               element={<SendNotif />}
-            />
+            /> */}
           </Route>
         </Route>
       </Routes>
