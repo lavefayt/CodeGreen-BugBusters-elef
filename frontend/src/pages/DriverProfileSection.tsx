@@ -4,8 +4,21 @@ import DriverVehicleComponent from "../components/ProfileComponent/DriverVehicle
 import DriverViolationComponent from "../components/ProfileComponent/DriverViolationComp";
 
 import { useState } from "react";
+// import useEditViolation from "../hooks/useEditViolation";
+import { useParams } from "react-router-dom";
+
 const DriverProfile = () => {
+
+  // const { id } = useParams()
+
+  // if may params kamo tdi then use it. 
+  // if wala, implemetn other way to fetch the id for useEditViolation hook
+
+  
+
   const [activeSection, SetActiveSection] = useState("profile");
+  // const { loading, violation } = useEditViolation(id!) // commented para di mag error
+
 
   return (
     <div className="flex flex-col items-center bg-homepage-bg bg-cover sm:bg-top md:bg-right lg:bg-left bg-no-repeat h-screen">

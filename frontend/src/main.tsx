@@ -33,7 +33,7 @@ import ViewProfile from "./pages/ViewProfile.tsx";
 import Protocols from "./components/Policies/protocols.tsx";
 import Rules from "./components/Policies/rules.tsx";
 import ChangePassword from "./pages/ChangePassword.tsx";
-import SendNotif from "./pages/SendNotif.tsx";
+// import SendNotif from "./pages/SendNotif.tsx";
 
 const Main = () => {
   const { appLoading }: LoadingContextType = useLoading();
@@ -103,10 +103,10 @@ const Main = () => {
               path="/add-car"
               element={<AddCar />}
             />
-            <Route
+            {/* <Route
               path="/send-notif"
               element={<SendNotif />}
-            />
+            /> */}
           </Route>
         </Route>
       </Routes>
