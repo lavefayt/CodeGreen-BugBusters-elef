@@ -7,7 +7,7 @@ const Profile = ({
 }) => {
   
   return (
-    <div className="max-w-full max-h-full flex justify-center items-center">
+    <div className="flex flex-col items-center justify-center w-full">
       <div className="w-[35rem] h-[20rem] bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
         <div className="items-center p-4">
           <form className="space-y-[2rem]">
