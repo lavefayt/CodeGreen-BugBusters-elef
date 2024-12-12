@@ -153,6 +153,19 @@ const AddCar = () => {
                         onChange={handleChange}
                       />
                     </div>
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-xl">
+                        Color
+                      </h1>
+                      <input
+                        type="text"
+                        className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
+                        name="color"
+                        placeholder="Enter Color"
+                        value={formData.color}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
 
                   <div className="flex space-x-4">
@@ -173,19 +186,7 @@ const AddCar = () => {
                   </div>
 
                   <div className="flex space-x-4">
-                    <div className="flex-1">
-                      <h1 className="text-white font-syke-light text-xl">
-                        Color
-                      </h1>
-                      <input
-                        type="text"
-                        className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
-                        name="color"
-                        placeholder="Enter Color"
-                        value={formData.color}
-                        onChange={handleChange}
-                      />
-                    </div>
+                    
                   </div>
                 </form>
               </div>
