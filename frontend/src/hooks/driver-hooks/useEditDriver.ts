@@ -1,23 +1,16 @@
-import { useState } from "react";
 import { fetchWithAuth } from "../../utils/fetch";
 import { BackendError } from "../../types/error.types";
 import useFetchWithAuthExports from "../context-hooks/useFetchWithAuthExports";
-import { Driver } from "../../types/datatypes";
+import { DriverWithVandC } from "../../types/datatypes";
 import useLoading from "../context-hooks/useLoading";
 import { LoadingContextType } from "../../types/loading.types";
 import { toast } from "react-toastify";
 
 export const useEditDriver = () => {
-  const [error, setError] = useState<{ title: string; message: string } | null>(
-    null
-  );
   const { setAppLoading }: LoadingContextType = useLoading();
   const { navigate, refresh, auth } = useFetchWithAuthExports();
 
-  const editDriver = async (
-    id: string,
-    updatedDriver: Driver
-  ): Promise<boolean> => {
+  const editDriver = async (updatedDriver: DriverWithVandC) => {
     setAppLoading!(true);
     try {
       const response = await fetchWithAuth(
@@ -26,35 +19,27 @@ export const useEditDriver = () => {
         auth,
         "/driver/update",
         "PATCH",
-        {
-          id,
-          ...updatedDriver,
-        }
+        updatedDriver
       );
 
       if (!response.ok) {
         const errorData: BackendError = await response.json();
-        setError({
-          title: errorData.title || "Error",
-          message: errorData.message || "Unknown error occurred",
-        });
-        return false;
+        toast.error(errorData.message);
+        return;
       }
 
-      const data = await response.json();
-      console.log("Driver updated:", data.driver);
-      setError(null); // Clear any previous errors
-      return true;
+      const notification = await response.json();
+      toast.success(notification.message);
     } catch (err) {
       alert(err);
       toast.error("Unexpected error has occurred.");
-      return false;
+      return;
     } finally {
       setAppLoading!(false);
     }
   };
 
-  return { editDriver, error };
+  return { editDriver };
 };
 
 export default useEditDriver;

@@ -26,10 +26,10 @@ const ViewProfile = () => {
   }
 
   return (
-    <div className="relative flex flex-col items-center bg-homepage-bg bg-cover sm:bg-top md:bg-right lg:bg-left bg-no-repeat h-screen">
+    <div className="flex flex-col items-center bg-homepage-bg md:bg-cover bg-no-repeat sm:bg-bottom md:bg-inherit lg:bg-left bg-center w-full h-screen">
       <div>{auth!.isAdmin ? <AdminHeader /> : <Header />}</div>
 
-      <h1 className="text-4xl text-textgreen font-syke-bold mb-3 pb-3 ">
+      <h1 className="lg:text-4xl md:text-3xl sm:text-2xl text-xl text-textgreen font-syke-bold mb-3 pb-3 ">
         My Gateway Account
       </h1>
       <div className="flex flex-col">
@@ -39,7 +39,7 @@ const ViewProfile = () => {
               <div className="space-y-[2rem]">
                 <button
                   onClick={() => SetActiveSection("profile")}
-                  className={`block cursor-pointer transition-colors text-2xl font-syke-medium ${
+                  className={`block cursor-pointer transition-colors md:text-2xl sm:text-xl text-lg font-syke-medium ${
                     activeSection === "profile"
                       ? "text-textgreen"
                       : "text-white hover:text-textgreen"
@@ -49,7 +49,7 @@ const ViewProfile = () => {
 
                 <button
                   onClick={() => SetActiveSection("vehicle")}
-                  className={`block cursor-pointer transition-colors text-2xl font-syke-medium ${
+                  className={`block cursor-pointer transition-colors md:text-2xl sm:text-xl text-lg font-syke-medium ${
                     activeSection === "vehicle"
                       ? "text-textgreen"
                       : "text-white hover:text-textgreen"
@@ -59,7 +59,7 @@ const ViewProfile = () => {
 
                 <button
                   onClick={() => SetActiveSection("violation")}
-                  className={`block cursor-pointer transition-colors text-2xl font-syke-medium ${
+                  className={`block cursor-pointer transition-colors md:text-2xl sm:text-xl text-lg font-syke-medium ${
                     activeSection === "violation"
                       ? "text-textgreen"
                       : "text-white hover:text-textgreen"
@@ -86,7 +86,7 @@ const ViewProfile = () => {
           driver={driver}
           violationModalActive={violationModalActive}
           setViolationModalActive={setViolationModalActive}
-        /> 
+        />
       </div>
     </div>
   );
