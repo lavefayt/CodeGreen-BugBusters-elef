@@ -26,10 +26,7 @@ router.post("/check-license", async (req: Request, res: Response) => {
       return;
     }
 
-    res.status(200).json({
-      title: "License Number Found",
-      message: "Driver with this license number exists.",
-    });
+    res.status(200).json(driverFound);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);

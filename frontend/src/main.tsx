@@ -13,10 +13,8 @@ import AdminLandingPage from "./pages/AdminHomePage.tsx";
 import EncodePage from "./pages/EncodePage.tsx";
 import ViolatorList from "./pages/ViolatorList.tsx";
 import DriversList from "./pages/DriverList.tsx";
-import DriverProfile from "./pages/DriverProfileSection.tsx";
 import RegisterDriver from "./pages/RegisterDriver.tsx";
 import AddDriver from "./pages/AddDriver.tsx";
-import AddViolation from "./pages/AddViolation.tsx";
 import { AuthProvider } from "./context/AuthContext.tsx";
 import UnauthorizedPage from "./pages/UnauthorizedPage.tsx";
 import HomepageDriver from "./components/NotificationsList.tsx";
@@ -32,6 +30,7 @@ import ViewProfile from "./pages/ViewProfile.tsx";
 import Protocols from "./components/Policies/protocols.tsx";
 import Rules from "./components/Policies/rules.tsx";
 import ChangePassword from "./pages/ChangePassword.tsx";
+import AddViolationPage from "./pages/AddViolationPage.tsx";
 // import SendNotif from "./pages/SendNotif.tsx";
 
 const Main = () => {
@@ -45,27 +44,67 @@ const Main = () => {
     <BrowserRouter>
       <Routes>
         {/* PUBLIC ROUTES */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/"
+          element={
+            <Navigate
+              to="/login"
+              replace
+            />
+          }
+        />
+        <Route
+          path="/login"
+          element={<LoginPage />}
+        />
 
-        <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="/signup"
+          element={<SignUp />}
+        />
 
-        <Route path="/unauthorized" element={<UnauthorizedPage />} />
+        <Route
+          path="/unauthorized"
+          element={<UnauthorizedPage />}
+        />
 
         <Route element={<PersistLogin />}>
           {/* FOR ALL LOGGED IN */}
-          <Route path="/view-profile/:driverId" element={<ViewProfile />} />
-          <Route path="/changepassword" element={<ChangePassword />} />
+          <Route
+            path="/view-profile/:driverId"
+            element={<ViewProfile />}
+          />
+          <Route
+            path="/changepassword"
+            element={<ChangePassword />}
+          />
 
           {/* USER ROUTES */}
           <Route element={<RequireAuth forAdmin={false} />}>
-            <Route path="/homepage" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/register-driver" element={<RegisterDriver />} />
-            <Route path="/driverprofile" element={<DriverProfile />} />
-            <Route path="/homepagedriver" element={<HomepageDriver />} />
-            <Route path="/protocols" element={<Protocols />} />
-            <Route path="/rules" element={<Rules />} />
+            <Route
+              path="/homepage"
+              element={<HomePage />}
+            />
+            <Route
+              path="/about"
+              element={<AboutPage />}
+            />
+            <Route
+              path="/register-driver"
+              element={<RegisterDriver />}
+            />
+            <Route
+              path="/homepagedriver"
+              element={<HomepageDriver />}
+            />
+            <Route
+              path="/protocols"
+              element={<Protocols />}
+            />
+            <Route
+              path="/rules"
+              element={<Rules />}
+            />
           </Route>
 
           {/* ADMIN ROUTES */}
@@ -88,7 +127,7 @@ const Main = () => {
             />
             <Route
               path="/add-violation"
-              element={<AddViolation />}
+              element={<AddViolationPage />}
             />
             <Route
               path="/violatorslist"
