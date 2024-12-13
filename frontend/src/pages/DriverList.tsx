@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import AdminHeader from "../components/AdminHeader";
@@ -7,6 +6,7 @@ import useDrivers from "../hooks/driver-hooks/useDrivers";
 import Loading from "../components/Loading";
 import { DriverWithVandC } from "../types/datatypes.ts";
 import SearchAndSort from "../components/SearchAndSort.tsx";
+import PreviewProfile from "../components/PreviewProfile.tsx";
 
 const DriversList = () => {
   const { data: Drivers, loading } = useDrivers();
@@ -15,17 +15,10 @@ const DriversList = () => {
   const [isSorted, setIsSorted] = useState(false); // Tracks toggle state
   const [originalDrivers, setOriginalDrivers] = useState<DriverWithVandC[]>([]); // Stores the original list
 
-  const navigate = useNavigate();
-
   // Handle driver click to show more details
   const handleDriverClick = (driver: DriverWithVandC) => {
     setSelectedDriver(driver);
     console.log(driver.id);
-  };
-
-  const handleViewProfile = () => {
-    if (!selectedDriver) return;
-    navigate(`/view-profile/${selectedDriver.id}`);
   };
 
   // Toggle sorting between alphabetical and default
@@ -65,90 +58,7 @@ const DriversList = () => {
         <div className="max-w-full max-h-full flex justify-center items-center">
           <div className="w-[35rem] p-3 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
             {selectedDriver ? (
-              <div className="items-center px-5">
-                <div className="text-left font-syke-light text-white">
-                  <div className="text-textgreen py-2 mb-5">
-                    <h1 className="text-4xl font-syke-bold">Driver Details</h1>
-                    <div>Driver's key data.</div>
-                  </div>
-                </div>
-                <form className="space-y-[2rem]">
-                  <div className="flex space-x-1">
-                    <div className="flex-1">
-                      <h1 className="text-white font-syke-light text-l">
-                        Last Name
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-xl">
-                        {selectedDriver.last_name || ""}
-                      </h1>
-                    </div>
-                    <div className="flex-1">
-                      <h1 className="text-white font-syke-light text-l">
-                        First Name
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-xl">
-                        {selectedDriver.first_name || ""}
-                      </h1>
-                    </div>
-                  </div>
-
-                  <div className="flex space-x-4">
-                    <div className="flex-1">
-                      <h1 className="text-white font-syke-light text-l">Sex</h1>
-                      <h1 className="text-textgreen font-syke-medium text-xl">
-                        {selectedDriver.sex || ""}
-                      </h1>
-                    </div>
-                    <div className="flex-1">
-                      <h1 className="text-white font-syke-light text-l">
-                        Date of Birth
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-xl">
-                        {selectedDriver.date_of_birth || "MM/DD/YY"}
-                      </h1>
-                    </div>
-                    <div className="flex-1">
-                      <h1 className="text-white font-syke-light text-l">
-                        Driver Type
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-xl">
-                        {selectedDriver.driver_type || ""}
-                      </h1>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <div className="flex space-x-4">
-                      <div className="flex-1">
-                        <h1 className="text-white font-syke-light text-l">
-                          License Number
-                        </h1>
-                        <h1 className="text-textgreen font-syke-medium text-xl">
-                          {selectedDriver.license_number || ""}
-                        </h1>
-                      </div>
-                    </div>
-
-                    <div className="flex">
-                      <div className="flex-1">
-                        <h1 className="text-white font-syke-light text-l">
-                          License Expiration Date
-                        </h1>
-                        <h1 className="text-textgreen font-syke-medium text-xl">
-                          {selectedDriver.license_expiration_date || ""}
-                        </h1>
-                      </div>
-                      <div>
-                        <button
-                          onClick={handleViewProfile}
-                          className="p-2 px-4 m-2 bg-buttongreen active:bg-colorhover transition-colors rounded-sm text-white font-syke-bold">
-                          View Profile
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
+              <PreviewProfile selectedEntry={selectedDriver} />
             ) : (
               <div className="text-white text-center font-syke p-2">
                 Select a driver to see details.

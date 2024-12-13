@@ -6,7 +6,7 @@ import { DriverWithVandC, Violators } from "../types/datatypes";
 import ViolatorsListCard from "../components/ViolatorsListCard";
 import { useEffect, useState } from "react";
 import SearchAndSort from "../components/SearchAndSort";
-import { useNavigate } from "react-router-dom";
+import PreviewProfile from "../components/PreviewProfile";
 
 const ViolatorList = () => {
   // to get the violators
@@ -17,18 +17,11 @@ const ViolatorList = () => {
   const [originalViolators, setOriginalViolators] = useState<DriverWithVandC[]>(
     []
   ); // Stores the original list
-  console.log(sortedViolators)
-
-  const navigate = useNavigate();
+  console.log(sortedViolators);
 
   const handleViolatorsClick = (violator: Violators) => {
     setSelectedViolator(violator);
     console.log(violator.id);
-  };
-
-  const handleViewProfile = () => {
-    if (!selectedViolator) return;
-    navigate(`/view-profile/${selectedViolator.id}`);
   };
 
   // Toggle sorting between alphabetical and default
@@ -66,101 +59,7 @@ const ViolatorList = () => {
         <div className="max-w-full max-h-full flex justify-center items-center">
           <div className="w-[35rem] p-3 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
             {selectedViolator ? (
-              <div className="items-center px-5">
-                <div className="text-left font-syke-light text-white">
-                  <div className="text-textgreen py-2 mb-5">
-                    <h1 className="text-4xl font-syke-bold">
-                      Violator Details
-                    </h1>
-                    <div>Violator's key data.</div>
-                  </div>
-                </div>
-                <form className="space-y-[2rem]">
-                  <div className="flex space-x-1">
-                    <div className="flex-1">
-                      <h1 className="text-white font-syke-light text-l">
-                        Last Name
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-xl">
-                        {selectedViolator.last_name || ""}
-                      </h1>
-                    </div>
-                    <div className="flex-1">
-                      <h1 className="text-white font-syke-light text-l">
-                        First Name
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-xl">
-                        {selectedViolator.first_name || ""}
-                      </h1>
-                    </div>
-                  </div>
-
-                  <div className="flex space-x-4">
-                    <div className="flex-1">
-                      <h1 className="text-white font-syke-light text-l">Sex</h1>
-                      <h1 className="text-textgreen font-syke-medium text-xl">
-                        {selectedViolator.sex || ""}
-                      </h1>
-                    </div>
-                    <div className="flex-1">
-                      <h1 className="text-white font-syke-light text-l">
-                        Date of Birth
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-xl">
-                        {selectedViolator.date_of_birth || "MM/DD/YY"}
-                      </h1>
-                    </div>
-                    <div className="flex-1">
-                      <h1 className="text-white font-syke-light text-l">
-                        Driver Type
-                      </h1>
-                      <h1 className="text-textgreen font-syke-medium text-xl">
-                        {selectedViolator.driver_type || ""}
-                      </h1>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <div className="flex space-x-4">
-                      <div className="flex-1">
-                        <h1 className="text-white font-syke-light text-l">
-                          License Number
-                        </h1>
-                        <h1 className="text-textgreen font-syke-medium text-xl">
-                          {selectedViolator.license_number || ""}
-                        </h1>
-                      </div>
-                      <div className="flex-1">
-                        <h1 className="text-white font-syke-light text-xl">
-                          Violations
-                        </h1>
-                        <h1 className="text-textgreen font-syke-medium text-xl">
-                          {selectedViolator.violations!.length || ""}
-                        </h1>
-                      </div>
-                    </div>
-
-                    <div className="flex">
-                      <div className="flex-1">
-                        <h1 className="text-white font-syke-light text-l">
-                          License Expiration Date
-                        </h1>
-                        <h1 className="text-textgreen font-syke-medium text-xl">
-                          {selectedViolator.license_expiration_date || ""}
-                        </h1>
-                      </div>
-                      <div>
-                        <button
-                          onClick={handleViewProfile} // Navigate to Driver Profile
-                          className="p-2 px-4 m-2 bg-buttongreen active:bg-colorhover transition-colors rounded-sm text-white font-syke-bold"
-                        >
-                          View Profile
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
+              <PreviewProfile selectedEntry={selectedViolator} />
             ) : (
               <div className="text-white text-center font-syke p-2">
                 Select a violator to see details.
@@ -186,8 +85,7 @@ const ViolatorList = () => {
               </div>
               <div
                 className="w-full h-[20rem] overflow-y-auto"
-                id="listcontainer"
-              >
+                id="listcontainer">
                 <div className="flex flex-col overflow-y-auto h-80 scrollbar-thin scrollbar text-white">
                   {sortedViolators && sortedViolators.length > 0 ? (
                     sortedViolators.map((violator) => (
