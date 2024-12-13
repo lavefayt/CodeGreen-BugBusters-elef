@@ -3,17 +3,16 @@ import { toast } from "react-toastify";
 import { BackendError } from "../../types/error.types";
 import { fetchWithAuth } from "../../utils/fetch";
 import useFetchWithAuthExports from "../context-hooks/useFetchWithAuthExports";
+import { DriverWithVandC } from "../../types/datatypes";
 
 const useCheckLicenseNumber = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
   const { auth, refresh, navigate } = useFetchWithAuthExports();
 
   const checkLicenseNumber = async (
     license_number: string
-  ): Promise<boolean> => {
+  ): Promise<DriverWithVandC | undefined> => {
     setLoading(true);
-    setError(null);
 
     try {
       // Make sure license_number is URL-safe
@@ -32,23 +31,22 @@ const useCheckLicenseNumber = () => {
       if (!response.ok) {
         const backendError: BackendError = await response.json();
         toast.error(backendError.message);
-        return false;
+        return
       }
 
-      const notification = await response.json();
-      toast.success(notification.message);
+      const driver = await response.json();
 
-      return true; // Assuming the backend sends { exists: true/false }
+      return driver; 
     } catch (error) {
       console.error("Error checking license number:", error);
-      setError("Failed to verify license number.");
-      return false;
+      toast.error("Failed to verify license number.");
+      return;
     } finally {
       setLoading(false);
     }
   };
 
-  return { checkLicenseNumber, loading, error };
+  return { checkLicenseNumber, loading };
 };
 
 export default useCheckLicenseNumber;

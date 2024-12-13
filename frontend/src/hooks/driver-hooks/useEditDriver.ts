@@ -5,19 +5,20 @@ import useFetchWithAuthExports from "../context-hooks/useFetchWithAuthExports";
 import { Driver } from "../../types/datatypes";
 import useLoading from "../context-hooks/useLoading";
 import { LoadingContextType } from "../../types/loading.types";
+import { toast } from "react-toastify";
 
 export const useEditDriver = () => {
   const [error, setError] = useState<{ title: string; message: string } | null>(
     null
   );
-  const { setAppLoading } : LoadingContextType = useLoading()
+  const { setAppLoading }: LoadingContextType = useLoading();
   const { navigate, refresh, auth } = useFetchWithAuthExports();
 
   const editDriver = async (
     id: string,
     updatedDriver: Driver
   ): Promise<boolean> => {
-    setAppLoading!(true)
+    setAppLoading!(true);
     try {
       const response = await fetchWithAuth(
         navigate,
@@ -44,14 +45,12 @@ export const useEditDriver = () => {
       console.log("Driver updated:", data.driver);
       setError(null); // Clear any previous errors
       return true;
-    } catch (err: any) {
-      console.error("Error updating driver:", err);
-      setError({
-        message: err.message || "Failed to connect to the server",
-      } as BackendError);
+    } catch (err) {
+      alert(err);
+      toast.error("Unexpected error has occurred.");
       return false;
     } finally {
-      setAppLoading!(false)
+      setAppLoading!(false);
     }
   };
 

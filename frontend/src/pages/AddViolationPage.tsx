@@ -3,14 +3,15 @@ import AdminHeader from "../components/AdminHeader";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import useCheckLicenseNumber from "../hooks/car-hooks/useCheckLicenseNumber"; // import the hook
+import { DriverWithVandC } from "../types/datatypes";
 
 const AddViolation = () => {
   const navigate = useNavigate();
-  const { checkLicenseNumber, loading, error } = useCheckLicenseNumber(); // using the hook
+  const { checkLicenseNumber, loading } = useCheckLicenseNumber(); // using the hook
 
   const [currentStep, setCurrentStep] = useState(1);
   const [licenseNumber, setLicenseNumber] = useState("");
-  const [driverProfile, setDriverProfile] = useState(null); // Store the driver profile
+  const [driverProfile, setDriverProfile] = useState<DriverWithVandC>(); // Store the driver profile
 
   const handleCancelButton = () => {
     navigate("/encode");
@@ -18,16 +19,15 @@ const AddViolation = () => {
 
   const handleNextClick = async () => {
     try {
-      const driverExists = await checkLicenseNumber(licenseNumber);
-      if (driverExists) {
+      const driver = await checkLicenseNumber(licenseNumber);
+      console.log(driver);
+      if (driver) {
+        setDriverProfile(driver);
         setCurrentStep(currentStep + 1);
-
-        // Use the hook to get driver details with license number, and use
-        // useState "setDriverProfile" to set the driverProfile as the result
-
         return;
       }
     } catch (error) {
+      alert(error);
       toast.error("Something went wrong!");
     }
   };
@@ -92,7 +92,7 @@ const AddViolation = () => {
                       Last Name
                     </h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
-                      {driverProfile.lastName}
+                      {driverProfile.last_name}
                     </h1>
                   </div>
 
@@ -101,7 +101,7 @@ const AddViolation = () => {
                       First Name
                     </h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
-                      {driverProfile.firstName}
+                      {driverProfile.first_name}
                     </h1>
                   </div>
 
@@ -119,7 +119,7 @@ const AddViolation = () => {
                       Date of Birth
                     </h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
-                      {driverProfile.dateOfBirth}
+                      {driverProfile.date_of_birth}
                     </h1>
                   </div>
                   <div className="flex-1">
@@ -127,7 +127,7 @@ const AddViolation = () => {
                       Driver Type
                     </h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
-                      {driverProfile.driverType}
+                      {driverProfile.driver_type}
                     </h1>
                   </div>
                 </div>
@@ -138,7 +138,7 @@ const AddViolation = () => {
                       License Number
                     </h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
-                      {driverProfile.licenseNumber}
+                      {driverProfile.license_number}
                     </h1>
                   </div>
                   <div className="flex-1">
@@ -146,7 +146,7 @@ const AddViolation = () => {
                       License Expiration Date
                     </h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
-                      {driverProfile.expirationDate}
+                      {driverProfile.license_expiration_date}
                     </h1>
                   </div>
                 </div>
@@ -162,8 +162,7 @@ const AddViolation = () => {
             <button
               type="button"
               className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-              onClick={handleCancelButton}
-            >
+              onClick={handleCancelButton}>
               Cancel
             </button>
           </div>
@@ -173,8 +172,7 @@ const AddViolation = () => {
               type="button"
               className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
               onClick={handleNextClick}
-              disabled={loading}
-            >
+              disabled={loading}>
               {loading ? "Searching..." : "Search"}
             </button>
           </div>
@@ -187,8 +185,7 @@ const AddViolation = () => {
             <button
               type="button"
               className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-              onClick={handleBackClick}
-            >
+              onClick={handleBackClick}>
               Back
             </button>
           </div>
@@ -197,8 +194,7 @@ const AddViolation = () => {
             <button
               type="button"
               className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-              onClick={() => navigate("/add-violation")}
-            >
+              onClick={() => navigate("/add-violation")}>
               Add Violation
             </button>
           </div>
