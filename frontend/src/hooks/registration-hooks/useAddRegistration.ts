@@ -1,13 +1,13 @@
-import { useState } from "react";
 import { BackendError } from "../../types/error.types";
 import { Registration } from "../../types/datatypes";
 import { fetchWithAuth } from "../../utils/fetch";
 import useFetchWithAuthExports from "../context-hooks/useFetchWithAuthExports";
+import { toast } from "react-toastify";
+import { useState } from "react";
 
 export const useAddRegistration = () => {
-  const [error, setError] = useState<BackendError | null>(null); // Handle errors
-  const [loading, setLoading] = useState<boolean>(); // Track loading state
   const { auth, refresh, navigate } = useFetchWithAuthExports();
+  const [loading, setLoading] = useState<boolean>(false)
 
   const postRegistration = async (formData: Registration) => {
     setLoading(true);
@@ -24,17 +24,16 @@ export const useAddRegistration = () => {
 
       if (!response.ok) {
         const error: BackendError = await response.json();
-        setError(error);
+        toast.error(error.message)
+        return
       }
     } catch (error) {
-      console.error("Unexpected error:", error);
-      setError({ message: "An unexpected error occurred" } as BackendError);
+      alert(error)
+      toast.error("Unexpected error has occured.")
     } finally {
-      setTimeout(() => {
-        setLoading(false);
-      }, 5000);
+      setLoading(false)
     }
   };
-  return { postRegistration, loading, setLoading, error };
+  return { postRegistration, loading };
 };
 export default useAddRegistration;

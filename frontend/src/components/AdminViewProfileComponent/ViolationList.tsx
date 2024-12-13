@@ -4,8 +4,8 @@ import ViolationCard from "../ViolationCard";
 const ViolationList = ({ violations }: { violations: Violation[] }) => {
 
   return (
-    <div className="max-w-full max-h-full justify-center">
-      <div className="w-[35rem] h-[20rem] bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 overflow-y-auto rounded-md scrollbar">
+    <div className="flex flex-col items-center justify-center w-full">
+      <div className="w-[35rem] h-[20rem] bg-gray-400 bg-clip-padding rounded-md backdrop-filter backdrop-blur-sm bg-opacity-10 overflow-y-auto scrollbar">
         {violations.map((violation) => (
           <ViolationCard violation={violation} />
         ))}

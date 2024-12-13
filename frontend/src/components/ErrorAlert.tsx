@@ -28,6 +28,7 @@ const ErrorAlert = () => {
         <p className="text-sm">Please fill out missing fields.</p>
       </div>
       <button
+        title="button"
         className="text-white hover:text-gray-300 focus:outline-none"
         onClick={handleClose}
       >

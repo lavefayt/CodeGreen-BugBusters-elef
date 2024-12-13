@@ -1,26 +1,24 @@
-import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { Car } from "../types/datatypes";
 import useAddCar from "../hooks/car-hooks/useAddCar";
 
 const AddCar = ({
-  driver_id,
-  license_number,
+  driverId,
+  licenseNumber,
   setVehicleModalActive,
 }: {
-  driver_id: string;
-  license_number: string;
+  driverId: string;
+  licenseNumber: string;
   setVehicleModalActive: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const navigate = useNavigate();
   const { postCar } = useAddCar();
 
   const [formData, setFormData] = useState<Car>({
-    driver_id: driver_id,
+    driver_id: driverId,
     brand: "",
     car_model: "",
     color: "",
-    license_number: license_number,
+    license_number: licenseNumber,
   });
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -36,7 +34,7 @@ const AddCar = ({
   };
 
   const handleCancelButton = () => {
-    navigate("/encode");
+    setVehicleModalActive(false);
   };
 
   const handleNextClick = async () => {

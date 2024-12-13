@@ -5,12 +5,12 @@ import { toast } from "react-toastify";
 import { LoadingContextType } from "../../types/loading.types";
 import useLoading from "../context-hooks/useLoading";
 
-const useAddCar = () => {
+const useEditCar = () => {
   const { auth, refresh, navigate} = useFetchWithAuthExports()
   const { setAppLoading }: LoadingContextType = useLoading()
   
 
-  const postCar = async (formData: Car) => {
+  const updateCar = async (formData: Car) => {
     setAppLoading!(true);
 
     try {
@@ -18,8 +18,8 @@ const useAddCar = () => {
         navigate,
         refresh,
         auth,
-        "/car/add",
-        "post",
+        "/car/update",
+        "patch",
         formData
       );
 
@@ -47,7 +47,7 @@ const useAddCar = () => {
     }
   };
 
-  return { postCar };
+  return { updateCar };
 };
 
-export default useAddCar;
+export default useEditCar;
