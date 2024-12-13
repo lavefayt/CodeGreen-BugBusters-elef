@@ -12,4 +12,5 @@ const Loading = ({ loading }: { loading: boolean }) => {
   );
 };
 
+
 export default Loading;
