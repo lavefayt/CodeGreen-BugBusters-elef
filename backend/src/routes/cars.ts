@@ -181,7 +181,7 @@ router.patch("/update", async (req: Request, res: Response) => {
 
   res.status(200).json({
     title: "Car Updated!",
-    message: `Driver ${updateCar.last_name}, ${updateCar.first_name} has been updated successfully.`,
+    message: `Car has been updated successfully.`,
     driver: updateCar,
   });
 });
