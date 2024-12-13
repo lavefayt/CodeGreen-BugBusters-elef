@@ -7,7 +7,7 @@ const VehicleList = ({ driver }: { driver: DriverWithVandC }) => {
       <div className="w-[35rem] h-[20rem] bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 overflow-y-auto scrollbar">
         {driver.cars!.map((car) => (
           <CarListCard
-            key={car.license_number || "placeholder-license"}
+            key={car.id || "placeholder-license"}
             car={car}
           />
         ))}
