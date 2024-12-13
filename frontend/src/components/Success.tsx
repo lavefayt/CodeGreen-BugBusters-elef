@@ -1,5 +1,5 @@
 
-const Success = () => {
+const Success = ({ text }: { text: string }) => {
   return (
     <div
       id="success-overlay"
@@ -20,11 +20,16 @@ const Success = () => {
         />
       </svg>
 
-      <span className="text-white text-3xl font-syke-medium">Driver Added Successfully</span>
+      <span className="text-white text-3xl font-syke-medium">{text}</span>
       </div>
 
     </div>
   );
+};
+
+
+Success.defaultProps = {
+  text: "Adding...", 
 };
 
 export default Success;

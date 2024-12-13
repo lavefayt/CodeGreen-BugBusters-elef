@@ -1,19 +1,15 @@
-import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import React, { useState } from "react";
 import Adding from "../components/Adding";
 import Success from "../components/Success";
-import ErrorAlert from "../components/ErrorAlert";
 import { Registration } from "../types/datatypes";
 import { useAddRegistration } from "../hooks/registration-hooks/useAddRegistration";
 import { toast } from "react-toastify";
 
 const RegisterDriver = () => {
-  const navigate = useNavigate();
-  const [currentStep, setCurrentStep] = useState(1);
-  const { postRegistration, loading, setLoading } = useAddRegistration();
-  const [successMessage, setSuccessMessage] = useState("");
-  const [alertMessage, setAlertMessage] = useState("");
+  const { postRegistration, loading } = useAddRegistration();
+  const [successMessage] = useState("");
+  const [isChecked, setIsChecked] = useState(false); // Added here for checkbox
   const [formErrors, setFormErrors] = useState({
     last_name: false,
     first_name: false,
@@ -43,23 +39,23 @@ const RegisterDriver = () => {
     const minAgeDate = new Date();
     minAgeDate.setFullYear(today.getFullYear() - 16);
   
-    if (!formData.last_name.trim()) {
+    if (!formData.last_name!.trim()) {
       errors.last_name = true;
       toast.error("Last Name is required.");
       isValid = false;
     }
   
-    if (!formData.first_name.trim()) {
+    if (!formData.first_name!.trim()) {
       errors.first_name = true;
       toast.error("First Name is required.");
       isValid = false;
     }
   
-    if (!formData.date_of_birth.trim()) {
+    if (!formData.date_of_birth!.trim()) {
       errors.date_of_birth = true;
       toast.error("Date of Birth is required.");
       isValid = false;
-    } else if (new Date(formData.date_of_birth) > today) {
+    } else if (new Date(formData.date_of_birth!) > today) {
       errors.date_of_birth = true;
       toast.error("Invalid Birth Date");
       isValid = false;
@@ -77,50 +73,29 @@ const RegisterDriver = () => {
       isValid = false;
     }
   
-    if (!formData.license_number.trim()) {
+    if (!formData.license_number!.trim()) {
       errors.license_number = true;
       toast.error("License Number is required.");
       isValid = false;
     }
   
-    if (!formData.school_email.trim()) {
+    if (!formData.school_email!.trim()) {
       errors.school_email = true;
       toast.error("School Email is required.");
       isValid = false;
     }
   
-    setFormErrors(errors);
     return isValid;
   };
-  
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsChecked(event.target.checked);
+  };
 
   const handleConfirmClick = async (e: React.FormEvent) => {
     e.preventDefault();
-
-
-    const errors: Record<string, boolean> = {};
-    let isValid = true;
-
-    const today = new Date();
-    if (!validateForm()) return;
-
-    
-
-    setLoading(true);
-    setSuccessMessage("");
-    setAlertMessage("");
-
-    try {
-      await postRegistration(formData);
-      setLoading(false);
-      setSuccessMessage("Registration successful!");
-      setTimeout(() => {
-        navigate("/homepage");
-      }, 5000);
-    } catch (error) {
-      setLoading(false);
-      setAlertMessage("Error submitting driver. Please try again.");
-    }
+    await postRegistration(formData);
+    validateForm()
   };
 
   const handleChange = (
@@ -146,12 +121,10 @@ const RegisterDriver = () => {
     <div className="flex flex-col items-center bg-homepage-bg bg-cover bg-no-repeat sm:bg-top md:bg-right lg:bg-left h-screen">
       <div>
         <Header />
-        {loading && <Adding />}
-        {successMessage && <Success />}
-        {alertMessage && <ErrorAlert />}
+        {loading && <Adding text="Adding Registration..."/>}
+        {successMessage && <Success text="Registration Successful"/>}
       </div>
 
-      {currentStep === 1 && (
         <div className="h-auto w-auto px-7 py-5 bg-zinc-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
           <div className="text-center font-syke-light text-white justify-center items-center">
             <div className="text-textgreen text-left font-syke-light">
@@ -324,8 +297,10 @@ const RegisterDriver = () => {
 
                 <div className="flex items-center mt-4">
                   <input
-                    type="checkbox"
-                    id="termsCheckbox"
+                  title="tickbox"
+                     type="checkbox"
+                     checked={isChecked}
+                     onChange={handleCheckboxChange}
                     className="w-6 h-6 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     required
                   />
@@ -337,16 +312,17 @@ const RegisterDriver = () => {
                   </label>
                 </div>
                 <button
+                  disabled={!isChecked}
                   onClick={handleConfirmClick}
-                  className="bg-buttongreen hover:bg-colorhover text-l text-white py-2 px-4 w-[9rem] mt-[1rem] rounded-sm font-syke-bold"
-                >
+                  className={`bg-buttongreen hover:bg-colorhover text-l text-white py-2 px-4 w-[9rem] mt-[1rem] rounded-sm font-syke-bold ${
+                    !isChecked ? "opacity-50 cursor-not-allowed" : ""
+                  }`}>
                   Confirm
                 </button>
               </div>
             </div>
           </div>
         </div>
-      )}
     </div>
   );
 };
