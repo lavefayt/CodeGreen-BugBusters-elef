@@ -43,15 +43,18 @@ export const fetchWithAuth = async (
     console.log(await response.json());
     console.log(auth?.accessToken);
     const newAccessToken = await refresh();
-    const newResponse = await fetch(`http://localhost:4444${route}`, {
-      method: method.toUpperCase(),
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${newAccessToken}`,
-      },
-      credentials: "include",
-      body: body ? JSON.stringify(body) : null,
-    });
+    const newResponse = await fetch(
+      `${import.meta.env.VITE_SERVER_URL}${route}`,
+      {
+        method: method.toUpperCase(),
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${newAccessToken}`,
+        },
+        credentials: "include",
+        body: body ? JSON.stringify(body) : null,
+      }
+    );
 
     if (!newResponse.ok) {
       const backendError: BackendError = await newResponse.json();

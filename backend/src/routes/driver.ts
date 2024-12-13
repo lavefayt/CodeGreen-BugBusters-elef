@@ -175,51 +175,79 @@ router.get("/get/:driverId", async (req: Request, res: Response) => {
 });
 
 router.patch("/update", async (req: Request, res: Response) => {
-  const { id, ...updates } = req.body;
-
-  if (!id) {
-    res.status(400).json({
-      title: "Validation Error",
-      message: "Driver ID is required to update the record.",
-    });
-    return;
-  }
-
-  // Prepare the fields and values for the query
-  const fields = Object.keys(updates);
-  const values = Object.values(updates);
-
-  // Dynamically create the SET clause for the update
-  const setClause = fields
-    .map((field, index) => `${field} = $${index + 1}`)
-    .join(", ");
-
   try {
-    // Build and run the update query
-    const query = `
-        UPDATE drivers
-        SET ${setClause}
-        WHERE id = $${fields.length + 1}
-        RETURNING *;
-      `;
+    const {
+      id,
+      email,
+      first_name,
+      last_name,
+      middle_name,
+      date_of_birth,
+      sex,
+      driver_type,
+      license_number,
+      license_expiration_date,
+    } = req.body;
 
-    const result = await pool.query(query, [...values, id]);
+    console.log("THIS IS THE DRIVER!");
+    console.log(
+      id,
+      email,
+      first_name,
+      last_name,
+      middle_name,
+      date_of_birth,
+      sex,
+      driver_type,
+      license_number,
+      license_expiration_date
+    );
 
-    if (result.rowCount === 0) {
-      res.status(404).json({
-        title: "Not Found",
-        message: "Driver with the specified ID does not exist.",
-      });
+    if (
+      ![
+        id,
+        email,
+        first_name,
+        last_name,
+        date_of_birth,
+        sex,
+        driver_type,
+        license_number,
+        license_expiration_date,
+      ].every(Boolean)
+    ) {
+      res.status(404).json({ message: "Driver does not exist." });
       return;
     }
 
-    const updatedDriver = result.rows[0];
+    await pool.query(
+      `
+      UPDATE drivers
+      SET email = $1,
+      first_name = $2,
+      last_name = $3,
+      middle_name = $4,
+      date_of_birth = $5,
+      sex = $6,
+      driver_type = $7,
+      license_expiration_date = $8
+      WHERE id = $9
+      `,
+      [
+        email,
+        first_name,
+        last_name,
+        middle_name,
+        date_of_birth,
+        sex,
+        driver_type,
+        license_expiration_date,
+        id,
+      ]
+    );
 
-    // Return success with the updated driver data
     res.status(200).json({
-      title: "Driver Updated!",
-      message: `Driver ${updatedDriver.last_name}, ${updatedDriver.first_name} has been updated successfully.`,
-      driver: updatedDriver,
+      message: `Successfully updated Driver: ${first_name} ${last_name}.`,
     });
   } catch (error) {
     console.error("Error updating driver:", error);
