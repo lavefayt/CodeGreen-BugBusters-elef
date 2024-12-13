@@ -59,7 +59,7 @@ const HomePage = () => {
 
             {/* Typewriter animation */}
             <div className="relative text-white text-lg overflow-hidden h-12">
-              <p className="inline-block whitespace-nowrap border-r-2 border-textgreen pr-2 animate-typewriter">
+              <p className="inline-block whitespace-nowrap border-r-2 border-textgreen pr-2 animate-typewriter break-word">
                 Thank you for registering as a driver. Our team is reviewing
                 your details to validate your registration.
               </p>

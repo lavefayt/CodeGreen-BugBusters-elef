@@ -9,7 +9,7 @@ import useGetDriver from "../hooks/driver-hooks/useGetDriver";
 import { AuthContextType } from "../types/user.types";
 import useAuth from "../hooks/context-hooks/useAuth";
 import Loading from "../components/Loading";
-import AddCar from "./AddCar";
+import AddCarButton from "../components/AddCarButton";
 
 const ViewProfile = () => {
   const { driverId } = useParams<{ driverId: string }>();
@@ -17,10 +17,6 @@ const ViewProfile = () => {
   const { loading, driver } = useGetDriver(driverId!);
   const { auth }: AuthContextType = useAuth();
   const [vehicleModalActive, setVehicleModalActive] = useState<boolean>(false);
-
-  const handleAddVehicle = () => {
-    setVehicleModalActive(true);
-  };
 
   if (loading) {
     return <Loading loading={loading} />;
@@ -76,26 +72,13 @@ const ViewProfile = () => {
             <ViolationList violations={driver.violations!} />
           )}
         </div>
-        {activeSection === "vehicle" && (
-          <button
-            onClick={handleAddVehicle}
-            className="flex bg-buttongreen text-white py-3 px-5 hover:bg-[#33471a] font-syke-regular transition-colors rounded-md justify-center items-center font-bold text-md mt-3 w-auto self-end">
-            Add Vehicle
-          </button>
-        )}
-        {activeSection === "violation" && (
-          <button className="flex bg-buttongreen text-white py-3 px-5 hover:bg-[#33471a] font-syke-regular transition-colors rounded-md justify-center items-center font-bold text-md mt-3 w-auto self-end">
-            Add Violation
-          </button>
-        )}
-      </div>
-      {vehicleModalActive && (
-        <AddCar
-          driver_id={driverId!}
-          license_number={driver.license_number!}
+        <AddCarButton
+          activeSection={activeSection}
+          driver={driver}
+          vehicleModalActive={vehicleModalActive}
           setVehicleModalActive={setVehicleModalActive}
         />
-      )}
+      </div>
     </div>
   );
 };
