@@ -37,6 +37,21 @@ router.post("/add", async (req: Request, res: Response) => {
       driver_type,
     } = req.body as Registration;
 
+    if (![license_number,
+      school_email,
+      first_name,
+      sex,
+      last_name,
+      middle_name,
+      date_of_birth,
+      driver_type].every(Boolean)) {
+      res.status(401).json({
+        title: "Missing Information",
+        message: "Please input all information needed.",
+      });
+      return;
+      }
+
     console.log(user_id);
     await pool.query(
       `
@@ -55,6 +70,7 @@ router.post("/add", async (req: Request, res: Response) => {
         sex,
       ]
     );
+    
     res.status(201).json({
       title: "Success",
       message: "Registration created successfully.",

@@ -10,6 +10,7 @@ import { AuthContextType } from "../types/user.types";
 import useAuth from "../hooks/context-hooks/useAuth";
 import Loading from "../components/Loading";
 import AddCarButton from "../components/AddCarButton";
+import AddViolationButton from "../components/AddViolationButton";
 
 const ViewProfile = () => {
   const { driverId } = useParams<{ driverId: string }>();
@@ -17,6 +18,8 @@ const ViewProfile = () => {
   const { loading, driver } = useGetDriver(driverId!);
   const { auth }: AuthContextType = useAuth();
   const [vehicleModalActive, setVehicleModalActive] = useState<boolean>(false);
+  const [violationModalActive, setViolationModalActive] =
+    useState<boolean>(false);
 
   if (loading) {
     return <Loading loading={loading} />;
@@ -78,6 +81,12 @@ const ViewProfile = () => {
           vehicleModalActive={vehicleModalActive}
           setVehicleModalActive={setVehicleModalActive}
         />
+        <AddViolationButton
+          activeSection={activeSection}
+          driver={driver}
+          violationModalActive={violationModalActive}
+          setViolationModalActive={setViolationModalActive}
+        /> 
       </div>
     </div>
   );
