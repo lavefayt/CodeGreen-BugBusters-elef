@@ -60,7 +60,7 @@ const CarListCard = ({ car }: { car: Car }) => {
       <div className="ml-2 space-y-3 p-3">
         <div className="flex space-x-4">
           <div className="flex-1">
-            <h1 className="text-white font-syke-light text-xl">License Number:</h1>
+            <h1 className="text-white font-syke-light lg:text-xl md:text-lg text-md">License Number:</h1>
             {isEditing ? (
               <input
                 type="text"
@@ -70,11 +70,11 @@ const CarListCard = ({ car }: { car: Car }) => {
                 className="text-input"
               />
             ) : (
-              <h1 className="text-textgreen font-syke-medium text-xl">{car.license_number}</h1>
+              <h1 className="text-textgreen font-syke-medium lg:text-xl md:text-lg text-md">{car.license_number}</h1>
             )}
           </div>
           <div className="flex-1">
-            <h1 className="text-white font-syke-light text-xl">Plate Number:</h1>
+            <h1 className="text-white font-syke-light lg:text-xl md:text-md text-xs">Plate Number:</h1>
             {isEditing ? (
               <input
                 type="text"
@@ -84,14 +84,14 @@ const CarListCard = ({ car }: { car: Car }) => {
                 className="text-input"
               />
             ) : (
-              <h1 className="text-textgreen font-syke-medium text-xl">{car.license_plate}</h1>
+              <h1 className="text-textgreen font-syke-medium lg:text-xl md:text-md text-xs">{car.license_plate}</h1>
             )}
           </div>
         </div>
 
         <div className="flex space-x-4">
           <div className="flex-1">
-            <h1 className="text-white font-syke-light text-xl">Brand:</h1>
+            <h1 className="text-white font-syke-light lg:text-xl md:text-md text-xs">Brand:</h1>
             {isEditing ? (
               <input
                 type="text"
@@ -101,12 +101,12 @@ const CarListCard = ({ car }: { car: Car }) => {
                 className="text-input"
               />
             ) : (
-              <h1 className="text-textgreen font-syke-medium text-xl">{car.brand}</h1>
+              <h1 className="text-textgreen font-syke-medium lg:text-xl md:text-md text-xs">{car.brand}</h1>
             )}
           </div>
 
           <div className="flex-1">
-            <h1 className="text-white font-syke-light text-xl">Model:</h1>
+            <h1 className="text-white font-syke-light lg:text-xl md:text-md text-xs">Model:</h1>
             {isEditing ? (
               <input
                 type="text"
@@ -116,12 +116,12 @@ const CarListCard = ({ car }: { car: Car }) => {
                 className="text-input"
               />
             ) : (
-              <h1 className="text-textgreen font-syke-medium text-xl">{car.car_model}</h1>
+              <h1 className="text-textgreen font-syke-medium lg:text-xl md:text-md text-xs">{car.car_model}</h1>
             )}
           </div>
 
           <div className="flex-1">
-            <h1 className="text-white font-syke-light text-xl">Color:</h1>
+            <h1 className="text-white font-syke-light lg:text-xl md:text-md text-xs">Color:</h1>
             {isEditing ? (
               <input
                 type="text"
@@ -131,7 +131,7 @@ const CarListCard = ({ car }: { car: Car }) => {
                 className="text-input"
               />
             ) : (
-              <h1 className="text-textgreen font-syke-medium text-xl">{car.color}</h1>
+              <h1 className="text-textgreen font-syke-medium lg:text-xl md:text-md text-xs">{car.color}</h1>
             )}
           </div>
         </div>
@@ -145,11 +145,11 @@ const CarListCard = ({ car }: { car: Car }) => {
           className="text-white px-2 py-1 rounded-full hover:bg-lime-600"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          <span className="text-2xl">⋮</span>
+          <span className="lg:text-2xl md:text-lg text-md">⋮</span>
         </button>
 
         {isMenuOpen && (
-          <div className="absolute right-0 mt-2 w-40 bg-gray-800 text-white rounded-md shadow-lg z-10">
+          <div className="absolute right-0 mt-2 w-40 bg-gray-800 text-white rounded-md shadow-lg z-50">
             <button
               className="block w-full text-left px-4 py-2 hover:bg-gray-700"
               onClick={handleEditButton}

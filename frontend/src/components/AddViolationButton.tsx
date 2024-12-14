@@ -22,7 +22,7 @@ const AddViolationButton = ({
       {activeSection === "violation" && (
         <button
           onClick={handleAddViolationPressed}
-          className="flex bg-buttongreen text-white py-3 px-5 hover:bg-[#33471a] font-syke-regular transition-colors rounded-md justify-center items-center font-bold text-md mt-3 w-auto self-end">
+          className="flex bg-buttongreen text-white py-3 px-5 hover:bg-[#33471a] font-syke-regular transition-colors rounded-md justify-center items-center font-bold lg:text-md md:text-sm text-xs mt-3 w-auto self-end">
           Add Violation
         </button>
       )}

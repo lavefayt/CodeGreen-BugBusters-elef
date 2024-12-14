@@ -142,9 +142,9 @@ router.get("/get", async (req: Request, res: Response) => {
 });
 
 router.patch("/update", async (req: Request, res: Response) => {
-  const { license_plate, ...updates } = req.body;
+  const { id, ...updates } = req.body;
 
-  if (!license_plate) {
+  if (!id) {
     res.status(400).json({
       title: "Validation Error",
       message: "License plate is required to update the record.",
@@ -160,10 +160,10 @@ router.patch("/update", async (req: Request, res: Response) => {
     .join(", ");
 
   const query = `UPDATE cars SET ${setClause}
-         WHERE license_plate = $${fields.length + 1} 
+         WHERE id = $${fields.length + 1} 
          RETURNING *`;
 
-  const result = await pool.query(query, [...values, license_plate]);
+  const result = await pool.query(query, [...values, id]);
 
   if (result.rowCount === 0) {
     res.status(404).json({
