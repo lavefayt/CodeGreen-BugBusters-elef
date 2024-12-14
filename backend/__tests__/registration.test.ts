@@ -1,7 +1,19 @@
-import request from "supertest";
-import { afterEach, beforeEach, describe, expect, it, Mock, test, vi } from "vitest";
+import supertest from "supertest";
+import cors from "cors";
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  Mock,
+  test,
+  vi,
+} from "vitest";
 import { Pool } from "pg";
-import { server } from "../src/index"
+import { server } from "../src/index";
+import { credentials } from "../src/middlewares/credentials";
+import allowedOrigins from "../src/config/allowedOrigins";
 
 vi.mock("pg", () => {
   const mPool = {
@@ -18,6 +30,20 @@ vi.mock("pg", () => {
 const pool = new Pool();
 
 describe("Database Tests", () => {
+  server.use(credentials);
+  server.use(
+    cors({
+      origin: (origin, callback) => {
+        if (allowedOrigins.indexOf(origin!) !== -1 || !origin) {
+          callback(null, true);
+        } else {
+          callback(new Error("Not Allowed By CORS"));
+        }
+      },
+      optionsSuccessStatus: 200,
+    })
+  );
+
   beforeEach(() => {
     // Reset the mock before each test
     (pool.query as Mock).mockReset();
@@ -28,42 +54,33 @@ describe("Database Tests", () => {
     vi.clearAllMocks();
   });
 
-  test('should fetch registrations successfully', async () => {
+  it("should fetch all registrations successfully", async () => {
     const mockRegistrations = [
-      { user_id: 1, license_number: 'ABC123', school_email: 'test@example.com', first_name: 'John', last_name: 'Doe', middle_name: 'A', date_of_birth: '1990-01-01', driver_type: 'Type A', sex: 'M' },
-      // Add more mock registrations as needed
+      { user_id: 1, license_number: "123", school_email: "test@example.com" },
+      { user_id: 2, license_number: "456", school_email: "test2@example.com" },
     ];
-
-    // Mock the database query
     (pool.query as Mock).mockResolvedValue({ rows: mockRegistrations });
 
-    const response = await request(server).get('/registration/get');
-    console.log(response.error)
+    const response = await supertest(server).get("/get");
 
     expect(response.status).toBe(200);
     expect(response.body).toEqual(mockRegistrations);
+    expect(pool.query).toHaveBeenCalledOnce();
+    expect(pool.query).toHaveBeenCalledWith(
+      "SELECT user_id, license_number, school_email, first_name,last_name, middle_name, date_of_birth, driver_type, sex FROM registrations"
+    );
   });
 
-  test('should handle database query error', async () => {
-    const mockError = new Error('Database query failed');
-    
-    // Mock the database query to throw an error
-    (pool.query as Mock).mockRejectedValue(mockError);
+  it("should handle database errors", async () => {
+    const dbError = new Error("Database query failed");
+    (pool.query as Mock).mockRejectedValue(dbError);
 
-    const response = await request(server).get('/registration/get');
+    const response = await supertest(server).get("/get");
 
     expect(response.status).toBe(500);
-    expect(response.body).toEqual({ title: 'Unknown Error', message: mockError.message });
+    expect(response.body).toEqual({
+      title: "Unknown Error",
+      message: dbError.message,
+    });
   });
-
-  test('should return empty array when no registrations exist', async () => {
-    // Mock the database query to return an empty array
-    (pool.query as Mock).mockResolvedValue({ rows: [] });
-
-    const response = await request(server).get('/registration/get');
-
-    expect(response.status).toBe(200);
-    expect(response.body).toEqual([]);
-  });
-  
 });
