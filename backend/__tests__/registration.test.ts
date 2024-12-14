@@ -30,19 +30,19 @@ vi.mock("pg", () => {
 const pool = new Pool();
 
 describe("Database Tests", () => {
-  server.use(credentials);
-  server.use(
-    cors({
-      origin: (origin, callback) => {
-        if (allowedOrigins.indexOf(origin!) !== -1 || !origin) {
-          callback(null, true);
-        } else {
-          callback(new Error("Not Allowed By CORS"));
-        }
-      },
-      optionsSuccessStatus: 200,
-    })
-  );
+  // server.use(credentials);
+  // server.use(
+  //   cors({
+  //     origin: (origin, callback) => {
+  //       if (allowedOrigins.indexOf(origin!) !== -1 || !origin) {
+  //         callback(null, true);
+  //       } else {
+  //         callback(new Error("Not Allowed By CORS"));
+  //       }
+  //     },
+  //     optionsSuccessStatus: 200,
+  //   })
+  // );
 
   beforeEach(() => {
     // Reset the mock before each test
