@@ -1,8 +1,8 @@
 import React from "react";
 import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
 import LoginPage from "../../src/pages/LoginPage";
-import { fireEvent, render, renderHook, screen } from "@testing-library/react";
-import { BrowserRouter, MemoryRouter } from "react-router-dom";
+import { fireEvent, render, screen } from "@testing-library/react";
+import { BrowserRouter} from "react-router-dom";
 import useLogin from "../../src/hooks/useLogin";
 
 
