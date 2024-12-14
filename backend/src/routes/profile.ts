@@ -31,17 +31,17 @@ router.get("/get/:id", async (req: Request, res: Response) => {
   }
 });
 
-router.delete("/:id", async (req: Request, res: Response) => {
-  try {
-    const {id} = req.params
+// router.delete("/:id", async (req: Request, res: Response) => {
+//   try {
+//     const {id} = req.params
 
-    const {rows: profile} = await pool.query('')
+//     const {rows: profile} = await pool.query('')
 
 
-  } catch (error) {
-    console.log(error);
-    res.sendStatus(500);
-  }
-});
+//   } catch (error) {
+//     console.log(error);
+//     res.sendStatus(500);
+//   }
+// });
 
 export default router;

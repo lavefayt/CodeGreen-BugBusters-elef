@@ -1,5 +1,5 @@
 import supertest from "supertest";
-import cors from "cors";
+
 import {
   afterEach,
   beforeEach,
@@ -7,14 +7,10 @@ import {
   expect,
   it,
   Mock,
-  test,
   vi,
 } from "vitest";
 import { Pool } from "pg";
 import { server } from "../src/index";
-import { credentials } from "../src/middlewares/credentials";
-import allowedOrigins from "../src/config/allowedOrigins";
-
 vi.mock("pg", () => {
   const mPool = {
     query: vi.fn(),
