@@ -31,7 +31,9 @@ const LoginPage = () => {
             <button
               className="text-buttongreen font-syke-medium"
               type="button"
-              onClick={handleSignUpButton}>
+              onClick={handleSignUpButton}
+              data-testid="signup-button"
+              >
               Sign Up
             </button>
           </h1>

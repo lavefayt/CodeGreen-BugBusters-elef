@@ -1,9 +1,3 @@
-
-
-/**
- * @jest-environment:json
- */
-
 import { renderHook, act } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
