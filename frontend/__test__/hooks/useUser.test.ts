@@ -1,7 +1,7 @@
 
 
 /**
- * @jest-environment:jsdom
+ * @jest-environment:json
  */
 
 import { renderHook, act } from '@testing-library/react';
@@ -47,17 +47,22 @@ describe('useLogin Hook', () => {
   });
 
   it('handles successful login', async () => {
+    //setup
     const mockUser = { isAdmin: true, name: 'Admin User' };
     (normalFetch as Mock).mockResolvedValueOnce({
       ok: true,
       json: () => Promise.resolve(mockUser),
     });
 
+    //action
+
     const { result } = renderHook(() => useLogin());
 
     await act(async () => {
       await result.current.submitLogin({ email: 'YoshiKanemoto@gmail.com', password: 'password' });
     });
+
+    //assert
 
     expect(setAppLoading).toHaveBeenCalledWith(true);
     expect(setAuth).toHaveBeenCalledWith(mockUser);
