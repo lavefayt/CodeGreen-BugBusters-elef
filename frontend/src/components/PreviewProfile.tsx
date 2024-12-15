@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom";
 import { DriverWithVandC } from "../types/datatypes";
+import { useNavigate } from "react-router-dom";
 
 const PreviewProfile = ({
   selectedEntry,
@@ -7,10 +7,15 @@ const PreviewProfile = ({
   selectedEntry: DriverWithVandC;
 }) => {
   const navigate = useNavigate();
-
   const handleViewProfile = () => {
     if (!selectedEntry) return;
     navigate(`/view-profile/${selectedEntry.id}`);
+  };
+
+  const handleSendNotification = () => {
+    if(!selectedEntry) return;
+    navigate(`/send-notif/${selectedEntry.id}`);
+
   };
 
   return (
@@ -82,8 +87,15 @@ const PreviewProfile = ({
             <div>
               <button
                 onClick={handleViewProfile}
-                className="p-2 px-4 m-2 bg-buttongreen active:bg-colorhover transition-colors rounded-sm text-white font-syke-bold">
+                className="p-2 px-4 m-2 bg-buttongreen active:bg-colorhover transition-colors rounded-sm text-white font-syke-bold"
+              >
                 View Profile
+              </button>
+              <button
+                onClick={handleSendNotification}
+                className="p-2 px-4 m-2 bg-buttongreen active:bg-colorhover transition-colors rounded-sm text-white font-syke-bold"
+              >
+                Send Notification
               </button>
             </div>
           </div>

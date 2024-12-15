@@ -46,12 +46,12 @@ const AddCar = ({
   };
 
   return (
-    <div className="absolute flex flex-col m-auto w-1/2 left-0 right-0 top-0 bottom-0 items-center justify-center h-1/2 px-6 py-5 bg-gray-600 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10">
-      <h1 className="text-4xl font-syke-bold text-textgreen">Adding a Car</h1>
+    <div className="absolute flex flex-col m-auto w-full left-0 right-0 top-0 bottom-0 items-center justify-center h-full px-6 py-5 bg-secondgrey rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10">
+      <h1 className="text-3xl font-syke-bold text-textgreen p-2">Adding a Car</h1>
       {currentStep === 1 && (
         <>
-          <p className="text-textgreen">Enter car details.</p>
-          <div className="flex flex-col space-y-3 p-3">
+          <p className="text-textgreen font-syke-light text-lg">Enter car details.</p>
+          <div className="flex flex-col space-y-4 p-3">
             <div className="flex space-x-3">
               <div className="flex flex-col w-full">
                 <h1 className="text-white font-syke-light text-xl">
@@ -59,7 +59,7 @@ const AddCar = ({
                 </h1>
                 <input
                   type="text"
-                  className="bg-secondgrey font-syke-regular text-md w-full px-4 py-2 borderborder-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
+                  className="bg-secondgrey font-syke-light w-full px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                   name="license_plate"
                   placeholder="Enter License Plate"
                   value={formData.license_plate}
@@ -73,7 +73,7 @@ const AddCar = ({
                 <h1 className="text-white font-syke-light text-xl">Brand</h1>
                 <input
                   type="text"
-                  className="bg-secondgrey font-syke-regular text-md w-full px-4 py-2 borderborder-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
+                  className="bg-secondgrey font-syke-light w-full px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                   name="brand"
                   placeholder="Enter Brand"
                   value={formData.brand}
@@ -84,7 +84,7 @@ const AddCar = ({
                 <h1 className="text-white font-syke-light text-xl">Model</h1>
                 <input
                   type="text"
-                  className="bg-secondgrey font-syke-regular text-md w-full px-4 py-2 borderborder-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
+                  className="bg-secondgrey font-syke-light w-full px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                   name="car_model"
                   placeholder="Enter Car Model"
                   value={formData.car_model}
@@ -95,7 +95,7 @@ const AddCar = ({
                 <h1 className="text-white font-syke-light text-xl">Color</h1>
                 <input
                   type="text"
-                  className="bg-secondgrey font-syke-regular text-md w-full px-4 py-2 borderborder-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
+                  className="bg-secondgrey font-syke-light w-full px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                   name="color"
                   placeholder="Enter Color"
                   value={formData.color}
@@ -109,41 +109,42 @@ const AddCar = ({
 
       {currentStep === 2 && (
         <>
-          <p className="text-textgreen">Confirm car details.</p>
-          <div className="flex flex-col space-y-8 p-3 w-full">
-            <div className="flex space-x-3 w-full">
-              <div className="flex flex-col w-full">
-                <h1 className="text-white font-syke-light text-xl">
-                  License Plate
-                </h1>
-                <h1 className="text-textgreen font-syke-medium text-3xl">
-                  {formData.license_plate}
-                </h1>
-              </div>
-            </div>
-
-            <div className="flex space-x-3">
-              <div className="flex flex-col w-1/3">
-                <h1 className="text-white font-syke-light text-xl">Brand</h1>
-                <h1 className="text-textgreen font-syke-medium text-3xl">
-                  {formData.brand}
-                </h1>
-              </div>
-              <div className="flex flex-col w-1/3">
-                <h1 className="text-white font-syke-light text-xl">Model</h1>
-                <h1 className="text-textgreen font-syke-medium text-3xl">
-                  {formData.car_model}
-                </h1>
-              </div>
-              <div className="flex flex-col w-1/3">
-                <h1 className="text-white font-syke-light text-xl">Color</h1>
-                <h1 className="text-textgreen font-syke-medium text-3xl">
-                  {formData.color}
-                </h1>
-              </div>
-            </div>
+        <p className="text-textgreen font-syke-light text-lg">Confirm car details.</p>
+        <div className="grid grid-cols-2 gap-6 p-5 w-full max-w-xl">
+          {/* License Plate */}
+          <div className="flex flex-col">
+            <h1 className="text-white font-syke-light text-xl">License Plate</h1>
+            <h1 className="text-textgreen font-syke-medium text-3xl">
+              {formData.license_plate}
+            </h1>
           </div>
-        </>
+      
+          {/* Model */}
+          <div className="flex flex-col">
+            <h1 className="text-white font-syke-light text-xl">Model</h1>
+            <h1 className="text-textgreen font-syke-medium text-3xl">
+              {formData.car_model}
+            </h1>
+          </div>
+      
+          {/* Brand */}
+          <div className="flex flex-col">
+            <h1 className="text-white font-syke-light text-xl">Brand</h1>
+            <h1 className="text-textgreen font-syke-medium text-3xl">
+              {formData.brand}
+            </h1>
+          </div>
+      
+          {/* Color */}
+          <div className="flex flex-col">
+            <h1 className="text-white font-syke-light text-xl">Color</h1>
+            <h1 className="text-textgreen font-syke-medium text-3xl">
+              {formData.color}
+            </h1>
+          </div>
+        </div>
+      </>
+      
       )}
 
       <div className="flex justify-center items-center gap-5 p-5">

@@ -29,12 +29,13 @@ const ViewProfile = () => {
     <div className="flex flex-col items-center bg-homepage-bg md:bg-cover bg-no-repeat sm:bg-bottom md:bg-inherit lg:bg-left bg-center w-full h-screen">
       <div>{auth!.isAdmin ? <AdminHeader /> : <Header />}</div>
 
-      <h1 className="lg:text-4xl md:text-3xl sm:text-2xl text-xl text-textgreen font-syke-bold mb-3 pb-3 ">
-        My Gateway Account
-      </h1>
+     
       <div className="flex flex-col">
         <div className="flex">
-          <aside className="p-4 grid items-center">
+          <aside className=" grid items-center p-20">
+          <h1 className="lg:text-4xl md:text-3xl sm:text-2xl text-xl text-textgreen font-syke-bold mb-3 pb-3 w-20">
+        My Gateway Account
+      </h1>
             <nav>
               <div className="space-y-[2rem]">
                 <button
