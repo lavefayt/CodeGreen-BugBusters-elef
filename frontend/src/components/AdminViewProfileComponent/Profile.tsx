@@ -67,6 +67,7 @@ const Profile = ({ driver }: { driver: DriverWithVandC }) => {
                 </h1>
                 {isEditing ? (
                   <input
+                    title="firstname"
                     type="text"
                     name="first_name"
                     value={formData.first_name}
@@ -86,6 +87,7 @@ const Profile = ({ driver }: { driver: DriverWithVandC }) => {
                 </h1>
                 {isEditing ? (
                   <input
+                  title="lastname"
                     type="text"
                     name="middle_name"
                     value={formData.middle_name || ""}
@@ -107,6 +109,7 @@ const Profile = ({ driver }: { driver: DriverWithVandC }) => {
                 </h1>
                 {isEditing ? (
                   <input
+                
                     type="text"
                     name="sex"
                     value={formData.sex}
