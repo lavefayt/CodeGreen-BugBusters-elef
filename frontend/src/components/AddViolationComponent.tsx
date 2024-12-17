@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Violation } from "../types/datatypes";
+import useAddViolation from "../hooks/violation-hooks/useAddViolation";
 
 const AddViolationComponent = ({
   driverId,
@@ -8,22 +9,30 @@ const AddViolationComponent = ({
   driverId: string;
   setViolationModalActive: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const { postViolation } = useAddViolation();
+  const date = new Date().toJSON()
+
   const [formData, setFormData] = useState<Violation>({
     driver_id: driverId,
+    violation_type: "",
+    violation_date: date.slice(0, 10),
+    description: "",
     // place the necessary inputs needed
   });
 
-  console.log(formData); // REMOVE THIS WHEN ALL IS DONE
+  const [currentStep, setCurrentStep] = useState(1);
 
-  const handleSubmit = () => {
-    // Place
-    setViolationModalActive(false);
-  };
+  // console.log(formData); // REMOVE THIS WHEN ALL IS DONE
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async () => {
+    // Place
+    await postViolation(formData);
+    setViolationModalActive(false);
   };
 
   const handleCancelButton = () => {
@@ -46,55 +55,48 @@ const AddViolationComponent = ({
       </h1>
       {currentStep === 1 && (
         <>
-          <p className="text-textgreen">Enter car details.</p>
-          <div className="flex flex-col space-y-3 p-3">
-            <div className="flex space-x-3">
-              <div className="flex flex-col w-full">
+          <p className="text-textgreen mb-6">Enter violation details.</p>
+          <div className="flex flex-col space-y-3 w-full">
+
+            <div className="flex space-x-4 w-full">
+              <div className="flex flex-col w-1/2">
                 <h1 className="text-white font-syke-light text-xl">
-                  License Plate
+                  Violation Type
                 </h1>
                 <input
                   type="text"
                   className="bg-secondgrey font-syke-regular text-md w-full px-4 py-2 borderborder-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
-                  name="license_plate"
-                  placeholder="Enter License Plate"
-                  // value={formData.license_plate}
+                  name="violation_type"
+                  placeholder="Enter Type of Violation"
+                  value={formData.violation_type}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex flex-col w-1/3">
+                <h1 className="text-white font-syke-light text-xl">
+                  Violation Date
+                </h1>
+                <input
+                  type="date"
+                  className="bg-secondgrey font-syke-regular text-md w-full px-4 py-2 borderborder-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
+                  name="violation_date"
+                  placeholder="Enter Violation Date"
+                  value={formData.violation_date}
                   onChange={handleChange}
                 />
               </div>
             </div>
-
             <div className="flex space-x-3">
-              <div className="flex flex-col w-1/3">
-                <h1 className="text-white font-syke-light text-xl">Brand</h1>
+              <div className="flex flex-col w-full">
+                <h1 className="text-white font-syke-light text-xl">
+                  Description
+                </h1>
                 <input
                   type="text"
                   className="bg-secondgrey font-syke-regular text-md w-full px-4 py-2 borderborder-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
-                  name="brand"
-                  placeholder="Enter Brand"
-                  // value={formData.brand}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="flex flex-col w-1/3">
-                <h1 className="text-white font-syke-light text-xl">Model</h1>
-                <input
-                  type="text"
-                  className="bg-secondgrey font-syke-regular text-md w-full px-4 py-2 borderborder-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
-                  name="car_model"
-                  placeholder="Enter Car Model"
-                  // value={formData.car_model}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="flex flex-col w-1/3">
-                <h1 className="text-white font-syke-light text-xl">Color</h1>
-                <input
-                  type="text"
-                  className="bg-secondgrey font-syke-regular text-md w-full px-4 py-2 borderborder-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
-                  name="color"
-                  placeholder="Enter Color"
-                  // value={formData.color}
+                  name="description"
+                  placeholder="Enter Violation Description"
+                  value={formData.description}
                   onChange={handleChange}
                 />
               </div>
@@ -103,44 +105,46 @@ const AddViolationComponent = ({
         </>
       )}
 
-      {currentStep === 2 && (
-        <>
-          <p className="text-textgreen">Confirm car details.</p>
-          <div className="flex flex-col space-y-8 p-3 w-full">
-            <div className="flex space-x-3 w-full">
-              <div className="flex flex-col w-full">
-                <h1 className="text-white font-syke-light text-xl">
-                  License Plate
-                </h1>
-                <h1 className="text-textgreen font-syke-medium text-3xl">
-                  {/* {formData.license_plate} */}
-                </h1>
-              </div>
-            </div>
+{currentStep === 2 && (
+  <>
+    <p className="text-textgreen mb-6">Confirm violation details below.</p>
+    <div className="flex flex-col space-y-4 w-full">
+      {/* Violation Type and Violation Date */}
+      <div className="flex space-x-4 w-full">
+        {/* Violation Type */}
+        <div className="flex flex-col w-1/2">
+          <h1 className="text-white font-syke-light text-xl mb-2">
+            Violation Type
+          </h1>
+          <h1 className="text-textgreen font-syke-medium text-2xl">
+            {formData.violation_type || "Not Provided"}
+          </h1>
+        </div>
 
-            <div className="flex space-x-3">
-              <div className="flex flex-col w-1/3">
-                <h1 className="text-white font-syke-light text-xl">Brand</h1>
-                <h1 className="text-textgreen font-syke-medium text-3xl">
-                  {/* {formData.brand} */}
-                </h1>
-              </div>
-              <div className="flex flex-col w-1/3">
-                <h1 className="text-white font-syke-light text-xl">Model</h1>
-                <h1 className="text-textgreen font-syke-medium text-3xl">
-                  {/* {formData.car_model} */}
-                </h1>
-              </div>
-              <div className="flex flex-col w-1/3">
-                <h1 className="text-white font-syke-light text-xl">Color</h1>
-                <h1 className="text-textgreen font-syke-medium text-3xl">
-                  {/* {formData.color} */}
-                </h1>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
+        {/* Violation Date */}
+        <div className="flex flex-col w-1/2">
+          <h1 className="text-white font-syke-light text-xl mb-2">
+            Violation Date
+          </h1>
+          <h1 className="text-textgreen font-syke-medium text-2xl">
+            {formData.violation_date || "Date Today"}
+          </h1>
+        </div>
+      </div>
+
+      {/* Description */}
+      <div className="flex flex-col w-full">
+        <h1 className="text-white font-syke-light text-xl mb-2">
+          Description
+        </h1>
+        <h1 className="text-textgreen font-syke-medium text-2xl">
+          {formData.description || "Not Provided"}
+        </h1>
+      </div>
+    </div>
+  </>
+)}
+
 
       <div className="flex justify-center items-center gap-5 p-5">
         {currentStep === 1 && (
@@ -173,7 +177,7 @@ const AddViolationComponent = ({
               type="button"
               className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
               onClick={handleSubmit}>
-              Add Car
+              Add Violation
             </button>
           </>
         )}
@@ -183,3 +187,12 @@ const AddViolationComponent = ({
 };
 
 export default AddViolationComponent;
+
+// export interface Violation {
+//   id?: string;
+//   driver_id?: string;
+//   violation_type?: string;
+//   violation_date?: string;
+//   description?: string;
+//   paid_status?: boolean;
+// }
