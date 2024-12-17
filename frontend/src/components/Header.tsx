@@ -8,12 +8,26 @@ const Header = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isDropdownOpenPolicies, setDropdownOpenPolicies] = useState(false);
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 768); // Track if the screen is wide
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const droopdownRefPolicies = useRef<HTMLDivElement>(null);
 
   const { logout } = useLogout();
   const { auth }: AuthContextType = useAuth();
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsWideScreen(window.innerWidth >= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const handleHomePage = () => {
     navigate("/homepage");
@@ -25,12 +39,12 @@ const Header = () => {
 
   const handleRules = () => {
     navigate("/rules");
-  }
+  };
 
   const handleProfile = () => {
-    console.log(auth);
     navigate(`/view-profile/${auth!.id}`);
   };
+
   const toggleDropdown = () => {
     setDropdownOpen((prevState) => !prevState);
   };
@@ -43,9 +57,13 @@ const Header = () => {
     logout();
   };
 
-  const handleChangePassword = () => ( 
-    navigate("/changepassword")
-  )
+  const handleChangePassword = () => {
+    navigate("/changepassword");
+  };
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen((prev) => !prev);
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -68,34 +86,50 @@ const Header = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [dropdownRef]);
+  }, []);
 
   return (
-    <header className="flex items-center justify-start w-full px-4 py-4">
-      <div className="flex items-center font-syke w-full justify-between">
-        {/* Logo Section */}
-        <div className="flex items-center w-[12rem] mr-[150px]">
+    <div>
+    <header className="flex items-center space-x-[15rem] font-syke-medium justify-start w-full p-4">
+    <div className="flex items-center">
           <button
             onClick={handleHomePage}
-            className="flex text-left items-center gap-4 group overflow-hidden rounded-md pr-20 py-2 text-white font-medium text-lg"
+            className="flex items-center w-[3rem] gap-4 text-white sm:text-xl"
           >
             <img
               src="../assets/5.png"
               alt="Logo"
-              className="w-10 h-5 object-contain md:w-[4rem] md:h-[4rem] transition-transform duration-300 hover:scale-105"
+              className="w-15 h-15 object-contain md:w-[4rem] md:h-[4rem] transition-transform duration-300 hover:scale-105"
             />
-            <h1 className="text-lg md:text-xl font-syke-medium transition-colors hover:text-buttongreen">
-              CodeGreen Gateway
-            </h1>
+            <h1 className="text-md text-left md:text-xl hover:text-textgreen">CodeGreen Gateway</h1>
           </button>
         </div>
 
-        {/* Navigation Links */}
-        <nav className="flex space-x-20 text-white font-syke-medium text-lg">
-          <Link
-            to="/homepagedriver"
-            className="hover:text-textgreen font-syke-medium transition-colors"
+        {!isWideScreen && (
+          <button
+            title="button"
+            onClick={toggleMobileMenu}
+            className="text-white md:hidden focus:outline-none block"
           >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16m-7 6h7"
+              />
+            </svg>
+          </button>
+        )}
+
+        <nav className="hidden md:flex flex-row items-center space-x-[5rem] text-white">
+          <Link to="/homepagedriver" className="hover:text-textgreen transition-colors">
             Inbox
           </Link>
           <Link to="/about" className="hover:text-textgreen transition-colors">
@@ -105,24 +139,21 @@ const Header = () => {
           <div className="relative" ref={droopdownRefPolicies}>
             <button
               onClick={toggleDropdownPolicies}
-              className="text-white hover:text-textgreen transition-colors"
+              className="hover:text-textgreen transition-colors"
             >
               Policies
             </button>
-
             {isDropdownOpenPolicies && (
-              <div className="absolute right-0 mt-4 w-48 bg-hoverbutton text-white rounded-md shadow-lg z-10">
+              <div className="absolute mt-2 w-48 bg-hoverbutton text-white rounded-md shadow-lg">
                 <span
-                  className="block font-syke-medium rounded-t-lg text-sm px-4 py-2 hover:bg-buttongreen cursor-pointer"
                   onClick={handleProtocols}
-
+                  className="block px-4 py-2 hover:bg-buttongreen rounded-t-md cursor-pointer"
                 >
                   Protocols
                 </span>
-
                 <span
                   onClick={handleRules}
-                  className="block font-syke-medium text-sm rounded-b-lg px-4 py-2 hover:bg-buttongreen cursor-pointer"
+                  className="block px-4 py-2 hover:bg-buttongreen rounded-b-md cursor-pointer"
                 >
                   Rules and Regulations
                 </span>
@@ -131,31 +162,26 @@ const Header = () => {
           </div>
 
           <div className="relative" ref={dropdownRef}>
-            <button
-              onClick={toggleDropdown}
-              className="text-white hover:text-textgreen transition-colors"
-            >
+            <button onClick={toggleDropdown} className="hover:text-textgreen transition-colors">
               Account
             </button>
-
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-4 w-48 bg-hoverbutton text-white rounded-md shadow-lg z-10">
+              <div className="absolute mt-2 w-48 bg-hoverbutton text-white rounded-md shadow-lg">
                 <span
                   onClick={handleProfile}
-                  className="block font-syke-medium rounded-t-lg text-sm px-4 py-2 hover:bg-buttongreen cursor-pointer"
+                  className="block px-4 py-2 hover:bg-buttongreen rounded-t-md cursor-pointer transition-colors"
                 >
                   Profile
                 </span>
                 <span
-                  // THIS SHOULD BE FOR RESETTING PASSWORD NOT LOG OUT
-                  onClick={ handleChangePassword }
-                  className="block font-syke-medium text-sm px-4 py-2 hover:bg-buttongreen cursor-pointer"
+                  onClick={handleChangePassword}
+                  className="block px-4 py-2 hover:bg-buttongreen cursor-pointer transition-colors"
                 >
                   Change Password
                 </span>
                 <span
                   onClick={handleLogOut}
-                  className="block font-syke-medium text-sm rounded-b-lg px-4 py-2 hover:bg-buttongreen cursor-pointer"
+                  className="block px-4 py-2 hover:bg-buttongreen rounded-b-md cursor-pointer transition-colors"
                 >
                   Log Out
                 </span>
@@ -163,8 +189,66 @@ const Header = () => {
             )}
           </div>
         </nav>
-      </div>
-    </header>
+      </header>
+
+      {isMobileMenuOpen && !isWideScreen && (
+        <nav className="flex flex-col font-syke-medium items-center space-y-5 text-white bg-hoverbutton p-4 rounded">
+          <Link to="/homepagedriver" className="hover:text-textgreen transition-colors">
+            Inbox
+          </Link>
+          <Link to="/about" className="hover:text-textgreen transition-colors">
+            About
+          </Link>
+          <button
+            onClick={toggleDropdownPolicies}
+            className="hover:text-textgreen transition-colors"
+          >
+            Policies
+          </button>
+          {isDropdownOpenPolicies && (
+            <div className="w-full bg-hoverbutton text-white rounded-md shadow-lg">
+              <span
+                onClick={handleProtocols}
+                className="block px-4 py-2 hover:bg-buttongreen cursor-pointer transition-colors"
+              >
+                Protocols
+              </span>
+              <span
+                onClick={handleRules}
+                className="block px-4 py-2 hover:bg-buttongreen cursor-pointer transition-colors"
+              >
+                Rules and Regulations
+              </span>
+            </div>
+          )}
+          <button onClick={toggleDropdown} className="hover:text-textgreen">
+            Account
+          </button>
+          {isDropdownOpen && (
+                <div className="absolute right-0 mt-4 w-48 bg-hoverbutton text-white rounded-md shadow-lg z-10">
+              <span
+                onClick={handleProfile}
+                className="block px-4 py-2 hover:bg-buttongreen cursor-pointer transition-colors"
+              >
+                Profile
+              </span>
+              <span
+                onClick={handleChangePassword}
+                className="block px-4 py-2 hover:bg-buttongreen cursor-pointer transition-colors"
+              >
+                Change Password
+              </span>
+              <span
+                onClick={handleLogOut}
+                className="block px-4 py-2 hover:bg-buttongreen cursor-pointer"
+              >
+                Log Out
+              </span>
+            </div>
+          )}
+        </nav>
+      )}
+    </div>
   );
 };
 
