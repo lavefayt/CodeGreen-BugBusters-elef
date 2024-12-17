@@ -54,10 +54,6 @@ export default {
             transform: "scale(1)",
           },
         },
-        typewriter: {
-          "0%": { width: "0%" },
-          "100%": { width: "100%" },
-        },
         blink: {
           "50%": { borderColor: "transparent" },
         },
@@ -66,7 +62,6 @@ export default {
         fadeIn: "fadeIn 0.5s ease-in",
         fadeOut: "fadeOut 0.5s ease-out",
         fadeInZoom: "fadeInZoom 0.8s ease-out",
-        typewriter: "typewriter 4s steps(40, end) 1s 1 normal both, blink 0.75s step-end infinite",
       },
     },
   },

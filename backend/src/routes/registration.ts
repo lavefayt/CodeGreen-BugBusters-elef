@@ -4,12 +4,21 @@ import { Registration } from "../types/datatypes";
 
 const router = express.Router();
 
+// Helper function to fetch registration by license
+const fetchRegistrationByLicense = async (license_number: string) => {
+  const { rows } = await pool.query(
+    `SELECT school_email, user_id FROM registrations WHERE license_number = $1`,
+    [license_number]
+  );
+  return rows[0];
+};
+
 // GET route to fetch all registrations
 router.get("/get", async (_req: Request, res: Response) => {
   try {
     console.log("Fetching registration from the database...");
     const { rows: registrations } = await pool.query(
-      "SELECT user_id, license_number, school_email, first_name,last_name, middle_name, date_of_birth, driver_type, sex FROM registrations"
+      "SELECT user_id, license_number, school_email, first_name, last_name, middle_name, date_of_birth, driver_type, sex FROM registrations"
     );
     console.log("Registrations fetched successfully:", registrations);
 
@@ -37,25 +46,29 @@ router.post("/add", async (req: Request, res: Response) => {
       driver_type,
     } = req.body as Registration;
 
-    if (![license_number,
-      school_email,
-      first_name,
-      sex,
-      last_name,
-      middle_name,
-      date_of_birth,
-      driver_type].every(Boolean)) {
-      res.status(401).json({
+    if (
+      ![
+        license_number,
+        school_email,
+        first_name,
+        sex,
+        last_name,
+        middle_name,
+        date_of_birth,
+        driver_type,
+      ].every(Boolean)
+    ) {
+      res.status(400).json({
         title: "Missing Information",
         message: "Please input all information needed.",
       });
       return;
-      }
+    }
 
     console.log(user_id);
     await pool.query(
       `
-      INSERT INTO registrations (user_id, license_number, school_email, first_name, last_name,middle_name, date_of_birth, driver_type, sex) 
+      INSERT INTO registrations (user_id, license_number, school_email, first_name, last_name, middle_name, date_of_birth, driver_type, sex) 
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
       `,
       [
@@ -70,7 +83,7 @@ router.post("/add", async (req: Request, res: Response) => {
         sex,
       ]
     );
-    
+
     res.status(201).json({
       title: "Success",
       message: "Registration created successfully.",
@@ -89,6 +102,7 @@ router.post("/add", async (req: Request, res: Response) => {
   }
 });
 
+// POST route to approve a registration
 router.post("/approve", async (req: Request, res: Response) => {
   const { license_number } = req.body;
 
@@ -100,85 +114,83 @@ router.post("/approve", async (req: Request, res: Response) => {
     return;
   }
 
-  const { rows: registrations } = await pool.query(
-    // Fetch based on license number
-    `SELECT school_email, user_id FROM registrations WHERE license_number = $1`,
-    [license_number]
-  );
+  const client = await pool.connect();
+  try {
+    await client.query("BEGIN");
 
-  if (registrations.length === 0) {
-    res.status(404).json({
-      title: "Not Found",
-      message: "Registration with the specified license number not found.",
-    });
-    return;
-  }
-
-  const registration = registrations[0];
-  const { school_email, user_id } = registration;
-
-  const { rows: existingDrivers } = await pool.query(
-    // Check if license exists in the driver table
-    `SELECT id, email FROM drivers WHERE license_number = $1`,
-    [license_number]
-  );
-
-  if (existingDrivers.length > 0) {
-    const existingDriver = existingDrivers[0];
-
-    // Only update the email if it's NULL or an empty string
-    if (!existingDriver.email) {
-      // If email is null, undefined, or an empty string
-      await pool.query(
-        `UPDATE drivers 
-         SET email = $1, user_id = $2 
-         WHERE license_number = $3`,
-        [school_email, user_id, license_number]
-      );
-
-      // Remove from registrations after successful update
-      await pool.query(`DELETE FROM registrations WHERE license_number = $1`, [
-        license_number,
-      ]);
-
-      res.status(200).json({
-        title: "Driver Updated!",
-        message: `Driver's email and user_id have been updated successfully.`,
+    const registration = await fetchRegistrationByLicense(license_number);
+    if (!registration) {
+      res.status(404).json({
+        title: "Not Found",
+        message: "Registration with the specified license number not found.",
       });
       return;
     }
 
-    if (existingDriver.email) {
-      await pool.query(
-        `UPDATE drivers 
-         SET user_id = $1 
-         WHERE license_number = $2`,
-        [user_id, license_number]
-      );
+    const { school_email, user_id } = registration;
 
-      // Remove from registrations after successful update
-      await pool.query(`DELETE  FROM registrations WHERE license_number = $1`, [
-        license_number,
-      ]);
+    const { rows: existingDrivers } = await client.query(
+      `SELECT id, email FROM drivers WHERE license_number = $1`,
+      [license_number]
+    );
 
-      res.status(200).json({
-        title: "Driver Updated!",
-        message: `Driver's user_id has been updated successfully.`,
-      });
-      return;
+    if (existingDrivers.length > 0) {
+      const existingDriver = existingDrivers[0];
+
+      // Only update the email if it's NULL or an empty string
+      if (!existingDriver.email) {
+        await client.query(
+          `UPDATE drivers SET email = $1, user_id = $2 WHERE license_number = $3`,
+          [school_email, user_id, license_number]
+        );
+
+        await client.query(
+          `DELETE FROM registrations WHERE license_number = $1`,
+          [license_number]
+        );
+
+        res.status(200).json({
+          title: "Driver Updated!",
+          message: `Driver's email and user_id have been updated successfully.`,
+        });
+        await client.query("COMMIT");
+        return;
+      }
+
+      if (existingDriver.email) {
+        await client.query(
+          `UPDATE drivers SET user_id = $1 WHERE license_number = $2`,
+          [user_id, license_number]
+        );
+
+        await client.query(
+          `DELETE FROM registrations WHERE license_number = $1`,
+          [license_number]
+        );
+
+        res.status(200).json({
+          title: "Driver Updated!",
+          message: `Driver's user_id has been updated successfully.`,
+        });
+        await client.query("COMMIT");
+        return;
+      }
     } else {
-      res.status(200).json({
-        title: "No Update Needed",
-        message: `Driver already has an email. No changes were made.`,
+      res.status(404).json({
+        title: "License Number Not Found",
+        message: "No driver found with the provided license number.",
       });
+      await client.query("ROLLBACK");
       return;
     }
-  } else {
-    res.status(404).json({
-      title: "License Number Not Found",
-      message: "No driver found with the provided license number.",
-    });
-    return;
+  } catch (error) {
+    await client.query("ROLLBACK");
+    console.error("Error during approval process:", (error as Error).message);
+    res
+      .status(500)
+      .json({ title: "Server Error", message: (error as Error).message });
+  } finally {
+    client.release();
   }
 });
 
