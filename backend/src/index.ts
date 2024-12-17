@@ -19,8 +19,7 @@ import violatorRoutes from "./routes/violators";
 import profileRoutes from "./routes/profile";
 
 dotenv.config({ path: ".env" });
-
-const server = express();
+export const server = express();
 
 // Middlewares
 server.use(express.json());
