@@ -1,14 +1,6 @@
 import supertest from "supertest";
 
-import {
-  afterEach,
-  beforeEach,
-  describe,
-  expect,
-  it,
-  Mock,
-  vi,
-} from "vitest";
+import { afterEach, beforeEach, describe, expect, it, Mock, vi } from "vitest";
 import { Pool } from "pg";
 import { server } from "../src/index";
 vi.mock("pg", () => {

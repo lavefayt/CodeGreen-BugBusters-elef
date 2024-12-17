@@ -30,49 +30,56 @@ const HomePage = () => {
         <Header />
       </div>
 
-      <div className="flex space-x-2 p-5">
-        <h1 className="text-3xl text-textgreen font-syke-bold">Welcome,</h1>
-        <h1 className="text-3xl text-white font-syke-bold">
+      {/* Welcome Section */}
+      <div className="flex flex-col sm:flex-row items-center justify-center sm:space-x-4 p-5 text-center">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl text-textgreen font-syke-bold">
+          Welcome,
+        </h1>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl text-white font-syke-bold mt-2 sm:mt-0">
           {data?.user.first_name}
         </h1>
       </div>
+
+      {/* Not Registered Section */}
       {!data?.hasRegistered && !data?.isDriver && (
-        <div className="justify-center text-center text-white mt-5 font-syke p-5 space-y-7">
-          <h1>Oops! It looks like you have not registered yet as a driver.</h1>
-          <div>
-            <button
-              type="button"
-              className="p-2 rounded-sm w-[10rem] font-syke-medium text-white bg-buttongreen hover:bg-colorhover transition-colors duration-300"
-              onClick={handleRegisterButton}
-            >
-              Register Now!
-            </button>
-          </div>
+        <div className="w-full max-w-lg text-center text-white mt-6 font-syke px-6 py-5 space-y-6">
+          <h1 className="text-sm sm:text-base lg:text-lg">
+            Oops! It looks like you have not registered yet as a driver.
+          </h1>
+          <button
+            type="button"
+            className="px-4 py-2 rounded-md w-full max-w-[200px] font-syke-medium text-white bg-buttongreen hover:bg-colorhover transition-all duration-300"
+            onClick={handleRegisterButton}
+          >
+            Register Now!
+          </button>
         </div>
       )}
+
+      {/* Registration Submitted Section */}
       {data?.hasRegistered && (
-        <div className="justify-center text-center text-white mt-5 font-syke p-5 space-y-7">
-          <div className="bg-secondgrey bg-opacity-50 p-8 rounded-lg shadow-lg max-w-md mx-auto text-center space-y-6 animate-fadeInZoom">
-            <h1 className="text-2xl font-syke-bold text-textgreen">
+        <div className="w-full max-w-xl text-center text-white mt-6 font-syke px-6 py-5 space-y-6">
+          <div className="bg-secondgrey bg-opacity-50 p-6 sm:p-8 rounded-lg shadow-lg text-center space-y-6 animate-fadeInZoom">
+            <h1 className="text-lg sm:text-2xl font-syke-bold text-textgreen">
               🎉 Registration Submitted!
             </h1>
 
-            {/* Typewriter animation */}
-            <div className="relative text-white text-lg overflow-hidden h-12">
+            {/* Typewriter Animation */}
+            <div className="relative text-sm sm:text-base lg:text-lg text-white overflow-hidden h-auto">
               <p className="inline-block whitespace-nowrap border-r-2 border-textgreen pr-2 animate-typewriter break-word">
                 Thank you for registering as a driver. Our team is reviewing
                 your details to validate your registration.
               </p>
             </div>
 
-            <p className="text-white leading-relaxed">
+            <p className="text-sm sm:text-base leading-relaxed">
               Please allow <b className="text-buttongreen">3-5</b> working days
               for the validation process to complete. Once verified, you will
               receive a notification.
             </p>
 
             <div className="mt-4">
-              <p className="text-sm text-gray-300">
+              <p className="text-xs sm:text-sm text-gray-300">
                 For inquiries or updates, feel free to contact our support team
                 at{" "}
                 <a
@@ -87,8 +94,10 @@ const HomePage = () => {
           </div>
         </div>
       )}
+
+      {/* Driver Section */}
       {data?.isDriver && (
-        <div className="justify-center text-center w-4/6 text-white mt-5 font-syke p-5 space-y-7">
+        <div className="w-full sm:w-5/6 lg:w-4/6 text-center text-white mt-6 font-syke px-6 py-5 space-y-6">
           <NotificationsList />
         </div>
       )}
