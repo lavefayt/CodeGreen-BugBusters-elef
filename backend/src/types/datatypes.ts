@@ -29,6 +29,7 @@ export interface Violation {
   driver_id: string;
   violation_type: string;
   violation_date: string;
+  description: string;
   paid_status: boolean;
 }
 

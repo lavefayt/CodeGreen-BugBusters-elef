@@ -84,7 +84,7 @@ const AddViolation = () => {
               <div>Driver details are shown below.</div>
             </div>
 
-            <div className="bg-[white] w-[40rem] h-[auto] mt-4">
+            <div className="w-[40rem] h-[auto] mt-4">
               <form className="space-y-[2rem]">
                 <div className="flex space-x-4">
                   <div className="flex-[1]">
@@ -106,7 +106,9 @@ const AddViolation = () => {
                   </div>
 
                   <div className="flex-2">
-                    <h1 className="text-white font-syke-light text-xl">Sex</h1>
+                    <h1 className="text-white font-syke-light text-xl">
+                      Sex
+                    </h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
                       {driverProfile.sex}
                     </h1>

@@ -111,7 +111,6 @@ const AddCar = ({
         <>
         <p className="text-textgreen font-syke-light text-lg">Confirm car details.</p>
         <div className="grid grid-cols-2 gap-6 p-5 w-full max-w-xl">
-          {/* License Plate */}
           <div className="flex flex-col">
             <h1 className="text-white font-syke-light text-xl">License Plate</h1>
             <h1 className="text-textgreen font-syke-medium text-3xl">
