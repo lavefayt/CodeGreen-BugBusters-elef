@@ -52,80 +52,75 @@ const AdminHeader = () => {
   }, []);
 
   return (
-    <div>
-      <header className="flex items-center font-syke-medium justify-between space-x-[20rem] w-full p-4 z-50">
-        <div className="flex items-center">
-          <button
+    <div className="flex w-screen">
+      <header className="flex relative items-center md:justify-evenly font-syke-medium w-full p-4 z-50">
+        <div className="flex items-center md:w-auto w-full">
+          <img
             onClick={handleHomePage}
-            className="flex items-center w-[3rem] gap-4 z-50 text-white sm:text-xl"
-          >
-            <img
-              src="../assets/5.png"
-              alt="Logo"
-              className="w-15 z-50 h-15 object-contain md:w-[4rem] md:h-[4rem] transition-transform duration-300 hover:scale-105"
-            />
-            <h1 className="text-md z-50 text-left md:text-xl hover:text-textgreen">
-              CodeGreen Gateway
-            </h1>
-          </button>
+            src="../assets/5.png"
+            alt="Logo"
+            className="z-50 object-contain md:w-16 md:h-16 w-12 h-12 transition-transform duration-300 hover:scale-105"
+          />
+          <h1 className="text-md z-50 text-left md:text-xl hover:text-textgreen text-white">
+            CodeGreen Gateway
+          </h1>
         </div>
 
         {isWideScreen ? (
           <nav className="flex flex-row space-x-20 text-white font-syke-medium z-50">
-            <Link to="/encode" className="hover:text-textgreen transition-colors">
+            <Link
+              to="/encode"
+              className="hover:text-textgreen transition-colors">
               Encode
             </Link>
 
-            <div className="relative" ref={dropdownRefList}>
+            <div
+              className="relative"
+              ref={dropdownRefList}>
               <button
                 onClick={toggleDropdownList}
-                className="hover:text-buttongreen transition-colors z-50"
-              >
+                className="hover:text-buttongreen transition-colors z-50">
                 Lists
               </button>
               {isDropdownOpenList && (
                 <div className="absolute mt-2 w-48 bg-hoverbutton text-white rounded-md shadow-lg">
                   <span
                     onClick={handleViolators}
-                    className="z-50 block px-4 py-2 hover:bg-buttongreen cursor-pointer hover:rounded-t-md"
-                  >
+                    className="z-50 block px-4 py-2 hover:bg-buttongreen cursor-pointer hover:rounded-t-md">
                     Violator's List
                   </span>
                   <span
                     onClick={handleDrivers}
-                    className=" z-50 block px-4 py-2 hover:bg-buttongreen cursor-pointer"
-                  >
+                    className=" z-50 block px-4 py-2 hover:bg-buttongreen cursor-pointer">
                     Driver's List
                   </span>
                   <span
                     onClick={handleRegistrations}
-                    className="z-50 block px-4 py-2 hover:bg-buttongreen cursor-pointer hover:rounded-b-md"
-                  >
+                    className="z-50 block px-4 py-2 hover:bg-buttongreen cursor-pointer hover:rounded-b-md">
                     Registration's List
                   </span>
                 </div>
               )}
             </div>
 
-            <div className="relative z-50" ref={dropdownRefAccount}>
+            <div
+              className="relative z-50"
+              ref={dropdownRefAccount}>
               <button
                 onClick={toggleDropdownAccount}
-                className="hover:text-buttongreen transition-colors"
-              >
+                className="hover:text-buttongreen transition-colors">
                 Account
               </button>
               {isDropdownOpenAccount && (
                 <div className="absolute mt-2 w-48 bg-hoverbutton text-white rounded-md shadow-lg">
                   <span
                     onClick={handleChangePassword}
-                    className="block px-4 py-2 hover:bg-buttongreen cursor-pointer hover:rounded-t-md"
-                  >
+                    className="block px-4 py-2 hover:bg-buttongreen cursor-pointer hover:rounded-t-md">
                     Change Password
                   </span>
                   <span
                     onClick={handleLogOut}
-                    className="block px-4 py-2 hover:bg-buttongreen cursor-pointer hover:rounded-b-md"
-                  >
+                    className="block px-4 py-2 hover:bg-buttongreen cursor-pointer hover:rounded-b-md">
                     Log Out
                   </span>
                 </div>
@@ -136,15 +131,13 @@ const AdminHeader = () => {
           <button
             title="menu"
             onClick={toggleMobileMenu}
-            className="text-white md:hidden focus:outline-none block"
-          >
+            className="text-white md:hidden focus:outline-none block">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
+              stroke="currentColor">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -157,62 +150,68 @@ const AdminHeader = () => {
       </header>
 
       {!isWideScreen && isMobileMenuOpen && (
-        <nav className="flex flex-col font-syke-medium items-center space-y-5 text-white bg-hoverbutton p-4 rounded">
-          <Link to="/encode" className="hover:text-textgreen transition-colors">
+        <nav className="flex flex-col absolute font-syke-medium items-center space-y-5 text-white bg-hoverbutton p-4 rounded right-2 top-16 z-50">
+          <Link
+            to="/encode"
+            className="hover:text-textgreen transition-colors">
             Encode
           </Link>
 
-          <div className="relative" ref={dropdownRefList}>
+          <div
+            className="relative"
+            ref={dropdownRefList}>
             <button
               onClick={toggleDropdownList}
-              className="hover:text-buttongreen transition-colors"
-            >
+              className="hover:text-buttongreen transition-colors">
               Lists
             </button>
             {isDropdownOpenList && (
               <div className="mt-2 w-48 bg-hoverbutton text-white rounded-md shadow-lg">
                 <span
                   onClick={handleViolators}
-                  className="block px-4 py-2 hover:bg-buttongreen cursor-pointer"
-                >
+                  className="block px-4 py-2 hover:bg-buttongreen cursor-pointer">
                   Violator's List
                 </span>
                 <span
                   onClick={handleDrivers}
-                  className="block px-4 py-2 hover:bg-buttongreen cursor-pointer"
-                >
+                  className="block px-4 py-2 hover:bg-buttongreen cursor-pointer">
                   Driver's List
                 </span>
                 <span
                   onClick={handleRegistrations}
-                  className="block px-4 py-2 hover:bg-buttongreen cursor-pointer"
-                >
+                  className="block px-4 py-2 hover:bg-buttongreen cursor-pointer">
                   Registration's List
                 </span>
               </div>
             )}
           </div>
 
-          <div className="relative" ref={dropdownRefAccount}>
+          <div
+            className="relative"
+            ref={dropdownRefAccount}>
             <button
               onClick={toggleDropdownAccount}
-              className="hover:text-buttongreen transition-colors"
-            >
+              className="hover:text-buttongreen transition-colors">
               Account
             </button>
             {isDropdownOpenAccount && (
               <div className="mt-2 w-48 bg-hoverbutton text-white rounded-md shadow-lg">
                 <span
                   onClick={handleChangePassword}
-                  className="block px-4 py-2 hover:bg-buttongreen cursor-pointer"
-                >
+                  className="block px-4 py-2 hover:bg-buttongreen cursor-pointer">
                   Change Password
                 </span>
-                <span       onClick={handleLogOut}
-                  className="block px-4 py-2 hover:bg-buttongreen cursor-pointer"
-                >
+                <span
+                  onClick={handleLogOut}
+                  className="block px-4 py-2 hover:bg-buttongreen cursor-pointer">
                   Log Out
                 </span>
               </div>
             )}
-          </div>er;
+          </div>
+        </nav>
+      )}
+    </div>
+  );
+};
+export default AdminHeader;

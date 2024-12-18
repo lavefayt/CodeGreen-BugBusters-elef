@@ -29,15 +29,14 @@ const ViewProfile = () => {
     <div className="flex flex-col items-center bg-homepage-bg md:bg-cover bg-no-repeat sm:bg-bottom md:bg-inherit lg:bg-left bg-center w-full h-screen">
       <div>{auth!.isAdmin ? <AdminHeader /> : <Header />}</div>
 
-     
-      <div className="flex flex-col">
-        <div className="flex">
-          <aside className=" grid items-center p-20">
-          <h1 className="lg:text-4xl md:text-3xl sm:text-2xl text-xl text-textgreen font-syke-bold mb-3 pb-3 w-20">
-        My Gateway Account
-      </h1>
-            <nav>
-              <div className="space-y-[2rem]">
+      <div className="flex flex-col w-full justify-center items-center">
+        <div className="flex flex-col sm:w-9/12 w-11/12 md:px-0 px-15">
+          <div className="flex md:space-x-10 space-y-5 md:flex-row flex-col">
+            <aside className="flex flex-col justify-center items-center">
+              <h1 className="lg:text-4xl text-center md:text-3xl text-2xl text-textgreen font-syke-bold md:mb-16 mb-5 md:w-full w-auto">
+                My Gateway Account
+              </h1>
+              <div className="md:space-y-[2rem] flex md:flex-col h-auto justify-center items-center md:space-x-0 space-x-5">
                 <button
                   onClick={() => SetActiveSection("profile")}
                   className={`block cursor-pointer transition-colors md:text-2xl sm:text-xl text-lg font-syke-medium ${
@@ -68,26 +67,26 @@ const ViewProfile = () => {
                   Violations
                 </button>
               </div>
-            </nav>
-          </aside>
-          {activeSection === "profile" && <Profile driver={driver} />}
-          {activeSection === "vehicle" && <VehicleList driver={driver} />}
-          {activeSection === "violation" && (
-            <ViolationList violations={driver.violations!} />
-          )}
+            </aside>
+            {activeSection === "profile" && <Profile driver={driver} />}
+            {activeSection === "vehicle" && <VehicleList driver={driver} />}
+            {activeSection === "violation" && (
+              <ViolationList violations={driver.violations!} />
+            )}
+          </div>
+          <AddCarButton
+            activeSection={activeSection}
+            driver={driver}
+            vehicleModalActive={vehicleModalActive}
+            setVehicleModalActive={setVehicleModalActive}
+          />
+          <AddViolationButton
+            activeSection={activeSection}
+            driver={driver}
+            violationModalActive={violationModalActive}
+            setViolationModalActive={setViolationModalActive}
+          />
         </div>
-        <AddCarButton
-          activeSection={activeSection}
-          driver={driver}
-          vehicleModalActive={vehicleModalActive}
-          setVehicleModalActive={setVehicleModalActive}
-        />
-        <AddViolationButton
-          activeSection={activeSection}
-          driver={driver}
-          violationModalActive={violationModalActive}
-          setViolationModalActive={setViolationModalActive}
-        />
       </div>
     </div>
   );

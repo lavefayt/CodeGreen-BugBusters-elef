@@ -62,7 +62,7 @@ const ViolationCard = ({ violation }: { violation: Violation }) => {
 
   return (
     <div className="border-b-2 border-t-2 border-t-transparent border-b-inputfield space-y-[10px] relative">
-      <div className="ml-2 space-y-3 p-3">
+      <div className="space-y-3 p-3">
         <div className="flex space-x-4">
           <div className="flex-1">
             <h1 className="text-white font-syke-light lg:text-lg md:text-md text-sm">

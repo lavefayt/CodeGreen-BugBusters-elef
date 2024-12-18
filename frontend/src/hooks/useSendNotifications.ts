@@ -5,7 +5,7 @@ import useCheckLicenseNumber from "../hooks/car-hooks/useCheckLicenseNumber";
 const useSendNotification = () => {
   const [licenseNumber, setLicenseNumber] = useState<string>("");
   const [licenseError, setLicenseError] = useState<string>("");
-  const [licenseExists, setLicenseExists] = useState<boolean>(false);
+  // const [licenseExists, setLicenseExists] = useState<boolean>(false);
   const [currentStep, setCurrentStep] = useState(1);
   
   const { checkLicenseNumber } = useCheckLicenseNumber();
@@ -24,7 +24,7 @@ const useSendNotification = () => {
       }
 
       // Set driver data and clear error
-      setLicenseExists(driverData);
+      // setLicenseExists(driverData);
       setLicenseError("");
       setCurrentStep(2);  // Move to the next step
     } catch (error) {
@@ -37,7 +37,7 @@ const useSendNotification = () => {
     licenseNumber,
     setLicenseNumber,
     licenseError,
-    licenseExists,
+    // licenseExists,
     currentStep,
     setCurrentStep,
     handleCheckLicense,
