@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { describe, it, expect, vi, beforeEach, Mock } from "vitest";
 import { fireEvent, render, renderHook, screen } from "@testing-library/react";
-import { BrowserRouter, MemoryRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import ViewProfile from "../../src/pages/ViewProfile";
 import useGetDriver from "../../src/hooks/driver-hooks/useGetDriver";
 import useAuth from "../../src/hooks/context-hooks/useAuth";
