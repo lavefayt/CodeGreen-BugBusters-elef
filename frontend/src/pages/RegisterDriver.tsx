@@ -7,6 +7,7 @@ import { useAddRegistration } from "../hooks/registration-hooks/useAddRegistrati
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
+
 const RegisterDriver = () => {
   const { postRegistration, loading } = useAddRegistration();
   const [successMessage] = useState("");
@@ -105,7 +106,6 @@ const RegisterDriver = () => {
       console.error("Error submitting the form:", error);
     }
   };
-
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -139,58 +139,72 @@ const RegisterDriver = () => {
               Please enter your information
             </h1>
 
-            <div className="bg- w-[40rem] h-auto mt-4">
-              <form className="space-y-2">
-                <div className="flex space-x-4">
-                  <div className="flex-1">
-                    <h1 className="text-white font-syke-light text-l">
-                      Last Name
-                    </h1>
-                    <input
-                      type="text"
-                      name="last_name"
-                      placeholder="Enter Last Name"
-                      value={formData.last_name}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-2 mt-1 border rounded-sm bg-secondgrey text-white focus:outline-none focus:ring-0 active:outline-none ${
-                        formErrors.last_name ? "border-red-800" : "border-none"
-                      }`}
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <h1 className="text-white font-syke-light text-l">
-                      Middle Name
-                    </h1>
-                    <input
-                      type="text"
-                      className={`w-full px-4 py-2 mt-1 border rounded-sm bg-secondgrey text-white focus:outline-none focus:ring-0 active:outline-none ${
-                        formErrors.middle_name
+              <div className="bg- w-[40rem] h-auto mt-4">
+                <form className="space-y-2">
+                  <div className="flex space-x-4">
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-l">
+                        Last Name
+                      </h1>
+                      <input
+                        type="text"
+                        name="last_name"
+                        placeholder="Enter Last Name"
+                        value={formData.last_name}
+                        onChange={(e) => {
+                          if (e.target.value.length <= 20) {
+                            handleChange(e);
+                          }
+                        }}                           
+                        className={`w-full px-4 py-2 mt-1 border rounded-sm bg-secondgrey text-white focus:outline-none focus:ring-0 active:outline-none ${
+                          formErrors.last_name
+                            ? "border-red-800"
+                            : "border-none"
+                        }`}
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-l">
+                        Middle Name
+                      </h1>
+                      <input
+                        type="text"
+                        className={`w-full px-4 py-2 mt-1 border rounded-sm bg-secondgrey text-white focus:outline-none focus:ring-0 active:outline-none ${
+                          formErrors.middle_name
                           ? "border-red-800"
                           : "border-none"
-                      }`}
-                      name="middle_name"
-                      value={formData.middle_name}
-                      onChange={handleChange}
-                      placeholder="Optional"
-                    />
+                        }`}
+                        name="middle_name"
+                        value={formData.middle_name}
+                        onChange={(e) => {
+                          if (e.target.value.length <= 20) {
+                            handleChange(e);
+                          }
+                        }}                         placeholder="Optional"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <h1 className="text-white font-syke-light text-l">
+                        First Name
+                      </h1>
+                      <input
+                        placeholder="Enter First Name"
+                        type="text"
+                        className={`w-full px-4 py-2 mt-1 border rounded-sm bg-secondgrey text-white focus:outline-none focus:ring-0 active:outline-none ${
+                          formErrors.first_name
+                          ? "border-red-800"
+                          : "border-none"
+                        }`}                     
+                        value={formData.first_name}
+                        onChange={(e) => {
+                          if (e.target.value.length <= 20) {
+                            handleChange(e);
+                          }
+                        }}                         name="first_name"
+                        required
+                      />
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <h1 className="text-white font-syke-light text-l">
-                      First Name
-                    </h1>
-                    <input
-                      placeholder="Enter First Name"
-                      type="text"
-                      className={`w-full px-4 py-2 mt-1 border rounded-sm bg-secondgrey text-white focus:outline-none focus:ring-0 active:outline-none ${
-                        formErrors.first_name ? "border-red-800" : "border-none"
-                      }`}
-                      value={formData.first_name}
-                      onChange={handleChange}
-                      name="first_name"
-                      required
-                    />
-                  </div>
-                </div>
 
                 <div className="flex space-x-4">
                   <div className="flex-1">
@@ -263,14 +277,18 @@ const RegisterDriver = () => {
                         formErrors.license_number
                           ? "border-red-800"
                           : "border-none"
-                      }`}
-                      name="license_number"
-                      value={formData.license_number}
-                      onChange={handleChange}
-                      placeholder="Enter license number"
-                      required
-                    />
-                  </div>
+                        }`}                          
+                        name="license_number"
+                        value={formData.license_number}
+                        onChange={(e) => {
+                          if (e.target.value.length <= 20) {
+                            handleChange(e);
+                          }
+                        }}                         
+                        placeholder="Enter license number"
+                        required
+                      />
+                    </div>
 
                   <div className="flex-1">
                     <h1 className="text-white font-syke-light text-l">
@@ -282,17 +300,21 @@ const RegisterDriver = () => {
                         formErrors.school_email
                           ? "border-red-800"
                           : "border-none"
-                      }`}
-                      name="school_email"
-                      value={formData.school_email}
-                      onChange={handleChange}
-                      placeholder="Enter school email"
-                      pattern="[\-a-zA-Z0-9~!$%^&amp;*_=+\}\{'?]+(\.[\-a-zA-Z0-9~!$%^&amp;*_=+\}\{'?]+)*@[a-zA-Z0-9_][\-a-zA-Z0-9_]*(\.[\-a-zA-Z0-9_]+)*\.[cC][oO][mM](:[0-9]{1,5})?"
-                      required
-                    />
+                        }`}                          
+                        name="school_email"
+                        value={formData.school_email}
+                        onChange={(e) => {
+                          if (e.target.value.length <= 20) {
+                            handleChange(e);
+                          }
+                        }}                           
+                        placeholder="Enter school email"
+                        pattern="[\-a-zA-Z0-9~!$%^&amp;*_=+\}\{'?]+(\.[\-a-zA-Z0-9~!$%^&amp;*_=+\}\{'?]+)*@[a-zA-Z0-9_][\-a-zA-Z0-9_]*(\.[\-a-zA-Z0-9_]+)*\.[cC][oO][mM](:[0-9]{1,5})?"
+                        required
+                      />
+                    </div>
                   </div>
-                </div>
-              </form>
+                </form>
 
               <div className="flex items-center mt-4">
                 <input

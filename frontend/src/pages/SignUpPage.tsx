@@ -19,9 +19,10 @@ const SignUp = () => {
   const { submitSignUp, loading } = useSignUp();
 
   const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSignUpForm((prevFormData) => {
-      return { ...prevFormData, [event.target.name]: event.target.value };
-    });
+    setSignUpForm((prevFormData) => ({
+      ...prevFormData,
+      [event.target.name]: event.target.value,
+    }));
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -53,18 +54,18 @@ const SignUp = () => {
             <button
               className="text-buttongreen font-syke-medium"
               type="button"
-              onClick={handleLogInButton}>
+              onClick={handleLogInButton}
+            >
               Log In
             </button>
           </h1>
 
-          <form
-            className="space-y-2"
-            onSubmit={handleSubmit}>
+          <form className="space-y-2" onSubmit={handleSubmit}>
             <div className="flex space-x-2.5">
               <div className="flex-1">
                 <input
                   type="text"
+                  maxLength={20}
                   className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                   placeholder="Last Name"
                   name="last_name"
@@ -75,11 +76,12 @@ const SignUp = () => {
               <div className="flex-1">
                 <input
                   type="text"
+                  maxLength={20}
                   className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                   placeholder="First Name"
                   name="first_name"
-                  required
                   onChange={handleFormChange}
+                  required
                 />
               </div>
             </div>
@@ -87,46 +89,46 @@ const SignUp = () => {
             <div>
               <input
                 type="text"
+                maxLength={50}
                 className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                 placeholder="Email"
                 pattern="[\-a-zA-Z0-9~!$%^&amp;*_=+\}\{'?]+(\.[\-a-zA-Z0-9~!$%^&amp;*_=+\}\{'?]+)*@[a-zA-Z0-9_][\-a-zA-Z0-9_]*(\.[\-a-zA-Z0-9_]+)*\.[cC][oO][mM](:[0-9]{1,5})?"
                 name="email"
-                required
                 onChange={handleFormChange}
+                required
               />
             </div>
 
             <div>
               <input
                 type="password"
+                maxLength={20}
                 className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                 placeholder="Password"
                 name="password"
-                required
                 onChange={handleFormChange}
+                required
               />
             </div>
 
             <div>
               <input
                 type="password"
+                maxLength={20}
                 className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 mb-3 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                 placeholder="Confirm Password"
                 name="confirm_password"
-                required
                 onChange={handleFormChange}
+                required
               />
             </div>
 
             <button
               type="submit"
-              className="flex justify-center items-center w-1/2 bg-buttongreen font-syke-regular text-white py-2 hover:bg-[#33471a] transition-colors rounded-sm">
+              className="flex justify-center items-center w-1/2 bg-buttongreen font-syke-regular text-white py-2 hover:bg-[#33471a] transition-colors rounded-sm"
+            >
               {loading ? (
-                <Spinner
-                  size={15}
-                  color="#fff"
-                  animating={loading}
-                />
+                <Spinner size={15} color="#fff" animating={loading} />
               ) : (
                 "Create account"
               )}

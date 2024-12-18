@@ -46,7 +46,11 @@ const LoginPage = () => {
                 type="text"
                 id="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  if (e.target.value.length <= 30) {
+                    setEmail(e.target.value);
+                  }
+                }}
                 className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 focus:shadow-inner border-none focus:outline-none focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
                 placeholder="Email or phone number"
                 pattern="[\-a-zA-Z0-9~!$%^&amp;*_=+\}\{'?]+(\.[\-a-zA-Z0-9~!$%^&amp;*_=+\}\{'?]+)*@[a-zA-Z0-9_][\-a-zA-Z0-9_]*(\.[\-a-zA-Z0-9_]+)*\.[cC][oO][mM](:[0-9]{1,5})?"
@@ -58,8 +62,11 @@ const LoginPage = () => {
                 type="password"
                 id="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 focus:shadow-inner border-none focus:outline-none focus:ring-1 focus:ring-textgreen rounded-sm text-white placeholder-white"
+                onChange={(e) => {
+                  if (e.target.value.length <= 20) {
+                    setPassword(e.target.value);
+                  }
+                }}                className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 focus:shadow-inner border-none focus:outline-none focus:ring-1 focus:ring-textgreen rounded-sm text-white placeholder-white"
                 placeholder="Enter your password"
                 required
               />
