@@ -65,8 +65,11 @@ const AddCar = ({
                   name="license_plate"
                   placeholder="Enter License Plate"
                   value={formData.license_plate}
-                  onChange={handleChange}
-                />
+                  onChange={(e) => {
+                    if (e.target.value.length <= 20) {
+                      handleChange(e);
+                    }
+                  }}                   />
               </div>
             </div>
 
@@ -79,8 +82,12 @@ const AddCar = ({
                   name="brand"
                   placeholder="Enter Brand"
                   value={formData.brand}
-                  onChange={handleChange}
-                />
+                  onChange={(e) => {
+                  if (e.target.value.length <= 20) {
+                      handleChange(e);
+                    }
+                  }}                   
+                  />
               </div>
               <div className="flex flex-col w-1/3">
                 <h1 className="text-white font-syke-light text-xl">Model</h1>
@@ -90,8 +97,11 @@ const AddCar = ({
                   name="car_model"
                   placeholder="Enter Car Model"
                   value={formData.car_model}
-                  onChange={handleChange}
-                />
+                  onChange={(e) => {
+                    if (e.target.value.length <= 20) {
+                        handleChange(e);
+                      }
+                    }}  />
               </div>
               <div className="flex flex-col w-1/3">
                 <h1 className="text-white font-syke-light text-xl">Color</h1>
@@ -101,8 +111,11 @@ const AddCar = ({
                   name="color"
                   placeholder="Enter Color"
                   value={formData.color}
-                  onChange={handleChange}
-                />
+                  onChange={(e) => {
+                    if (e.target.value.length <= 20) {
+                        handleChange(e);
+                      }
+                    }}                  />
               </div>
             </div>
           </div>

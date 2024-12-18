@@ -78,6 +78,7 @@ const AddDriver = () => {
       ...formData,
       [name]: value,
     });
+
   };
 
   return (
@@ -110,8 +111,12 @@ const AddDriver = () => {
                         className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                         name="last_name"
                         value={formData.last_name}
-                        onChange={handleChange}
-                        placeholder="Enter Last Name"
+                        onChange={(e) => {
+                          if (e.target.value.length <= 20) {
+                              handleChange(e);
+                            }
+                          }}                          
+                          placeholder="Enter Last Name"
                         required
                       />
                     </div>
@@ -125,8 +130,12 @@ const AddDriver = () => {
                           className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                           name="middle_name"
                           value={formData.middle_name}
-                          onChange={handleChange}
-                          placeholder="Optional"
+                          onChange={(e) => {
+                            if (e.target.value.length <= 20) {
+                                handleChange(e);
+                              }
+                            }}                            
+                            placeholder="Optional"
                         />
                       </div>
                     </div>
@@ -142,8 +151,12 @@ const AddDriver = () => {
                         className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                         name="first_name"
                         value={formData.first_name}
-                        onChange={handleChange}
-                        placeholder="Enter First Name"
+                        onChange={(e) => {
+                          if (e.target.value.length <= 20) {
+                              handleChange(e);
+                            }
+                          }}                          
+                          placeholder="Enter First Name"
                         required
                       />
                     </div>
@@ -158,8 +171,12 @@ const AddDriver = () => {
                       className="bg-secondgrey font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                       name="email"
                       value={formData.email}
-                      onChange={handleChange}
-                      placeholder="Optional"
+                      onChange={(e) => {
+                        if (e.target.value.length <= 50) {
+                            handleChange(e);
+                          }
+                        }}                        
+                        placeholder="Optional"
                     />
                   </div>
                 </form>
@@ -264,8 +281,12 @@ const AddDriver = () => {
                         className="bg-secondgrey border-b	 font-syke-regular text-[1.2rem] w-full mt-1 px-4 py-2 border h-10 border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white placeholder-opacity-25 rounded-sm"
                         name="license_number"
                         value={formData.license_number}
-                        onChange={handleChange}
-                        placeholder="Enter license number"
+                        onChange={(e) => {
+                          if (e.target.value.length <= 20) {
+                              handleChange(e);
+                            }
+                          }}                          
+                          placeholder="Enter license number"
                         required
                       />
                     </div>

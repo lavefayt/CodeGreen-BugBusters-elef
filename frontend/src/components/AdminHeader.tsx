@@ -208,19 +208,11 @@ const AdminHeader = () => {
                 >
                   Change Password
                 </span>
-                <span
-                  onClick={handleLogOut}
+                <span       onClick={handleLogOut}
                   className="block px-4 py-2 hover:bg-buttongreen cursor-pointer"
                 >
                   Log Out
                 </span>
               </div>
             )}
-          </div>
-        </nav>
-      )}
-    </div>
-  );
-};
-
-export default AdminHeader;
+          </div>er;
