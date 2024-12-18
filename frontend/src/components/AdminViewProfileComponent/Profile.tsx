@@ -36,8 +36,8 @@ const Profile = ({ driver }: { driver: DriverWithVandC }) => {
   };
 
   return (
-    <div className="max-w-full max-h-full flex justify-center items-center">
-      <div className="lg:w-[35rem] md:w-[25rem] sm:w-[20rem] w-[15rem] h-[25rem] bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+    <div className="flex-col flex justify-center items-center w-full">
+      <div className="w-full md:h-[25rem] h-full bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
         <div className="items-center p-4">
           <form className="lg:space-y-8 md:space-y-10 sm:space-y-12 space-y-14">
             <div className="flex space-x-1">

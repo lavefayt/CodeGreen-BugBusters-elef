@@ -4,12 +4,15 @@ export default {
   theme: {
     extend: {
       screens: {
-        xs: '430px',
-        sm: '650px',
-        md: '768px',
-        lg: '1024px',
-        xl: '1280px',
-        '2xl': '1536px',
+        xs: "430px",
+        sm: "650px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px",
+      },
+      fontSize: {
+        xxs: ["0.5rem", "0.75rem"],
       },
       colors: {
         textgreen: "#86C232",
@@ -62,6 +65,8 @@ export default {
         fadeIn: "fadeIn 0.5s ease-in",
         fadeOut: "fadeOut 0.5s ease-out",
         fadeInZoom: "fadeInZoom 0.8s ease-out",
+        typewriter:
+          "typewriter 4s steps(40, end) 1s 1 normal both, blink 0.75s step-end infinite",
       },
     },
   },

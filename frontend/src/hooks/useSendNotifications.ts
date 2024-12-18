@@ -24,7 +24,7 @@ const useSendNotification = () => {
       }
 
       // Set driver data and clear error
-      setLicenseExists(driverData);
+      // setLicenseExists(driverData);
       setLicenseError("");
       setCurrentStep(2);  // Move to the next step
     } catch (error) {

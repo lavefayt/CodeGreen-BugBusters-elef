@@ -2,7 +2,7 @@ import supertest from "supertest";
 
 import { afterEach, beforeEach, describe, expect, it, Mock, vi } from "vitest";
 import { Pool } from "pg";
-import { server } from "../src/index";
+import { server } from "../index";
 vi.mock("pg", () => {
   const mPool = {
     query: vi.fn(),

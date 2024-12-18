@@ -43,6 +43,7 @@ export const fetchWithAuth = async (
     console.log(await response.json());
     console.log(auth?.accessToken);
     const newAccessToken = await refresh();
+    console.log("New Access Token: " + newAccessToken);
     const newResponse = await fetch(
       `${import.meta.env.VITE_SERVER_URL}${route}`,
       {

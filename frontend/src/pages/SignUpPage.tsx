@@ -36,20 +36,15 @@ const SignUp = () => {
 
   return (
     <div className="flex relative justify-center items-center bg-signup-bg bg-cover bg-no-repeat sm:bg-top md:bg-right h-screen overflow-hidden">
-      <div className="flex bg-transparent p-8 rounded-lg w-full max-w-3xl mt-10">
-        <div className="w-1/2 pl-8 flex flex-col justify-center items-start font-syke-medium text-textgreen text-4xl gap-2">
+      <div className="flex bg-transparent p-6 rounded-lg w-full max-w-3xl mt-10 space-x-5">
+        <div className="w-1/2 flex flex-col justify-center items-start font-syke-medium text-textgreen lg:text-4xl md:text-3xl sm:text-2xl text-xl gap-2">
           <h1>Stay compliant.</h1>
-          <h1>Sign up to track</h1>
-          <h1>and manage your</h1>
-          <h1>vehicle's records.</h1>
+          <h1>Sign up to track and manage your vehicle's records.</h1>
         </div>
 
-        <div className="w-1/2 pr-8">
-          <h2 className="text-3xl text-textgreen font-syke-regular-">Create</h2>
-          <h2 className="text-3xl mb-2 text-textgreen font-syke-regular">
-            new account
-          </h2>
-          <h1 className="text-sm mb-1 text-white">
+        <div className="w-1/2">
+          <h2 className="lg:text-3xl md:text-2xl sm:text-xl text-lg text-textgreen font-syke-regular-">Create new account</h2>
+          <h1 className="lg:text-sm md:text-xs text-xxs mb-1 text-white">
             Already have an account?{" "}
             <button
               className="text-buttongreen font-syke-medium"
@@ -65,8 +60,7 @@ const SignUp = () => {
               <div className="flex-1">
                 <input
                   type="text"
-                  maxLength={20}
-                  className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+                  className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm lg:text-sm md:text-xs text-xxs"
                   placeholder="Last Name"
                   name="last_name"
                   onChange={handleFormChange}
@@ -76,8 +70,7 @@ const SignUp = () => {
               <div className="flex-1">
                 <input
                   type="text"
-                  maxLength={20}
-                  className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+                  className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm lg:text-sm md:text-xs text-xxs"
                   placeholder="First Name"
                   name="first_name"
                   onChange={handleFormChange}
@@ -89,8 +82,7 @@ const SignUp = () => {
             <div>
               <input
                 type="text"
-                maxLength={50}
-                className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+                className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm lg:text-sm md:text-xs text-xxs"
                 placeholder="Email"
                 pattern="[\-a-zA-Z0-9~!$%^&amp;*_=+\}\{'?]+(\.[\-a-zA-Z0-9~!$%^&amp;*_=+\}\{'?]+)*@[a-zA-Z0-9_][\-a-zA-Z0-9_]*(\.[\-a-zA-Z0-9_]+)*\.[cC][oO][mM](:[0-9]{1,5})?"
                 name="email"
@@ -102,8 +94,7 @@ const SignUp = () => {
             <div>
               <input
                 type="password"
-                maxLength={20}
-                className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+                className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm lg:text-sm md:text-xs text-xxs"
                 placeholder="Password"
                 name="password"
                 onChange={handleFormChange}
@@ -114,8 +105,7 @@ const SignUp = () => {
             <div>
               <input
                 type="password"
-                maxLength={20}
-                className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 mb-3 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm"
+                className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 mb-3 border border-none focus:outline-none focus:shadow-inner focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm lg:text-sm md:text-xs text-xxs"
                 placeholder="Confirm Password"
                 name="confirm_password"
                 onChange={handleFormChange}
@@ -125,8 +115,7 @@ const SignUp = () => {
 
             <button
               type="submit"
-              className="flex justify-center items-center w-1/2 bg-buttongreen font-syke-regular text-white py-2 hover:bg-[#33471a] transition-colors rounded-sm"
-            >
+              className="flex justify-center items-center justify-self-end w-auto bg-buttongreen font-syke-regular text-white py-2 px-5 hover:bg-[#33471a] transition-colors rounded-sm lg:text-sm md:text-xs text-xxs">
               {loading ? (
                 <Spinner size={15} color="#fff" animating={loading} />
               ) : (

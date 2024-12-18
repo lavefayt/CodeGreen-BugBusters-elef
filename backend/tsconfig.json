@@ -11,7 +11,7 @@
     "outDir": "./dist",
     "rootDir": "./src"
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "src/__tests__"],
   "exclude": ["node_modules", "dist"],
   "files": ["./src/types/express.types.ts"]
 }
