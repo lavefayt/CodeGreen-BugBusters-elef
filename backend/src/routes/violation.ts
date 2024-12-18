@@ -50,7 +50,6 @@ router.post("/add", async (req: Request, res: Response) => {
     );
 
     const driverFound = await drivers[0];
-    
 
     if (!driverFound) {
       res
@@ -59,8 +58,8 @@ router.post("/add", async (req: Request, res: Response) => {
       return;
     }
 
-    console.log("THIS IS THE DRIVER FROM VIOLATION")
-    console.log(driverFound)
+    console.log("THIS IS THE DRIVER FROM VIOLATION");
+    console.log(driverFound);
 
     const violations = await pool.query(
       `INSERT INTO violations (
@@ -79,7 +78,6 @@ router.post("/add", async (req: Request, res: Response) => {
       title: "Violation Added!",
       message: `Violation has been added for ${driverFound.first_name} ${driverFound.last_name}, ${violation_type}.`,
     });
-
   } catch (error) {
     const errorMessage = (error as Error).message;
     console.error("Error:", errorMessage);
@@ -105,41 +103,51 @@ router.patch("/update", async (req: Request, res: Response) => {
     .map((field, index) => `${field} = $${index + 1}`)
     .join(", ");
 
-  const query = `UPDATE drivers
-    SET ${setClause}
-    WHERE id = $${fields.length + 1}
-    RETURNING *`;
+  const query = `UPDATE violations SET ${setClause}
+         WHERE id = $${fields.length + 1} 
+         RETURNING *`;
 
   const result = await pool.query(query, [...values, id]);
 
   if (result.rowCount === 0) {
     res.status(404).json({
       title: "Not Found",
-      message: "Driver with the specified ID does not exist.",
+      message: "Violations with the specified ID does not exist.",
     });
     return;
   }
 
-  const updatedViolation = result.rows[0];
-  console.log("Driver updated successfully:", updatedViolation);
+  const updateViolation = result.rows[0];
+  console.log("Violations updated successfully:", updateViolation);
 
   res.status(200).json({
-    title: "Driver Updated!",
-    message: `Driver ${updatedViolation.last_name}, ${updatedViolation.first_name} has been updated successfully.`,
-    driver: updatedViolation,
+    title: "Violation Updated!",
+    message: `Violation has been updated successfully.`,
   });
 });
 
 router.delete("/delete", async (req: Request, res: Response) => {
   try {
-    await pool.query(
-      `DELETE FROM
-            violations
-            WHERE
-            id = $1
+    console.log("Fetching. . .");
+
+    const { violationId } = req.body;
+
+    const violations = await pool.query(
+      `DELETE FROM 
+            violations 
+            WHERE 
+            id = $1 
             RETURNING *`,
-      [req.body.id]
+      [violationId]
     );
+
+    if (violations.rowCount === 0) {
+      res
+        .status(404)
+        .json({ message: "Cannot find and delete the violation." });
+      return;
+    }
+
     res.status(200).json({
       title: "Violation Deleted",
       message: "Violation Deleted Successfully.",
