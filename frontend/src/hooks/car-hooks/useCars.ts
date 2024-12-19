@@ -1,5 +1,5 @@
 import { Car } from "../../types/datatypes.ts";
-import { BackendError } from "../../types/error.types.ts";
+import { BackendMessage } from "../../types/response.types.ts";
 
 import { useEffect, useState, useCallback } from "react";
 import { fetchWithAuth } from "../../utils/fetch.tsx";
@@ -7,7 +7,7 @@ import useFetchWithAuthExports from "../context-hooks/useFetchWithAuthExports.ts
 
 const useCars = (driverId: string) => {
   const [data, setData] = useState<Car[] | null>(null);
-  const [error, setError] = useState<BackendError | null>(null);
+  const [error, setError] = useState<BackendMessage | null>(null);
   const [loading, setLoading] = useState(false);
   const { auth, refresh, navigate } = useFetchWithAuthExports();
 
@@ -23,7 +23,7 @@ const useCars = (driverId: string) => {
       );
 
       if (!response.ok) {
-        const error: BackendError = await response.json();
+        const error: BackendMessage = await response.json();
         setError(error);
       } else {
         const cars: Car[] = await response.json();
@@ -31,7 +31,7 @@ const useCars = (driverId: string) => {
       }
     } catch (err) {
       console.error("Unexpected error:", err);
-      setError({ message: "An unexpected error occurred" } as BackendError);
+      setError({ message: "An unexpected error occurred" } as BackendMessage);
     } finally {
       setLoading(false);
     }

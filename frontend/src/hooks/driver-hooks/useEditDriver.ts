@@ -1,5 +1,5 @@
 import { fetchWithAuth } from "../../utils/fetch";
-import { BackendError } from "../../types/error.types";
+import { BackendMessage } from "../../types/response.types";
 import useFetchWithAuthExports from "../context-hooks/useFetchWithAuthExports";
 import { DriverWithVandC } from "../../types/datatypes";
 import useLoading from "../context-hooks/useLoading";
@@ -23,7 +23,7 @@ export const useEditDriver = () => {
       );
 
       if (!response.ok) {
-        const errorData: BackendError = await response.json();
+        const errorData: BackendMessage = await response.json();
         toast.error(errorData.message);
         return;
       }

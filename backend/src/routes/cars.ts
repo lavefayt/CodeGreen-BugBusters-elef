@@ -26,8 +26,8 @@ router.post("/check-license", async (req: Request, res: Response) => {
 
     res.status(200).json(driverFound);
   } catch (error) {
-    console.log(error);
-    res.sendStatus(500);
+    const errorMessage = (error as Error).message;
+    res.status(500).json({ title: "Unknown Error", message: errorMessage });
   }
 });
 
@@ -86,8 +86,7 @@ router.post("/add", async (req: Request, res: Response) => {
     });
   } catch (error) {
     const errorMessage = (error as Error).message;
-    console.error("Error:", errorMessage);
-    res.status(500).json({ title: "Error", message: errorMessage });
+    res.status(500).json({ title: "Unknown Error", message: errorMessage });
   }
 });
 
@@ -124,61 +123,56 @@ router.get("/get", async (req: Request, res: Response) => {
 
     res.status(200).json(cars);
   } catch (error: unknown) {
-    if (error instanceof Error) {
-      console.error("Error fetching cars:", error.message);
-      res.status(500).json({ title: "Unknown Error", message: error.message });
-      return;
-    } else {
-      console.error("Unknown error:", error);
-      res.status(500).json({
-        title: "Unknown Error",
-        message: "An unexpected error occurred",
-      });
-      return;
-    }
+    const errorMessage = (error as Error).message;
+    res.status(500).json({ title: "Unknown Error", message: errorMessage });
   }
 });
 
 router.patch("/update", async (req: Request, res: Response) => {
-  const { id, ...updates } = req.body;
+  try {
+    const { id, ...updates } = req.body;
 
-  if (!id) {
-    res.status(400).json({
-      title: "Validation Error",
-      message: "License plate is required to update the record.",
-    });
-    return;
-  }
+    if (!id) {
+      res.status(400).json({
+        title: "Validation Error",
+        message: "License plate is required to update the record.",
+      });
+      return;
+    }
 
-  const fields = Object.keys(updates);
-  const values = Object.values(updates);
+    const fields = Object.keys(updates);
+    const values = Object.values(updates);
 
-  const setClause = fields
-    .map((field, index) => `${field} = $${index + 1}`)
-    .join(", ");
+    const setClause = fields
+      .map((field, index) => `${field} = $${index + 1}`)
+      .join(", ");
 
-  const query = `UPDATE cars SET ${setClause}
+    const query = `UPDATE cars SET ${setClause}
          WHERE id = $${fields.length + 1} 
          RETURNING *`;
 
-  const result = await pool.query(query, [...values, id]);
+    const result = await pool.query(query, [...values, id]);
 
-  if (result.rowCount === 0) {
-    res.status(404).json({
-      title: "Not Found",
-      message: "Cars with the specified ID does not exist.",
+    if (result.rowCount === 0) {
+      res.status(404).json({
+        title: "Not Found",
+        message: "Cars with the specified ID does not exist.",
+      });
+      return;
+    }
+
+    const updateCar = result.rows[0];
+    console.log("Car updated successfully:", updateCar);
+
+    res.status(200).json({
+      title: "Car Updated!",
+      message: `Car has been updated successfully.`,
+      driver: updateCar,
     });
-    return;
+  } catch (error) {
+    const errorMessage = (error as Error).message;
+    res.status(500).json({ title: "Unknown Error", message: errorMessage });
   }
-
-  const updateCar = result.rows[0];
-  console.log("Car updated successfully:", updateCar);
-
-  res.status(200).json({
-    title: "Car Updated!",
-    message: `Car has been updated successfully.`,
-    driver: updateCar,
-  });
 });
 
 router.delete("/delete", async (req: Request, res: Response) => {
@@ -197,7 +191,8 @@ router.delete("/delete", async (req: Request, res: Response) => {
     res.status(200).json({ message: "Car Added Successfully" });
     console.log("Driver deleted successfully:", car);
   } catch (error) {
-    res.status(500).json({ message: error });
+    const errorMessage = (error as Error).message;
+    res.status(500).json({ title: "Unknown Error", message: errorMessage });
   }
 });
 

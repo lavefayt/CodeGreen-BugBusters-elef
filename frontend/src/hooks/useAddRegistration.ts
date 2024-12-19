@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { BackendError } from "../types/error.types";
+import { BackendMessage } from "../types/response.types";
 import { Registration } from "../types/datatypes";
 import { fetchWithAuth } from "../utils/fetch";
 import useFetchWithAuthExports from "./context-hooks/useFetchWithAuthExports";
 
 export const useAddRegistration = () => {
-  const [error, setError] = useState<BackendError | null>(null); // Handle errors
+  const [error, setError] = useState<BackendMessage | null>(null); // Handle errors
   const [loading, setLoading] = useState<boolean>(); // Track loading state
   const { auth, refresh, navigate } = useFetchWithAuthExports();
 
@@ -23,12 +23,12 @@ export const useAddRegistration = () => {
       );
 
       if (!response.ok) {
-        const error: BackendError = await response.json();
+        const error: BackendMessage = await response.json();
         setError(error);
       }
     } catch (error) {
       console.error("Unexpected error:", error);
-      setError({ message: "An unexpected error occurred" } as BackendError);
+      setError({ message: "An unexpected error occurred" } as BackendMessage);
     } finally {
       setTimeout(() => {
         setLoading(false);

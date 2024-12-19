@@ -95,12 +95,10 @@ router.post("/login", validateAuth, async (req: Request, res: Response) => {
     // console.log(req.cookies.jwt);
     res.status(200).json({ accessToken, isAdmin: user.is_admin, id: user.id });
   } catch (error) {
-    res.sendStatus(500);
-    console.log(error);
+    const errorMessage = (error as Error).message;
+    res.status(500).json({ title: "Unknown Error", message: errorMessage });
   }
 });
-
-
 
 router.get("/refresh", async (req: Request, res: Response) => {
   try {
@@ -153,8 +151,8 @@ router.get("/refresh", async (req: Request, res: Response) => {
       return;
     }
   } catch (error) {
-    res.sendStatus(500).json({ title: "Unknown Error", message: error });
-    console.log(error);
+    const errorMessage = (error as Error).message;
+    res.status(500).json({ title: "Unknown Error", message: errorMessage });
   }
 });
 
@@ -201,8 +199,8 @@ router.get("/logout", async (req: Request, res: Response) => {
       message: "Thank you for visiting, feel free to use our services again.",
     });
   } catch (error) {
-    res.sendStatus(500);
-    console.log(error);
+    const errorMessage = (error as Error).message;
+    res.status(500).json({ title: "Unknown Error", message: errorMessage });
   }
 });
 export default router;

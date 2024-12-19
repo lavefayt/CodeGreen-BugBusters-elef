@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { BackendError } from "../types/error.types";
+import { BackendMessage } from "../types/response.types";
 import { AuthContextType } from "../types/user.types";
 import useAuth from "./context-hooks/useAuth";
 import { LoadingContextType } from "../types/loading.types";
@@ -18,7 +18,7 @@ const useLogout = () => {
       const response = await normalFetch("/auth/logout", "get");
 
       if (!response.ok) {
-        const backendError: BackendError = await response.json();
+        const backendError: BackendMessage = await response.json();
         toast.error("Something went wrong!");
         throw new Error(`${backendError.title}: ${backendError.message}`);
       }

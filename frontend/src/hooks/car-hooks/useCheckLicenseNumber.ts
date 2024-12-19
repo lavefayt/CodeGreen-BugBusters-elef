@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { BackendError } from "../../types/error.types";
+import { BackendMessage } from "../../types/response.types";
 import { fetchWithAuth } from "../../utils/fetch";
 import useFetchWithAuthExports from "../context-hooks/useFetchWithAuthExports";
 import { DriverWithVandC } from "../../types/datatypes";
@@ -29,14 +29,14 @@ const useCheckLicenseNumber = () => {
       );
 
       if (!response.ok) {
-        const backendError: BackendError = await response.json();
+        const backendError: BackendMessage = await response.json();
         toast.error(backendError.message);
-        return
+        return;
       }
 
       const driver = await response.json();
 
-      return driver; 
+      return driver;
     } catch (error) {
       console.error("Error checking license number:", error);
       toast.error("Failed to verify license number.");

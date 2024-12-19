@@ -1,12 +1,12 @@
 import { useEffect, useState, useCallback } from "react";
 import { DriverWithVandC } from "../../types/datatypes.ts";
-import { BackendError } from "../../types/error.types.ts";
+import { BackendMessage } from "../../types/response.types.ts";
 import { fetchWithAuth } from "../../utils/fetch.tsx";
 import useFetchWithAuthExports from "../context-hooks/useFetchWithAuthExports.ts";
 
 const useDrivers = () => {
   const [data, setData] = useState<DriverWithVandC[] | null>(null);
-  const [error, setError] = useState<BackendError | null>(null);
+  const [error, setError] = useState<BackendMessage | null>(null);
   const [loading, setLoading] = useState(false);
   const { auth, refresh, navigate } = useFetchWithAuthExports();
 
@@ -22,7 +22,7 @@ const useDrivers = () => {
       );
 
       if (!response.ok) {
-        const error: BackendError = await response.json();
+        const error: BackendMessage = await response.json();
         setError(error);
       } else {
         const drivers: DriverWithVandC[] = await response.json();
@@ -30,7 +30,7 @@ const useDrivers = () => {
       }
     } catch (err) {
       console.error("Unexpected error:", err);
-      setError({ message: "An unexpected error occurred" } as BackendError);
+      setError({ message: "An unexpected error occurred" } as BackendMessage);
     } finally {
       setLoading(false);
     }

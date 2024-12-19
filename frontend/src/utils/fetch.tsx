@@ -1,5 +1,5 @@
 import { NavigateFunction } from "react-router-dom";
-import { BackendError } from "../types/error.types";
+import { BackendMessage } from "../types/response.types";
 import { User } from "../types/user.types";
 
 export const normalFetch = async (
@@ -58,7 +58,7 @@ export const fetchWithAuth = async (
     );
 
     if (!newResponse.ok) {
-      const backendError: BackendError = await newResponse.json();
+      const backendError: BackendMessage = await newResponse.json();
       navigate("/unauthorized");
       throw new Error(backendError.title + ": " + backendError.message);
     }

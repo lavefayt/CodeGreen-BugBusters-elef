@@ -59,14 +59,6 @@ server.use("/notification", notificationRoutes);
 server.use("/violation", violationRoutes);
 server.use("/violator", violatorRoutes);
 
-// server.get("/testing", async (req: Request, res: Response) => {
-//   try {
-//     res.status(200).json({ title: "Testing Complete", message: "WOWZIES" });
-//   } catch (error) {
-//     res.sendStatus(500);
-//   }
-// });
-
 // For PORT
 const PORT = Number(process.env.PORT) || 3000;
 

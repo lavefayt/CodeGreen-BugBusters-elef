@@ -32,7 +32,7 @@ const AdminLandingPage = () => {
       <div className="flex space-x-2 p-5">
         <h1 className="text-3xl text-textgreen font-syke-bold">Welcome,</h1>
         <h1 className="text-3xl text-white font-syke-bold">
-          Admin {user?.user.first_name}
+          {user?.user.first_name}
         </h1>
       </div>
 

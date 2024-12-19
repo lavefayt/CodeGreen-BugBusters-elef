@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { UserSignUp } from "../types/user.types";
-import { BackendError } from "../types/error.types";
+import { BackendMessage } from "../types/response.types";
 import { toast } from "react-toastify";
 import { normalFetch } from "../utils/fetch";
 
@@ -13,7 +13,7 @@ const useSignUp = () => {
       const response = await normalFetch("/auth/signup", "post", formData);
 
       if (!response.ok) {
-        const backendError: BackendError = await response.json();
+        const backendError: BackendMessage = await response.json();
         console.log(backendError);
         toast.error(`${backendError.message}`);
         return;
