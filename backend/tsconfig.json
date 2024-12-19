@@ -4,7 +4,7 @@
     "types": ["vitest/globals"],
     "target": "es6",
     "module": "commonjs",
-    "moduleResolution": "node",
+    "moduleResolution": "node16",
     "sourceMap": true,
     "strict": true,
     "esModuleInterop": true,
