@@ -9,7 +9,6 @@ import RegisterDriver from "../../src/pages/RegisterDriver"
 import useUser from "../../src/hooks/useUser";
 import Homepage from "../../src/pages/HomePage"
 import useAddRegistration from "../../src/hooks/registration-hooks/useAddRegistration";
-import { waitFor as waitForOriginal } from "@testing-library/react";
 
 vi.mock("../../src/hooks/useLogin")
 describe("registered user login, register as a driver", () => {
