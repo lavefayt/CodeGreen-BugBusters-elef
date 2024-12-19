@@ -9,9 +9,7 @@ router.post("/check-license", async (req: Request, res: Response) => {
     const { license_number } = req.body;
 
     const { rows: drivers } = await pool.query(
-      `SELECT id
-          FROM drivers
-          WHERE license_number = $1`,
+      `SELECT id FROM drivers WHERE license_number = $1`,
       [license_number]
     );
 
