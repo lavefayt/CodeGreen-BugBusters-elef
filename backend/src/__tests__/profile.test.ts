@@ -24,8 +24,14 @@ describe("GET /profile/get/:id", () => {
     };
 
     const mockViolations = [
-      { violation_id: 1, description: "Speeding" },
-      { violation_id: 2, description: "Red Light" }
+      { 
+        violation_id: 1, 
+        description: "Speeding" 
+      },
+      { 
+        violation_id: 2,
+        description: "Red Light" 
+      }
     ];
 
     // Mocking database responses
