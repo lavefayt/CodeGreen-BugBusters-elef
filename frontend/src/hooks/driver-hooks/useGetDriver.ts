@@ -18,7 +18,7 @@ const useGetDriver = (id: string) => {
           navigate,
           refresh,
           auth,
-          auth?.isAdmin ? `/driver/get/${id}` : `/profile/get/${id}`,
+          auth?.isAdmin ? `/driver/get/${id}` : `/profile/get/${auth?.id}`,
           "get"
         );
 

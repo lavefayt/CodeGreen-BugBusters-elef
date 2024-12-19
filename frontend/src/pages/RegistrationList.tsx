@@ -7,9 +7,8 @@ import RegistrationListCard from "../components/RegistrationListCard";
 import { Registration } from "../types/datatypes";
 import { useApproveRegistration } from "../hooks/registration-hooks/useApproveRegistration";
 
-
 const RegistrationList = () => {
-  const { registration: registrations, loading} = useGetRegistration();
+  const { registration: registrations, loading } = useGetRegistration();
   const [selectedRegistration, setSelectedRegistration] =
     useState<Registration>();
   const { approveRegistration, processLoading } = useApproveRegistration();
@@ -27,14 +26,10 @@ const RegistrationList = () => {
     await approveRegistration(selectedRegistration.license_number);
     setTimeout(() => {
       window.location.reload();
-    }, 500); 
+    }, 500);
   };
 
   if (loading) return <Loading loading={loading} />;
-
-  if (!registrations || registrations.length === 0) {
-    return <div>No registrations found.</div>;
-  }
 
   return (
     <div className="flex flex-col items-center bg-adminlanding-bg min-h-screen">
@@ -124,8 +119,7 @@ const RegistrationList = () => {
                         <button
                           onClick={handleAccept}
                           disabled={processLoading}
-                          className="p-2 px-4 m-2 bg-hoverbutton hover:bg-buttongreen transition-colors rounded-sm text-white font-syke-bold"
-                        >
+                          className="p-2 px-4 m-2 bg-hoverbutton hover:bg-buttongreen transition-colors rounded-sm text-white font-syke-bold">
                           {processLoading ? "Processing..." : "Accept"}
                         </button>
                         <button className="p-2 px-5  m-2 bg-hoverbutton hover:bg-red-900 transition-colors rounded-sm text-white font-syke-bold">
@@ -154,16 +148,14 @@ const RegistrationList = () => {
               </div>
               <div
                 className="w-full h-[20rem] overflow-y-auto"
-                id="listcontainer"
-              >
+                id="listcontainer">
                 <div className="flex flex-col overflow-y-auto h-80 scrollbar-thin scrollbar text-white">
                   {registrations && registrations.length > 0 ? (
                     registrations.map((registration) => (
                       <div
                         key={registration.user_id}
                         className="cursor-pointer hover:bg-secondgrey"
-                        onClick={() => handleRegisterClick(registration)}
-                      >
+                        onClick={() => handleRegisterClick(registration)}>
                         <RegistrationListCard
                           key={registration.user_id}
                           user_id={registration.user_id!}
@@ -177,7 +169,9 @@ const RegistrationList = () => {
                       </div>
                     ))
                   ) : (
-                    <p className="text-white text-center">No drivers found.</p>
+                    <p className="text-white text-center">
+                      No registrations found.
+                    </p>
                   )}
                 </div>
               </div>
