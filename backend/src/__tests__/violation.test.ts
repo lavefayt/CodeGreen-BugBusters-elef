@@ -3,6 +3,7 @@ import express from "express";
 import router from "../routes/violation";
 import { pool } from ".."; // Your pool instance
 import { Violation } from "../types/datatypes";
+import { Mock } from "vitest";
 
 const app = express();
 app.use(express.json());
@@ -28,12 +29,12 @@ describe("Violation API", () => {
           };
       
           // Mock driver found in the database
-          (pool.query as vi.Mock).mockResolvedValueOnce({
+          (pool.query as Mock).mockResolvedValueOnce({
             rows: [{ id: 1, first_name: "John", last_name: "Doe" }],
           });
       
           // Mock insertion of the violation
-          (pool.query as vi.Mock).mockResolvedValueOnce({
+          (pool.query as Mock).mockResolvedValueOnce({
             rows: [{ driver_id: 1, violation_type: "Speeding" }],
           });
       
@@ -57,7 +58,7 @@ describe("Violation API", () => {
           };
       
           // Mock driver not found in the database
-          (pool.query as vi.Mock).mockResolvedValueOnce({
+          (pool.query as Mock).mockResolvedValueOnce({
             rows: [],
           });
       
@@ -81,7 +82,7 @@ describe("Violation API", () => {
           };
       
           // Mock error during query
-          (pool.query as vi.Mock).mockRejectedValueOnce(new Error("Database error"));
+          (pool.query as Mock).mockRejectedValueOnce(new Error("Database error"));
       
           const response = await request(app).post("/violations/add").send(violationData);
       
@@ -103,7 +104,7 @@ describe("Violation API", () => {
       };
 
       // Mock successful update
-      (pool.query as vi.Mock).mockResolvedValueOnce({
+      (pool.query as Mock).mockResolvedValueOnce({
         rowCount: 1,
         rows: [{ id: 1, violation_type: "Speeding", description: "Exceeded speed limit by 20 mph" }],
       });
@@ -125,7 +126,7 @@ describe("Violation API", () => {
       };
 
       // Mock violation not found
-      (pool.query as vi.Mock).mockResolvedValueOnce({
+      (pool.query as Mock).mockResolvedValueOnce({
         rowCount: 0,
         rows: [],
       });
@@ -145,7 +146,7 @@ describe("Violation API", () => {
       const violationData = { violationId: 1 };
 
       // Mock successful deletion
-      (pool.query as vi.Mock).mockResolvedValueOnce({
+      (pool.query as Mock).mockResolvedValueOnce({
         rowCount: 1,
         rows: [{ id: 1 }],
       });
@@ -163,7 +164,7 @@ describe("Violation API", () => {
       const violationData = { violationId: 999 }; // Non-existent violation
 
       // Mock deletion failure
-      (pool.query as vi.Mock).mockResolvedValueOnce({
+      (pool.query as Mock).mockResolvedValueOnce({
         rowCount: 0,
         rows: [],
       });

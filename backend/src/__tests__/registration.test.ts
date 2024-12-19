@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, Mock } from "vitest";
 import request from "supertest";
 import express from "express";
 import router from "../routes/registration";
@@ -6,16 +6,16 @@ import { pool } from ".."; // Assuming pool is exported from your index file
 
 // Define types for the mock response data
 interface MockClient {
-  query: vi.Mock;
-  release: vi.Mock;
-  begin: vi.Mock;
-  commit: vi.Mock;
-  rollback: vi.Mock;
+  query: Mock;
+  release: Mock;
+  begin: Mock;
+  commit: Mock;
+  rollback: Mock;
 }
 
 interface Registration {
-  user_id: number;
-  license_number: string;
+  user_id?: number;
+  license_number?: string;
   school_email: string;
   first_name?: string;
   last_name?: string;
@@ -54,7 +54,7 @@ describe("Registration API", () => {
         { user_id: 2, license_number: "456", school_email: "test2@example.com" },
       ];
 
-      (pool.query as vi.Mock).mockResolvedValue({ rows: mockRegistrations });
+      (pool.query as Mock).mockResolvedValue({ rows: mockRegistrations });
 
       const response = await request(app).get("/get");
 
@@ -68,7 +68,7 @@ describe("Registration API", () => {
 
     it("should handle database errors", async () => {
       const dbError = new Error("Database query failed");
-      (pool.query as vi.Mock).mockRejectedValue(dbError);
+      (pool.query as Mock).mockRejectedValue(dbError);
 
       const response = await request(app).get("/get");
 
@@ -110,7 +110,7 @@ describe("Registration API", () => {
         sex: "M",
       };
 
-      (pool.query as vi.Mock).mockResolvedValueOnce({ rowCount: 1 });
+      (pool.query as Mock).mockResolvedValueOnce({ rowCount: 1 });
 
       const response = await request(app).post("/add").send(registrationData);
 
@@ -141,7 +141,7 @@ describe("Registration API", () => {
       };
 
       const dbError = new Error("Database insertion failed");
-      (pool.query as vi.Mock).mockRejectedValue(dbError);
+      (pool.query as Mock).mockRejectedValue(dbError);
 
       const response = await request(app).post("/add").send(registrationData);
 
@@ -166,7 +166,7 @@ describe("Registration API", () => {
 
     it("should return 404 if registration not found", async () => {
       const license_number = "12345678";
-      (pool.query as vi.Mock).mockResolvedValueOnce({ rows: [] });  // No matching registration
+      (pool.query as Mock).mockResolvedValueOnce({ rows: [] });  // No matching registration
 
       const response = await request(app).post("/approve").send({ license_number });
 
@@ -183,7 +183,7 @@ describe("Registration API", () => {
       const mockDriver = { email: "", id: 1 };
 
       // Mocking registration and driver fetch queries
-      (pool.query as vi.Mock)
+      (pool.query as Mock)
         .mockResolvedValueOnce({ rows: [mockRegistration] })  // Mock registration fetch
         .mockResolvedValueOnce({ rows: [mockDriver] });  // Mock driver fetch
 
@@ -195,7 +195,7 @@ describe("Registration API", () => {
         commit: vi.fn().mockResolvedValueOnce({}),
         rollback: vi.fn().mockResolvedValueOnce({}),
       };
-      (pool.connect as vi.Mock).mockResolvedValue(mockClient);
+      (pool.connect as Mock).mockResolvedValue(mockClient);
 
       const response = await request(app).post("/approve").send({ license_number });
 

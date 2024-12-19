@@ -1,18 +1,13 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, beforeEach, vi, Mock } from "vitest";
 import request from "supertest";
 import express from "express";
 import router from "../routes/cars";
 import { pool } from "..";
 
-// Define the structure of the query result rows
-type QueryResult = {
-  rows: Array<{ id: number } | { car_model: string; license_plate: string; brand: string; color: string; license_number: string }>;
-};
-
 // Mock the database pool with a more specific type
 vi.mock("../index", () => ({
   pool: {
-    query: vi.fn() as vi.MockedFunction<(text: string, values: unknown[]) => Promise<QueryResult>>,
+    query: vi.fn().mockResolvedValue({ rows: [], rowCount: 0 }),
   },
 }));
 
@@ -27,14 +22,16 @@ describe("Cars API", () => {
 
   describe("POST /check-license", () => {
     it("should return 401 if license number is not found", async () => {
-      (pool.query as vi.MockedFunction<(text: string, values: unknown[]) => Promise<QueryResult>>).mockResolvedValue({
+      (
+      pool.query as Mock
+      ).mockResolvedValue({
         rows: [],
       });
-    
+
       const response = await request(app)
         .post("/check-license")
         .send({ license_number: "12345678" });
-    
+
       expect(response.status).toBe(401);
       expect(response.body).toEqual({
         title: "License Number Not Found",
@@ -45,16 +42,18 @@ describe("Cars API", () => {
         ["12345678"]
       );
     });
-    
+
     it("should return 200 if license number is found", async () => {
-      (pool.query as vi.MockedFunction<(text: string, values: unknown[]) => Promise<QueryResult>>).mockResolvedValue({
+      (
+        pool.query as Mock
+      ).mockResolvedValue({
         rows: [{ id: 1 }],
       });
-  
+
       const response = await request(app)
         .post("/check-license")
         .send({ license_number: "12345678" });
-  
+
       expect(response.status).toBe(200);
       expect(response.body).toEqual({ id: 1 });
     });
@@ -62,7 +61,9 @@ describe("Cars API", () => {
 
   describe("POST /add", () => {
     it("should return 404 if driver is not found", async () => {
-      (pool.query as vi.MockedFunction<(text: string, values: unknown[]) => Promise<QueryResult>>).mockResolvedValueOnce({ rows: [] });
+      (
+        pool.query as Mock
+      ).mockResolvedValueOnce({ rows: [] });
 
       const response = await request(app).post("/add").send({
         car_model: "Tesla",
@@ -81,7 +82,9 @@ describe("Cars API", () => {
     });
 
     it("should add a car and return 200", async () => {
-      (pool.query as vi.MockedFunction<(text: string, values: unknown[]) => Promise<QueryResult>>)
+      (
+        pool.query as Mock
+      )
         .mockResolvedValueOnce({ rows: [{ id: 1 }] }) // Mock driver query
         .mockResolvedValueOnce({ rows: [{ id: 1 }] }); // Mock car insert
 
@@ -112,7 +115,9 @@ describe("Cars API", () => {
     });
 
     it("should return 404 if no cars are found", async () => {
-      (pool.query as vi.MockedFunction<(text: string, values: unknown[]) => Promise<QueryResult>>).mockResolvedValue({ rows: [] });
+      (
+        pool.query as Mock
+      ).mockResolvedValue({ rows: [] });
 
       const response = await request(app).get("/get?driverId=1");
 
@@ -124,7 +129,9 @@ describe("Cars API", () => {
     });
 
     it("should return cars for a valid driverId", async () => {
-      (pool.query as vi.MockedFunction<(text: string, values: unknown[]) => Promise<QueryResult>>).mockResolvedValue({
+      (
+        pool.query as Mock
+      ).mockResolvedValue({
         rows: [
           {
             car_model: "Tesla",
@@ -139,13 +146,15 @@ describe("Cars API", () => {
       const response = await request(app).get("/get?driverId=1");
 
       expect(response.status).toBe(200);
-      expect(response.body).toEqual([{
-        car_model: "Tesla",
-        license_plate: "ABC123",
-        brand: "Tesla",
-        color: "Red",
-        license_number: "12345678",
-      }]);
+      expect(response.body).toEqual([
+        {
+          car_model: "Tesla",
+          license_plate: "ABC123",
+          brand: "Tesla",
+          color: "Red",
+          license_number: "12345678",
+        },
+      ]);
     });
   });
 
@@ -163,7 +172,9 @@ describe("Cars API", () => {
     });
 
     it("should update a car and return 200", async () => {
-      (pool.query as vi.MockedFunction<(text: string, values: unknown[]) => Promise<QueryResult>>).mockResolvedValue({
+      (
+        pool.query as Mock
+      ).mockResolvedValue({
         rowCount: 1,
         rows: [{ id: 1, car_model: "Tesla", license_plate: "ABC123" }],
       });
@@ -184,7 +195,9 @@ describe("Cars API", () => {
 
   describe("DELETE /delete", () => {
     it("should delete a car and return 200", async () => {
-      (pool.query as vi.MockedFunction<(text: string, values: unknown[]) => Promise<QueryResult>>).mockResolvedValue({
+      (
+        pool.query as Mock
+      ).mockResolvedValue({
         rowCount: 1,
       });
 
