@@ -3,7 +3,7 @@ import express from "express";
 import router from "../routes/violation";
 import { pool } from ".."; // Your pool instance
 import { Violation } from "../types/datatypes";
-import { Mock } from "vitest"
+import { Mock } from "vitest";
 const app = express();
 app.use(express.json());
 app.use("/violations", router);
@@ -29,6 +29,7 @@ describe("Violation API", () => {
       
           // Mock driver found in the database
           (pool.query as Mock).mockResolvedValueOnce({
+
             rows: [
               { id: 1, 
                 first_name: "John", 
