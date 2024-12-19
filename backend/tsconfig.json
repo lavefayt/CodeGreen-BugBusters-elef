@@ -3,7 +3,7 @@
     "lib": ["esnext", "dom"],
     "types": ["vitest/globals"],
     "target": "es6",
-    "module": "preserve",
+    "module": "es2015",
     "moduleResolution": "bundler",
     "sourceMap": true,
     "strict": true,
