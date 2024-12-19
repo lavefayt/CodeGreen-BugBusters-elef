@@ -33,7 +33,7 @@ describe("Login Page renders corriquely", () => {
     render(<LoginPage />, { wrapper: BrowserRouter });
 
     const emailInput = await screen.findByPlaceholderText(
-      "Email or phone number"
+      "Email address"
     );
     const passwordInput = await screen.findByPlaceholderText(
       "Enter your password"
@@ -46,7 +46,7 @@ describe("Login Page renders corriquely", () => {
   it("이메일 및 비밀번호 필드의 값을 업데이트해야 합니다", async () => {
     render(<LoginPage />, { wrapper: BrowserRouter });
 
-    const emailInput = screen.getByPlaceholderText("Email or phone number");
+    const emailInput = screen.getByPlaceholderText("Email address");
     const passwordInput = screen.getByPlaceholderText("Enter your password");
 
     fireEvent.change(emailInput, { target: { value: "test@example.com" } });
@@ -55,6 +55,4 @@ describe("Login Page renders corriquely", () => {
     expect(emailInput).toHaveProperty("value", "test@example.com");
     expect(passwordInput).toHaveProperty("value", "password123");
   });
-
-  
 });

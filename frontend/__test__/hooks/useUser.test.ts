@@ -30,6 +30,10 @@ vi.mock('react-router-dom', () => ({
   MemoryRouter: ({ children }) => children,
 }));
 
+// Mock window.alert to prevent "Not implemented" error
+vi.spyOn(window, 'alert').mockImplementation(() => {});
+
+
 describe('useLogin Hook', () => {
   const setAuth = vi.fn();
   const setAppLoading = vi.fn();
