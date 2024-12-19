@@ -31,8 +31,7 @@ import Protocols from "./components/Policies/protocols.tsx";
 import Rules from "./components/Policies/rules.tsx";
 import ChangePassword from "./pages/ChangePassword.tsx";
 import AddViolationPage from "./pages/AddViolationPage.tsx";
-// import SendNotif from "./pages/SendNotif.tsx";
-// import SendNotif from "./pages/SendNotif.tsx";
+import SendNotif from "./pages/SendNotif.tsx";
 
 const Main = () => {
   const { appLoading }: LoadingContextType = useLoading();
@@ -97,10 +96,10 @@ const Main = () => {
               path="/registration-list"
               element={<RegistrationList />}
             />
-            {/* <Route
-              path="/send-notif"
+            <Route
+              path="/send-notif/:id"
               element={<SendNotif />}
-            /> */}
+            /> 
           </Route>
         </Route>
       </Routes>
