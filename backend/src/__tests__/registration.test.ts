@@ -50,10 +50,19 @@ describe("Registration API", () => {
   describe("GET /get", () => {
     it("should fetch all registrations successfully", async () => {
       const mockRegistrations: Registration[] = [
-        { user_id: 1, license_number: "123", school_email: "test@example.com" },
-        { user_id: 2, license_number: "456", school_email: "test2@example.com" },
+        { 
+          user_id: 1, 
+          license_number: "123", 
+          school_email: "test@example.com" 
+        },
+        { 
+          user_id: 2, 
+          license_number: "456", 
+          school_email: "test2@example.com" 
+        },
       ];
 
+      // Correctly mock the pool.query method
       (pool.query as Mock).mockResolvedValue({ rows: mockRegistrations });
 
       const response = await request(app).get("/get");
@@ -62,7 +71,7 @@ describe("Registration API", () => {
       expect(response.body).toEqual(mockRegistrations);
       expect(pool.query).toHaveBeenCalledOnce();
       expect(pool.query).toHaveBeenCalledWith(
-        "SELECT user_id, license_number, school_email, first_name, last_name, middle_name, date_of_birth, driver_type, sex FROM registrations"
+        `SELECT user_id, license_number, school_email, first_name, last_name, middle_name, date_of_birth, driver_type, sex FROM registrations`
       );
     });
 
@@ -83,10 +92,10 @@ describe("Registration API", () => {
   describe("POST /add", () => {
     it("should return 400 if missing required information", async () => {
       const incompleteData: Registration = {
+        user_id: 1,
         license_number: "12345678",
         school_email: "test@example.com",
         first_name: "John",
-        // Missing required fields
       };
 
       const response = await request(app).post("/add").send(incompleteData);
@@ -100,6 +109,7 @@ describe("Registration API", () => {
 
     it("should add a registration successfully", async () => {
       const registrationData: Registration = {
+        user_id: 1,
         license_number: "12345678",
         school_email: "test@example.com",
         first_name: "John",
@@ -130,6 +140,7 @@ describe("Registration API", () => {
 
     it("should handle database errors on registration creation", async () => {
       const registrationData: Registration = {
+        user_id: 1,
         license_number: "12345678",
         school_email: "test@example.com",
         first_name: "John",

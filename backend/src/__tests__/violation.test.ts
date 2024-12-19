@@ -4,7 +4,6 @@ import router from "../routes/violation";
 import { pool } from ".."; // Your pool instance
 import { Violation } from "../types/datatypes";
 import { Mock } from "vitest";
-
 const app = express();
 app.use(express.json());
 app.use("/violations", router);
@@ -30,12 +29,23 @@ describe("Violation API", () => {
       
           // Mock driver found in the database
           (pool.query as Mock).mockResolvedValueOnce({
-            rows: [{ id: 1, first_name: "John", last_name: "Doe" }],
+
+            rows: [
+              { id: 1, 
+                first_name: "John", 
+                last_name: "Doe" 
+              }
+            ],
           });
       
           // Mock insertion of the violation
           (pool.query as Mock).mockResolvedValueOnce({
-            rows: [{ driver_id: 1, violation_type: "Speeding" }],
+            rows: [
+              { 
+                driver_id: 1, 
+                violation_type: "Speeding" 
+              }
+            ],
           });
       
           const response = await request(app).post("/violations/add").send(violationData);
@@ -106,7 +116,13 @@ describe("Violation API", () => {
       // Mock successful update
       (pool.query as Mock).mockResolvedValueOnce({
         rowCount: 1,
-        rows: [{ id: 1, violation_type: "Speeding", description: "Exceeded speed limit by 20 mph" }],
+        rows: [
+          { 
+            id: 1, 
+            violation_type: "Speeding", 
+            description: "Exceeded speed limit by 20 mph" 
+          }
+        ],
       });
 
       const response = await request(app).patch("/violations/update").send(violationData);
