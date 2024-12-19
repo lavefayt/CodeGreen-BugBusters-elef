@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, MockedFunction } from "vitest";
 import request from "supertest";
 import express from "express";
 import router from "../routes/cars";
@@ -12,7 +12,7 @@ type QueryResult = {
 // Mock the database pool with a more specific type
 vi.mock("../index", () => ({
   pool: {
-    query: vi.fn() as vi.MockedFunction<(text: string, values: unknown[]) => Promise<QueryResult>>,
+    query: vi.fn() as MockedFunction<(text: string, values: unknown[]) => Promise<QueryResult>>,
   },
 }));
 

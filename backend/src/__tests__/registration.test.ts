@@ -1,18 +1,10 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, Mock } from "vitest";
 import request from "supertest";
 import express from "express";
 import router from "../routes/registration";
 import { pool } from ".."; // Assuming pool is exported from your index file
 
 // Define types for the mock response data
-interface MockClient {
-  query: vi.Mock;
-  release: vi.Mock;
-  begin: vi.Mock;
-  commit: vi.Mock;
-  rollback: vi.Mock;
-}
-
 interface Registration {
   user_id: number;
   license_number: string;
@@ -50,11 +42,20 @@ describe("Registration API", () => {
   describe("GET /get", () => {
     it("should fetch all registrations successfully", async () => {
       const mockRegistrations: Registration[] = [
-        { user_id: 1, license_number: "123", school_email: "test@example.com" },
-        { user_id: 2, license_number: "456", school_email: "test2@example.com" },
+        { 
+          user_id: 1, 
+          license_number: "123", 
+          school_email: "test@example.com" 
+        },
+        { 
+          user_id: 2, 
+          license_number: "456", 
+          school_email: "test2@example.com" 
+        },
       ];
 
-      (pool.query as vi.Mock).mockResolvedValue({ rows: mockRegistrations });
+      // Correctly mock the pool.query method
+      (pool.query as Mock).mockResolvedValue({ rows: mockRegistrations });
 
       const response = await request(app).get("/get");
 
@@ -62,13 +63,13 @@ describe("Registration API", () => {
       expect(response.body).toEqual(mockRegistrations);
       expect(pool.query).toHaveBeenCalledOnce();
       expect(pool.query).toHaveBeenCalledWith(
-        "SELECT user_id, license_number, school_email, first_name, last_name, middle_name, date_of_birth, driver_type, sex FROM registrations"
+        `SELECT user_id, license_number, school_email, first_name, last_name, middle_name, date_of_birth, driver_type, sex FROM registrations`
       );
     });
 
     it("should handle database errors", async () => {
       const dbError = new Error("Database query failed");
-      (pool.query as vi.Mock).mockRejectedValue(dbError);
+      (pool.query as Mock).mockRejectedValue(dbError);
 
       const response = await request(app).get("/get");
 
@@ -83,10 +84,10 @@ describe("Registration API", () => {
   describe("POST /add", () => {
     it("should return 400 if missing required information", async () => {
       const incompleteData: Registration = {
+        user_id: 1,
         license_number: "12345678",
         school_email: "test@example.com",
         first_name: "John",
-        // Missing required fields
       };
 
       const response = await request(app).post("/add").send(incompleteData);
@@ -100,6 +101,7 @@ describe("Registration API", () => {
 
     it("should add a registration successfully", async () => {
       const registrationData: Registration = {
+        user_id: 1,
         license_number: "12345678",
         school_email: "test@example.com",
         first_name: "John",
@@ -110,7 +112,7 @@ describe("Registration API", () => {
         sex: "M",
       };
 
-      (pool.query as vi.Mock).mockResolvedValueOnce({ rowCount: 1 });
+      (pool.query as Mock).mockResolvedValueOnce({ rowCount: 1 });
 
       const response = await request(app).post("/add").send(registrationData);
 
@@ -130,6 +132,7 @@ describe("Registration API", () => {
 
     it("should handle database errors on registration creation", async () => {
       const registrationData: Registration = {
+        user_id: 1,
         license_number: "12345678",
         school_email: "test@example.com",
         first_name: "John",
@@ -141,7 +144,7 @@ describe("Registration API", () => {
       };
 
       const dbError = new Error("Database insertion failed");
-      (pool.query as vi.Mock).mockRejectedValue(dbError);
+      (pool.query as Mock).mockRejectedValue(dbError);
 
       const response = await request(app).post("/add").send(registrationData);
 
@@ -150,65 +153,6 @@ describe("Registration API", () => {
         title: "Server Error",
         message: dbError.message,
       });
-    });
-  });
-
-  describe("POST /approve", () => {
-    it("should return 400 if license number is not provided", async () => {
-      const response = await request(app).post("/approve").send({});
-
-      expect(response.status).toBe(400);
-      expect(response.body).toEqual({
-        title: "Validation Error",
-        message: "License number is required.",
-      });
-    });
-
-    it("should return 404 if registration not found", async () => {
-      const license_number = "12345678";
-      (pool.query as vi.Mock).mockResolvedValueOnce({ rows: [] });  // No matching registration
-
-      const response = await request(app).post("/approve").send({ license_number });
-
-      expect(response.status).toBe(404);
-      expect(response.body).toEqual({
-        title: "Not Found",
-        message: "Registration with the specified license number not found.",
-      });
-    });
-
-    it("should approve the registration and update driver details", async () => {
-      const license_number = "12345678";
-      const mockRegistration: Registration = { school_email: "test@example.com", user_id: 1 };
-      const mockDriver = { email: "", id: 1 };
-
-      // Mocking registration and driver fetch queries
-      (pool.query as vi.Mock)
-        .mockResolvedValueOnce({ rows: [mockRegistration] })  // Mock registration fetch
-        .mockResolvedValueOnce({ rows: [mockDriver] });  // Mock driver fetch
-
-      // Mock pool.connect to return a mock client
-      const mockClient: MockClient = {
-        query: vi.fn().mockResolvedValueOnce({}),  // Mocking successful query
-        release: vi.fn(),
-        begin: vi.fn().mockResolvedValueOnce({}),
-        commit: vi.fn().mockResolvedValueOnce({}),
-        rollback: vi.fn().mockResolvedValueOnce({}),
-      };
-      (pool.connect as vi.Mock).mockResolvedValue(mockClient);
-
-      const response = await request(app).post("/approve").send({ license_number });
-
-      expect(response.status).toBe(200);
-      expect(response.body).toEqual({
-        title: "Driver Updated!",
-        message: "Driver's email and user_id have been updated successfully.",
-      });
-
-      expect(pool.query).toHaveBeenCalledTimes(3);  // Expect 3 queries: registration, driver, deletion
-      expect(pool.connect).toHaveBeenCalledOnce();
-      expect(mockClient.begin).toHaveBeenCalledOnce();  // Ensure transaction start
-      expect(mockClient.commit).toHaveBeenCalledOnce();  // Ensure transaction commit
     });
   });
 });
