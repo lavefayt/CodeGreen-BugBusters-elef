@@ -100,8 +100,9 @@ const RegisterDriver = () => {
 
     try {
       await postRegistration(formData); // Send the form data to the backend
-      validateForm(); // Validate the form
-      navigate("/homepage"); // Redirect to the homepage
+      console.log(formData)
+      const isValid = validateForm(); // Validate the form
+      isValid && navigate("/homepage"); // Redirect to the homepage
     } catch (error) {
       console.error("Error submitting the form:", error);
     }
@@ -307,7 +308,7 @@ const RegisterDriver = () => {
                         name="school_email"
                         value={formData.school_email}
                         onChange={(e) => {
-                          if (e.target.value.length <= 20) {
+                          if (e.target.value.length <= 50) {
                             handleChange(e);
                           }
                         }}                           

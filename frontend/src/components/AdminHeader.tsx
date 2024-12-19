@@ -61,7 +61,9 @@ const AdminHeader = () => {
             alt="Logo"
             className="z-50 object-contain md:w-16 md:h-16 w-12 h-12 transition-transform duration-300 hover:scale-105"
           />
-          <h1 className="text-md z-50 text-left md:text-xl hover:text-textgreen text-white">
+          <h1
+            onClick={handleHomePage}
+            className="text-md z-50 text-left md:text-xl hover:text-textgreen text-white">
             CodeGreen Gateway
           </h1>
         </div>

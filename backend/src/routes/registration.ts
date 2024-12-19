@@ -46,6 +46,7 @@ router.post("/add", async (req: Request, res: Response) => {
       driver_type,
     } = req.body as Registration;
 
+    console.log(req.body);
     if (
       ![
         license_number,
@@ -53,7 +54,6 @@ router.post("/add", async (req: Request, res: Response) => {
         first_name,
         sex,
         last_name,
-        middle_name,
         date_of_birth,
         driver_type,
       ].every(Boolean)
@@ -65,7 +65,6 @@ router.post("/add", async (req: Request, res: Response) => {
       return;
     }
 
-    console.log(user_id);
     await pool.query(
       `
       INSERT INTO registrations (user_id, license_number, school_email, first_name, last_name, middle_name, date_of_birth, driver_type, sex) 

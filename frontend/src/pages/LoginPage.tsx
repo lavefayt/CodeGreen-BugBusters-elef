@@ -49,7 +49,7 @@ const LoginPage = () => {
                 id="email"
                 value={email}
                 onChange={(e) => {
-                  if (e.target.value.length <= 20) {
+                  if (e.target.value.length <= 50) {
                       setEmail(e.target.value);
                     }
                   }}                 

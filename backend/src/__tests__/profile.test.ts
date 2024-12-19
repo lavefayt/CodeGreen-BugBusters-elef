@@ -20,32 +20,60 @@ describe("GET /profile/get/:id", () => {
       id: 1,
       first_name: "John",
       last_name: "Doe",
-      user_id: "123"
+      user_id: "123",
     };
 
     const mockViolations = [
-      { 
-        violation_id: 1, 
-        description: "Speeding" 
+      {
+        violation_id: 1,
+        description: "Speeding",
       },
-      { 
+      {
         violation_id: 2,
-        description: "Red Light" 
-      }
+        description: "Red Light",
+      },
+    ];
+
+    const mockCars = [
+      {
+        id: "123",
+        driver_id: "1233",
+        car_model: "Civic",
+        color: "Blue",
+        license_plate: "123-123",
+        license_number: "123-123-123",
+        brand: "Honda",
+      },
+      {
+        id: "124",
+        driver_id: "1244",
+        car_model: "Civic",
+        color: "Red",
+        license_plate: "123-1232",
+        license_number: "123-123-1232",
+        brand: "Honda",
+      },
     ];
 
     // Mocking database responses
     pool.query = vi
       .fn()
       .mockResolvedValueOnce({ rows: [mockDriver] }) // Mock driver query
-      .mockResolvedValueOnce({ rows: mockViolations }); // Mock violations query
+      .mockResolvedValueOnce({ rows: mockViolations })
+      .mockResolvedValueOnce({ rows: mockCars }); // Mock violations query
 
     const response = await request(app).get("/profile/get/123");
 
     expect(response.status).toBe(200);
     expect(response.body.first_name).toBe(mockDriver.first_name);
     expect(response.body.violations.length).toBe(2);
-    expect(response.body.violations[0].description).toBe(mockViolations[0].description);
+    expect(response.body.cars.length).toBe(2);
+    expect(response.body.violations[0].description).toBe(
+      mockViolations[0].description
+    );
+    expect(response.body.cars[0].car_model).toBe(
+      mockCars[0].car_model
+    );
   });
 
   it("should return 404 if driver is not found", async () => {

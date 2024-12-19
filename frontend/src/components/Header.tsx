@@ -89,25 +89,86 @@ const Header = () => {
   }, []);
 
   return (
-    <div>
-    <header className="flex items-center space-x-[15rem] font-syke-medium justify-start w-full p-4">
-    <div className="flex items-center">
-          <button
+    <div className="flex w-screen">
+      <header className="flex relative items-center md:justify-evenly font-syke-medium w-full p-4 z-50">
+        <div className="flex items-center md:w-auto w-full">
+          <img
             onClick={handleHomePage}
-            className="flex items-center w-[3rem] gap-4 text-white sm:text-xl"
-          >
-            <img
-              src="../assets/5.png"
-              alt="Logo"
-              className="w-15 h-15 object-contain md:w-[4rem] md:h-[4rem] transition-transform duration-300 hover:scale-105"
-            />
-            <h1 className="text-md text-left md:text-xl hover:text-textgreen">CodeGreen Gateway</h1>
-          </button>
+            src="../assets/5.png"
+            alt="Logo"
+            className="z-50 object-contain md:w-16 md:h-16 w-12 h-12 transition-transform duration-300 hover:scale-105"
+          />
+          <h1
+            onClick={handleHomePage}
+            className="text-md z-50 text-left md:text-xl hover:text-textgreen text-white">
+            CodeGreen Gateway
+          </h1>
         </div>
 
-        {!isWideScreen && (
+        {isWideScreen ? (
+          <nav className="flex flex-row space-x-20 text-white font-syke-medium z-50">
+            <Link
+              to="/about"
+              className="hover:text-textgreen transition-colors">
+              About
+            </Link>
+
+            <div
+              className="relative"
+              ref={droopdownRefPolicies}>
+              <button
+                onClick={toggleDropdownPolicies}
+                className="hover:text-textgreen transition-colors z-50">
+                Policies
+              </button>
+              {isDropdownOpenPolicies && (
+                <div className="absolute mt-2 w-48 bg-hoverbutton text-white rounded-md shadow-lg">
+                  <span
+                    onClick={handleProtocols}
+                    className="z-50 block px-4 py-2 hover:bg-buttongreen rounded-t-md cursor-pointer">
+                    Protocols
+                  </span>
+                  <span
+                    onClick={handleRules}
+                    className="z-50 block px-4 py-2 hover:bg-buttongreen rounded-b-md cursor-pointer">
+                    Rules and Regulations
+                  </span>
+                </div>
+              )}
+            </div>
+
+            <div
+              className="relative z-50"
+              ref={dropdownRef}>
+              <button
+                onClick={toggleDropdown}
+                className="hover:text-textgreen transition-colors">
+                Account
+              </button>
+              {isDropdownOpen && (
+                <div className="absolute mt-2 w-48 bg-hoverbutton text-white rounded-md shadow-lg">
+                  <span
+                    onClick={handleProfile}
+                    className="block px-4 py-2 hover:bg-buttongreen rounded-t-md cursor-pointer transition-colors">
+                    Profile
+                  </span>
+                  <span
+                    onClick={handleChangePassword}
+                    className="block px-4 py-2 hover:bg-buttongreen cursor-pointer transition-colors">
+                    Change Password
+                  </span>
+                  <span
+                    onClick={handleLogOut}
+                    className="block px-4 py-2 hover:bg-buttongreen rounded-b-md cursor-pointer transition-colors">
+                    Log Out
+                  </span>
+                </div>
+              )}
+            </div>
+          </nav>
+        ) : (
           <button
-            title="button"
+            title="menu"
             onClick={toggleMobileMenu}
             className="text-white md:hidden focus:outline-none block z-50"
           >
@@ -116,8 +177,7 @@ const Header = () => {
               className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
+              stroke="currentColor">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -127,121 +187,54 @@ const Header = () => {
             </svg>
           </button>
         )}
-
-        <nav className="hidden md:flex flex-row items-center space-x-[5rem] text-white">
-          <Link to="/homepagedriver" className="hover:text-textgreen transition-colors">
-            Inbox
-          </Link>
-          <Link to="/about" className="hover:text-textgreen transition-colors">
-            About
-          </Link>
-
-          <div className="relative z-50" ref={droopdownRefPolicies}>
-            <button
-              onClick={toggleDropdownPolicies}
-              className="hover:text-textgreen transition-colors z-50"
-            >
-              Policies
-            </button>
-            {isDropdownOpenPolicies && (
-              <div className="z-50 absolute mt-2 w-48 bg-hoverbutton text-white rounded-md shadow-lg">
-                <span
-                  onClick={handleProtocols}
-                  className="block px-4 py-2 hover:bg-buttongreen rounded-t-md cursor-pointer"
-                >
-                  Protocols
-                </span>
-                <span
-                  onClick={handleRules}
-                  className="z-50 block px-4 py-2 hover:bg-buttongreen rounded-b-md cursor-pointer"
-                >
-                  Rules and Regulations
-                </span>
-              </div>
-            )}
-          </div>
-
-          <div className="relative" ref={dropdownRef}>
-            <button onClick={toggleDropdown} className="z-50 hover:text-textgreen transition-colors">
-              Account
-            </button>
-            {isDropdownOpen && (
-              <div className="absolute mt-2 w-48 z-50 bg-hoverbutton text-white rounded-md shadow-lg">
-                <span
-                  onClick={handleProfile}
-                  className="block px-4 py-2 z-50 hover:bg-buttongreen rounded-t-md cursor-pointer transition-colors"
-                >
-                  Profile
-                </span>
-                <span
-                  onClick={handleChangePassword}
-                  className="block px-4 py-2 z-50 hover:bg-buttongreen cursor-pointer transition-colors"
-                >
-                  Change Password
-                </span>
-                <span
-                  onClick={handleLogOut}
-                  className="block px-4 py-2 z-50 hover:bg-buttongreen rounded-b-md cursor-pointer transition-colors"
-                >
-                  Log Out
-                </span>
-              </div>
-            )}
-          </div>
-        </nav>
       </header>
 
-      {isMobileMenuOpen && !isWideScreen && (
-        <nav className="flex flex-col font-syke-medium items-center space-y-5 text-white bg-hoverbutton p-4 rounded">
-          <Link to="/homepagedriver" className="hover:text-textgreen transition-colors">
-            Inbox
-          </Link>
-          <Link to="/about" className="hover:text-textgreen transition-colors">
+      {!isWideScreen && isMobileMenuOpen && (
+        <nav className="flex flex-col absolute font-syke-medium items-center space-y-5 text-white bg-hoverbutton p-4 rounded right-2 top-16 z-50">
+          <Link
+            to="/about"
+            className="hover:text-textgreen transition-colors">
             About
           </Link>
           <button
             onClick={toggleDropdownPolicies}
-            className="hover:text-textgreen transition-colors"
-          >
+            className="hover:text-textgreen transition-colors">
             Policies
           </button>
           {isDropdownOpenPolicies && (
             <div className="w-full bg-hoverbutton text-white rounded-md shadow-lg">
               <span
                 onClick={handleProtocols}
-                className="block px-4 py-2 z-50 hover:bg-buttongreen cursor-pointer transition-colors"
-              >
+                className="block px-4 py-2 hover:bg-buttongreen cursor-pointer transition-colors">
                 Protocols
               </span>
               <span
                 onClick={handleRules}
-                className="block px-4 py-2 z-50 hover:bg-buttongreen cursor-pointer transition-colors"
-              >
+                className="block px-4 py-2 hover:bg-buttongreen cursor-pointer transition-colors">
                 Rules and Regulations
               </span>
             </div>
           )}
-          <button onClick={toggleDropdown} className=" z-50 hover:text-textgreen">
+          <button
+            onClick={toggleDropdown}
+            className="hover:text-textgreen">
             Account
           </button>
           {isDropdownOpen && (
-                <div className="absolute right-0 mt-4 w-48 bg-hoverbutton text-white rounded-md shadow-lg z-10">
+            <div className="absolute right-0 mt-4 w-48 bg-hoverbutton text-white rounded-md shadow-lg z-10">
               <span
                 onClick={handleProfile}
-                className="block px-4 py-2 z-50 hover:bg-buttongreen cursor-pointer transition-colors"
-              >
+                className="block px-4 py-2 hover:bg-buttongreen cursor-pointer transition-colors">
                 Profile
               </span>
               <span
                 onClick={handleChangePassword}
-                className="block px-4 py-2 z-50 hover:bg-buttongreen cursor-pointer transition-colors"
-              >
+                className="block px-4 py-2 hover:bg-buttongreen cursor-pointer transition-colors">
                 Change Password
               </span>
               <span
                 onClick={handleLogOut}
-                className="block px-4 py-2 z-50 hover:bg-buttongreen cursor-pointer"
-              >
+                className="block px-4 py-2 hover:bg-buttongreen cursor-pointer">
                 Log Out
               </span>
             </div>

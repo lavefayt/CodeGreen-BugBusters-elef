@@ -72,7 +72,7 @@ describe("Drivers API", () => {
       });
 
       expect(response.status).toBe(500);
-      expect(response.body.title).toBe("Server Error");
+      expect(response.body.title).toBe("Unknown Error");
     });
   });
 
@@ -160,7 +160,7 @@ describe("Drivers API", () => {
       });
 
       expect(response.status).toBe(500);
-      expect(response.body.title).toBe("Server Error");
+      expect(response.body.title).toBe("Unknown Error");
     });
   });
 
