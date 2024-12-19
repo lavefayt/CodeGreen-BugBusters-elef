@@ -102,7 +102,7 @@ const RegisterDriver = () => {
       await postRegistration(formData); // Send the form data to the backend
       console.log(formData)
       const isValid = validateForm(); // Validate the form
-      isValid && navigate("/homepage"); // Redirect to the homepage
+      if (isValid) navigate("/homepage"); // Redirect to the homepage
     } catch (error) {
       console.error("Error submitting the form:", error);
     }
