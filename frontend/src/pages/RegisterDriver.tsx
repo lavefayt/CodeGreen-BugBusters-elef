@@ -148,7 +148,7 @@ const RegisterDriver = () => {
                       </h1>
                       <input
                         type="text"
-                        name="last_name"
+                        data-testid="last_name_register"
                         placeholder="Enter Last Name"
                         value={formData.last_name}
                         onChange={(e) => {
@@ -168,6 +168,7 @@ const RegisterDriver = () => {
                         Middle Name
                       </h1>
                       <input
+                        data-testid="middle_name_register"
                         type="text"
                         className={`w-full px-4 py-2 mt-1 border rounded-sm bg-secondgrey text-white focus:outline-none focus:ring-0 active:outline-none ${
                           formErrors.middle_name
@@ -180,7 +181,8 @@ const RegisterDriver = () => {
                           if (e.target.value.length <= 20) {
                             handleChange(e);
                           }
-                        }}                         placeholder="Optional"
+                        }}                         
+                        placeholder="Optional"
                       />
                     </div>
                     <div className="flex-1">
@@ -190,6 +192,7 @@ const RegisterDriver = () => {
                       <input
                         placeholder="Enter First Name"
                         type="text"
+                        data-testid="first_name_register"
                         className={`w-full px-4 py-2 mt-1 border rounded-sm bg-secondgrey text-white focus:outline-none focus:ring-0 active:outline-none ${
                           formErrors.first_name
                           ? "border-red-800"
@@ -200,7 +203,7 @@ const RegisterDriver = () => {
                           if (e.target.value.length <= 20) {
                             handleChange(e);
                           }
-                        }}                         name="first_name"
+                        }}                         
                         required
                       />
                     </div>
@@ -212,7 +215,7 @@ const RegisterDriver = () => {
                       Birth Date
                     </h1>
                     <input
-                      placeholder="Enter Last Name"
+                      title="birthdate_register"
                       type="date"
                       className={`w-full px-4 py-1.5 mt-1 border rounded-sm bg-secondgrey text-white focus:outline-none focus:ring-0 active:outline-none ${
                         formErrors.date_of_birth
@@ -247,7 +250,7 @@ const RegisterDriver = () => {
                       Driver Type
                     </h1>
                     <select
-                      title="drivertype"
+                      title="driver_type"
                       className={`w-full px-4 py-2 mt-1 border rounded-sm bg-secondgrey text-white focus:outline-none focus:ring-0 active:outline-none ${
                         formErrors.driver_type
                           ? "border-red-800"

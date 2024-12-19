@@ -50,6 +50,7 @@ const HomePage = () => {
             type="button"
             className="px-4 py-2 rounded-md w-full max-w-[200px] font-syke-medium text-white bg-buttongreen hover:bg-colorhover transition-all duration-300"
             onClick={handleRegisterButton}
+            data-testid="register_button"
           >
             Register Now!
           </button>

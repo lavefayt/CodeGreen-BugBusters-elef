@@ -33,8 +33,8 @@ const LoginPage = () => {
             <button
               className="text-buttongreen font-syke-medium"
               type="button"
-              onClick={handleSignUpButton}
               data-testid="signup-button"
+              onClick={handleSignUpButton}
               >
               Sign Up
             </button>
@@ -48,7 +48,11 @@ const LoginPage = () => {
                 type="text"
                 id="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  if (e.target.value.length <= 20) {
+                      setEmail(e.target.value);
+                    }
+                  }}                 
                 className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 focus:shadow-inner border-none focus:outline-none focus:ring-1 focus:ring-textgreen text-white placeholder-white rounded-sm lg:text-sm md:text-xs text-xxs"
                 placeholder="Email address"
                 pattern="[\-a-zA-Z0-9~!$%^&amp;*_=+\}\{'?]+(\.[\-a-zA-Z0-9~!$%^&amp;*_=+\}\{'?]+)*@[a-zA-Z0-9_][\-a-zA-Z0-9_]*(\.[\-a-zA-Z0-9_]+)*\.[cC][oO][mM](:[0-9]{1,5})?"
@@ -60,7 +64,11 @@ const LoginPage = () => {
                 type="password"
                 id="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  if (e.target.value.length <= 20) {
+                      setPassword(e.target.value);
+                    }
+                  }} 
                 className="bg-secondgrey font-syke-regular w-full mt-1 px-4 py-2 focus:shadow-inner border-none focus:outline-none focus:ring-1 focus:ring-textgreen rounded-sm text-white placeholder-white lg:text-sm md:text-xs text-xxs"
                 placeholder="Enter your password"
                 required
@@ -73,6 +81,7 @@ const LoginPage = () => {
             </div>
             <button
               type="submit"
+              data-testid="login-button"
               className="flex w-auto bg-buttongreen text-white py-2 px-5 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm justify-center items-center lg:text-sm text-xs">
               {loading ? (
                 <Spinner
@@ -80,6 +89,7 @@ const LoginPage = () => {
                   color="#fff"
                   animating={loading}
                 />
+                
               ) : (
                 "Login"
               )}
