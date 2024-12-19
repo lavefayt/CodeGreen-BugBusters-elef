@@ -53,7 +53,9 @@ const ViewProfile = () => {
                     activeSection === "vehicle"
                       ? "text-textgreen"
                       : "text-white hover:text-textgreen"
-                  }`}>
+                  }`}
+                  data-testid="vehicle-button"
+                  >
                   Vehicles
                 </button>
 

@@ -4,20 +4,7 @@ import useEditDriver from "../../hooks/driver-hooks/useEditDriver";
 
 const Profile = ({ driver }: { driver: DriverWithVandC }) => {
   const [isEditing, setIsEditing] = useState(false); // Track edit mode
-  const [formData, setFormData] = useState<DriverWithVandC>({
-    id: driver.id,
-    last_name: driver.last_name,
-    first_name: driver.first_name,
-    middle_name: driver.middle_name,
-    sex: driver.sex,
-    date_of_birth: driver.date_of_birth,
-    driver_type: driver.driver_type,
-    email: driver.email,
-    license_number: driver.license_number,
-    license_expiration_date: driver.license_expiration_date,
-  });
-
-  console.log(driver);
+  const [formData, setFormData] = useState<DriverWithVandC>(driver);
 
   const { editDriver } = useEditDriver();
 
@@ -42,7 +29,9 @@ const Profile = ({ driver }: { driver: DriverWithVandC }) => {
           <form className="lg:space-y-8 md:space-y-10 sm:space-y-12 space-y-14">
             <div className="flex space-x-1">
               <div className="flex-1">
-                <h1 className="text-white font-syke-light lg:text-lg md:text-md sm:text-sm text-xs">
+                <h1 className="text-white font-syke-light lg:text-lg md:text-md sm:text-sm text-xs"
+                
+                data-testid="profile-lastname">
                   Last Name:
                 </h1>
                 {isEditing ? (
