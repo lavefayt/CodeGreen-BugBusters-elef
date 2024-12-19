@@ -52,16 +52,8 @@ router.post("/add", validateDriver, async (req: Request, res: Response) => {
 
     return;
   } catch (error) {
-    if (error instanceof Error) {
-      console.error("Error occurred:", error.message);
-      res.status(500).json({ title: "Server Error", message: error.message });
-    } else {
-      console.error("Unexpected error occurred:", error);
-      res.status(500).json({
-        title: "Server Error",
-        message: "An unexpected error occurred.",
-      });
-    }
+    const errorMessage = (error as Error).message;
+    res.status(500).json({ title: "Unknown Error", message: errorMessage });
   }
 });
 
@@ -129,7 +121,6 @@ router.get("/get/:driverId", async (req: Request, res: Response) => {
     res.status(200).json({ ...foundDriver, violations, cars });
   } catch (error) {
     const errorMessage = (error as Error).message;
-    console.error("Error fetching driver:", errorMessage);
     res.status(500).json({ title: "Unknown Error", message: errorMessage });
   }
 });
@@ -148,20 +139,6 @@ router.patch("/update", async (req: Request, res: Response) => {
       license_number,
       license_expiration_date,
     } = req.body;
-
-    console.log("THIS IS THE DRIVER!");
-    console.log(
-      id,
-      email,
-      first_name,
-      last_name,
-      middle_name,
-      date_of_birth,
-      sex,
-      driver_type,
-      license_number,
-      license_expiration_date
-    );
 
     if (
       ![
@@ -210,54 +187,55 @@ router.patch("/update", async (req: Request, res: Response) => {
       message: `Successfully updated Driver: ${first_name} ${last_name}.`,
     });
   } catch (error) {
-    console.error("Error updating driver:", error);
-    res.status(500).json({
-      title: "Server Error",
-      message: "An error occurred while updating the driver.",
-    });
+    const errorMessage = (error as Error).message;
+    res.status(500).json({ title: "Unknown Error", message: errorMessage });
   }
 });
 
 router.delete("/delete", async (req: Request, res: Response) => {
   console.log("Request body:", req.body); // Log the incoming request body
+  try {
+    const { id } = req.body;
 
-  const { id } = req.body;
+    if (!id) {
+      console.error("No ID provided in the request body");
+      res.status(400).json({
+        title: "Validation Error",
+        message: "Driver ID is required to delete a record.",
+      });
+      return;
+    }
 
-  if (!id) {
-    console.error("No ID provided in the request body");
-    res.status(400).json({
-      title: "Validation Error",
-      message: "Driver ID is required to delete a record.",
+    await pool.query(`DELETE FROM cars WHERE driver_id = $1 RETURNING *`, [id]);
+
+    await pool.query(`DELETE FROM violations WHERE id = $1 RETURNING *`, [id]);
+
+    const resultDriver = await pool.query(
+      `DELETE FROM drivers WHERE id = $1 RETURNING *`,
+      [id]
+    );
+
+    if (resultDriver.rowCount === 0) {
+      console.error("Driver not found in the database");
+      res.status(404).json({
+        title: "Not Found",
+        message: "Driver with the specified ID does not exist.",
+      });
+      return;
+    }
+
+    const deletedDriver = resultDriver.rows[0];
+    console.log("Driver deleted successfully:", deletedDriver);
+
+    res.status(200).json({
+      title: "Driver Deleted",
+      message: `Driver ${deletedDriver.last_name}, ${deletedDriver.first_name} has been removed.`,
+      driver: deletedDriver,
     });
-    return;
+  } catch (error) {
+    const errorMessage = (error as Error).message;
+    res.status(500).json({ title: "Unknown Error", message: errorMessage });
   }
-
-  await pool.query(`DELETE FROM cars WHERE driver_id = $1 RETURNING *`, [id]);
-
-  await pool.query(`DELETE FROM violations WHERE id = $1 RETURNING *`, [id]);
-
-  const resultDriver = await pool.query(
-    `DELETE FROM drivers WHERE id = $1 RETURNING *`,
-    [id]
-  );
-
-  if (resultDriver.rowCount === 0) {
-    console.error("Driver not found in the database");
-    res.status(404).json({
-      title: "Not Found",
-      message: "Driver with the specified ID does not exist.",
-    });
-    return;
-  }
-
-  const deletedDriver = resultDriver.rows[0];
-  console.log("Driver deleted successfully:", deletedDriver);
-
-  res.status(200).json({
-    title: "Driver Deleted",
-    message: `Driver ${deletedDriver.last_name}, ${deletedDriver.first_name} has been removed.`,
-    driver: deletedDriver,
-  });
 });
 
 export default router;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AuthContextType, UserLogin } from "../types/user.types";
-import { BackendError } from "../types/error.types";
+import { BackendMessage } from "../types/response.types";
 import { useNavigate } from "react-router-dom";
 import useAuth from "./context-hooks/useAuth";
 import { LoadingContextType } from "../types/loading.types";
@@ -28,7 +28,7 @@ const useLogin = () => {
       const response = await normalFetch("/auth/login", "post", data);
 
       if (!response.ok) {
-        const backendError: BackendError = await response.json();
+        const backendError: BackendMessage = await response.json();
         toast.error(`${backendError.message}`);
 
         // stop button loading here after error

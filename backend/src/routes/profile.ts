@@ -24,24 +24,17 @@ router.get("/get/:id", async (req: Request, res: Response) => {
       [foundDriver.id]
     );
 
-    res.status(200).json({ ...foundDriver, violations });
+    const { rows: cars } = await pool.query(
+      "SELECT * FROM cars WHERE driver_id = $1",
+      [foundDriver.id]
+    );
+
+    res.status(200).json({ ...foundDriver, violations, cars });
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
   }
 });
 
-// router.delete("/:id", async (req: Request, res: Response) => {
-//   try {
-//     const {id} = req.params
-
-//     const {rows: profile} = await pool.query('')
-
-
-//   } catch (error) {
-//     console.log(error);
-//     res.sendStatus(500);
-//   }
-// });
 
 export default router;

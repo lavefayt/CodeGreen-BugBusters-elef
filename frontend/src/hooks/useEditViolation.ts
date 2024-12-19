@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BackendError } from "../types/error.types";
+import { BackendMessage } from "../types/response.types";
 import { toast } from "react-toastify";
 import { Violation } from "../types/datatypes";
 import { fetchWithAuth } from "../utils/fetch";
@@ -24,26 +24,26 @@ const useEditViolation = (id: string) => {
         );
 
         if (response.status === 401) {
-          const backendError: BackendError = await response.json();
+          const backendError: BackendMessage = await response.json();
           toast.error(backendError.message);
           navigate("/unauthorized");
-          throw Error("WALA TAWO NGA LOGGED IN")
+          throw Error("WALA TAWO NGA LOGGED IN");
         }
 
         if (!response.ok) {
-          const backendError: BackendError = await response.json();
+          const backendError: BackendMessage = await response.json();
           toast.error(backendError.message);
-          throw Error("may sala sa backend hahaha")
+          throw Error("may sala sa backend hahaha");
         }
 
         const editedViolation = await response.json();
         setViolation(editedViolation);
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
     };
 
-    editViolation(id)
+    editViolation(id);
   }, [auth, id, navigate, refresh]);
 
   return { violation, loading };

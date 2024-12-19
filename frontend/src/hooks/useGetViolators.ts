@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { BackendError } from "../types/error.types";
+import { BackendMessage } from "../types/response.types";
 import { DriverWithVandC } from "../types/datatypes";
 import { fetchWithAuth } from "../utils/fetch";
 import useFetchWithAuthExports from "./context-hooks/useFetchWithAuthExports";
@@ -23,7 +23,7 @@ const useGetViolators = () => {
         );
 
         if (!response.ok) {
-          const backendError: BackendError = await response.json();
+          const backendError: BackendMessage = await response.json();
           toast.error(backendError.message);
           return;
         }

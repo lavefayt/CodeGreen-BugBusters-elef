@@ -2,7 +2,7 @@ import { useState } from "react";
 import useFetchWithAuthExports from "./context-hooks/useFetchWithAuthExports";
 import { fetchWithAuth } from "../utils/fetch";
 import { toast } from "react-toastify";
-import { BackendError } from "../types/error.types";
+import { BackendMessage } from "../types/response.types";
 
 const useChangePassword = () => {
   const { auth, navigate, refresh } = useFetchWithAuthExports();
@@ -24,7 +24,7 @@ const useChangePassword = () => {
       );
 
       if (!response.ok) {
-        const backendError: BackendError = await response.json();
+        const backendError: BackendMessage = await response.json();
         toast.error(backendError.message);
         return;
       }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BackendError } from "../../types/error.types";
+import { BackendMessage } from "../../types/response.types";
 import { toast } from "react-toastify";
 import { DriverWithVandC } from "../../types/datatypes";
 import { fetchWithAuth } from "../../utils/fetch";
@@ -23,14 +23,14 @@ const useGetDriver = (id: string) => {
         );
 
         if (response.status === 401) {
-          const backendError: BackendError = await response.json();
+          const backendError: BackendMessage = await response.json();
           toast.error(backendError.message);
           navigate("/unauthorized");
           return {};
         }
 
         if (!response.ok) {
-          const backendError: BackendError = await response.json();
+          const backendError: BackendMessage = await response.json();
           toast.error(backendError.message);
           return {};
         }

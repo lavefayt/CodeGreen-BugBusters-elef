@@ -1,4 +1,4 @@
-export interface BackendError {
+export interface BackendMessage {
   title: string;
   message: string;
 }

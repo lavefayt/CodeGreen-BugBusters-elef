@@ -1,4 +1,4 @@
-import { BackendError } from "../../types/error.types";
+import { BackendMessage } from "../../types/response.types";
 import { Registration } from "../../types/datatypes";
 import { fetchWithAuth } from "../../utils/fetch";
 import useFetchWithAuthExports from "../context-hooks/useFetchWithAuthExports";
@@ -7,7 +7,7 @@ import { useState } from "react";
 
 export const useAddRegistration = () => {
   const { auth, refresh, navigate } = useFetchWithAuthExports();
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
 
   const postRegistration = async (formData: Registration) => {
     setLoading(true);
@@ -23,15 +23,15 @@ export const useAddRegistration = () => {
       );
 
       if (!response.ok) {
-        const error: BackendError = await response.json();
-        toast.error(error.message)
-        return
+        const error: BackendMessage = await response.json();
+        toast.error(error.message);
+        return;
       }
     } catch (error) {
-      alert(error)
-      toast.error("Unexpected error has occured.")
+      alert(error);
+      toast.error("Unexpected error has occured.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
   return { postRegistration, loading };

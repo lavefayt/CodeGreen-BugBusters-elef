@@ -30,16 +30,16 @@ const SearchAndSort = ({
   };
 
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center lg:w-1/2 w-full space-x-2">
       <input
         type="text"
         placeholder="Search"
         value={searchQuery}
         onChange={handleInputChange}
-        className="p-2 rounded font-syke-medium bg-hoverbutton w-40 text-white focus:outline-none focus:ring-0 active:outline-none"
+        className="p-2 rounded font-syke-medium bg-hoverbutton text-white focus:outline-none focus:ring-0 active:outline-none lg:w-1/2 w-4/6 md:text-md text-sm"
       />
       <button
-        className="text-white bg-buttongreen w-20 h-10 rounded font-syke-medium active:bg-colorhover "
+        className="text-white bg-buttongreen lg:w-1/2 w-2/6 p-2 rounded font-syke-medium active:bg-colorhover md:text-md text-sm"
         onClick={handleSortToggle}
       >
         {isSorted ? "Default" : "Sort"}

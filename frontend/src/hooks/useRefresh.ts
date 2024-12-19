@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { AuthContextType } from "../types/user.types";
-import { BackendError } from "../types/error.types";
+import { BackendMessage } from "../types/response.types";
 import useAuth from "./context-hooks/useAuth";
 
 const useRefresh = () => {
   const { setAuth }: AuthContextType = useAuth();
-  const [error, setError] = useState<BackendError>();
+  const [error, setError] = useState<BackendMessage>();
   const [loading, setLoading] = useState<boolean>(true);
 
   const refresh = async () => {
@@ -18,7 +18,7 @@ const useRefresh = () => {
     });
 
     if (!response.ok) {
-      const backendError: BackendError = await response.json();
+      const backendError: BackendMessage = await response.json();
       setError(backendError);
       setLoading(false);
       return undefined;

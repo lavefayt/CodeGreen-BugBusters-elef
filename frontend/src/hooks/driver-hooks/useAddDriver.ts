@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { BackendError } from "../../types/error.types";
+import { BackendMessage } from "../../types/response.types";
 import { Driver } from "../../types/datatypes";
 import { fetchWithAuth } from "../../utils/fetch";
 import useFetchWithAuthExports from "../context-hooks/useFetchWithAuthExports";
 
 export const useAddDriver = () => {
   // const [data, setData] = useState<Driver[] | null>(null); // Store fetched drivers
-  const [error, setError] = useState<BackendError | null>(null); // Handle errors
+  const [error, setError] = useState<BackendMessage | null>(null); // Handle errors
   const [loading, setLoading] = useState<boolean>(); // Track loading state
   const { auth, refresh, navigate } = useFetchWithAuthExports();
 
@@ -25,13 +25,13 @@ export const useAddDriver = () => {
       );
 
       if (!response.ok) {
-        const error: BackendError = await response.json();
+        const error: BackendMessage = await response.json();
         setError(error);
         console.log("What are you doing?!");
       }
     } catch (error) {
       console.error("Unexpected error:", error);
-      setError({ message: "An unexpected error occurred" } as BackendError);
+      setError({ message: "An unexpected error occurred" } as BackendMessage);
     } finally {
       setTimeout(() => {
         setLoading(false);

@@ -26,7 +26,7 @@ router.get("/get-by-user", async (req: Req, res: Response) => {
       res.json(notifications);
     }
   } catch (err) {
-    console.error("ERROR", err);
+    console.log(err);
     res.status(500).json({
       title: "Server Error",
       message: "An unexpected error occurred while retrieving notifications",
@@ -36,11 +36,12 @@ router.get("/get-by-user", async (req: Req, res: Response) => {
 
 // Create a new notification
 router.post("/add", async (req: Req, res: Response) => {
-  const { licenseNumber, message } = req.body;
   try {
+    const { driver_id, title, message } = req.body;
+
     const { rows: drivers } = await pool.query(
-      "SELECT * FROM drivers WHERE license_number = $1",
-      [licenseNumber]
+      "SELECT * FROM drivers WHERE id = $1",
+      [driver_id]
     );
 
     if (drivers.length === 0) {
@@ -54,8 +55,8 @@ router.post("/add", async (req: Req, res: Response) => {
     const driver = await drivers[0];
 
     const { rows: notifications } = await pool.query(
-      "INSERT INTO notifications (user_id, message) VALUES ($1, $2)",
-      [driver.id, message]
+      "INSERT INTO notifications (driver_id, title, message) VALUES ($1, $2, $3) RETURNING *",
+      [driver.id, title, message]
     );
 
     if (notifications.length === 0) {

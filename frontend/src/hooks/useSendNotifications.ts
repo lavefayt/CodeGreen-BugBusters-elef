@@ -1,46 +1,46 @@
-import { useState } from "react";
 import { toast } from "react-toastify";
-import useCheckLicenseNumber from "../hooks/car-hooks/useCheckLicenseNumber";
+import { fetchWithAuth } from "../utils/fetch";
+import useFetchWithAuthExports from "./context-hooks/useFetchWithAuthExports";
+import { BackendMessage } from "../types/response.types";
+import { LoadingContextType } from "../types/loading.types";
+import useLoading from "./context-hooks/useLoading";
+import { UserNotification } from "../types/datatypes";
 
 const useSendNotification = () => {
-  const [licenseNumber, setLicenseNumber] = useState<string>("");
-  const [licenseError, setLicenseError] = useState<string>("");
-  // const [licenseExists, setLicenseExists] = useState<boolean>(false);
-  const [currentStep, setCurrentStep] = useState(1);
-  
-  const { checkLicenseNumber } = useCheckLicenseNumber();
+  const { auth, refresh, navigate } = useFetchWithAuthExports();
+  const { setAppLoading }: LoadingContextType = useLoading();
 
-  const handleCheckLicense = async () => {
+  const handleSendNotification = async (formData: UserNotification) => {
+    setAppLoading!(true);
     try {
-      if (!licenseNumber.trim()) {
-        toast.error("License Number is required.");
+      const response = await fetchWithAuth(
+        navigate,
+        refresh,
+        auth,
+        "/notification/add",
+        "post",
+        formData
+      );
+
+      if (!response.ok) {
+        const backendError: BackendMessage = await response.json();
+        toast.error(backendError.message);
         return;
       }
 
-      const driverData = await checkLicenseNumber(licenseNumber.trim());
-      if (!driverData) {
-        setLicenseError("This license number does not exist in our records.");
-        return;
-      }
+      const backendNotification: BackendMessage = await response.json();
 
-      // Set driver data and clear error
-      // setLicenseExists(driverData);
-      setLicenseError("");
-      setCurrentStep(2);  // Move to the next step
+      toast.success(backendNotification.message);
     } catch (error) {
-      console.error("Error checking license number:", error);
-      setLicenseError("An error occurred while checking the license number.");
+      const errorMessage = (error as Error).message;
+      toast.error(errorMessage);
+    } finally {
+      setAppLoading!(false);
     }
   };
 
   return {
-    licenseNumber,
-    setLicenseNumber,
-    licenseError,
-    // licenseExists,
-    currentStep,
-    setCurrentStep,
-    handleCheckLicense,
+    handleSendNotification,
   };
 };
 

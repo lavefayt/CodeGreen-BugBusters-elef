@@ -91,6 +91,7 @@ export interface UserType {
 export interface UserNotification {
   id?: string;
   driver_id?: string;
+  title?: string;
   message?: string;
   sender?: "Central Philippine School";
   date_sent?: string;
