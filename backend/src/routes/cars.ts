@@ -58,7 +58,7 @@ router.post("/add", async (req: Request, res: Response) => {
       return;
     }
 
-    const car = await pool.query(
+    await pool.query(
       `INSERT INTO cars (
             driver_id,
             car_model,
@@ -166,7 +166,7 @@ router.patch("/update", async (req: Request, res: Response) => {
 router.delete("/delete", async (req: Request, res: Response) => {
   try {
 
-    const car = await pool.query(
+    await pool.query(
       `DELETE FROM 
             cars 
             WHERE 

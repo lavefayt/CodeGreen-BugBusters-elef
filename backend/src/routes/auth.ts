@@ -136,7 +136,7 @@ router.get("/refresh", async (req: Request, res: Response) => {
       res
         .status(200)
         .json({ accessToken, isAdmin: foundUser.is_admin, id: foundUser.id });
-    } catch (error) {
+    } catch {
       res.status(403).json({
         title: "No Access Rights",
         message: "You do not have access to these features.",

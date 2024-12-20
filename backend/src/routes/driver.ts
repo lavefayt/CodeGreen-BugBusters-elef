@@ -18,7 +18,7 @@ router.post("/add", validateDriver, async (req: Request, res: Response) => {
       license_expiration_date,
     } = req.body as Driver;
 
-    const driver = await pool.query(
+    await pool.query(
       `INSERT INTO drivers (
         email, 
         first_name, 

@@ -30,7 +30,7 @@ router.post("/add", async (req: Request, res: Response) => {
     }
 
 
-    const violations = await pool.query(
+    await pool.query(
       `INSERT INTO violations (
           driver_id,
           violation_type,
@@ -85,8 +85,6 @@ router.patch("/update", async (req: Request, res: Response) => {
     return;
   }
 
-  const updateViolation = result.rows[0];
-
   res.status(200).json({
     title: "Violation Updated!",
     message: `Violation has been updated successfully.`,
@@ -118,7 +116,8 @@ router.delete("/delete", async (req: Request, res: Response) => {
       title: "Violation Deleted",
       message: "Violation Deleted Successfully.",
     });
-  } catch (error) {
+  } catch {
+    return
   }
 });
 

@@ -99,7 +99,7 @@ router.patch("/change-password", async (req: Request, res: Response) => {
       title: "Password Changed",
       message: "Password has been successfully changed.",
     });
-  } catch (error) {
+  } catch {
     res.status(500).json({ message: "An Unknown Error Occured" });
   }
 });
