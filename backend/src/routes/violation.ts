@@ -116,8 +116,9 @@ router.delete("/delete", async (req: Request, res: Response) => {
       title: "Violation Deleted",
       message: "Violation Deleted Successfully.",
     });
-  } catch {
-    return
+  } catch (error) {
+    const errorMessage = (error as Error).message;
+    res.status(500).json({ title: "Unknown Error", message: errorMessage });
   }
 });
 
