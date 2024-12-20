@@ -13,7 +13,7 @@ const RegistrationListCard = ({
         <div className="flex-2 min-w-[70%]">
           <h1 className="text-white font-syke-light text-md">Name</h1>
           <h1 className="text-textgreen font-syke-medium text-xl">
-            {last_name} {first_name}
+            {first_name} {last_name} 
           </h1>
         </div>
         <div className="flex-2 text-left">

@@ -1,19 +1,20 @@
-import { useState } from "react";
 import { toast } from "react-toastify";
 import { fetchWithAuth } from "../../utils/fetch"; // Custom fetch utility
 import useFetchWithAuthExports from "../context-hooks/useFetchWithAuthExports";
+import { LoadingContextType } from "../../types/loading.types";
+import useLoading from "../context-hooks/useLoading";
 
 export const useApproveRegistration = () => {
-  const [processLoading, setProcessLoading] = useState<boolean>(false);
   const { auth, refresh, navigate } = useFetchWithAuthExports();
+  const { setAppLoading }: LoadingContextType = useLoading();
 
-  const approveRegistration = async (licenseNumber: string): Promise<void> => {
+  const approveRegistration = async (licenseNumber: string) => {
+    setAppLoading!(true);
+
     if (!licenseNumber) {
       toast.error("License number is required.");
       return;
     }
-
-    setProcessLoading(true);
 
     try {
       const response = await fetchWithAuth(
@@ -28,7 +29,7 @@ export const useApproveRegistration = () => {
       if (!response.ok) {
         const errorData = await response.json();
         toast.error(errorData.message || "Failed to approve registration.");
-        return;
+        return false;
       }
 
       const data = await response.json();
@@ -39,9 +40,9 @@ export const useApproveRegistration = () => {
         "Network error occurred. Could not connect to the server. Please try again."
       );
     } finally {
-      setProcessLoading(false);
+      setAppLoading!(false);
     }
   };
 
-  return { approveRegistration, processLoading };
+  return { approveRegistration };
 };
