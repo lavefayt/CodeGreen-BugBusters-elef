@@ -4,15 +4,6 @@ import express from "express";
 import router from "../routes/registration";
 import { pool } from ".."; // Assuming pool is exported from your index file
 
-// Define types for the mock response data
-interface MockClient {
-  query: Mock;
-  release: Mock;
-  begin: Mock;
-  commit: Mock;
-  rollback: Mock;
-}
-
 interface Registration {
   user_id?: number;
   license_number?: string;
