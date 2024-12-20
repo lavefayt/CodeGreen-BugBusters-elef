@@ -8,7 +8,7 @@ const validateAuth = (req: Request, res: Response, next: NextFunction) => {
   };
 
   switch (req.path) {
-    case "/register":
+    case "/signup":
       {
         const { first_name, last_name, email, password, confirm_password } =
           req.body;

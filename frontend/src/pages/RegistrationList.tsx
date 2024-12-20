@@ -14,7 +14,7 @@ const RegistrationList = () => {
     useDeleteRegistration();
   const [selectedRegistration, setSelectedRegistration] =
     useState<Registration>();
-  const { approveRegistration, processLoading } = useApproveRegistration();
+  const { approveRegistration } = useApproveRegistration();
 
   const handleRegisterClick = (registration: Registration) => {
     setSelectedRegistration(registration);
@@ -27,9 +27,6 @@ const RegistrationList = () => {
     }
 
     await approveRegistration(selectedRegistration.license_number);
-    setTimeout(() => {
-      window.location.reload();
-    }, 500);
   };
 
   const handleReject = async () => {
@@ -144,10 +141,8 @@ const RegistrationList = () => {
                       <div>
                         <button
                           onClick={handleAccept}
-                          disabled={processLoading}
-                          className="p-2 px-4 m-2 bg-hoverbutton hover:bg-buttongreen transition-colors rounded-sm text-white font-syke-bold"
-                        >
-                          {processLoading ? "Processing..." : "Accept"}
+                          className="p-2 px-4 m-2 bg-hoverbutton hover:bg-buttongreen transition-colors rounded-sm text-white font-syke-bold">
+                          Accept
                         </button>
                         <button
                           className="p-2 px-5  m-2 bg-hoverbutton hover:bg-red-900 transition-colors rounded-sm text-white font-syke-bold"

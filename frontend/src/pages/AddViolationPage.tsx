@@ -4,6 +4,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import useCheckLicenseNumber from "../hooks/car-hooks/useCheckLicenseNumber"; // import the hook
 import { DriverWithVandC } from "../types/datatypes";
+import AddViolationComponent from "../components/AddViolationComponent";
 
 const AddViolation = () => {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ const AddViolation = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [licenseNumber, setLicenseNumber] = useState("");
   const [driverProfile, setDriverProfile] = useState<DriverWithVandC>(); // Store the driver profile
+  const [violationModalActive, setViolationModalActive] = useState(false);
 
   const handleCancelButton = () => {
     navigate("/encode");
@@ -20,15 +22,14 @@ const AddViolation = () => {
   const handleNextClick = async () => {
     try {
       const driver = await checkLicenseNumber(licenseNumber);
-      console.log(driver);
       if (driver) {
         setDriverProfile(driver);
         setCurrentStep(currentStep + 1);
         return;
       }
     } catch (error) {
-      alert(error);
-      toast.error("Something went wrong!");
+      const errorMessage = (error as Error).message;
+      toast.error(errorMessage);
     }
   };
 
@@ -106,9 +107,7 @@ const AddViolation = () => {
                   </div>
 
                   <div className="flex-2">
-                    <h1 className="text-white font-syke-light text-xl">
-                      Sex
-                    </h1>
+                    <h1 className="text-white font-syke-light text-xl">Sex</h1>
                     <h1 className="text-textgreen font-syke-medium text-3xl">
                       {driverProfile.sex}
                     </h1>
@@ -196,11 +195,17 @@ const AddViolation = () => {
             <button
               type="button"
               className="w-32 bg-buttongreen font-syke-medium text-white py-2 hover:bg-[#33471a] font-syke-regular transition-colors rounded-sm"
-              onClick={() => navigate("/add-violation")}>
+              onClick={() => setViolationModalActive(true)}>
               Add Violation
             </button>
           </div>
         </div>
+      )}
+      {violationModalActive && (
+        <AddViolationComponent
+          driverId={driverProfile!.id!}
+          setViolationModalActive={setViolationModalActive}
+        />
       )}
     </div>
   );

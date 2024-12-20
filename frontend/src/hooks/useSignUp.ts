@@ -16,13 +16,15 @@ const useSignUp = () => {
         const backendError: BackendMessage = await response.json();
         console.log(backendError);
         toast.error(`${backendError.message}`);
-        return;
+        return false;
       }
 
       const notification = await response.json();
       toast.success(`${notification.message}!`);
+      return true
     } catch (error) {
       alert(error);
+      return false;
     } finally {
       setLoading(false);
     }
