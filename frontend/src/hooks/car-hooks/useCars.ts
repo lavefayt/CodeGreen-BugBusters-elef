@@ -19,7 +19,7 @@ const useCars = (driverId: string) => {
         refresh,
         auth,
         `/car/get?driverId=${driverId}`,
-        "get"
+        "get",
       );
 
       if (!response.ok) {

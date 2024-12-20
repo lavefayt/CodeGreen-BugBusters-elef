@@ -17,7 +17,7 @@ router.post("/add", async (req: Request, res: Response) => {
       `SELECT *
         FROM drivers
         WHERE id = $1`,
-      [driver_id]
+      [driver_id],
     );
 
     const driverFound = await drivers[0];
@@ -29,7 +29,6 @@ router.post("/add", async (req: Request, res: Response) => {
       return;
     }
 
-
     await pool.query(
       `INSERT INTO violations (
           driver_id,
@@ -38,9 +37,8 @@ router.post("/add", async (req: Request, res: Response) => {
           description
           )
           VALUES($1, $2, $3, $4)`,
-      [driver_id, violation_type, violation_date, description]
+      [driver_id, violation_type, violation_date, description],
     );
-
 
     res.status(200).json({
       title: "Violation Added!",
@@ -93,7 +91,6 @@ router.patch("/update", async (req: Request, res: Response) => {
 
 router.delete("/delete", async (req: Request, res: Response) => {
   try {
-
     const { violationId } = req.body;
 
     const violations = await pool.query(
@@ -102,7 +99,7 @@ router.delete("/delete", async (req: Request, res: Response) => {
             WHERE 
             id = $1 
             RETURNING *`,
-      [violationId]
+      [violationId],
     );
 
     if (violations.rowCount === 0) {

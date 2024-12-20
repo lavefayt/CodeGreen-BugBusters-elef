@@ -19,7 +19,7 @@ const useAddViolation = () => {
         auth,
         "/violation/add",
         "POST",
-        formData
+        formData,
       );
 
       if (!response.ok) {

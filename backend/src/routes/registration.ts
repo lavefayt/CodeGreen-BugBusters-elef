@@ -8,7 +8,7 @@ const router = express.Router();
 const fetchRegistrationByLicense = async (license_number: string) => {
   const { rows } = await pool.query(
     `SELECT school_email, user_id FROM registrations WHERE license_number = $1`,
-    [license_number]
+    [license_number],
   );
   return rows[0];
 };
@@ -17,7 +17,7 @@ const fetchRegistrationByLicense = async (license_number: string) => {
 router.get("/get", async (_req: Request, res: Response) => {
   try {
     const { rows: registrations } = await pool.query(
-      "SELECT user_id, license_number, school_email, first_name, last_name, middle_name, date_of_birth, driver_type, sex FROM registrations"
+      "SELECT user_id, license_number, school_email, first_name, last_name, middle_name, date_of_birth, driver_type, sex FROM registrations",
     );
 
     res.json(registrations); // Send the registration list as a response
@@ -77,7 +77,7 @@ router.post("/add", async (req: Request, res: Response) => {
         date_of_birth,
         driver_type,
         sex,
-      ]
+      ],
     );
 
     res.status(201).json({
@@ -105,7 +105,7 @@ router.delete("/delete", async (req: Request, res: Response): Promise<void> => {
     // Attempt to delete the registration
     await pool.query(
       `DELETE FROM registrations WHERE license_number = $1 RETURNING *`,
-      [license_number]
+      [license_number],
     );
 
     // If deletion was successful, return a success response
@@ -154,7 +154,7 @@ router.post("/approve", async (req: Request, res: Response) => {
 
     const { rows: existingDrivers } = await client.query(
       `SELECT id, email FROM drivers WHERE license_number = $1`,
-      [license_number]
+      [license_number],
     );
 
     if (existingDrivers.length > 0) {
@@ -164,12 +164,12 @@ router.post("/approve", async (req: Request, res: Response) => {
       if (!existingDriver.email) {
         await client.query(
           `UPDATE drivers SET email = $1, user_id = $2 WHERE license_number = $3`,
-          [school_email, user_id, license_number]
+          [school_email, user_id, license_number],
         );
 
         await client.query(
           `DELETE FROM registrations WHERE license_number = $1`,
-          [license_number]
+          [license_number],
         );
 
         res.status(200).json({
@@ -183,12 +183,12 @@ router.post("/approve", async (req: Request, res: Response) => {
       if (existingDriver.email) {
         await client.query(
           `UPDATE drivers SET user_id = $1 WHERE license_number = $2`,
-          [user_id, license_number]
+          [user_id, license_number],
         );
 
         await client.query(
           `DELETE FROM registrations WHERE license_number = $1`,
-          [license_number]
+          [license_number],
         );
 
         res.status(200).json({

@@ -12,7 +12,6 @@ export const useDeleteRegistration = () => {
     setdeleteLoading(true);
 
     try {
-
       // Send license_number in the request body as JSON
       const response = await fetchWithAuth(
         navigate,
@@ -22,7 +21,7 @@ export const useDeleteRegistration = () => {
         "delete",
         {
           license_number: licenseNumber,
-        }
+        },
       );
 
       // Log the response status

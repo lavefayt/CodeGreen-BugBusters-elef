@@ -19,7 +19,7 @@ const useUser = () => {
           refresh,
           auth,
           "/user/get",
-          "get"
+          "get",
         );
         if (!response.ok) {
           const error: BackendMessage = await response.json();

@@ -20,7 +20,7 @@ const useSignUp = () => {
 
       const notification = await response.json();
       toast.success(`${notification.message}!`);
-      return true
+      return true;
     } catch (error) {
       alert(error);
       return false;

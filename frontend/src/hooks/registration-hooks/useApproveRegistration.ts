@@ -23,7 +23,7 @@ export const useApproveRegistration = () => {
         auth,
         "/registration/approve",
         "POST",
-        { license_number: licenseNumber }
+        { license_number: licenseNumber },
       );
 
       if (!response.ok) {
@@ -37,7 +37,7 @@ export const useApproveRegistration = () => {
     } catch (error) {
       console.error("Error approving registration:", error);
       toast.error(
-        "Network error occurred. Could not connect to the server. Please try again."
+        "Network error occurred. Could not connect to the server. Please try again.",
       );
     } finally {
       setAppLoading!(false);

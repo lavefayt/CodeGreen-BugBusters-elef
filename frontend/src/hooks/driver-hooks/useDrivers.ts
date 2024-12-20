@@ -18,7 +18,7 @@ const useDrivers = () => {
         refresh,
         auth,
         "/driver/get",
-        "get"
+        "get",
       );
 
       if (!response.ok) {

@@ -15,7 +15,7 @@ const validateAuth = (req: Request, res: Response, next: NextFunction) => {
 
         if (
           ![first_name, last_name, email, password, confirm_password].every(
-            Boolean
+            Boolean,
           )
         ) {
           res.status(401).json({
@@ -43,7 +43,7 @@ const validateAuth = (req: Request, res: Response, next: NextFunction) => {
         }
       }
       break;
-      
+
     case "/login": {
       const { email, password } = req.body;
       if (![email, password].every(Boolean)) {

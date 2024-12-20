@@ -10,7 +10,7 @@ router.post("/check-license", async (req: Request, res: Response) => {
 
     const { rows: drivers } = await pool.query(
       `SELECT * FROM drivers WHERE license_number = $1`,
-      [license_number]
+      [license_number],
     );
 
     const driverFound = drivers[0];
@@ -41,12 +41,11 @@ router.post("/add", async (req: Request, res: Response) => {
       license_number,
     }: Cars = req.body;
 
-
     const { rows: drivers } = await pool.query(
       `SELECT id
               FROM drivers
               WHERE id = $1`,
-      [driver_id]
+      [driver_id],
     );
 
     const driverFound = await drivers[0];
@@ -68,7 +67,7 @@ router.post("/add", async (req: Request, res: Response) => {
             license_number)
             VALUES($1, $2, $3, $4, $5, $6)`,
 
-      [driver_id, car_model, license_plate, brand, color, license_number]
+      [driver_id, car_model, license_plate, brand, color, license_number],
     );
     res.status(200).json({
       title: "Car Added!",
@@ -84,7 +83,6 @@ router.get("/get", async (req: Request, res: Response) => {
   try {
     const { driverId } = req.query;
 
-
     if (!driverId) {
       res.status(400).json({
         title: "Driver ID is required",
@@ -99,7 +97,7 @@ router.get("/get", async (req: Request, res: Response) => {
       `SELECT car_model, license_plate, brand, color, license_number 
        FROM cars 
        WHERE driver_id = $1`,
-      [driverIdStr]
+      [driverIdStr],
     );
 
     if (cars.length === 0) {
@@ -165,14 +163,13 @@ router.patch("/update", async (req: Request, res: Response) => {
 
 router.delete("/delete", async (req: Request, res: Response) => {
   try {
-
     await pool.query(
       `DELETE FROM 
             cars 
             WHERE 
             id = $1 
             RETURNING *`,
-      [req.body.id]
+      [req.body.id],
     );
 
     res.status(200).json({ message: "Car Added Successfully" });
