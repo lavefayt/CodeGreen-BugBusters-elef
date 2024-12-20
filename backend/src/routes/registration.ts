@@ -101,6 +101,38 @@ router.post("/add", async (req: Request, res: Response) => {
   }
 });
 
+router.delete("/delete", async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { license_number } = req.body as Registration; // Extract license_number from request body
+
+    console.log(
+      "Attempting to delete registration with license number:",
+      license_number
+    );
+
+    // Attempt to delete the registration
+    await pool.query(
+      `DELETE FROM registrations WHERE license_number = $1 RETURNING *`,
+      [license_number]
+    );
+
+    // If deletion was successful, return a success response
+    res.status(200).json({
+      success: true,
+      title: "Registration Deleted",
+      message: `Registration with license number ${license_number} has been successfully deleted.`,
+    });
+  } catch (error) {
+    console.error("Error occurred during deletion:", error);
+    res.status(500).json({
+      success: false,
+      title: "Server Error",
+      message: "An error occurred while attempting to delete the registration.",
+      // error: error.message, // Include error message for debugging
+    });
+  }
+});
+
 // POST route to approve a registration
 router.post("/approve", async (req: Request, res: Response) => {
   const { license_number } = req.body;
