@@ -41,7 +41,7 @@ router.post("/add", validateDriver, async (req: Request, res: Response) => {
         driver_type,
         license_number,
         license_expiration_date,
-      ]
+      ],
     );
 
     res.status(200).json({
@@ -58,10 +58,9 @@ router.post("/add", validateDriver, async (req: Request, res: Response) => {
 
 router.get("/get", async (req: Request, res: Response) => {
   try {
-
     const { rows: drivers } = await pool.query(
       `SELECT *
-        FROM drivers`
+        FROM drivers`,
     );
 
     // Send the drivers list as a response
@@ -79,7 +78,7 @@ router.get("/get/:driverId", async (req: Request, res: Response) => {
 
     const { rows: users } = await pool.query(
       "SELECT * FROM users WHERE id = $1",
-      [req.user]
+      [req.user],
     );
 
     const foundUser = users[0];
@@ -94,7 +93,7 @@ router.get("/get/:driverId", async (req: Request, res: Response) => {
 
     const { rows: drivers } = await pool.query(
       "SELECT * FROM drivers WHERE id = $1",
-      [driverId]
+      [driverId],
     );
 
     const foundDriver = await drivers[0];
@@ -106,12 +105,12 @@ router.get("/get/:driverId", async (req: Request, res: Response) => {
 
     const { rows: violations } = await pool.query(
       "SELECT * FROM violations WHERE driver_id = $1",
-      [foundDriver.id]
+      [foundDriver.id],
     );
 
     const { rows: cars } = await pool.query(
       "SELECT * FROM cars WHERE driver_id = $1",
-      [foundDriver.id]
+      [foundDriver.id],
     );
 
     res.status(200).json({ ...foundDriver, violations, cars });
@@ -176,7 +175,7 @@ router.patch("/update", async (req: Request, res: Response) => {
         driver_type,
         license_expiration_date,
         id,
-      ]
+      ],
     );
 
     res.status(200).json({
@@ -207,7 +206,7 @@ router.delete("/delete", async (req: Request, res: Response) => {
 
     const resultDriver = await pool.query(
       `DELETE FROM drivers WHERE id = $1 RETURNING *`,
-      [id]
+      [id],
     );
 
     if (resultDriver.rowCount === 0) {

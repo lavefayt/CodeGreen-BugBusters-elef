@@ -10,7 +10,7 @@ const useCheckLicenseNumber = () => {
   const { auth, refresh, navigate } = useFetchWithAuthExports();
 
   const checkLicenseNumber = async (
-    license_number: string
+    license_number: string,
   ): Promise<DriverWithVandC | undefined> => {
     setLoading(true);
 
@@ -24,7 +24,7 @@ const useCheckLicenseNumber = () => {
         "post",
         {
           license_number,
-        }
+        },
       );
 
       if (!response.ok) {

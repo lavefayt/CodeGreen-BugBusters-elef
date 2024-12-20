@@ -19,7 +19,7 @@ const useGetDriver = (id: string) => {
           refresh,
           auth,
           auth?.isAdmin ? `/driver/get/${id}` : `/profile/get/${auth?.id}`,
-          "get"
+          "get",
         );
 
         if (response.status === 401) {

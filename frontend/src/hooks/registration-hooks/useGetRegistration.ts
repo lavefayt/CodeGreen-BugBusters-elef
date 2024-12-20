@@ -21,7 +21,7 @@ const useGetRegistration = () => {
           refresh,
           auth,
           "/registration/get",
-          "get"
+          "get",
         );
 
         if (!response.ok) {

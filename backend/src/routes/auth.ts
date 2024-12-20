@@ -15,7 +15,7 @@ router.post("/signup", validateAuth, async (req: Request, res: Response) => {
 
     const existingUser = await pool.query(
       "SELECT * FROM users WHERE email = $1",
-      [email]
+      [email],
     );
 
     if (existingUser.rowCount !== 0) {
@@ -38,7 +38,7 @@ router.post("/signup", validateAuth, async (req: Request, res: Response) => {
     const hashedPassword = await bcrypt.hash(password!, salt);
     await pool.query(
       "INSERT INTO users (first_name, last_name, email, password, salt) VALUES ($1, $2, $3, $4, $5)",
-      [first_name, last_name, email, hashedPassword, salt]
+      [first_name, last_name, email, hashedPassword, salt],
     );
     res.status(200).json({
       title: "Account Created Successfully",
@@ -55,7 +55,7 @@ router.post("/login", validateAuth, async (req: Request, res: Response) => {
 
     const { rows: users } = await pool.query(
       "SELECT * FROM users WHERE email = $1",
-      [email]
+      [email],
     );
 
     const user = (await users[0]) as User;
@@ -78,7 +78,6 @@ router.post("/login", validateAuth, async (req: Request, res: Response) => {
       });
       return;
     }
- 
 
     const refreshToken = generateRefreshToken(user.id!);
     const accessToken = generateAccessToken(user.id!);
@@ -116,7 +115,6 @@ router.get("/refresh", async (req: Request, res: Response) => {
       ])
     ).rows[0];
 
-
     if (!foundUser) {
       res.status(403).json({
         title: "No Access Rights",
@@ -129,7 +127,7 @@ router.get("/refresh", async (req: Request, res: Response) => {
     try {
       const payload = jwt.verify(
         refreshToken,
-        process.env.REFRESH_TOKEN_SECRET!
+        process.env.REFRESH_TOKEN_SECRET!,
       ) as JwtPayload;
 
       const accessToken = generateAccessToken(payload.userId);
@@ -165,7 +163,7 @@ router.get("/logout", async (req: Request, res: Response) => {
 
     const { rows: users } = await pool.query(
       "SELECT * FROM users WHERE refresh_token = $1",
-      [refreshToken]
+      [refreshToken],
     );
 
     const foundUser = users[0];

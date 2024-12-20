@@ -19,7 +19,7 @@ export const useEditViolation = () => {
         auth,
         "/violation/update",
         "patch",
-        formData
+        formData,
       );
 
       if (!response.ok) {

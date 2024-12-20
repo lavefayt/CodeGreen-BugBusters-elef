@@ -16,94 +16,93 @@ vi.mock("..", () => ({
 }));
 
 describe("Violation API", () => {
-    describe("POST /add", () => {
-        it("should add a violation when the driver exists", async () => {
-          const violationData: Violation = {
-            id: "1", // Add id
-            driver_id: "1", // driver_id as string
-            violation_type: "Speeding",
-            violation_date: "2024-12-19",
-            description: "Exceeding the speed limit",
-            paid_status: false, // Add paid_status
-          };
-      
-          // Mock driver found in the database
-          (pool.query as Mock).mockResolvedValueOnce({
+  describe("POST /add", () => {
+    it("should add a violation when the driver exists", async () => {
+      const violationData: Violation = {
+        id: "1", // Add id
+        driver_id: "1", // driver_id as string
+        violation_type: "Speeding",
+        violation_date: "2024-12-19",
+        description: "Exceeding the speed limit",
+        paid_status: false, // Add paid_status
+      };
 
-            rows: [
-              { id: 1, 
-                first_name: "John", 
-                last_name: "Doe" 
-              }
-            ],
-          });
-      
-          // Mock insertion of the violation
-          (pool.query as Mock).mockResolvedValueOnce({
-            rows: [
-              { 
-                driver_id: 1, 
-                violation_type: "Speeding" 
-              }
-            ],
-          });
-      
-          const response = await request(app).post("/violations/add").send(violationData);
-      
-          expect(response.status).toBe(200);
-          expect(response.body).toEqual({
-            title: "Violation Added!",
-            message: "Violation has been added for John Doe, Speeding.",
-          });
-        });
-      
-        it("should return 404 when the driver does not exist", async () => {
-          const violationData: Violation = {
-            id: "1", // Add id
-            driver_id: "999", // Non-existent driver (as a string)
-            violation_type: "Speeding",
-            violation_date: "2024-12-19",
-            description: "Exceeding the speed limit",
-            paid_status: false, // Add paid_status
-          };
-      
-          // Mock driver not found in the database
-          (pool.query as Mock).mockResolvedValueOnce({
-            rows: [],
-          });
-      
-          const response = await request(app).post("/violations/add").send(violationData);
-      
-          expect(response.status).toBe(404);
-          expect(response.body).toEqual({
-            title: "No Driver Found",
-            message: "Driver is not found.",
-          });
-        });
-      
-        it("should return 500 if an error occurs", async () => {
-          const violationData: Violation = {
-            id: "1", // Add id
-            driver_id: "1", // driver_id as string
-            violation_type: "Speeding",
-            violation_date: "2024-12-19",
-            description: "Exceeding the speed limit",
-            paid_status: false, // Add paid_status
-          };
-      
-          // Mock error during query
-          (pool.query as Mock).mockRejectedValueOnce(new Error("Database error"));
-      
-          const response = await request(app).post("/violations/add").send(violationData);
-      
-          expect(response.status).toBe(500);
-          expect(response.body).toEqual({
-            title: "Error",
-            message: "Database error",
-          });
-        });
+      // Mock driver found in the database
+      (pool.query as Mock).mockResolvedValueOnce({
+        rows: [{ id: 1, first_name: "John", last_name: "Doe" }],
       });
-      
+
+      // Mock insertion of the violation
+      (pool.query as Mock).mockResolvedValueOnce({
+        rows: [
+          {
+            driver_id: 1,
+            violation_type: "Speeding",
+          },
+        ],
+      });
+
+      const response = await request(app)
+        .post("/violations/add")
+        .send(violationData);
+
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual({
+        title: "Violation Added!",
+        message: "Violation has been added for John Doe, Speeding.",
+      });
+    });
+
+    it("should return 404 when the driver does not exist", async () => {
+      const violationData: Violation = {
+        id: "1", // Add id
+        driver_id: "999", // Non-existent driver (as a string)
+        violation_type: "Speeding",
+        violation_date: "2024-12-19",
+        description: "Exceeding the speed limit",
+        paid_status: false, // Add paid_status
+      };
+
+      // Mock driver not found in the database
+      (pool.query as Mock).mockResolvedValueOnce({
+        rows: [],
+      });
+
+      const response = await request(app)
+        .post("/violations/add")
+        .send(violationData);
+
+      expect(response.status).toBe(404);
+      expect(response.body).toEqual({
+        title: "No Driver Found",
+        message: "Driver is not found.",
+      });
+    });
+
+    it("should return 500 if an error occurs", async () => {
+      const violationData: Violation = {
+        id: "1", // Add id
+        driver_id: "1", // driver_id as string
+        violation_type: "Speeding",
+        violation_date: "2024-12-19",
+        description: "Exceeding the speed limit",
+        paid_status: false, // Add paid_status
+      };
+
+      // Mock error during query
+      (pool.query as Mock).mockRejectedValueOnce(new Error("Database error"));
+
+      const response = await request(app)
+        .post("/violations/add")
+        .send(violationData);
+
+      expect(response.status).toBe(500);
+      expect(response.body).toEqual({
+        title: "Error",
+        message: "Database error",
+      });
+    });
+  });
 
   describe("PATCH /update", () => {
     it("should update a violation successfully", async () => {
@@ -117,15 +116,17 @@ describe("Violation API", () => {
       (pool.query as Mock).mockResolvedValueOnce({
         rowCount: 1,
         rows: [
-          { 
-            id: 1, 
-            violation_type: "Speeding", 
-            description: "Exceeded speed limit by 20 mph" 
-          }
+          {
+            id: 1,
+            violation_type: "Speeding",
+            description: "Exceeded speed limit by 20 mph",
+          },
         ],
       });
 
-      const response = await request(app).patch("/violations/update").send(violationData);
+      const response = await request(app)
+        .patch("/violations/update")
+        .send(violationData);
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual({
@@ -147,7 +148,9 @@ describe("Violation API", () => {
         rows: [],
       });
 
-      const response = await request(app).patch("/violations/update").send(violationData);
+      const response = await request(app)
+        .patch("/violations/update")
+        .send(violationData);
 
       expect(response.status).toBe(404);
       expect(response.body).toEqual({
@@ -167,7 +170,9 @@ describe("Violation API", () => {
         rows: [{ id: 1 }],
       });
 
-      const response = await request(app).delete("/violations/delete").send(violationData);
+      const response = await request(app)
+        .delete("/violations/delete")
+        .send(violationData);
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual({
@@ -185,7 +190,9 @@ describe("Violation API", () => {
         rows: [],
       });
 
-      const response = await request(app).delete("/violations/delete").send(violationData);
+      const response = await request(app)
+        .delete("/violations/delete")
+        .send(violationData);
 
       expect(response.status).toBe(404);
       expect(response.body).toEqual({

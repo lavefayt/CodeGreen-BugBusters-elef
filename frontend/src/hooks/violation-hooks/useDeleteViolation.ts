@@ -11,14 +11,13 @@ export const useDeleteViolation = () => {
   const deleteViolation = async (violationId: string) => {
     setAppLoading!(true);
     try {
-
       const response = await fetchWithAuth(
         navigate,
         refresh,
         auth,
         "/violation/delete",
         "delete",
-        { violationId }
+        { violationId },
       );
 
       if (!response.ok) {
@@ -38,8 +37,9 @@ export const useDeleteViolation = () => {
       console.error("Network error:", err);
 
       // Narrow down `err` to ensure it has a `message` property
-      const errorMessage = err instanceof Error ? err.message : "Failed to connect to the server";
-      
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to connect to the server";
+
       toast.error(errorMessage);
 
       return;

@@ -20,7 +20,7 @@ export const useAddDriver = () => {
         auth,
         "/driver/add",
         "POST",
-        formData
+        formData,
       );
 
       if (!response.ok) {
