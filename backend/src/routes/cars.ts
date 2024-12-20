@@ -14,7 +14,6 @@ router.post("/check-license", async (req: Request, res: Response) => {
     );
 
     const driverFound = drivers[0];
-    console.log(drivers);
 
     if (!driverFound) {
       res.status(401).json({
@@ -42,14 +41,6 @@ router.post("/add", async (req: Request, res: Response) => {
       license_number,
     }: Cars = req.body;
 
-    console.log(
-      car_model,
-      license_plate,
-      license_number,
-      color,
-      driver_id,
-      brand
-    );
 
     const { rows: drivers } = await pool.query(
       `SELECT id
@@ -67,7 +58,7 @@ router.post("/add", async (req: Request, res: Response) => {
       return;
     }
 
-    const car = await pool.query(
+    await pool.query(
       `INSERT INTO cars (
             driver_id,
             car_model,
@@ -79,7 +70,6 @@ router.post("/add", async (req: Request, res: Response) => {
 
       [driver_id, car_model, license_plate, brand, color, license_number]
     );
-    console.log(car.rows);
     res.status(200).json({
       title: "Car Added!",
       message: `Car ${brand} ${car_model} ${color} with a license plate of ${license_plate} has been added!`,
@@ -94,7 +84,6 @@ router.get("/get", async (req: Request, res: Response) => {
   try {
     const { driverId } = req.query;
 
-    console.log("Received driverId:", driverId);
 
     if (!driverId) {
       res.status(400).json({
@@ -162,7 +151,6 @@ router.patch("/update", async (req: Request, res: Response) => {
     }
 
     const updateCar = result.rows[0];
-    console.log("Car updated successfully:", updateCar);
 
     res.status(200).json({
       title: "Car Updated!",
@@ -177,9 +165,8 @@ router.patch("/update", async (req: Request, res: Response) => {
 
 router.delete("/delete", async (req: Request, res: Response) => {
   try {
-    console.log("Fetching. . .");
 
-    const car = await pool.query(
+    await pool.query(
       `DELETE FROM 
             cars 
             WHERE 
@@ -189,7 +176,6 @@ router.delete("/delete", async (req: Request, res: Response) => {
     );
 
     res.status(200).json({ message: "Car Added Successfully" });
-    console.log("Driver deleted successfully:", car);
   } catch (error) {
     const errorMessage = (error as Error).message;
     res.status(500).json({ title: "Unknown Error", message: errorMessage });

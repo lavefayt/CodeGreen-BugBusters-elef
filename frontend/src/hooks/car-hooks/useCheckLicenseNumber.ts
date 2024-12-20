@@ -16,7 +16,6 @@ const useCheckLicenseNumber = () => {
 
     try {
       // Make sure license_number is URL-safe
-      console.log(license_number);
       const response = await fetchWithAuth(
         navigate,
         refresh,

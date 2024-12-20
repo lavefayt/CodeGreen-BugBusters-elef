@@ -11,7 +11,6 @@ export const useDeleteDriver = () => {
   const deleteDriver = async (driverId: string) => {
     setAppLoading!(true)
     try {
-      console.log("Sending delete request for driver ID:", driverId); // Log driverId
 
       const response = await fetchWithAuth(
         navigate,

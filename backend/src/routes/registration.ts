@@ -16,11 +16,9 @@ const fetchRegistrationByLicense = async (license_number: string) => {
 // GET route to fetch all registrations
 router.get("/get", async (_req: Request, res: Response) => {
   try {
-    console.log("Fetching registration from the database...");
     const { rows: registrations } = await pool.query(
       "SELECT user_id, license_number, school_email, first_name, last_name, middle_name, date_of_birth, driver_type, sex FROM registrations"
     );
-    console.log("Registrations fetched successfully:", registrations);
 
     res.json(registrations); // Send the registration list as a response
   } catch (error) {
@@ -46,7 +44,6 @@ router.post("/add", async (req: Request, res: Response) => {
       driver_type,
     } = req.body as Registration;
 
-    console.log(req.body);
     if (
       ![
         license_number,
@@ -104,11 +101,6 @@ router.post("/add", async (req: Request, res: Response) => {
 router.delete("/delete", async (req: Request, res: Response): Promise<void> => {
   try {
     const { license_number } = req.body as Registration; // Extract license_number from request body
-
-    console.log(
-      "Attempting to delete registration with license number:",
-      license_number
-    );
 
     // Attempt to delete the registration
     await pool.query(

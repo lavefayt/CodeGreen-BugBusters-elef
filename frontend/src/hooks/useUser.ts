@@ -27,7 +27,6 @@ const useUser = () => {
           return;
         }
         const user: UserType = await response.json();
-        console.log(user);
         setData(user);
       } catch (err) {
         console.error("Error fetching user:", err);

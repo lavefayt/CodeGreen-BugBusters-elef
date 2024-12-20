@@ -29,10 +29,8 @@ router.post("/add", async (req: Request, res: Response) => {
       return;
     }
 
-    console.log("THIS IS THE DRIVER FROM VIOLATION");
-    console.log(driverFound);
 
-    const violations = await pool.query(
+    await pool.query(
       `INSERT INTO violations (
           driver_id,
           violation_type,
@@ -43,7 +41,6 @@ router.post("/add", async (req: Request, res: Response) => {
       [driver_id, violation_type, violation_date, description]
     );
 
-    console.log(violations.rows[0]);
 
     res.status(200).json({
       title: "Violation Added!",
@@ -88,9 +85,6 @@ router.patch("/update", async (req: Request, res: Response) => {
     return;
   }
 
-  const updateViolation = result.rows[0];
-  console.log("Violations updated successfully:", updateViolation);
-
   res.status(200).json({
     title: "Violation Updated!",
     message: `Violation has been updated successfully.`,
@@ -99,7 +93,6 @@ router.patch("/update", async (req: Request, res: Response) => {
 
 router.delete("/delete", async (req: Request, res: Response) => {
   try {
-    console.log("Fetching. . .");
 
     const { violationId } = req.body;
 
@@ -124,7 +117,8 @@ router.delete("/delete", async (req: Request, res: Response) => {
       message: "Violation Deleted Successfully.",
     });
   } catch (error) {
-    console.log(error);
+    const errorMessage = (error as Error).message;
+    res.status(500).json({ title: "Unknown Error", message: errorMessage });
   }
 });
 

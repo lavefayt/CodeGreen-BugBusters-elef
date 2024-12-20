@@ -4,7 +4,6 @@ import useUser from "../hooks/useUser";
 
 const AdminLandingPage = () => {
   const { data: user } = useUser();
-  console.log(user);
 
   const navigate = useNavigate();
 

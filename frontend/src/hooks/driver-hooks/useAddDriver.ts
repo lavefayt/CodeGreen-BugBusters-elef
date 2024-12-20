@@ -14,7 +14,6 @@ export const useAddDriver = () => {
     setLoading(true);
 
     try {
-      console.log(`FORM DATA: ${JSON.stringify(formData)}`);
       const response = await fetchWithAuth(
         navigate,
         refresh,
@@ -27,7 +26,6 @@ export const useAddDriver = () => {
       if (!response.ok) {
         const error: BackendMessage = await response.json();
         setError(error);
-        console.log("What are you doing?!");
       }
     } catch (error) {
       console.error("Unexpected error:", error);

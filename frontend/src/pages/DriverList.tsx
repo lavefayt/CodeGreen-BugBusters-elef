@@ -18,7 +18,6 @@ const DriversList = () => {
   // Handle driver click to show more details
   const handleDriverClick = (driver: DriverWithVandC) => {
     setSelectedDriver(driver);
-    console.log(driver.id);
   };
 
   // Toggle sorting between alphabetical and default

@@ -14,7 +14,6 @@ const useSignUp = () => {
 
       if (!response.ok) {
         const backendError: BackendMessage = await response.json();
-        console.log(backendError);
         toast.error(`${backendError.message}`);
         return false;
       }
