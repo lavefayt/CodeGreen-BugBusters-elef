@@ -12,8 +12,6 @@ export const useDeleteRegistration = () => {
     setdeleteLoading(true);
 
     try {
-      console.log(`Sending DELETE request to: /registration/delete`);
-      console.log("License Number to Delete:", licenseNumber);
 
       // Send license_number in the request body as JSON
       const response = await fetchWithAuth(
@@ -28,12 +26,10 @@ export const useDeleteRegistration = () => {
       );
 
       // Log the response status
-      console.log("Response Status:", response.status);
 
       let responseBody;
       try {
         responseBody = await response.json();
-        console.log("Response Body:", responseBody);
       } catch (error) {
         console.error("Failed to parse JSON response:", error);
         throw new Error("Invalid JSON response from server.");

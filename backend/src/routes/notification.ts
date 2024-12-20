@@ -26,7 +26,6 @@ router.get("/get-by-user", async (req: Req, res: Response) => {
       res.json(notifications);
     }
   } catch (err) {
-    console.log(err);
     res.status(500).json({
       title: "Server Error",
       message: "An unexpected error occurred while retrieving notifications",

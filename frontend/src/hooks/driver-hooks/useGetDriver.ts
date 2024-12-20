@@ -38,7 +38,6 @@ const useGetDriver = (id: string) => {
         const fetchedDriver = await response.json();
         setDriver(fetchedDriver);
       } catch (error) {
-        console.log(error);
         return {};
       } finally {
         setLoading(false);

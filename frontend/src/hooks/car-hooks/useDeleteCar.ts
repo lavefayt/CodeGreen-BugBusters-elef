@@ -11,7 +11,6 @@ export const useDeleteCar = () => {
     const deleteCar = async (carId: string) => {
         setAppLoading!(true)
         try {
-          console.log("Sending delete request for car ID:", carId); // Log driverId
     
           const response = await fetchWithAuth(
             navigate,
@@ -34,7 +33,6 @@ export const useDeleteCar = () => {
           const notificationAPI = await response.json()
           toast.success(notificationAPI.message)
 
-          console.log("Car deleted successfully");
           return ;
         } catch (err: unknown) {
           console.error("Network error:", err);

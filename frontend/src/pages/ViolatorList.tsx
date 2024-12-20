@@ -17,11 +17,9 @@ const ViolatorList = () => {
   const [originalViolators, setOriginalViolators] = useState<DriverWithVandC[]>(
     []
   ); // Stores the original list
-  console.log(sortedViolators);
 
   const handleViolatorsClick = (violator: Violators) => {
     setSelectedViolator(violator);
-    console.log(violator.id);
   };
 
   // Toggle sorting between alphabetical and default

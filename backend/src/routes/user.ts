@@ -9,13 +9,10 @@ router.get("/get", async (req: Request, res: Response) => {
   try {
     const userId = req.user;
 
-    console.log(req.user);
-    console.log("Fetching user from the database...");
     const { rows: users } = await pool.query(
       "SELECT id, first_name, last_name FROM users WHERE id = $1",
       [userId]
     );
-    console.log("User fetched successfully:", users);
 
     const { rows: registrations } = await pool.query(
       "SELECT * FROM registrations WHERE user_id = $1",
@@ -104,7 +101,6 @@ router.patch("/change-password", async (req: Request, res: Response) => {
     });
   } catch (error) {
     res.status(500).json({ message: "An Unknown Error Occured" });
-    console.log(error);
   }
 });
 

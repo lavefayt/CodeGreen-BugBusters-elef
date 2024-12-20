@@ -59,7 +59,6 @@ router.post("/login", validateAuth, async (req: Request, res: Response) => {
     );
 
     const user = (await users[0]) as User;
-    // console.log(user);
 
     if (!user) {
       res.status(401).json({
@@ -79,8 +78,7 @@ router.post("/login", validateAuth, async (req: Request, res: Response) => {
       });
       return;
     }
-    // console.log(user.password);
-    // console.log(hashedPassword);
+ 
 
     const refreshToken = generateRefreshToken(user.id!);
     const accessToken = generateAccessToken(user.id!);
@@ -92,7 +90,6 @@ router.post("/login", validateAuth, async (req: Request, res: Response) => {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
-    // console.log(req.cookies.jwt);
     res.status(200).json({ accessToken, isAdmin: user.is_admin, id: user.id });
   } catch (error) {
     const errorMessage = (error as Error).message;
@@ -112,7 +109,6 @@ router.get("/refresh", async (req: Request, res: Response) => {
     }
 
     const refreshToken = cookies.jwt;
-    // console.log(refreshToken);
 
     const foundUser = (
       await pool.query("SELECT * FROM users WHERE refresh_token = $1", [
@@ -120,7 +116,6 @@ router.get("/refresh", async (req: Request, res: Response) => {
       ])
     ).rows[0];
 
-    // console.log(foundUser);
 
     if (!foundUser) {
       res.status(403).json({
@@ -137,13 +132,11 @@ router.get("/refresh", async (req: Request, res: Response) => {
         process.env.REFRESH_TOKEN_SECRET!
       ) as JwtPayload;
 
-      console.log(payload.userId);
       const accessToken = generateAccessToken(payload.userId);
       res
         .status(200)
         .json({ accessToken, isAdmin: foundUser.is_admin, id: foundUser.id });
     } catch (error) {
-      console.log(error);
       res.status(403).json({
         title: "No Access Rights",
         message: "You do not have access to these features.",

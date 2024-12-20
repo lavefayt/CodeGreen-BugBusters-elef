@@ -44,7 +44,6 @@ router.post("/add", validateDriver, async (req: Request, res: Response) => {
       ]
     );
 
-    console.log(driver.rows);
     res.status(200).json({
       title: "Driver Added!",
       message: `Driver ${last_name}, ${first_name} ${middle_name} has been added`,
@@ -59,13 +58,11 @@ router.post("/add", validateDriver, async (req: Request, res: Response) => {
 
 router.get("/get", async (req: Request, res: Response) => {
   try {
-    console.log("Fetching drivers from the database...");
 
     const { rows: drivers } = await pool.query(
       `SELECT *
         FROM drivers`
     );
-    console.log("Drivers fetched successfully:", drivers);
 
     // Send the drivers list as a response
     res.json(drivers);
@@ -101,7 +98,6 @@ router.get("/get/:driverId", async (req: Request, res: Response) => {
     );
 
     const foundDriver = await drivers[0];
-    console.log(foundDriver);
 
     if (!foundDriver) {
       res.status(404).json({ message: "Driver not found" });
@@ -193,7 +189,6 @@ router.patch("/update", async (req: Request, res: Response) => {
 });
 
 router.delete("/delete", async (req: Request, res: Response) => {
-  console.log("Request body:", req.body); // Log the incoming request body
   try {
     const { id } = req.body;
 
@@ -225,7 +220,6 @@ router.delete("/delete", async (req: Request, res: Response) => {
     }
 
     const deletedDriver = resultDriver.rows[0];
-    console.log("Driver deleted successfully:", deletedDriver);
 
     res.status(200).json({
       title: "Driver Deleted",

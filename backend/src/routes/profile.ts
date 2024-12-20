@@ -31,7 +31,6 @@ router.get("/get/:id", async (req: Request, res: Response) => {
 
     res.status(200).json({ ...foundDriver, violations, cars });
   } catch (error) {
-    console.log(error);
     res.sendStatus(500);
   }
 });

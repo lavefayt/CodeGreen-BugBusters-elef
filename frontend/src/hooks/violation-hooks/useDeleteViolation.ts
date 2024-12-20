@@ -11,7 +11,6 @@ export const useDeleteViolation = () => {
   const deleteViolation = async (violationId: string) => {
     setAppLoading!(true);
     try {
-      console.log("Sending delete request for violation ID:", violationId); // Log driverId
 
       const response = await fetchWithAuth(
         navigate,
@@ -34,7 +33,6 @@ export const useDeleteViolation = () => {
       const notificationAPI = await response.json();
       toast.success(notificationAPI.message);
 
-      console.log("Violation deleted successfully");
       return;
     } catch (err: unknown) {
       console.error("Network error:", err);
