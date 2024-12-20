@@ -150,13 +150,14 @@ const RegisterDriver = () => {
                       <input
                         type="text"
                         data-testid="last_name_register"
+                        name="last_name"
                         placeholder="Enter Last Name"
                         value={formData.last_name}
                         onChange={(e) => {
                           if (e.target.value.length <= 20) {
                             handleChange(e);
                           }
-                        }}                           
+                        }}                        
                         className={`w-full px-4 py-2 mt-1 border rounded-sm bg-secondgrey text-white focus:outline-none focus:ring-0 active:outline-none ${
                           formErrors.last_name
                             ? "border-red-800"
@@ -193,6 +194,7 @@ const RegisterDriver = () => {
                       <input
                         placeholder="Enter First Name"
                         type="text"
+                        name="first_name"
                         data-testid="first_name_register"
                         className={`w-full px-4 py-2 mt-1 border rounded-sm bg-secondgrey text-white focus:outline-none focus:ring-0 active:outline-none ${
                           formErrors.first_name
@@ -204,7 +206,7 @@ const RegisterDriver = () => {
                           if (e.target.value.length <= 20) {
                             handleChange(e);
                           }
-                        }}                         
+                        }}                          
                         required
                       />
                     </div>
