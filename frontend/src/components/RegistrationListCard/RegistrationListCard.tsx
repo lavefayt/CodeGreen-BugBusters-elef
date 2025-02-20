@@ -1,4 +1,4 @@
-import { Registration } from "../types/datatypes";
+import { Registration } from "../../types/datatypes";
 
 const RegistrationListCard = ({
   driver_type,

@@ -1,4 +1,4 @@
-import { Violators } from "../types/datatypes";
+import { Violators } from "../../types/datatypes";
 
 const ViolatorsListCard = ({
   first_name,

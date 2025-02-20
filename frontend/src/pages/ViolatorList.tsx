@@ -3,10 +3,10 @@ import AdminHeader from "../components/AdminHeader";
 import useGetViolators from "../hooks/useGetViolators";
 import Loading from "../components/Loading";
 import { DriverWithVandC, Violators } from "../types/datatypes";
-import ViolatorsListCard from "../components/ViolatorsListCard";
+import ViolatorsListCard from "../components/ViolatorsListCard/ViolatorsListCard";
 import { useEffect, useState } from "react";
 import SearchAndSort from "../components/SearchAndSort";
-import PreviewProfile from "../components/PreviewProfile";
+import PreviewProfile from "../components/PreviewProfile/PreviewProfile";
 
 const ViolatorList = () => {
   // to get the violators

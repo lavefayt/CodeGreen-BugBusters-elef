@@ -1,4 +1,4 @@
-import { DriverWithVandC } from "../types/datatypes";
+import { DriverWithVandC } from "../../types/datatypes";
 import { useNavigate } from "react-router-dom";
 
 const PreviewProfile = ({

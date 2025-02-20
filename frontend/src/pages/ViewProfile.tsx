@@ -9,7 +9,7 @@ import useGetDriver from "../hooks/driver-hooks/useGetDriver";
 import { AuthContextType } from "../types/user.types";
 import useAuth from "../hooks/context-hooks/useAuth";
 import Loading from "../components/Loading";
-import AddCarButton from "../components/AddCarButton";
+import AddCarButton from "../components/AddCarButton/AddCarButton";
 import AddViolationButton from "../components/AddViolationButton";
 
 const ViewProfile = () => {

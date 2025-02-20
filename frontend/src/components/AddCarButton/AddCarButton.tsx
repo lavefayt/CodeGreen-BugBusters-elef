@@ -1,6 +1,6 @@
 import React from "react";
-import AddCar from "./AddCar";
-import { DriverWithVandC } from "../types/datatypes";
+import AddCar from "../AddCar";
+import { DriverWithVandC } from "../../types/datatypes";
 
 const AddCarButton = ({
   activeSection,

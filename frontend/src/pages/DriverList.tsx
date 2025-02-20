@@ -6,7 +6,7 @@ import useDrivers from "../hooks/driver-hooks/useDrivers";
 import Loading from "../components/Loading";
 import { DriverWithVandC } from "../types/datatypes.ts";
 import SearchAndSort from "../components/SearchAndSort.tsx";
-import PreviewProfile from "../components/PreviewProfile.tsx";
+import PreviewProfile from "../components/PreviewProfile/PreviewProfile.tsx";
 
 const DriversList = () => {
   const { data: Drivers, loading } = useDrivers();

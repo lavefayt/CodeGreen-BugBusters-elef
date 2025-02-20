@@ -14,7 +14,7 @@ import AdminLandingPage from "./pages/AdminHomePage.tsx";
 import EncodePage from "./pages/EncodePage.tsx";
 import ViolatorList from "./pages/ViolatorList.tsx";
 import DriversList from "./pages/DriverList.tsx";
-import AddDriver from "./pages/AddDriver.tsx";
+import AddDriver from "./pages/AddDriver/AddDriver.tsx";
 import RegistrationList from "./pages/RegistrationList.tsx";
 import RegisterDriver from "./pages/RegisterDriver.tsx";
 import SendNotif from "./pages/SendNotif.tsx";

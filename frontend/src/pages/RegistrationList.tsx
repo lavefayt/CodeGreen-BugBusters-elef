@@ -4,7 +4,7 @@ import useGetRegistration from "../hooks/registration-hooks/useGetRegistration";
 import useDeleteRegistration from "../hooks/registration-hooks/useDeleteRegistration";
 import AdminHeader from "../components/AdminHeader";
 import Loading from "../components/Loading";
-import RegistrationListCard from "../components/RegistrationListCard";
+import RegistrationListCard from "../components/RegistrationListCard/RegistrationListCard";
 import { Registration } from "../types/datatypes";
 import { useApproveRegistration } from "../hooks/registration-hooks/useApproveRegistration";
 

@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import AdminHeader from "../components/AdminHeader";
+import AdminHeader from "../../components/AdminHeader";
 import React, { useState } from "react";
-import Adding from "../components/Adding";
-import Success from "../components/Success";
-import { Driver } from "../types/datatypes";
-import useAddDriver from "../hooks/driver-hooks/useAddDriver";
-import ErrorAlert from "../components/ErrorAlert";
+import Adding from "../../components/Adding";
+import Success from "../../components/Success";
+import { Driver } from "../../types/datatypes";
+import useAddDriver from "../../hooks/driver-hooks/useAddDriver";
+import ErrorAlert from "../../components/ErrorAlert";
 import { toast } from "react-toastify";
 
 const AddDriver = () => {
